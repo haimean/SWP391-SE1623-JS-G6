@@ -4,13 +4,33 @@
         <servlet-name>admin</servlet-name>
         <jsp-file>/admin/index.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>ControllerAdmin.DeleteUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>ControllerAdmin.UserList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/delete-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/user</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <taglib>
+        <taglib-uri>http://java.sun.com/jstl/core_rt</taglib-uri>
+        <taglib-location>/WEB-INF/tld/c-rt.tld</taglib-location>
+    </taglib>
 </web-app>

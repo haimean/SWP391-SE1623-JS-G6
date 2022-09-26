@@ -101,4 +101,12 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
+<<<<<<< HEAD
 }
+=======
+
+    
+    
+
+}
+>>>>>>> b59a7f3 (feat: User list)

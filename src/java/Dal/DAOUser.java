@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -18,6 +19,27 @@ import java.util.logging.Logger;
  */
 public class DAOUser extends DBContext.DBContext {
 
+=======
+package Dal;
+
+import Context.DBContext;
+import Context.DBContext;
+import Model.User;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author PiPi
+ */
+public class DAOUser {
+
+    private Connection con;
+    private PreparedStatement ps;
+    private ResultSet rs;
+>>>>>>> b59a7f3 (feat: User list)
     private String status = "";
 
     public String getStatus() {
@@ -30,14 +52,24 @@ public class DAOUser extends DBContext.DBContext {
                 + "from [User] u ,[UserInformation] ui\n"
                 + "where u.id = ui.id";
         try {
+<<<<<<< HEAD
             PreparedStatement stm = connection.prepareStatement(query);
             ResultSet rs = stm.executeQuery();
+=======
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+>>>>>>> b59a7f3 (feat: User list)
             while (rs.next()) {
                 userList.add(new User(rs.getInt(1), rs.getInt(4), rs.getString(9), rs.getString(2),
                         rs.getString(3), rs.getString(10), rs.getDate(5), rs.getDate(6)));
             }
 
+<<<<<<< HEAD
         } catch (SQLException e) {
+=======
+        } catch (Exception e) {
+>>>>>>> b59a7f3 (feat: User list)
             status += "Error at get all users" + e.getMessage();
             System.out.println(status);
         }
@@ -45,6 +77,11 @@ public class DAOUser extends DBContext.DBContext {
     }
 
     public void deleteUser(String id) {
+<<<<<<< HEAD
+=======
+//        String query = "delete from [User] where [User].id = ?\n"
+//                + "delete from [UserInformation] where [UserInformation].id = ?";
+>>>>>>> b59a7f3 (feat: User list)
         String query = "delete from [Notification] where userId = ?\n"
                 + "delete from [Message] where userSenderId = ?\n"
                 + "delete from [UserInformation] where userId = ?\n"

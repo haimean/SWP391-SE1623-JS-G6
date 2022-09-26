@@ -64,6 +64,14 @@
         <servlet-name>SellerDashbroad</servlet-name>
         <servlet-class>ControllerSeller.SellerDashbroad</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>Controller.DeleteUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>Controller.UserList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Category_Search</servlet-name>
         <url-pattern>/category_search</url-pattern>
@@ -134,3 +142,4 @@
         </session-timeout>
     </session-config>
 </web-app>
+

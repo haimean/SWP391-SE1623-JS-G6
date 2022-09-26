@@ -6,11 +6,11 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteUser</servlet-name>
-        <servlet-class>Controller.DeleteUser</servlet-class>
+        <servlet-class>ControllerAdmin.DeleteUser</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>User</servlet-name>
-        <servlet-class>Controller.UserList</servlet-class>
+        <servlet-class>ControllerAdmin.UserList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
@@ -29,5 +29,8 @@
             30
         </session-timeout>
     </session-config>
+    <taglib>
+        <taglib-uri>http://java.sun.com/jstl/core_rt</taglib-uri>
+        <taglib-location>/WEB-INF/tld/c-rt.tld</taglib-location>
+    </taglib>
 </web-app>
-

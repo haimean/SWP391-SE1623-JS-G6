@@ -3,6 +3,9 @@ package org.apache.jsp.admin.layout;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import Model.*;
+import Dal.*;
+import java.util.ArrayList;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -41,6 +44,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<meta charset=\"utf-8\">\r\n");
       out.write("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n");

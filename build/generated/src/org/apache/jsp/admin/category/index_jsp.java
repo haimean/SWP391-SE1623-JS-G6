@@ -1,8 +1,11 @@
 package org.apache.jsp.admin.category;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.jsp.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.jsp.*;
+import Model.*;
+import Dal.*;
+import java.util.ArrayList;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -16,20 +19,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_dependants.add("/admin/category/../layout/index.jsp");
   }
 
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
-
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
-  }
-
-  public void _jspInit() {
-    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-  }
-
-  public void _jspDestroy() {
-    _jspx_tagPool_c_forEach_var_items.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -56,6 +49,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<meta charset=\"utf-8\">\r\n");
       out.write("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n");
@@ -116,26 +110,44 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </div>\r\n");
       out.write("</div>");
       out.write("\r\n");
-      out.write("\r\n");
       out.write("<link href=\"");
       out.print(request.getContextPath());
       out.write("/admin/category/css/style.css\" rel=\"stylesheet\">\r\n");
-      out.write("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\r\n");
-      out.write("<form action=\"category\" method=\"POST\">\r\n");
-      out.write("    <div class=\"side-nav-categories\" style=\"width: 1500px;height: 800px\">\r\n");
-      out.write("        <div class=\"title\"><strong>Category</strong></div>\r\n");
-      out.write("        <ul class=\"w3-ul w3-card-4\">\r\n");
-      out.write("            ");
-      if (_jspx_meth_c_forEach_0(_jspx_page_context))
-        return;
       out.write("\r\n");
-      out.write("        </ul>\r\n");
-      out.write("        <div id=\"footer-button-category\">\r\n");
-      out.write("            <button class=\"button create-category\">Create New Category</button>\r\n");
-      out.write("            <button class=\"button update-category\">Update Category</button>\r\n");
-      out.write("        </div>\r\n");
+      out.write("<div class=\"side-nav-categories\" style=\"width: 1000px;height: 405px\">\r\n");
+      out.write("    <div class=\"title\"><strong>Category</strong></div>\r\n");
+      out.write("    <ul id=\"category-tabs\">\r\n");
+      out.write("        <li><a href=\"\" class=\"main-category\"> Web Applications<i class=\"fa fa-minus\"></i></a>\r\n");
+      out.write("            <ul class=\"sub-category-tabs\">\r\n");
+      out.write("                <li><a href=\"\">HTML</a></li>\r\n");
+      out.write("                <li><a href=\"\">CSS</a></li>\r\n");
+      out.write("                <li><a href=\"\">SCSS</a></li>\r\n");
+      out.write("            </ul>\r\n");
+      out.write("        </li>\r\n");
+      out.write("    </ul>\r\n");
+      out.write("    <ul id=\"category-tabs\">\r\n");
+      out.write("        <li><a href=\"\" class=\"main-category\">Script<i class=\"fa fa-minus\"></i></a>\r\n");
+      out.write("            <ul class=\"sub-category-tabs\">\r\n");
+      out.write("                <li><a href=\"\">Javascript</a></li>\r\n");
+      out.write("                <li><a href=\"\">CSSgo</a></li>\r\n");
+      out.write("                <li><a href=\"\">HTMLOL</a></li>\r\n");
+      out.write("            </ul>\r\n");
+      out.write("        </li>\r\n");
+      out.write("    </ul>\r\n");
+      out.write("    <ul id=\"category-tabs\">\r\n");
+      out.write("        <li><a href=\"\" class=\"main-category\">Server Script<i class=\"fa fa-minus\"></i></a>\r\n");
+      out.write("            <ul class=\"sub-category-tabs\">\r\n");
+      out.write("                <li><a href=\"\">C#</a></li>\r\n");
+      out.write("                <li><a href=\"\">PYTHON</a></li>\r\n");
+      out.write("                <li><a href=\"\">JAVA</a></li>\r\n");
+      out.write("            </ul>\r\n");
+      out.write("        </li>\r\n");
+      out.write("    </ul>\r\n");
+      out.write("    <div id=\"footer-button-category\">\r\n");
+      out.write("        <button class=\"button create-category\">Create New Category</button>\r\n");
+      out.write("        <button class=\"button update-category\">Update Category</button>\r\n");
       out.write("    </div>\r\n");
-      out.write("</form>\r\n");
+      out.write("</div>\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
@@ -147,44 +159,5 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
-  }
-
-  private boolean _jspx_meth_c_forEach_0(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:forEach
-    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
-    _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
-    _jspx_th_c_forEach_0.setParent(null);
-    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${requestScope.category}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    _jspx_th_c_forEach_0.setVar("ca");
-    int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
-    try {
-      int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
-      if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
-        do {
-          out.write("\r\n");
-          out.write("                <li>");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${ca.getName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</li>\r\n");
-          out.write("                ");
-          int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
-          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
-            break;
-        } while (true);
-      }
-      if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-        return true;
-      }
-    } catch (Throwable _jspx_exception) {
-      while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
-        out = _jspx_page_context.popBody();
-      _jspx_th_c_forEach_0.doCatch(_jspx_exception);
-    } finally {
-      _jspx_th_c_forEach_0.doFinally();
-      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
-    }
-    return false;
   }
 }

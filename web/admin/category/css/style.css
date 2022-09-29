@@ -18,6 +18,7 @@ ul{
     display: inline-flex;
     margin-top: 150px;
     width: 1200px;
+    margin-left: 35px;
 }
 
 .button-create{
@@ -33,6 +34,7 @@ ul{
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 10px;
+    margin-left: 200px;
 }
 .button-create:hover{
     background-color: rgb(255, 165, 0);
@@ -41,7 +43,8 @@ ul{
 }
 .search{
     display: inline-flex;
-    text-align: right;
+    margin-top: 10px;
+    margin-left: 200px;
 }
 .text-search{
     width: 300px;
@@ -79,7 +82,7 @@ ul{
     border-style: solid;
     border-color: #f5f5f5 #eee #d5d5d5 #eee;
     box-shadow: 0 5px 0 rgba(200,200,200,.2);
-    width: 1200px;
+    width: 800px;
     margin: auto;
     top:15px;
     left: 20px;
@@ -126,17 +129,26 @@ ul#category-tabs li a i {
 
 .footer-category{
     display: inline-flex;
-    margin-left: 1000px;
+    /*margin-left: 570px;*/
 }
 
-.button-delete{
+.btn-danger{
     border: none;
     border-radius: 5px;
     background-color: rgb(220, 53, 69);
     margin-right: 10px;
+    margin-left: 10px;
 }
-.button-info{
+.btn-info{
     border: none;
     border-radius: 5px;
     background-color: rgb(23, 162, 184);
+    color: #fff;
+}
+.name{
+    margin: 0px;
+    width: 100px;
+}
+.items{
+    display: inline-flex;
 }

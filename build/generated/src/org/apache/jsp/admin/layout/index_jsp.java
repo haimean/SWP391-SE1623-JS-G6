@@ -3,8 +3,8 @@ package org.apache.jsp.admin.layout;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import Model.*;
-import Dal.*;
+//import Model.*;
+//import Dal.*;
 import java.util.ArrayList;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -91,7 +91,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("         height: 100pc;\r\n");
       out.write("         padding-top: 56px\"\r\n");
       out.write("         >\r\n");
-      out.write("        <ul class=\"list-group  list-group-flush  bg-secondary\">\r\n");
+      out.write("        <ul class=\"list-group  list-group-flush  bg-secondary row-10\">\r\n");
       out.write("            <li class=\"list-group-item  bg-secondary\"><a href=\"");
       out.print( request.getContextPath());
       out.write("/admin\"> <h4>Dashboard</h3></a></li>\r\n");

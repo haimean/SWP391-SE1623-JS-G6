@@ -2,36 +2,28 @@ package Context;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBContext {
-
-    /*USE BELOW METHOD FOR YOUR DATABASE CONNECTION FOR BOTH SINGLE AND MULTILPE SQL SERVER INSTANCE(s)*/
- /*DO NOT EDIT THE BELOW METHOD, YOU MUST USE ONLY THIS ONE FOR YOUR DATABASE CONNECTION*/
-    public Connection getConnection() throws Exception {
-        String url = "jdbc:sqlserver://" + serverName + ":" + portNumber
-                + ";databaseName=" + dbName;//+"; integratedSecurity=true";
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        return DriverManager.getConnection(url, userID, password);
-//        return DriverManager.getConnection(url);
+    protected Connection connection;
+    public DBContext()
+    {
+        try {
+            // Edit URL , username, password to authenticate with your MS SQL Server
+            String url = "jdbc:sqlserver://localhost:1433;databaseName= pj391";
+            String username = "sa";
+            String password = "123456";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
     }
-
-    /*Insert your other code right after this comment*/
- /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
-    private final String serverName = "localhost";
-    private final String dbName = "se1623JS-Gr6-SWP391";
-    private final String portNumber = "2808";
-    private final String userID = "sa";
-    private final String password = "samsunggears3";
-}
-
-class Using {
-
     public static void main(String[] args) {
         try {
-            new DBContext().getConnection();
-            System.out.println("Connection successful");
+            System.out.println(new DBContext().connection);
         } catch (Exception e) {
-            System.out.println("Connection failed " + e.getMessage());
+            System.out.println(e);
         }
     }
 }

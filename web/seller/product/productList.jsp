@@ -1,9 +1,3 @@
-<%-- 
-    Document   : productList
-    Created on : Sep 30, 2022, 4:43:54 PM
-    Author     : ngolu
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -20,14 +14,13 @@
     </head>
     <body>
 
-
         <div class="container">
             <div class="bttCreate">
                 <button type="button" class="btn btn-primary">Create</button>
             </div>         
             <div class="content">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="search"  method="post"  class="d-flex" role="search">
+                    <input name="txt" class="form-control me-2" type="text" placeholder="Enter Name" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
 
@@ -45,17 +38,20 @@
                     <tbody>
                         <c:forEach items="${listP}" var="o">
                         <tr>
+                            
                             <th scope="row">${o.id}</th>
+                            
                             <td>
                                 ${o.name}
                             </td>
-                            <td>${o.categoryID}</td>
+                            <td>
+                                ${o.categoryID}
+                            </td>
                             <td>
                                 ${o.quantity}
                             </td>
-                            <td>
-                                
-                            </td>
+                            <td></td>
+                            
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -80,14 +76,14 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <button type="button" class="btn btn-info">Update</button>
+                                
+                                <a href="updatep?pid=${o.id}"> <button type="button" class="btn btn-info">Update</button></a>
                             </td>
-                        </tr>  
-                        </c:forEach>
+                           
+                        </tr>    
+                         </c:forEach>
                     </tbody>
                 </table>
             </div>
-
     </body>
 </html>

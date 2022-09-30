@@ -1,4 +1,4 @@
-package Dal;
+    package Dal;
 
 import Context.DBContext;
 import Context.DBContext;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author PiPi
  */
-public class DAOUser {
+public class DAOUser extends DBContext{
 
     private Connection con;
     private PreparedStatement ps;
@@ -29,8 +29,7 @@ public class DAOUser {
                 + "from [User] u ,[UserInformation] ui\n"
                 + "where u.id = ui.id";
         try {
-            con = new DBContext().getConnection();
-            ps = con.prepareStatement(query);
+            ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
                 userList.add(new User(rs.getInt(1), rs.getInt(4), rs.getString(9), rs.getString(2),
@@ -53,8 +52,7 @@ public class DAOUser {
                 + "delete from [AddressReceiver] where userId = ?\n"
                 + "delete from [User] where id = ?";
         try {
-            con = new DBContext().getConnection();
-            ps = con.prepareStatement(query);
+            ps = connection.prepareStatement(query);
             ps.setString(1, id);
             ps.setString(2, id);
             ps.setString(3, id);

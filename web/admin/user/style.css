@@ -13,15 +13,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     box-sizing: border-box;
 }
 
-
-
 .table-container{
     padding: 8rem 4rem;
-    /*background-color: red;*/
 }
-.table-container div{
-    padding: 8rem 4rem;
-    background-color: rgba(234, 234, 234, 0.33);
-    border-radius: 20px;
-    box-shadow: 5px 6px 16px 3px rgba(0,0,0,0.1);
+
+table th:hover{
+    background-color: #f7f7f7;
+    cursor: pointer;    
 }

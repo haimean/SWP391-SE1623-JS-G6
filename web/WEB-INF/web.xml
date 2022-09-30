@@ -12,6 +12,10 @@
         <servlet-name>User</servlet-name>
         <servlet-class>ControllerAdmin.UserList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserList</servlet-name>
+        <servlet-class>ControllerAdmin.UserList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
         <url-pattern>/admin</url-pattern>
@@ -21,16 +25,12 @@
         <url-pattern>/delete-user</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>User</servlet-name>
-        <url-pattern>/user</url-pattern>
+        <servlet-name>UserList</servlet-name>
+        <url-pattern>/admin/user</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <taglib>
-        <taglib-uri>http://java.sun.com/jstl/core_rt</taglib-uri>
-        <taglib-location>/WEB-INF/tld/c-rt.tld</taglib-location>
-    </taglib>
 </web-app>

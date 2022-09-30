@@ -12,6 +12,10 @@
         <servlet-name>User</servlet-name>
         <servlet-class>ControllerAdmin.UserList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListProduct</servlet-name>
+        <servlet-class>ControllerSeller.ListProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
         <url-pattern>/admin</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>User</servlet-name>
         <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListProduct</servlet-name>
+        <url-pattern>/seller/product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

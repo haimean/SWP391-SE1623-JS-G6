@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,16 +43,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <c:forEach items="${listP}" var="o">
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">${o.id}</th>
                             <td>
-                                Mark
+                                ${o.name}
                             </td>
-                            <td>Otto</td>
+                            <td>${o.categoryID}</td>
                             <td>
-                                12
+                                ${o.quantity}
                             </td>
-                            <td></td>
+                            <td>
+                                
+                            </td>
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -79,7 +83,8 @@
 
                                 <button type="button" class="btn btn-info">Update</button>
                             </td>
-                        </tr>                
+                        </tr>  
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>

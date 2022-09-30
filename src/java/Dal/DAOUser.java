@@ -6,13 +6,16 @@ import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author PiPi
  */
-public class DAOUser {
+public class DAOUser  extends DBContext{
 
     private Connection con;
     private PreparedStatement ps;
@@ -66,7 +69,34 @@ public class DAOUser {
             System.out.println(status);
         }
     }
+    public User search(String Email, String password) throws Exception  {
+        String sql = "select u.id, u.role, ui.fullname, u.email,	"
+                + "u.password, ui.phone, u.created_at, u.updated_at\n" +
+    "from UserInformation as ui, [User] as u\n" +
+    "where u.id = ui.userId and u.email = '"+Email+"' and u.password = '"+password+"'";
+        
+        try {
+            con = new DBContext().getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
 
+                return new User(
+                        rs.getInt(1), 
+                        rs.getInt(2), 
+                        rs.getString(3), 
+                        rs.getString(4), 
+                        rs.getString(5), 
+                        rs.getString(6), 
+                        rs.getDate(7), 
+                        rs.getDate(8));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     public static void main(String[] args) {
         DAOUser dao = new DAOUser();
         for (User u : dao.getAllUsers()) {

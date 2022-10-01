@@ -58,26 +58,33 @@ public class DAOProduct extends DBContext {
         return list;
     }
     
-    public void insertProduct(String name ,int categoryId , int quantity ,String description ){
-        String sql = "INSERT INTO [dbo].[Product]\n" +
-"           ([categoryID]\n" +
-"           ,[name]\n" +
-"           ,[description]\n" +
-"           ,[origin]\n" +
-"           ,[quantity]\n" +
-"           ,[price]\n" +
-"           ,[status]\n" +
-"           ,[viewNumer]\n" +
-"           ,[created_at]\n" +
-"           ,[updated_at])\n" +
-"     VALUES(?,?,?,?,?,?,?,?,?,?)";
-        
+    public void insertProduct(String name, int categoryId, String description, String origin,
+            int quantity, double price, boolean status, int viewNumber, String created, String updated) {
+        String sql = "INSERT INTO [dbo].[Product]\n"
+                + "           ([categoryID]\n"
+                + "           ,[name]\n"
+                + "           ,[description]\n"
+                + "           ,[origin]\n"
+                + "           ,[quantity]\n"
+                + "           ,[price]\n"
+                + "           ,[status]\n"
+                + "           ,[viewNumer]\n"
+                + "           ,[created_at]\n"
+                + "           ,[updated_at])\n"
+                + "     VALUES(?,?,?,?,?,?,?,?,?,?)";
+
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, name);
             ps.setInt(2, categoryId);
-            ps.setInt(3, quantity);
-            ps.setString(4, description);
+            ps.setString(3, description);
+            ps.setString(4, origin);
+            ps.setInt(5, quantity);
+            ps.setDouble(6, price);
+            ps.setBoolean(7, status);
+            ps.setInt(8, viewNumber);
+            ps.setString(9, created);
+            ps.setString(10, updated);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);

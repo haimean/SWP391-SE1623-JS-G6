@@ -18,7 +18,7 @@ import model.Category;
  *
  * @author Mr Tuan
  */
-public class CategoryController_Search extends HttpServlet {
+public class Category_Search extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.UserlistDBContext;
+import dal.CategoryDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import model.User;
+import model.Category;
 
 /**
  *
- * @author MrTuan
+ * @author Mr Tuan
  */
-public class UserlistController_List extends HttpServlet {
+public class Category_List extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +31,6 @@ public class UserlistController_List extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserlistController_List</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserlistController_List at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,10 +45,11 @@ public class UserlistController_List extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserlistDBContext db = new UserlistDBContext();
-        ArrayList<User> list = db.getAllUsers();
-        request.setAttribute("listU", list);
-        request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+//getall
+        CategoryDBContext db = new CategoryDBContext();
+        ArrayList<Category> listC = db.getAllCategory();
+        request.setAttribute("category", listC);
+        request.getRequestDispatcher("admin\\category\\index.jsp").forward(request, response);
     }
 
     /**
@@ -75,7 +63,11 @@ public class UserlistController_List extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//create        
+        CategoryDBContext db = new CategoryDBContext();
+        String name=request.getParameter("name");
+        db.CreateCategory(name);
+        response.sendRedirect("category");
     }
 
     /**

@@ -4,20 +4,19 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
-<!--<form action="category" method="POST">-->
-<div class="title">
-    <button class="button-create" onclick="CreateCategory()" >Create</button>
-</div>
-<!--</form>-->
+
 <div class="container-category">
+    <div class="title">
+        <button class="button-create" onclick="CreateCategory()" style="margin-left: 140px;">Create</button>
+    </div>
     <div class="side-nav-categories">
-        <form action="search" method="POST">
+        <form action="category_search" method="POST">
             <div class="search">
                 <input name="txt" class="text-search" type="text" placeholder="Name...">
                 <button class="button-search">Search</button>
             </div>
         </form>
-        <form action="category" method="GET">
+        <form action="category_list" method="GET">
             <ul id="category-tabs">
                 <li><a>#</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a>Name</a></li>
                     <c:set var="i" value="0"></c:set>
@@ -28,7 +27,7 @@
                                 <div class="id" id="id" style="width: 50px;">${i}</div>
                             <div class="name" style="margin-left: 150px;width: 200px;">${c.name}</div>
                             <div class="footer-category" style="margin-left: 200px;">
-                                <button type="button" class="btn btn-danger"  onclick="AlertDelete(${c.id})">Delete</button>
+                                <button  type="button" class="btn btn-danger" onclick="AlertDelete(${c.id})">Delete</button>
                                 <button type="button" class="btn btn-info" onclick="UpdateInfo(${c.id})">Info</button>
                             </div>
                         </div>
@@ -41,14 +40,17 @@
         function AlertDelete(id) {
             var result = confirm("Do you want to delete ?");
             if (result === true) {
-                window.location.href = 'category_ud?id=' + id;
+                window.location.href = 'category_delete?id=' + id;
+            }
+            else{
+                return false;
             }
         }
         function CreateCategory() {
-            window.location.href = "<%= request.getContextPath()%>/admin/category/create/CreateCategory.jsp";
+            window.location.href = "category_create";
         }
         function UpdateInfo(id) {
-            window.location.href = 'update?id=' + id;
+            window.location.href = 'category_update?id=' + id;
         }
     </script>
 </div>

@@ -43,12 +43,12 @@
 <div class="offcanvas-lg offcanvas-start " tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
     <div class="offcanvas-body  bg-secondary" style="
          float: left;
-         height: 100pc;
+         height: 1000px;
          padding-top: 56px"
          >
         <ul class="list-group  list-group-flush  bg-secondary">
             <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin"> <h4>Dashboard</h3></a></li>
-            <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/category"> <h4>Category</h3></a></li>
+            <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/category_list"> <h4>Category</h3></a></li>
             <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin/user"> <h4>User</h3></a></li>
         </ul>
     </div>

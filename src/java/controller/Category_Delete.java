@@ -62,7 +62,7 @@ public class Category_Delete extends HttpServlet {
         CategoryDBContext db = new CategoryDBContext();
         String id = request.getParameter("id");
         db.deleteByID(id);
-        response.sendRedirect("category");
+        response.sendRedirect("category_list");
     }
 
     /**

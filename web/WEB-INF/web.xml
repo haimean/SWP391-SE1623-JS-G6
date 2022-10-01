@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>CategoryController</servlet-name>
-        <servlet-class>controller.CategoryController</servlet-class>
+        <servlet-name>Category_List</servlet-name>
+        <servlet-class>controller.Category_List</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CategoryController_UD</servlet-name>
-        <servlet-class>controller.CategoryController_UD</servlet-class>
+        <servlet-name>Category_Delete</servlet-name>
+        <servlet-class>controller.Category_Delete</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CategoryController_Search</servlet-name>
-        <servlet-class>controller.CategoryController_Search</servlet-class>
+        <servlet-name>Category_Search</servlet-name>
+        <servlet-class>controller.Category_Search</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Category_Update</servlet-name>
@@ -57,24 +57,24 @@
         <servlet-class>controller.ProductlistforUser</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CategoryController</servlet-name>
-        <url-pattern>/category</url-pattern>
+        <servlet-name>Category_List</servlet-name>
+        <url-pattern>/category_list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CategoryController_UD</servlet-name>
-        <url-pattern>/category_ud</url-pattern>
+        <servlet-name>Category_Delete</servlet-name>
+        <url-pattern>/category_delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CategoryController_Search</servlet-name>
-        <url-pattern>/search</url-pattern>
+        <servlet-name>Category_Search</servlet-name>
+        <url-pattern>/category_search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Category_Update</servlet-name>
-        <url-pattern>/update</url-pattern>
+        <url-pattern>/category_update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Category_Create</servlet-name>
-        <url-pattern>/create</url-pattern>
+        <url-pattern>/category_create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserlistController_List</servlet-name>

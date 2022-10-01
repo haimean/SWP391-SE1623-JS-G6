@@ -109,9 +109,9 @@ public class CategoryDBContext extends DBContext {
         return listCategory;
     }
 
+
     public static void main(String[] args) {
         CategoryDBContext db = new CategoryDBContext();
-        db.CreateCategory("kinh");
-
+        db.updateInfo("1","loan");
     }
 }

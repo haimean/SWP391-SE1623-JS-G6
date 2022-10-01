@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/web/seller/product/productList.jsp</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/web/WEB-INF/web.xml</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/src/java/dal/CategoryDBContext.java</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/nbproject/build-impl.xml</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/web/seller/product/css/style.css</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/web/seller/product/productDetail.jsp</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/src/java/controller/CategoryController.java</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/src/java/dal/ProductDBContext.java</file>
-            <file>file:/E:/SWP391/SWP391-SE1623-JS-G6/src/java/controller/Productlist_List.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

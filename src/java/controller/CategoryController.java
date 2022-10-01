@@ -4,21 +4,21 @@
  */
 package controller;
 
-import dal.ProductDBContext;
+import dal.CategoryDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Product;
+import java.util.ArrayList;
+import model.Category;
 
 /**
  *
- * @author MrTuan
+ * @author Mr Tuan
  */
-public class Productlist_List extends HttpServlet {
+public class CategoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +31,6 @@ public class Productlist_List extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        try ( PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            ProductDBContext db = new ProductDBContext();
-//            List<Product> listP = db.getProduct();
-//            request.setAttribute("listP", listP);
-//            request.getRequestDispatcher("../seller/product/productList.jsp").forward(request, response);
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,11 +45,11 @@ public class Productlist_List extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ProductDBContext db = new ProductDBContext();
-        List<Product> listP = db.getProduct();
-        request.setAttribute("listP", listP);
-        request.getRequestDispatcher("productList.jsp").forward(request, response);
+//getall
+        CategoryDBContext db = new CategoryDBContext();
+        ArrayList<Category> listC = db.getAllCategory();
+        request.setAttribute("category", listC);
+        request.getRequestDispatcher("admin\\category\\index.jsp").forward(request, response);
     }
 
     /**
@@ -71,12 +63,11 @@ public class Productlist_List extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-response.setContentType("text/html;charset=UTF-8");
-        ProductDBContext db = new ProductDBContext();
-        List<Product> listP = db.getProduct();
-        request.setAttribute("listP", listP);
-        request.getRequestDispatcher("productList.jsp").forward(request, response);
+//create        
+        CategoryDBContext db = new CategoryDBContext();
+        String name=request.getParameter("name");
+        db.CreateCategory(name);
+        response.sendRedirect("category");
     }
 
     /**

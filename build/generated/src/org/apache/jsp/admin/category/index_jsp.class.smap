@@ -1,0 +1,19 @@
+SMAP
+index_jsp.java
+JSP
+*S JSP
+*F
++ 0 index.jsp
+admin/category/../layout/index.jsp
++ 1 index.jsp
+admin/category/index.jsp
+*L
+4,33:52
+37:85,3
+38,12:88
+50,3:100,3
+53,3:109
+1#1:112
+2:113,3
+3,36:116
+*E

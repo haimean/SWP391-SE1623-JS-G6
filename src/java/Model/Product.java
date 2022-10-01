@@ -2,132 +2,129 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package model;
 
 /**
  *
- * @author nguye
+ * @author MrTuan
  */
 public class Product {
 
-    private int proId;
-    private Category category;
-    private String proName;
-    private String proDes;
-    private String proOrigin;
-    private int proQuantity;
-    private double proPrice;
-    private boolean proStatus;
-    private String proImg;
-    private int proViewNumber;
+    private int id, categoryID;
+    private String name, description, original;
+    private int quantity;
+    private double price;
+    private boolean status;
+    private int viewNumber;
+    private String Create_at, Update_at;
 
     public Product() {
     }
-    
-   public Product(int proId, Category category, String proName, String proDes, String proOrigin, int proQuantity, double proPrice, boolean proStatus, int proViewNumber){
-       this.proId = proId;
-        this.category = category;
-        this.proName = proName;
-        this.proDes = proDes;
-        this.proOrigin = proOrigin;
-        this.proQuantity = proQuantity;
-        this.proPrice = proPrice;
-        this.proStatus = proStatus;
-       
-        this.proViewNumber = proViewNumber;
-   }
-           
-    public Product(int proId, Category category, String proName, String proDes, String proOrigin, int proQuantity, double proPrice, boolean proStatus, String proImg, int proViewNumber) {
-        this.proId = proId;
-        this.category = category;
-        this.proName = proName;
-        this.proDes = proDes;
-        this.proOrigin = proOrigin;
-        this.proQuantity = proQuantity;
-        this.proPrice = proPrice;
-        this.proStatus = proStatus;
-        this.proImg = proImg;
-        this.proViewNumber = proViewNumber;
+
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String Create_at, String Update_at) {
+        this.id = id;
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+        this.original = original;
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+        this.viewNumber = viewNumber;
+        this.Create_at = Create_at;
+        this.Update_at = Update_at;
     }
 
-    public int getProId() {
-        return proId;
+    public int getId() {
+        return id;
     }
 
-    public void setProId(int proId) {
-        this.proId = proId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getCategoryID() {
+        return categoryID;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
-    public String getProName() {
-        return proName;
+    public String getName() {
+        return name;
     }
 
-    public void setProName(String proName) {
-        this.proName = proName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProDes() {
-        return proDes;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProDes(String proDes) {
-        this.proDes = proDes;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getProOrigin() {
-        return proOrigin;
+    public String getOriginal() {
+        return original;
     }
 
-    public void setProOrigin(String proOrigin) {
-        this.proOrigin = proOrigin;
+    public void setOriginal(String original) {
+        this.original = original;
     }
 
-    public int getProQuantity() {
-        return proQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setProQuantity(int proQuantity) {
-        this.proQuantity = proQuantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public double getProPrice() {
-        return proPrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProPrice(double proPrice) {
-        this.proPrice = proPrice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public boolean isProStatus() {
-        return proStatus;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setProStatus(boolean proStatus) {
-        this.proStatus = proStatus;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public String getProImg() {
-        return proImg;
+    public int getViewNumber() {
+        return viewNumber;
     }
 
-    public void setProImg(String proImg) {
-        this.proImg = proImg;
+    public void setViewNumber(int viewNumber) {
+        this.viewNumber = viewNumber;
     }
 
-    public int getProViewNumber() {
-        return proViewNumber;
+    public String getCreate_at() {
+        return Create_at;
     }
 
-    public void setProViewNumber(int proViewNumber) {
-        this.proViewNumber = proViewNumber;
+    public void setCreate_at(String Create_at) {
+        this.Create_at = Create_at;
     }
 
+    public String getUpdate_at() {
+        return Update_at;
+    }
+
+    public void setUpdate_at(String Update_at) {
+        this.Update_at = Update_at;
+    }
+
+    @Override
+    public String toString() {
+        return "DAO{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", Create_at=" + Create_at + ", Update_at=" + Update_at + '}';
+    }
 }

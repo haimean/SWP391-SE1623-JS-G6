@@ -2,16 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
-
+package model;
 import java.sql.Date;
-
 /**
  *
- * @author PiPi
+ * @author MrTuan
  */
 public class User {
-//wiwiwiwiw
     private int id;
     private int role;
     private String fullName;
@@ -103,8 +100,4 @@ public class User {
     public String toString() {
         return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
-
-    
-    
-
 }

@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="SWP391-SE1623-JS-G6" default="default" basedir=".">
-    <description>Builds, tests, and runs the project SWP391-SE1623-JS-G6.</description>
+<project name="BlogShop" default="default" basedir=".">
+    <description>Builds, tests, and runs the project BlogShop.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

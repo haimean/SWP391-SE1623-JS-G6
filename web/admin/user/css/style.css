@@ -1,0 +1,23 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Sep 26, 2022, 5:07:29 PM
+    Author     : PiPi
+*/
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.table-container{
+    padding: 8rem 4rem;
+}
+
+table th:hover{
+    background-color: #f7f7f7;
+    cursor: pointer;    
+}

@@ -41,8 +41,7 @@ public class UserlistDBContext extends DBContext {
         }
         return userList;
     }
-    
-    
+
     public void deleteUser(String id) {
 //        String query = "delete from [User] where [User].id = ?\n"
 //                + "delete from [UserInformation] where [UserInformation].id = ?";
@@ -52,7 +51,7 @@ public class UserlistDBContext extends DBContext {
                 + "delete from [AddressReceiver] where userId = ?\n"
                 + "delete from [User] where id = ?";
         try {
-            PreparedStatement stm=connection.prepareStatement(query);
+            PreparedStatement stm = connection.prepareStatement(query);
             stm.setString(1, id);
             stm.setString(2, id);
             stm.setString(3, id);
@@ -63,5 +62,14 @@ public class UserlistDBContext extends DBContext {
             status += "Error at delete user " + e.getMessage();
             System.out.println(status);
         }
+    }
+
+    public static void main(String[] args) {
+        UserlistDBContext db = new UserlistDBContext();
+        ArrayList<User> lu=db.getAllUsers();
+        for (User user : lu) {
+            System.out.println(user.getFullName());
+        }
+
     }
 }

@@ -52,6 +52,10 @@
         <servlet-name>CustomerProfile</servlet-name>
         <servlet-class>controller.CustomerProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductlistforUser</servlet-name>
+        <servlet-class>controller.ProductlistforUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoryController</servlet-name>
         <url-pattern>/category</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>CustomerProfile</servlet-name>
         <url-pattern>/customerProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductlistforUser</servlet-name>
+        <url-pattern>/productlistforUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

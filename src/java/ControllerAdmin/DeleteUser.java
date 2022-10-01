@@ -16,7 +16,11 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author PiPi
  */
+<<<<<<<< HEAD:src/java/ControllerAdmin/DeleteUser.java
 public class DeleteUser extends HttpServlet {
+========
+public class Category_Search extends HttpServlet {
+>>>>>>>> f089ca3 (update code project):src/java/ControllerAdmin/Category_Search.java
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -4,12 +4,19 @@
  */
 package ControllerAdmin;
 
+<<<<<<< HEAD
 import Dal.DAOCategory;
 import java.io.IOException;
+=======
+import Dal.DAOUser;
+import java.io.IOException;
+import java.io.PrintWriter;
+>>>>>>> ad91098 (update code project)
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import Model.Category;
 
@@ -18,6 +25,18 @@ import Model.Category;
  * @author Mr Tuan
  */
 public class Category_Search extends HttpServlet {
+=======
+
+/**
+ *
+ * @author PiPi
+ */
+<<<<<<<< HEAD:src/java/ControllerAdmin/DeleteUser.java
+public class DeleteUser extends HttpServlet {
+========
+public class Category_Search extends HttpServlet {
+>>>>>>>> f089ca3 (update code project):src/java/ControllerAdmin/Category_Search.java
+>>>>>>> ad91098 (update code project)
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,6 +49,7 @@ public class Category_Search extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
 //search
         DAOCategory db=new DAOCategory();
         String txtname=request.getParameter("txt");
@@ -37,6 +57,10 @@ public class Category_Search extends HttpServlet {
         request.setAttribute("category", listCategory);
         request.getRequestDispatcher("admin\\category\\index.jsp").forward(request, response);
         
+=======
+        response.setContentType("text/html;charset=UTF-8");
+
+>>>>>>> ad91098 (update code project)
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,7 +75,14 @@ public class Category_Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         processRequest(request, response);
+=======
+        DAOUser dao = new DAOUser();
+        String id = request.getParameter("id");
+        dao.deleteUser(id);
+        response.sendRedirect(request.getContextPath() + "/user-list");
+>>>>>>> ad91098 (update code project)
     }
 
     /**

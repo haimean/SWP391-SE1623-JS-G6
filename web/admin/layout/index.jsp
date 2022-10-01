@@ -65,7 +65,11 @@
     <div class="offcanvas-body  bg-secondary" style="
          float: left;
          height: 1000px;
+<<<<<<< HEAD
          "
+=======
+         padding-top: 56px"
+>>>>>>> 8aa70bc (finish fix category)
          >
         <ul class="list-group  list-group-flush  bg-secondary">
             <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin"> <h4>Dashboard</h3></a></li>

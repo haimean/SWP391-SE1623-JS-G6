@@ -10,6 +10,66 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 ul{
     list-style:none;
 }
+
+.container-category{
+    text-align: center;
+}
+.title{
+    display: inline-flex;
+    margin-top: 150px;
+    width: 1200px;
+    margin-left: 35px;
+}
+
+.button-create{
+    background-color: rgb(119, 73, 248);
+    width: 80px;
+    height: 35px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    margin-right: 650px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.button-create:hover{
+    background-color: rgb(255, 165, 0);
+    margin-right: 650px;
+    color: white;
+}
+.search{
+    display: inline-flex;
+    margin-top: 10px;
+    margin-left: 200px;
+}
+.text-search{
+    width: 300px;
+    height: 35px;
+    margin-left: 10px; 
+}
+.button-search{
+    background-color: rgb(23, 162, 184);
+    width: 80px;
+    height: 35px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.button-search:hover{
+    background-color: rgb(255, 165, 0);
+    margin-left: 10px;
+    color: white;
+}
+
 .side-nav-categories {
     padding: 0px;
     position: relative;

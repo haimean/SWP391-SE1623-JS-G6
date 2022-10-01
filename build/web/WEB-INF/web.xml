@@ -63,6 +63,7 @@
     <servlet>
         <servlet-name>SellerDashbroad</servlet-name>
         <servlet-class>ControllerSeller.SellerDashbroad</servlet-class>
+
     </servlet>
     <servlet>
         <servlet-name>DeleteUser</servlet-name>
@@ -77,6 +78,7 @@
         <servlet-class>controller.ProductlistforUser</servlet-class>
     </servlet>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>Category_Search</servlet-name>
         <url-pattern>/category_search</url-pattern>
     </servlet-mapping>
@@ -110,6 +112,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminDashboard</servlet-name>
+=======
+<<<<<<< HEAD
+        <servlet-name>admin</servlet-name>
+>>>>>>> 8aa70bc (finish fix category)
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -117,6 +123,7 @@
         <url-pattern>/admin/category</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>Home</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>

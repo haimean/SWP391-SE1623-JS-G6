@@ -61,7 +61,7 @@ public class Userlist_List extends HttpServlet {
         UserlistDBContext db = new UserlistDBContext();
         ArrayList<User> list = db.getAllUsers();
         request.setAttribute("listU", list);
-        request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+        request.getRequestDispatcher("admin\\user\\index.jsp").forward(request, response);
     }
 
     /**

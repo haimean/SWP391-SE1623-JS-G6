@@ -21,8 +21,8 @@
         <servlet-class>controller.Category_Create</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserlistController_List</servlet-name>
-        <servlet-class>controller.UserlistController_List</servlet-class>
+        <servlet-name>Userlist_List</servlet-name>
+        <servlet-class>controller.Userlist_List</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Userlist_Delete</servlet-name>
@@ -77,7 +77,7 @@
         <url-pattern>/category_create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserlistController_List</servlet-name>
+        <servlet-name>Userlist_List</servlet-name>
         <url-pattern>/userlist_list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

@@ -49,7 +49,7 @@
         <ul class="list-group  list-group-flush  bg-secondary">
             <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin"> <h4>Dashboard</h3></a></li>
             <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/category_list"> <h4>Category</h3></a></li>
-            <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin/user"> <h4>User</h3></a></li>
+            <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/userlist_list"> <h4>User</h3></a></li>
         </ul>
     </div>
 </div>

@@ -34,18 +34,52 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        LoginDBContext db = new LoginDBContext();
+        HttpSession session = request.getSession();
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        User user = new User();
+        try {
+            user = db.search(email, password);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //login
+        if (user == null) {
+            String noti = "Incorrect user name or password,please try again";
+//            request.setAttribute("noti", noti);
+            request.getRequestDispatcher("login\\index.jsp").forward(request, response);
+        } else {
+            int type = user.getRole();
+            request.getSession().setMaxInactiveInterval(600);
+            switch (type) {
+                case 1:
+                    if (type == 1) {
+                        session.setAttribute("email", email);
+                        session.setAttribute("user", user);
+                        response.sendRedirect("adminProfile");
+                        request.getSession().setMaxInactiveInterval(600);
+                        break;
+                    }
+                case 2:
+                    if (type == 2) {
+                        session.setAttribute("email", email);
+                        session.setAttribute("user", user);
+                        response.sendRedirect("sellerProfile");
+                        request.getSession().setMaxInactiveInterval(600);
+                        break;
+                    }
+                case 3:
+                    if (type == 3) {
+                        session.setAttribute("email", email);
+                        session.setAttribute("user", user);
+                        response.sendRedirect("customerProfile");
+                        request.getSession().setMaxInactiveInterval(600);
+                        break;
+                    }
+                default:
+                    throw new AssertionError();
+            }
         }
     }
 

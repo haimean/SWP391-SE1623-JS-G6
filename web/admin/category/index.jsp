@@ -3,6 +3,7 @@
 <link href="<%=request.getContextPath()%>/admin/category/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<!-- Modal -->
 
 <!-- Modal -->
 <c:forEach items="${requestScope.categories}" var="c">

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Category;
 import model.Product;
 
 /**
@@ -151,7 +152,25 @@ public class ProductDBContext extends DBContext {
             System.out.println(ex);
         }
     }
+    
+    
+    public List<Category> getAllCategory(){
+        List<Category> list = new ArrayList<>();
+        String sql = "Select * from Category";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {                
+                Category c = new Category(rs.getString(1), rs.getString(2));
+                list.add(c);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
 
+        return list ;
+    }
     public static void main(String[] args) {
         
     }

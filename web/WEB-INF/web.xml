@@ -56,6 +56,10 @@
         <servlet-name>ProductlistforUser</servlet-name>
         <servlet-class>controller.ProductlistforUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Product_detail</servlet-name>
+        <servlet-class>controller.Product_detail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CategoryController</servlet-name>
         <url-pattern>/category</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>ProductlistforUser</servlet-name>
         <url-pattern>/productlistforUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Product_detail</servlet-name>
+        <url-pattern>/product_detail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

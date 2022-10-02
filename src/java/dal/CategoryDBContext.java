@@ -24,7 +24,7 @@ public class CategoryDBContext extends DBContext {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Category category = new Category();
-                category.setId(rs.getInt("id"));
+                category.setId(rs.getString("id"));
                 category.setName(rs.getString("name"));
                 listCategory.add(category);
             }
@@ -69,7 +69,7 @@ public class CategoryDBContext extends DBContext {
             ResultSet rs=stm.executeQuery();
             while(rs.next()){
                 Category category= new Category();
-                category.setId(rs.getInt("id"));
+                category.setId(rs.getString("id"));
                 category.setName(rs.getString("name"));
                 listCategory.add(category);
             }
@@ -99,7 +99,7 @@ public class CategoryDBContext extends DBContext {
             ResultSet rs= stm.executeQuery();
             while(rs.next()){
                 Category category= new Category();
-                category.setId(rs.getInt("id"));
+                category.setId(rs.getString("id"));
                 category.setName(rs.getString("name"));
                 listCategory.add(category);
             }

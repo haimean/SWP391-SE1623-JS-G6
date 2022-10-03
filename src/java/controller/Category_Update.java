@@ -80,7 +80,7 @@ public class Category_Update extends HttpServlet {
         String id=request.getParameter("id");
         String namenew=request.getParameter("namenew");
         db.updateInfo(id, namenew);
-        response.sendRedirect("category");
+        response.sendRedirect("category_list");
     }
 
     /**

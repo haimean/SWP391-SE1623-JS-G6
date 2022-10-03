@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${requestScope.listP}" var="o">
+                        <c:forEach items="${listP}" var="o">
                         <tr>
                             
                             <th scope="row">${o.id}</th>

@@ -99,4 +99,6 @@ public class DAOUser extends DBContext.DBContext {
 			System.out.println(u.toString());
 		}
 	}
+    }
+>>>>>>> 9d2143a (feat: login author)
 }

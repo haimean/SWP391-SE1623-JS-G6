@@ -22,35 +22,25 @@ import Model.Category;
  */
 public class Category_Search extends HttpServlet {
 
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// search
-		DAOCategory db = new DAOCategory();
-		String txtname = request.getParameter("txt");
-		ArrayList<Category> listCategory = db.SearchName(txtname);
-		request.setAttribute("category", listCategory);
-		request.getRequestDispatcher("admin\\category\\index.jsp").forward(request, response);
-	}
-
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
-	// + sign on the left to edit the code.">
-	/**
-	 * Handles the HTTP <code>GET</code> method.
-	 *
-	 * @param request  servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		processRequest(request, response);
-		DAOUser dao = new DAOUser();
-		String id = request.getParameter("id");
-		dao.deleteUser(id);
-		response.sendRedirect(request.getContextPath() + "/user-list");
-	}
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+//search
+        DAOCategory db=new DAOCategory();
+        String txtname=request.getParameter("txt");
+        ArrayList<Category> listCategory=db.SearchName(txtname);
+        request.setAttribute("category", listCategory);
+        request.getRequestDispatcher("admin\\category\\index.jsp").forward(request, response);
+        
+    }
 
 	/**
 	 * Handles the HTTP <code>POST</code> method.

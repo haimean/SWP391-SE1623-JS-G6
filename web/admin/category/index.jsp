@@ -5,8 +5,7 @@
 
 
 <!-- Modal -->
-
-<c:forEach items="${requestScope.category}" var="c">
+<c:forEach items="${requestScope.categories}" var="c">
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -31,9 +30,9 @@
         <button class="button-create" onclick="CreateCategory()" style="margin-left: 140px;">Create</button>
     </div>
     <div class="side-nav-categories">
-        <form action="category_search" method="POST">
+        <form action="category" method="get">
             <div class="search">
-                <input name="txt" class="text-search" type="text" placeholder="Name...">
+                <input name="search" class="text-search" type="text" placeholder="Name...">
                 <button class="button-search">Search</button>
             </div>
         </form>
@@ -41,7 +40,7 @@
             <ul id="category-tabs">
                 <li><a>#</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a>Name</a></li>
                     <c:set var="i" value="0"></c:set>
-                    <c:forEach items="${requestScope.category}" var="c">
+                    <c:forEach items="${requestScope.categories}" var="c">
                         <c:set var="i" value="${i+1}"></c:set>
                         <li>
                             <div class="items">

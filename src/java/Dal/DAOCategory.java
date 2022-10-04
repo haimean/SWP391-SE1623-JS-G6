@@ -2,19 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dal;
+package Dal;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Category;
+import Model.Category;
 
 /**
  *
  * @author Mr Tuan
  */
-public class CategoryDBContext extends DBContext {
+public class DAOCategory extends DBContext.DBContext {
 
     public ArrayList<Category> getAllCategory() {
         ArrayList<Category> listCategory = new ArrayList<>();
@@ -111,7 +111,7 @@ public class CategoryDBContext extends DBContext {
 
 
     public static void main(String[] args) {
-        CategoryDBContext db = new CategoryDBContext();
+        DAOCategory db = new DAOCategory();
         db.updateInfo("1","loan");
     }
 }

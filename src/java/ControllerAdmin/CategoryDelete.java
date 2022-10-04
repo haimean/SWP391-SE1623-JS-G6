@@ -2,23 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package ControllerAdmin;
 
-import dal.CategoryDBContext;
+import Dal.DAOCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Category;
 
 /**
  *
  * @author Mr Tuan
  */
-public class Category_Update extends HttpServlet {
+public class CategoryDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,10 @@ public class Category_Update extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Category_Update</title>");            
+            out.println("<title>Servlet CategoryController_UD</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Category_Update at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CategoryController_UD at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,11 +56,11 @@ public class Category_Update extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDBContext db = new CategoryDBContext();
+//delete        
+        DAOCategory db = new DAOCategory();
         String id = request.getParameter("id");
-        ArrayList<Category> listCategory=db.GetCategoryById(id);
-        request.setAttribute("updateinfo", listCategory);
-        request.getRequestDispatcher("admin\\category\\updateinfo\\UpdateInfo.jsp").forward(request, response);
+        db.deleteByID(id);
+        response.sendRedirect("category_list");
     }
 
     /**
@@ -76,11 +74,7 @@ public class Category_Update extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDBContext db = new CategoryDBContext();
-        String id=request.getParameter("id");
-        String namenew=request.getParameter("namenew");
-        db.updateInfo(id, namenew);
-        response.sendRedirect("category_list");
+        processRequest(request, response);
     }
 
     /**

@@ -2,23 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package ControllerAdmin;
 
-import dal.CategoryDBContext;
+import Dal.DAOCategory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Category;
 
 /**
  *
  * @author Mr Tuan
  */
-public class Category_Search extends HttpServlet {
+public class CategoryCreate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,13 +28,6 @@ public class Category_Search extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//search
-        CategoryDBContext db=new CategoryDBContext();
-        String txtname=request.getParameter("txt");
-        ArrayList<Category> listCategory=db.SearchName(txtname);
-        request.setAttribute("category", listCategory);
-        request.getRequestDispatcher("admin\\category\\index.jsp").forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,7 +42,7 @@ public class Category_Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("admin\\category\\create\\CreateCategory.jsp").forward(request, response);
     }
 
     /**
@@ -66,7 +56,11 @@ public class Category_Search extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        DAOCategory db = new DAOCategory();
+        String new_category = request.getParameter("txt");
+        db.CreateCategory(new_category);
+        response.sendRedirect("category_list");
+
     }
 
     /**

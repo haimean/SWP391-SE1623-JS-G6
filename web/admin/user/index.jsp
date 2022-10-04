@@ -30,13 +30,13 @@
         </div>
     </div>
 </div>
-<div class="content-wrap">
+<div class="content-wrap d-flex" >
     <div class="container">
         <div class="table-responsive table-container mx-auto">
             <div class="shadow-sm p-3 mb-5 bg-white rounded px-5 py-5 d-flex flex-column align-items-center">
-                <div class="d-flex">
-                    <input type="search" id="search" class="form-control mb-4" placeholder="Search"/>
-                    <button class="btn btn-primary">Search</button>
+                <div class="d-flex mb-4" style=" justify-content: center; align-items: center;">
+                    <input type="search" id="search" class="form-control " placeholder="Search"/>
+                    <button class="btn btn-primary" style="margin-left: 1rem;">Search</button>
                 </div>
                 <table class="table">
                     <thead class="text-center">

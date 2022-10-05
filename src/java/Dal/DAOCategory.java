@@ -34,20 +34,22 @@ public class DAOCategory extends DBContext.DBContext {
         return listCategory;
     }
 
-    public void deleteByID(String id) {
+    public int deleteByID(String id) {
+        int count = 0;
         try {
             String sql = "delete from Category  where id=?\n"
                     + "delete from Product where categoryID=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             stm.setString(2, id);
-            stm.executeUpdate();
+            count = stm.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return count;
     }
 
-    public void updateInfo(String id,String name ) {
+    public void updateInfo(String id, String name) {
         try {
             String sql = "UPDATE Category\n"
                     + "   SET [name] = ?\n"
@@ -61,14 +63,14 @@ public class DAOCategory extends DBContext.DBContext {
     }
 
     public ArrayList<Category> SearchName(String txtname) {
-        ArrayList<Category> listCategory=new ArrayList<>();
+        ArrayList<Category> listCategory = new ArrayList<Category>();
         try {
             String sql = "Select * from Category c where c.[name] like '%'+?+'%'";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, txtname);
-            ResultSet rs=stm.executeQuery();
-            while(rs.next()){
-                Category category= new Category();
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Category category = new Category();
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
                 listCategory.add(category);
@@ -78,27 +80,27 @@ public class DAOCategory extends DBContext.DBContext {
         }
         return listCategory;
     }
-    
-    public void CreateCategory(String name){
+
+    public void CreateCategory(String name) {
         try {
-            String sql="insert into Category values(?)";
-            PreparedStatement stm=connection.prepareStatement(sql);
+            String sql = "insert into Category values(?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, name);
             stm.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    
-    public ArrayList<Category> GetCategoryById(String id){
-        ArrayList<Category> listCategory =new ArrayList<>();
+
+    public ArrayList<Category> GetCategoryById(String id) {
+        ArrayList<Category> listCategory = new ArrayList<>();
         try {
-            String sql="select * from Category where id=?";
-            PreparedStatement stm= connection.prepareStatement(sql);
+            String sql = "select * from Category where id=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
-            ResultSet rs= stm.executeQuery();
-            while(rs.next()){
-                Category category= new Category();
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Category category = new Category();
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
                 listCategory.add(category);
@@ -109,9 +111,8 @@ public class DAOCategory extends DBContext.DBContext {
         return listCategory;
     }
 
-
     public static void main(String[] args) {
         DAOCategory db = new DAOCategory();
-        db.updateInfo("1","loan");
+        db.updateInfo("1", "loan");
     }
 }

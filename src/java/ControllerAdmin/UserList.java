@@ -17,7 +17,7 @@ import Model.User;
  *
  * @author MrTuan
  */
-public class Userlist_List extends HttpServlet {
+public class UserList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

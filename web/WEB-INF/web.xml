@@ -6,11 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>Category Delete</servlet-name>
-        <servlet-class>ControllerAdmin.CategoryCreate</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Category_Search</servlet-name>
-        <servlet-class>controller.Category_Search</servlet-class>
+        <servlet-class>ControllerAdmin.CategoryDelete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CategoryUpdate</servlet-name>
@@ -22,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>Userlist List</servlet-name>
-        <servlet-class>ControllerAdmin.Userlist_List</servlet-class>
+        <servlet-class>ControllerAdmin.UserList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Userlist_Delete</servlet-name>
@@ -33,8 +29,8 @@
         <servlet-class>ControllerAuthen.Userlist_Search</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Productlist_List</servlet-name>
-        <servlet-class>controller.Productlist_List</servlet-class>
+        <servlet-name>ProductList</servlet-name>
+        <servlet-class>ControllerSeller.Productlist_List</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
@@ -65,10 +61,6 @@
         <servlet-class>ControllerSeller.SellerDashbroad</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Category_Search</servlet-name>
-        <url-pattern>/category_search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Category_Create</servlet-name>
         <url-pattern>/category_create</url-pattern>
     </servlet-mapping>
@@ -79,10 +71,6 @@
     <servlet-mapping>
         <servlet-name>Userlist_Search</servlet-name>
         <url-pattern>/userlist_search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Productlist_List</servlet-name>
-        <url-pattern>/productlist_list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -127,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>CategoryUpdate</servlet-name>
         <url-pattern>/admin/category/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductList</servlet-name>
+        <url-pattern>/seller/product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

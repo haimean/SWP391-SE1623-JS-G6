@@ -4,8 +4,8 @@
  */
 package ControllerAdmin;
 
-import Dal.DAOCategory;
-import Dal.DAOUser;
+import DAO.DAOCategory;
+import DAO.DAOUser;
 import Model.Category;
 import Model.User;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class AdminDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Category> categories =  new DAOCategory().getAllCategory();       
+        ArrayList<Category> categories =  new DAOCategory().getCategories();       
         ArrayList<User> users =  new DAOUser().getAllUsers();
         request.setAttribute("categoriesCount", categories.size());    
         request.setAttribute("usersCount", users.size());

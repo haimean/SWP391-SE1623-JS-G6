@@ -33,7 +33,7 @@
 							Category
 						</a>
 						<ul class="dropdown-menu" style="height: 13rem; overflow: auto;">
-							<% List<Category> categories = new DAOCategory().getAllCategory();
+							<% ArrayList<Category> categories = new DAOCategory().getAllCategory();
 								if(categories != null){
 								for(Category c : categories){
 								%>

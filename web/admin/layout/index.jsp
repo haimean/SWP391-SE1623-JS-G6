@@ -19,16 +19,21 @@
 			--bs-offcanvas-padding-y: 0;
 		}
 
+		.offcanvas-lg {
+			--bs-offcanvas-width: none;
+			--bs-offcanvas-border-width: 0px;
+			--bs-offcanvas-padding-x: 0;
+			--bs-offcanvas-padding-y: 0;
+		}
+
 		a {
 			text-decoration: none;
 			color: black
 		}
 
-		<<<<<<< HEAD=======body {
+		body {
 			background-color: #D9D8E1;
 		}
-
-		>>>>>>>8ec4d3b (n)
 	</style>
 	<nav class="navbar bg-secondary">
 		<div class="container-fluid">

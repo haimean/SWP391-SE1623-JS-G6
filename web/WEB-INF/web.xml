@@ -257,20 +257,12 @@
         <url-pattern>/admin/qna-type/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProfileUserChangePassword</servlet-name>
-        <url-pattern>/profile/changepassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <url-pattern>/profile/changepassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>VerifyCode</servlet-name>
-        <url-pattern>/verify</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterVerifyCode</servlet-name>

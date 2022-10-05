@@ -1,4 +1,3 @@
 /build/
 /dist/
-/src/java/DBContext/
-/nbproject/
+/src/java/DBContext/DBContext.java

@@ -20,6 +20,9 @@
         text-decoration: none;
         color: black
     }
+    body{
+        background-color: #D9D8E1;
+    }
 </style>
 <nav class="navbar bg-warning">
     <div class="container-fluid">

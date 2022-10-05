@@ -2,28 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerUser;
+package Controller;
 
-import DAO.DAOCategory;
-import DAO.DAOProduct;
-import Model.Category;
 import Model.Product;
+import Model.Category;
+import Dao.CategoryDao;
+import Dao.ProductDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author nguye
  */
-public class UserProductList extends HttpServlet {
+public class StoreProductList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,7 +42,7 @@ public class UserProductList extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserProductList</title>");            
+            out.println("<title>Servlet UserProductList</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UserProductList at " + request.getContextPath() + "</h1>");
@@ -87,7 +87,7 @@ public class UserProductList extends HttpServlet {
         }
         request.setAttribute("sortabc", sortby);
 
-        //get search by name
+        // get search by name
         String name = "";
         if (request.getParameter("search") != null) {
             name = request.getParameter("search").trim();
@@ -95,14 +95,14 @@ public class UserProductList extends HttpServlet {
         }
         request.setAttribute("searchname", name);
 
-        //get selected cartegory
+        // get selected cartegory
         int catCheck = 0;
         if (null != request.getParameter("category")) {
             catCheck = Integer.parseInt(request.getParameter("category"));
         }
         request.setAttribute("category", catCheck);
-        
-        //get price range
+
+        // get price range
         int beginprice = 0;
         int endprice = 0;
         if (request.getParameter("beginp") != null && !"".equals(request.getParameter("beginp"))) {
@@ -114,11 +114,11 @@ public class UserProductList extends HttpServlet {
             request.setAttribute("endprice", endprice);
         }
 
-        //DAO import
-        DAOProduct pdao = new DAOProduct();
-        DAOCategory cdao = new DAOCategory();
-        
-        //load cartegory
+        // DAO import
+        ProductDao pdao = new ProductDao();
+        CategoryDao cdao = new CategoryDao();
+
+        // load cartegory
         List<Category> categories = new ArrayList<>();
         Category all = new Category();
         all.setId(0);
@@ -129,25 +129,25 @@ public class UserProductList extends HttpServlet {
                 categories.add(cat);
             }
         } catch (Exception ex) {
-            Logger.getLogger(UserProductList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StoreProductList.class.getName()).log(Level.SEVERE, null, ex);
         }
         request.setAttribute("categories", categories);
 
-        //get and pagecount
+        // get and pagecount
         int pagecount = 0;
         try {
             pagecount = pdao.getPageCount(catCheck, beginprice, endprice, name);
         } catch (Exception ex) {
-            Logger.getLogger(UserProductList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StoreProductList.class.getName()).log(Level.SEVERE, null, ex);
         }
         request.setAttribute("numberPage", pagecount);
-        //get and set current page
+        // get and set current page
         int page = 1;
         if (null != request.getParameter("page")) {
             page = Integer.parseInt(request.getParameter("page"));
         }
         request.setAttribute("pageCurrent", page);
-        //paging calculation
+        // paging calculation
         int beginPage = page - 1;
         int endPage = page + 1;
         if (page < 3) {

@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerSeller;
+package Controller;
 
-import DAO.DAOCategory;
-import DAO.DAOProduct;
+import Model.Product;
 import Model.Category;
+import Dao.CategoryDao;
+import Dao.ProductDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +15,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import Model.Product;
 
 /**
  *
@@ -62,8 +62,8 @@ public class SellerProductUpdate extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("pid");
-        Product p = new DAOProduct().getProductById(id);
-        List<Category> listc = new DAOCategory().getCategories();
+        Product p = new ProductDao().getProductById(id);
+        List<Category> listc = new CategoryDao().getCategories();
         request.setAttribute("detail", p);
         request.setAttribute("listc", listc);
         request.getRequestDispatcher("productDetail.jsp").forward(request, response);
@@ -90,7 +90,7 @@ public class SellerProductUpdate extends HttpServlet {
         String create = request.getParameter("create");
         String update = request.getParameter("update");
         String description = request.getParameter("description");
-        DAOProduct dao = new DAOProduct();
+        ProductDao dao = new ProductDao();
         dao.updateProductById(id, categoryId, name, description, origin, quantity, price, true, viewNumber, create,
                 update);
         response.sendRedirect(request.getContextPath() + "/seller/product");

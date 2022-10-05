@@ -8,7 +8,7 @@
 
 <div class="grid-category">
     <%
-    ArrayList<Category> categories = new DAOCategory().getCategories();
+    ArrayList<Category> categories = new CategoryDal().getCategories();
       if(categories != null){
                            for(Category c : categories){
     %>
@@ -16,7 +16,7 @@
     <%
               }}
     %>
-</div> 
+</div>
 <div class= "grid-container">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/lala.jpg">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/ghegamming.jpg">

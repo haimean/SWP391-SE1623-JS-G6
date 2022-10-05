@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerStore;
+package Controller;
 
+import Model.ItemCart;
+import Model.Product;
+import Model.Cart;
+import Dao.ProductDao;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,21 +15,19 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import DAO.*;
-import Model.*;
 
 /**
  *
  * @author PiPi
  */
-enum Mode {
+enum Type {
     ADD,
     CHANGE_QUANTITY,
     SINGAL_DELETE,
     ALL_DELETE
 }
 
-public class Buy extends HttpServlet {
+public class StoreBuy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,10 +57,10 @@ public class Buy extends HttpServlet {
 
         String mode = request.getParameter("mode");
 
-        if (mode.equals(Mode.ADD.toString())) {
+        if (mode.equals(Type.ADD.toString())) {
             int num = Integer.parseInt(request.getParameter("num"));
             String id = request.getParameter("id");
-            DAOProduct dao = new DAOProduct();
+            ProductDao dao = new ProductDao();
             Product product = dao.getProductById(id);
             double price = product.getPrice();
             ItemCart item = new ItemCart(product, num, price);
@@ -68,24 +70,24 @@ public class Buy extends HttpServlet {
                 num = 1;
             }
         }
-        if (mode.equals(Mode.CHANGE_QUANTITY.toString())) {
+        if (mode.equals(Type.CHANGE_QUANTITY.toString())) {
             int num = Integer.parseInt(request.getParameter("num"));
             String id = request.getParameter("id");
 
             if ((num == -1) && (cart.getQuantityById(Integer.parseInt(id)) <= 1)) {
                 cart.removeItem(Integer.parseInt(id));
             } else {
-                DAOProduct dao = new DAOProduct();
+                ProductDao dao = new ProductDao();
                 Product product = dao.getProductById(id);
                 ItemCart t = new ItemCart(product, num, product.getPrice());
                 cart.addItem(t);
             }
         }
-        if (mode.equals(Mode.SINGAL_DELETE.toString())) {
+        if (mode.equals(Type.SINGAL_DELETE.toString())) {
             int id = Integer.parseInt(request.getParameter("id"));
             cart.removeItem(id);
         }
-        if (mode.equals(Mode.ALL_DELETE.toString())) {
+        if (mode.equals(Type.ALL_DELETE.toString())) {
             cart.removeAllItems();
         }
 

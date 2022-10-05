@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package Dao;
 
+import DBContext.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import Model.Product;
  *
  * @author MrTuan
  */
-public class DAOProduct extends DBContext.DBContext {
+public class ProductDao extends DBContext {
 
     // get product
     public List<Product> getProduct() {
@@ -43,7 +44,7 @@ public class DAOProduct extends DBContext.DBContext {
                 list.add(p);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -73,7 +74,7 @@ public class DAOProduct extends DBContext.DBContext {
                 list.add(p);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -107,7 +108,7 @@ public class DAOProduct extends DBContext.DBContext {
             ps.setString(10, updated);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -133,7 +134,7 @@ public class DAOProduct extends DBContext.DBContext {
                         rs.getString(11));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -146,7 +147,7 @@ public class DAOProduct extends DBContext.DBContext {
             ps.setInt(1, pid);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -189,7 +190,7 @@ public class DAOProduct extends DBContext.DBContext {
             ps.setString(10, updated);
             ps.setString(11, id);
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

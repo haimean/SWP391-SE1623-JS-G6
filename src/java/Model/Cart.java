@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Model.ItemCart;
 import java.util.ArrayList;
 
 /**

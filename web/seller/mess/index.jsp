@@ -6,7 +6,7 @@
                 <div class="card mb-sm-3 mb-md-0 contacts_card">
                     <div class="card-header">
                         <form
-                            action="<%= request.getContextPath()%>/message"
+                            action="<%= request.getContextPath()%>/seller/message"
                             method="get"
                             class="d-flex"
                             >
@@ -39,7 +39,7 @@
                             <li>
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
-                                        <a href="<%= request.getContextPath()%>/message?id=<%=userReceiver.getId()%>">
+                                        <a href="<%= request.getContextPath()%>/seller/message?id=<%=userReceiver.getId()%>">
                                             <img 
                                                 src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
                                                 class="rounded-circle user_img"
@@ -47,10 +47,10 @@
                                         </a>
                                     </div>
                                     <div class="user_info">
-                                        <a href="<%= request.getContextPath()%>/message?id=<%=userReceiver.getId()%>">
+                                        <a href="<%= request.getContextPath()%>/seller/message?id=<%=userReceiver.getId()%>">
                                             <span>  <%=userReceiver.getFullName()%></span>
                                         </a>
-                                        <p><%=m.getContent()%></p>
+                                        <p>Ban: <%=m.getContent()%></p>
                                     </div>
                                 </div>
                             </li>

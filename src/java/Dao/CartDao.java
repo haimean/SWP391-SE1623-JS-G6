@@ -2,23 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package Dao;
 
-import Model.Cart;
 import Model.ItemCart;
+import Model.Cart;
 import Model.User;
+import DBContext.DBContext;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *
  * @author PiPi
  */
-public class DAOCart extends DBContext.DBContext {
+public class CartDao extends DBContext {
 
     private String status = "";
 
@@ -41,11 +40,9 @@ public class DAOCart extends DBContext.DBContext {
             ps.setDate(4, date);
             ps.setDate(5, date);
             ps.executeUpdate();
-
             String query1 = "select top 1 id from [Order] order by id desc";
             PreparedStatement ps1 = connection.prepareStatement(query1);
             ResultSet rs = ps1.executeQuery();
-
             if (rs.next()) {
                 int oid = rs.getInt(1);
                 for (ItemCart item : cart.getItems()) {
@@ -58,7 +55,6 @@ public class DAOCart extends DBContext.DBContext {
                     ps2.executeUpdate();
                 }
             }
-
             String query3 = "update Product set quantity = quantity - ? where id = ?";
             PreparedStatement ps3 = connection.prepareStatement(query3);
             for (ItemCart i : cart.getItems()) {

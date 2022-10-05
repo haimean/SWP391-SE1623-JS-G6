@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAdmin;
+package Controller;
 
-import DAO.DAOCategory;
+import Dao.CategoryDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,7 +35,7 @@ public class AdminCategoryCreate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOCategory dbCategory=new DAOCategory();
+        CategoryDao dbCategory=new CategoryDao();
         String new_category=request.getParameter("txt");
         if(new_category == null || new_category.equals("")){
             response.sendRedirect(request.getContextPath()+"/admin/category");

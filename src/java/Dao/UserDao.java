@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package Dao;
 
+import Model.User;
+import DBContext.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Model.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author MrTuan
  */
-public class DAOUser extends DBContext.DBContext {
+public class UserDao extends DBContext {
 
     private String status = "";
 
@@ -93,7 +94,7 @@ public class DAOUser extends DBContext.DBContext {
                         rs.getDate(8));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;

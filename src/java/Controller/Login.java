@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAuthen;
+package Controller;
 
-import DAO.DAOUser;
+import Model.User;
+import Dao.UserDao;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Model.User;
 
 /**
  *
@@ -51,11 +51,10 @@ public class Login extends HttpServlet {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            DAOUser db = new DAOUser();
+            UserDao db = new UserDao();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            User u = new User();
-            u = db.login(email, password);
+            User u = new UserDao().login(email, password);
             if (u == null) {
                 String noti = "Incorrect user name or password,please try again";
                 request.setAttribute("noti", noti);

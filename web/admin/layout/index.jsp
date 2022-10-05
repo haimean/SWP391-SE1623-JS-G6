@@ -21,6 +21,9 @@
         text-decoration: none;
         color: black
     }
+    body{
+        background-color: #D9D8E1;
+    }
 </style>
 <nav class="navbar bg-secondary">
     <div class="container-fluid">
@@ -46,17 +49,17 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout">Logout</a></li>
                 </ul>
-                    <%
-                        break;
-                    case 2:
-                        response.sendRedirect(request.getContextPath()+"/seller");
-                        break;
-                    case 3:
-                        response.sendRedirect(request.getContextPath());
-                        break;
-                    default:
-                        response.sendRedirect(request.getContextPath()+"/login");
-                    }}%>
+                <%
+                    break;
+                case 2:
+                    response.sendRedirect(request.getContextPath()+"/seller");
+                    break;
+                case 3:
+                    response.sendRedirect(request.getContextPath());
+                    break;
+                default:
+                    response.sendRedirect(request.getContextPath()+"/login");
+                }}%>
             </li>
         </ul>
     </div>

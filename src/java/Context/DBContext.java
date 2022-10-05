@@ -1,0 +1,23 @@
+package Context;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBContext {
+
+    protected Connection connection;
+
+    public DBContext() {
+        try {
+            String user = "sa";
+            String pass = "12345678";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391-G6-SE1623";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DriverManager.getConnection(url, user, pass);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DriverManager.getConnection(url, user, pass);
+        } catch (ClassNotFoundException | SQLException ex) {
+        }
+    }
+}

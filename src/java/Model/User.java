@@ -5,100 +5,105 @@ package Model;
  */
 
 import java.sql.Date;
+
 /**
  *
- * @author MrTuan
+ * @author PiPi
  */
 public class User {
-    private int id;
-    private int role;
-    private String fullName;
-    private String email;
-    private String password;
-    private String phone;
-    private Date createdAt;
-    private Date updatedAt;
 
-    public User() {
-    }
+	private int id;
+	private int role;
+	private String fullName;
+	private String email;
+	private String password;
+	private String phone;
+	private Date createdAt;
+	private Date updatedAt;
 
-    public User(int id, int role, String fullName, String email, String password, String phone, Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.role = role;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
+	public User() {
+	}
 
-    public int getId() {
-        return id;
-    }
+	public User(int id, int role, String fullName, String email, String password, String phone, Date createdAt,
+			Date updatedAt) {
+		this.id = id;
+		this.role = role;
+		this.fullName = fullName;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public int getRole() {
-        return role;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setRole(int role) {
-        this.role = role;
-    }
+	public int getRole() {
+		return role;
+	}
 
-    public String getFullName() {
-        return fullName;
-    }
+	public void setRole(int role) {
+		this.role = role;
+	}
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+	public String getFullName() {
+		return fullName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
-    }
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password="
+				+ password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+	}
+
 }

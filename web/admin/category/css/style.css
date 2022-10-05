@@ -71,8 +71,6 @@ ul{
 }
 
 .side-nav-categories {
-    border-radius: 10px;
-    text-align: left;
     padding: 0px;
     position: relative;
     margin-top: 0px;
@@ -82,11 +80,45 @@ ul{
     border-style: solid;
     border-color: #f5f5f5 #eee #d5d5d5 #eee;
     box-shadow: 0 5px 0 rgba(200,200,200,.2);
-    width: 800px;
+    margin-bottom: 30px;
+    width: 1000px;
     margin: auto;
-    top:15px;
-    left: 20px;
-    
+    top: 100px;
+}
+
+.title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    padding: 12px 25px 10px 25px;
+    position: relative;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ed6663;
+    margin-top: 0px;
+    margin-left: -10px;
+}
+
+.title:before {
+
+    content: '\f039';
+    font-family: FontAwesome;
+    font-weight: 900;
+}
+
+.title:after {
+    content: "";
+    height: 1px;
+    width: 1px;
+    border-style: solid;
+    border-width: 5px;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    border-color: #d95451 #d95451 transparent transparent;
 }
 
 ul#category-tabs {
@@ -128,24 +160,43 @@ ul#category-tabs li a i {
     color: #ed6663;
 }
 
-.footer-category{
-    display: inline-flex;
-    /*margin-left: 570px;*/
+#footer-button-category{
+    text-align: center;
 }
 
-.btn-danger{
+.button{
     border: none;
-    border-radius: 5px;
-    background-color: rgb(220, 53, 69);
-    margin-right: 10px;
-    margin-left: 10px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 10px;
 }
-.btn-info{
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(23, 162, 184);
-    color: #fff;
+.create-category{
+    background-color: rgb(255, 165, 0);
+    margin-right: 5px;
+    border: 1px solid black;
+    color: black;
+
 }
-.items{
-    display: flex;
+.create-category:hover{
+    background-color: rgb(255, 165, 0);
+    margin-right: 5px;
+    color: white;
+}
+.update-category{
+    background-color: rgb(255, 165, 0);
+    margin-left: 5px;
+    border: 1px solid black;
+    color: black;
+}
+.update-category:hover{
+    background-color: rgb(255, 165, 0);
+    margin-left: 5px;
+    color: white;
 }

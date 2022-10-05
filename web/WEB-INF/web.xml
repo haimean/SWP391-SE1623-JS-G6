@@ -127,10 +127,13 @@
     <servlet-mapping>
         <servlet-name>Message</servlet-name>
         <url-pattern>/message</url-pattern>
+<<<<<<< HEAD
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductList</servlet-name>
         <url-pattern>/seller/product</url-pattern>
+=======
+>>>>>>> b44df51c32cb7cb4de5c667f2149d26803b60d53
     </servlet-mapping>
     <session-config>
         <session-timeout>

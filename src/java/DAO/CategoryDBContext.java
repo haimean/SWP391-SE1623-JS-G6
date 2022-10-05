@@ -14,11 +14,7 @@ import Model.Category;
  *
  * @author Mr Tuan
  */
-<<<<<<< HEAD
 public class CategoryDBContext extends DBContext.DBContext {
-=======
-public class DAOCategory extends DBContext.DBContext {
->>>>>>> b44df51c32cb7cb4de5c667f2149d26803b60d53
 
     public ArrayList<Category> getCategories() {
         ArrayList<Category> listCategory = new ArrayList<>();
@@ -49,10 +45,7 @@ public class DAOCategory extends DBContext.DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-<<<<<<< HEAD
         return count;
-=======
->>>>>>> b44df51c32cb7cb4de5c667f2149d26803b60d53
     }
 
     public void updateCategory(String id, String name) {
@@ -112,7 +105,6 @@ public class DAOCategory extends DBContext.DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-<<<<<<< HEAD
 <<<<<<<< HEAD:src/java/DAO/DAOCategory.java
         return category;
 ========
@@ -124,8 +116,5 @@ public class DAOCategory extends DBContext.DBContext {
         CategoryDBContext db = new CategoryDBContext();
         db.updateInfo("1","loan");
 >>>>>>>> b44df51c32cb7cb4de5c667f2149d26803b60d53:src/java/DAO/CategoryDBContext.java
-=======
-        return category;
->>>>>>> b44df51c32cb7cb4de5c667f2149d26803b60d53
     }
 }

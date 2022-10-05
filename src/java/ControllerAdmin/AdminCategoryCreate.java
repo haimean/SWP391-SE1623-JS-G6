@@ -22,28 +22,16 @@ public class AdminCategoryCreate extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("categoryAdd.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        DAOCategory db = new DAOCategory();
-        String new_category = request.getParameter("txt");
-        if(new_category == null || new_category.equals("")){
-            response.sendRedirect(request.getContextPath() + "/admin/category");
-        }
-        else{
-            db.createCategory(new_category);
-            response.sendRedirect(request.getContextPath() + "/admin/category");
-        }
+        String new_category = request.getParameter("name");
+        new DAOCategory().createCategory(new_category);
+        response.sendRedirect(request.getContextPath() + "/admin/category");
     }
 }

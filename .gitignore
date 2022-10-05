@@ -8,7 +8,7 @@ Leiningen.gitignore
 
 ### Cvs files ###
 /CVS/*
-*/CVS/
+**/CVS/*
 .cvsignore
 */.cvsignore
 

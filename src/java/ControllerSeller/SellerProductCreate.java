@@ -6,6 +6,7 @@ package ControllerSeller;
 
 import DAO.DAOProduct;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,35 +16,21 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ngolu
  */
-<<<<<<< HEAD:src/java/ControllerAdmin/CategoryDelete.java
-public class CategoryDelete extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        DAOCategory db = new DAOCategory();
-        String id = request.getParameter("id");
-        if (db.deleteByID(id) > 0) {
-            response.sendRedirect("../category");
-            return;
-        }
-        response.sendRedirect("../category");
-    }
-=======
 public class SellerProductCreate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -57,13 +44,16 @@ public class SellerProductCreate extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    /*
+     * Handles the HTTP <code>GET</code> meth
      *
      * @param request servlet request
+     * 
      * @param response servlet response
+     * 
      * @throws ServletException if a servlet-specific error occurs
+     * 
      * @throws IOException if an I/O error occurs
      */
     @Override
@@ -72,14 +62,13 @@ public class SellerProductCreate extends HttpServlet {
         request.getRequestDispatcher("productAdd.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    **
+
+    @param request servlet request*
+    @param response servlet response*@throws ServletException if
+    a servlet-specific error occurs*@throws IOException if
+    an I/O error occurs*/
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -97,5 +86,4 @@ public class SellerProductCreate extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/seller/product");
     }
 
->>>>>>> 7ec6b42858d12d51cf061cf13f56291b9e0a0fa1:src/java/ControllerSeller/SellerProductCreate.java
 }

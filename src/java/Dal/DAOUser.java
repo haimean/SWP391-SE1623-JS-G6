@@ -18,57 +18,53 @@ import java.util.logging.Logger;
  */
 public class DAOUser extends DBContext.DBContext {
 
-	private String status = "";
+    private String status = "";
 
-	public String getStatus() {
-		return status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public ArrayList<User> getAllUsers() {
-		ArrayList<User> userList = new ArrayList<>();
-		String query = "select * \n"
-				+ "from [User] u ,[UserInformation] ui\n"
-				+ "where u.id = ui.id";
-		try {
-			PreparedStatement stm = connection.prepareStatement(query);
-			ResultSet rs = stm.executeQuery();
-			while (rs.next()) {
-				userList.add(new User(rs.getInt(1), rs.getInt(4), rs.getString(9), rs.getString(2),
-						rs.getString(3), rs.getString(10), rs.getDate(5), rs.getDate(6)));
-			}
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> userList = new ArrayList<>();
+        String query = "select * \n"
+                + "from [User] u ,[UserInformation] ui\n"
+                + "where u.id = ui.id";
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                userList.add(new User(rs.getInt(1), rs.getInt(4), rs.getString(9), rs.getString(2),
+                        rs.getString(3), rs.getString(10), rs.getDate(5), rs.getDate(6)));
+            }
 
-		} catch (SQLException e) {
-			status += "Error at get all users" + e.getMessage();
-			System.out.println(status);
-		}
-		return userList;
-	}
+        } catch (SQLException e) {
+            status += "Error at get all users" + e.getMessage();
+            System.out.println(status);
+        }
+        return userList;
+    }
 
-	public void deleteUser(String id) {
-		String query = "delete from [Notification] where userId = ?\n"
-				+ "delete from [Message] where userSenderId = ?\n"
-				+ "delete from [UserInformation] where userId = ?\n"
-				+ "delete from [AddressReceiver] where userId = ?\n"
-				+ "delete from [User] where id = ?";
+    public void deleteUser(String id) {
+        String query = "delete from [Notification] where userId = ?\n"
+                + "delete from [Message] where userSenderId = ?\n"
+                + "delete from [UserInformation] where userId = ?\n"
+                + "delete from [AddressReceiver] where userId = ?\n"
+                + "delete from [User] where id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            stm.setString(1, id);
+            stm.setString(2, id);
+            stm.setString(3, id);
+            stm.setString(4, id);
+            stm.setString(5, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            status += "Error at delete user " + e.getMessage();
+            System.out.println(status);
+        }
+    }
 
-		PreparedStatement stm = connection.prepareStatement(query);
-		stm.setString(1, id);
-		stm.setString(2, id);
-		stm.setString(3, id);
-		stm.setString(4, id);
-		stm.setString(5, id);
-		stm.executeUpdate();
-	}catch(
-
-	SQLException e)
-	{
-
-		status += "Error at delete user " + e.getMessage();
-		System.out.println(status);
-	}
-	}
-
-	public User login(String Email, String password) {
+    public User login(String Email, String password) {
         String sql = "select u.id, u.role, ui.fullname, u.email,	"
                 + "u.password, ui.phone, u.created_at, u.updated_at\n"
                 + "from UserInformation as ui, [User] as u\n"
@@ -92,13 +88,5 @@ public class DAOUser extends DBContext.DBContext {
         }
 
         return null;
-
-	public static void main(String[] args) {
-		DAOUser dao = new DAOUser();
-		for (User u : dao.getAllUsers()) {
-			System.out.println(u.toString());
-		}
-	}
     }
->>>>>>> 9d2143a (feat: login author)
 }

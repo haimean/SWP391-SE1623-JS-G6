@@ -2,20 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAdmin;
+package controller;
 
-import Dal.DAOCategory;
+import dal.ProductDBContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Product;
 
 /**
  *
- * @author Mr Tuan
+ * @author MrTuan
  */
-public class CategoryCreate extends HttpServlet {
+public class Productlist_List extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,6 +31,14 @@ public class CategoryCreate extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            ProductDBContext db = new ProductDBContext();
+            List<Product> listP = db.getProduct();
+            request.setAttribute("listP", listP);
+            request.getRequestDispatcher("productList.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -42,7 +53,7 @@ public class CategoryCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("admin\\category\\create\\CreateCategory.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -56,11 +67,7 @@ public class CategoryCreate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOCategory db = new DAOCategory();
-        String new_category = request.getParameter("txt");
-        db.CreateCategory(new_category);
-        response.sendRedirect("category_list");
-
+        processRequest(request, response);
     }
 
     /**

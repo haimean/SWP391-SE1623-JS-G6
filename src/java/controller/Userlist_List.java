@@ -2,21 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAuthen;
+package controller;
 
-import Dal.DAOUser;
+import dal.UserlistDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.User;
 
 /**
  *
  * @author MrTuan
  */
-public class Userlist_Delete extends HttpServlet {
+public class Userlist_List extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +37,10 @@ public class Userlist_Delete extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Userlist_Delete</title>");
+            out.println("<title>Servlet UserlistController_List</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Userlist_Delete at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserlistController_List at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,10 +58,10 @@ public class Userlist_Delete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOUser db = new DAOUser();
-        String id = request.getParameter("id");
-        db.deleteUser(id);
-        response.sendRedirect(request.getContextPath() + "/user-list");
+        UserlistDBContext db = new UserlistDBContext();
+        ArrayList<User> list = db.getAllUsers();
+        request.setAttribute("listU", list);
+        request.getRequestDispatcher("admin\\user\\index.jsp").forward(request, response);
     }
 
     /**

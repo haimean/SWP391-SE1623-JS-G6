@@ -8,10 +8,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 .container-category{
+    text-align: center;
     display: inline-flex;
-    margin-top: 180px;
+    margin-top: 150px;
     width: 1200px;
-    margin-left: 200px;
+    margin-left: 35px;
 }
 
 .side-nav-categories {
@@ -28,6 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin: auto;
     top:15px;
     left: 20px;
+    
 }
 .div-title{
 

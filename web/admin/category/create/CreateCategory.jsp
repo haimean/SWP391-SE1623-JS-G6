@@ -9,6 +9,7 @@
 <link href="<%=request.getContextPath()%>/admin/category/create/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+
 <div class="container-category">
     <div class="side-nav-categories">
         <form action="category_create" method="POST">
@@ -23,4 +24,6 @@
         </form>
     </div>
 </div>
+
+
 

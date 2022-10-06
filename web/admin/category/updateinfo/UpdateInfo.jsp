@@ -4,7 +4,6 @@
     Author     : Mr Tuan
 --%>
 
-<%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
 <%@include file="../../layout/index.jsp"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="<%=request.getContextPath()%>/admin/category/updateinfo/css/style.css" rel="stylesheet">

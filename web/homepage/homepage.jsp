@@ -3,6 +3,7 @@
     Created on : Oct 7, 2022, 2:24:35 AM
     Author     : Mr Tuan
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,11 +32,15 @@
                             </li>
                             <li class="nav-item">
                                 <div class="dropdown" >
-                                    <button class="dropbtn" onclick="">Category</button>
+                                    <button class="dropbtn" onclick="ListCategory()">Category</button>
                                     <div class="dropdown-content">
-                                        <a href="<%= request.getContextPath()%>/#">Table</a>
-                                        <a href="<%= request.getContextPath()%>/#">Char</a>
-                                        <a href="<%= request.getContextPath()%>/#">Mouse</a>
+                                        <a href="#">Char</a>
+                                        <a href="#">Mouse</a>
+                                        <c:forEach items="${requestScope.category}" var="ca">
+                                            <a href="category?id=${c.getId()}">${ca.name}</a>
+                                            <!--                                            <a href="#">Char</a>
+                                                                                        <a href="#">Mouse</a>-->
+                                        </c:forEach>
                                     </div>
                                 </div>
                             </li>
@@ -60,9 +65,9 @@
                                 <div class="dropdown-1" >
                                     <button class="dropbtn" onclick=""><ion-icon name="person-circle-outline" style="font-size: 35px;"></ion-icon></button>
                                     <div class="dropdown-content-1">
-                                        <a href="<%= request.getContextPath()%>/profile">Profile</a>
-                                        <a href="<%= request.getContextPath()%>/message">Message</a>
-                                        <a href="<%= request.getContextPath()%>/logout">Logout</a>
+                                        <a href="<%= request.getContextPath()%>/profile">Profile<ion-icon name="person" style="margin-left: 15px;font-size: 25px;"></ion-icon></a>
+                                        <a href="<%= request.getContextPath()%>/message">Message <ion-icon name="chatbubbles" style="margin-left: 15px;font-size: 25px;"></ion-icon></a>
+                                        <a href="<%= request.getContextPath()%>/logout">Logout<ion-icon name="log-out-outline" style="margin-left: 15px;font-size: 25px;"></ion-icon></a>
                                     </div>
                                 </div>
                             </li>
@@ -75,10 +80,15 @@
 
         <div class="container-fluid mt-3">
             <h3>Navbar Forms</h3>
-            <p>You can also include forms inside the navigation bar.</p>
+            <p>Russiaaa Uraaaaaaaaaaaaaaaaaaaaaaaa Uraaaaaaaaaaaaaaaaaaaaaaaa Uraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!</p>
         </div>
 
     </body>
+    <script>
+        function ListCategory() {
+            window.location.href = "../category_list";
+        }
+    </script>
 </html>
 
 

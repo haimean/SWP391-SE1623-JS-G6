@@ -112,6 +112,9 @@ public class CategoryDBContext extends DBContext {
 
     public static void main(String[] args) {
         CategoryDBContext db = new CategoryDBContext();
-        db.updateInfo("1","loan");
+        ArrayList<Category> lista=db.getAllCategory();
+        for (Category category : lista) {
+            System.out.println(category.getName());
+        }
     }
 }

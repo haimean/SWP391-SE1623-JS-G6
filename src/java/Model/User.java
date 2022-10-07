@@ -17,11 +17,12 @@ public class User {
     private String phone;
     private Date createdAt;
     private Date updatedAt;
+    private boolean status;
 
     public User() {
     }
 
-    public User(int id, int role, String fullName, String email, String password, String phone, Date createdAt, Date updatedAt) {
+    public User(int id, int role, String fullName, String email, String password, String phone, Date createdAt, Date updatedAt, boolean status) {
         this.id = id;
         this.role = role;
         this.fullName = fullName;
@@ -30,6 +31,7 @@ public class User {
         this.phone = phone;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.status = status;
     }
 
     public int getId() {
@@ -96,8 +98,18 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+        return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status=" + status + '}';
     }
+
+    
 }

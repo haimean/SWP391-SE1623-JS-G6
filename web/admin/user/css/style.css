@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: 8rem 4rem;
 }
 
-table th:not(:last-child):hover{
+table th:hover{
     background-color: #f7f7f7;
     cursor: pointer;    
 }

@@ -34,7 +34,8 @@ public class LoginDBContext extends DBContext {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getDate(7),
-                        rs.getDate(8));
+                        rs.getDate(8),
+                        rs.getBoolean(9));
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginDBContext.class.getName()).log(Level.SEVERE, null, ex);

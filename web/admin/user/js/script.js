@@ -1,5 +1,3 @@
-
-
 function sortTable(el) {
     let thead = document.getElementsByTagName("thead")[0];
     let th = [...thead.getElementsByTagName("th")];
@@ -38,4 +36,13 @@ function sortTable(el) {
             }
         }
     }
+}
+
+console.log("on load");
+
+function changeRole(el,id) {
+    let form = document.getElementById("form-role");
+    let value = el.value;
+    form.action = `user?id=${id}&role=${value}&mode=ROLE`;
+    form.submit();
 }

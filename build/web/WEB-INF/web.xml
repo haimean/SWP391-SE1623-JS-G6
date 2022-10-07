@@ -25,8 +25,8 @@
         <servlet-class>controller.Userlist_List</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Userlist_Delete</servlet-name>
-        <servlet-class>controller.Userlist_Delete</servlet-class>
+        <servlet-name>Userlist_Ban</servlet-name>
+        <servlet-class>controller.Userlist_Ban</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Userlist_Search</servlet-name>
@@ -56,6 +56,10 @@
         <servlet-name>ProductlistforUser</servlet-name>
         <servlet-class>controller.ProductlistforUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Userlisr_UpdateRole</servlet-name>
+        <servlet-class>controller.Userlisr_UpdateRole</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Category_List</servlet-name>
         <url-pattern>/category_list</url-pattern>
@@ -75,10 +79,6 @@
     <servlet-mapping>
         <servlet-name>Category_Create</servlet-name>
         <url-pattern>/category_create</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Userlist_Delete</servlet-name>
-        <url-pattern>/userlist_delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Productlist_List</servlet-name>
@@ -111,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>Userlist_Search</servlet-name>
         <url-pattern>/admin/user-search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Userlist_Ban</servlet-name>
+        <url-pattern>/admin/userlist-ban</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Userlisr_UpdateRole</servlet-name>
+        <url-pattern>/admin/userlist-updaterole</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

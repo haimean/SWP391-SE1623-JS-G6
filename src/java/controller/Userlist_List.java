@@ -18,6 +18,12 @@ import model.User;
  *
  * @author MrTuan
  */
+enum Mode {
+    SEARCH,
+    BAN,
+    ROLE
+}
+
 public class Userlist_List extends HttpServlet {
 
     /**
@@ -31,19 +37,25 @@ public class Userlist_List extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserlistController_List</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserlistController_List at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String modeParam = request.getParameter("mode");
+        UserlistDBContext db = new UserlistDBContext();
+        ArrayList<User> list;
+        if (modeParam == null) {
+            list = db.getAllUsers();
+            request.setAttribute("listU", list);
+            request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
         }
+        if (modeParam.equals(Mode.BAN.toString())) {
+            String idParam = request.getParameter("id");
+            String statusParam = request.getParameter("status");
+            int id = Integer.parseInt(idParam);
+            boolean status = Boolean.parseBoolean(statusParam);
+            db.updateUserStatusByID(id, !status);
+            list = db.getAllUsers();
+            request.setAttribute("listU", list);
+            request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,10 +70,7 @@ public class Userlist_List extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserlistDBContext db = new UserlistDBContext();
-        ArrayList<User> list = db.getAllUsers();
-        request.setAttribute("listU", list);
-        request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -75,7 +84,27 @@ public class Userlist_List extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ArrayList<User> list;
+        UserlistDBContext db = new UserlistDBContext();
+        String modeParam = request.getParameter("mode");
+
+        if (modeParam.equals(Mode.ROLE.toString())) {
+            String idParam = request.getParameter("id");
+            String roleParam = request.getParameter("role");
+            int id = Integer.parseInt(idParam);
+            int role = Integer.parseInt(roleParam);
+            db.updateUserRoleByID(id, role);
+            list = db.getAllUsers();
+            request.setAttribute("listU", list);
+            request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+        }
+        if ((modeParam.equals(Mode.SEARCH.toString()))) {
+            String searchValue = request.getParameter("search");
+            list = db.searchUser(searchValue);
+            request.setAttribute("listU", list);
+            request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+        }
+
     }
 
     /**

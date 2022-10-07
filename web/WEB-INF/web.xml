@@ -64,6 +64,10 @@
         <servlet-name>SellerDashbroad</servlet-name>
         <servlet-class>ControllerSeller.SellerDashbroad</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerMess</servlet-name>
+        <servlet-class>ControllerSeller.SellerMess</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Category_Search</servlet-name>
         <url-pattern>/category_search</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>CategoryUpdate</servlet-name>
         <url-pattern>/admin/category/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerMess</servlet-name>
+        <url-pattern>/seller/message</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

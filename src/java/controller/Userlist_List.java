@@ -88,7 +88,7 @@ public class Userlist_List extends HttpServlet {
         UserlistDBContext db = new UserlistDBContext();
         String modeParam = request.getParameter("mode");
 
-        if (modeParam.equals(Mode.ROLE.toString())) {
+        if (modeParam.equals(Mode.ROLE.toString())) { 
             String idParam = request.getParameter("id");
             String roleParam = request.getParameter("role");
             int id = Integer.parseInt(idParam);
@@ -99,9 +99,10 @@ public class Userlist_List extends HttpServlet {
             request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
         }
         if ((modeParam.equals(Mode.SEARCH.toString()))) {
-            String searchValue = request.getParameter("search");
+            String searchValue = request.getParameter("search").trim();
             list = db.searchUser(searchValue);
             request.setAttribute("listU", list);
+            request.setAttribute("value", searchValue);
             request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
         }
 

@@ -10,9 +10,7 @@
 <!DOCTYPE html>
 
 <%@include file="../layout/index.jsp"  %>
-
 <link href="<%=request.getContextPath()%>/admin/user/css/style.css" rel="stylesheet">
-
 <div class="container">
     <div class="table-responsive table-container mx-auto">
         <div class="shadow-sm p-3 mb-5 bg-white rounded px-5 py-5 d-flex flex-column align-items-center">

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>Category_List</servlet-name>
-        <servlet-class>controller.Category_List</servlet-class>
+        <servlet-name>CategoryList</servlet-name>
+        <servlet-class>ControllerAdmin.CategoryList</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Category_Delete</servlet-name>
-        <servlet-class>controller.Category_Delete</servlet-class>
+        <servlet-name>Category Delete</servlet-name>
+        <servlet-class>ControllerAdmin.CategoryCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Category_Search</servlet-name>
         <servlet-class>controller.Category_Search</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Category_Update</servlet-name>
-        <servlet-class>controller.Category_Update</servlet-class>
+        <servlet-name>CategoryUpdate</servlet-name>
+        <servlet-class>ControllerAdmin.CategoryUpdate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Category_Create</servlet-name>
         <servlet-class>controller.Category_Create</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Userlist_List</servlet-name>
-        <servlet-class>controller.Userlist_List</servlet-class>
+        <servlet-name>Userlist List</servlet-name>
+        <servlet-class>ControllerAdmin.Userlist_List</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Userlist_Ban</servlet-name>
-        <servlet-class>controller.Userlist_Ban</servlet-class>
+        <servlet-name>Userlist_Delete</servlet-name>
+        <servlet-class>ControllerAuthen.Userlist_Delete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Userlist_Search</servlet-name>
-        <servlet-class>controller.Userlist_Search</servlet-class>
+        <servlet-class>ControllerAuthen.Userlist_Search</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Productlist_List</servlet-name>
@@ -38,47 +38,51 @@
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>controller.LoginController</servlet-class>
+        <servlet-class>ControllerAuthen.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SellerProfileController</servlet-name>
         <servlet-class>controller.SellerProfileController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminProfile</servlet-name>
-        <servlet-class>controller.AdminProfile</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CustomerProfile</servlet-name>
-        <servlet-class>controller.CustomerProfile</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProductlistforUser</servlet-name>
         <servlet-class>controller.ProductlistforUser</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Userlisr_UpdateRole</servlet-name>
-        <servlet-class>controller.Userlisr_UpdateRole</servlet-class>
+        <servlet-name>AdminDashboard</servlet-name>
+        <servlet-class>ControllerAdmin.AdminDashboard</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Category_List</servlet-name>
-        <url-pattern>/category_list</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Category_Delete</servlet-name>
-        <url-pattern>/category_delete</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>ControllerStore.Home</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>ControllerAuthen.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerDashbroad</servlet-name>
+        <servlet-class>ControllerSeller.SellerDashbroad</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerMess</servlet-name>
+        <servlet-class>ControllerSeller.SellerMess</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Category_Search</servlet-name>
         <url-pattern>/category_search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Category_Update</servlet-name>
-        <url-pattern>/category_update</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Category_Create</servlet-name>
         <url-pattern>/category_create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Userlist_Delete</servlet-name>
+        <url-pattern>/userlist_delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Userlist_Search</servlet-name>
+        <url-pattern>/userlist_search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Productlist_List</servlet-name>
@@ -93,32 +97,44 @@
         <url-pattern>/sellerProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminProfile</servlet-name>
-        <url-pattern>/adminProfile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CustomerProfile</servlet-name>
-        <url-pattern>/customerProfile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ProductlistforUser</servlet-name>
         <url-pattern>/productlistforUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Userlist_List</servlet-name>
+        <servlet-name>AdminDashboard</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryList</servlet-name>
+        <url-pattern>/admin/category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerDashbroad</servlet-name>
+        <url-pattern>/seller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Userlist List</servlet-name>
         <url-pattern>/admin/user</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Userlist_Search</servlet-name>
-        <url-pattern>/admin/user-search</url-pattern>
+        <servlet-name>Category Delete</servlet-name>
+        <url-pattern>/admin/category/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Userlist_Ban</servlet-name>
-        <url-pattern>/admin/userlist-ban</url-pattern>
+        <servlet-name>CategoryUpdate</servlet-name>
+        <url-pattern>/admin/category/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Userlisr_UpdateRole</servlet-name>
-        <url-pattern>/admin/userlist-updaterole</url-pattern>
+        <servlet-name>SellerMess</servlet-name>
+        <url-pattern>/seller/message</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

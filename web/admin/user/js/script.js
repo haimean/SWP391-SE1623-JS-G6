@@ -37,9 +37,6 @@ function sortTable(el) {
         }
     }
 }
-
-console.log("on load");
-
 function changeRole(el,id) {
     let form = document.getElementById("form-role");
     let value = el.value;

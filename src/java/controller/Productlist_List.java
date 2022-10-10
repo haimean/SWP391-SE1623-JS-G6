@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.ProductDBContext;
+import DAO.ProductDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Product;
+import Model.Product;
 
 /**
  *

@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.CategoryDBContext;
+import DAO.CategoryDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

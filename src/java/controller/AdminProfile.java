@@ -56,7 +56,6 @@ public class AdminProfile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("./admin/AdminProfile.jsp");
-//        processRequest(request, response);
     }
 
     /**

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package ControllerAuthen;
 
+import DAO.DAOUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author MrTuan
  */
-public class Userlist_Search extends HttpServlet {
+public class Userlist_Delete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +35,10 @@ public class Userlist_Search extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Userlist_Search</title>");            
+            out.println("<title>Servlet Userlist_Delete</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Userlist_Search at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Userlist_Delete at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +56,10 @@ public class Userlist_Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        DAOUser db = new DAOUser();
+        String id = request.getParameter("id");
+        db.deleteUser(id);
+        response.sendRedirect(request.getContextPath() + "/user-list");
     }
 
     /**

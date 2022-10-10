@@ -1,21 +1,21 @@
+package DAO;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dal;
 
+import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.User;
 
 /**
  *
  * @author MrTuan
  */
-public class LoginDBContext extends DBContext {
+public class LoginDBContext extends DBContext.DBContext {
 
     public User search(String Email, String password){
         String sql = "select u.id, u.role, ui.fullname, u.email,	"
@@ -34,7 +34,8 @@ public class LoginDBContext extends DBContext {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getDate(7),
-                        rs.getDate(8));
+                        rs.getDate(8),
+                        rs.getBoolean(9));
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginDBContext.class.getName()).log(Level.SEVERE, null, ex);

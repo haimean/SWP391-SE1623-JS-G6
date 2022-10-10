@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dal;
+package DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Product;
+import Model.Product;
 
 /**
  *
  * @author MrTuan
  */
-public class ProductDBContext extends DBContext {
+public class DAOProduct extends DBContext.DBContext {
 
     public List<Product> getProduct() {
         List<Product> list = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ProductDBContext extends DBContext {
                 list.add(p);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return list;
@@ -52,7 +52,7 @@ public class ProductDBContext extends DBContext {
                 list.add(p);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -79,7 +79,7 @@ public class ProductDBContext extends DBContext {
             ps.setString(4, description);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

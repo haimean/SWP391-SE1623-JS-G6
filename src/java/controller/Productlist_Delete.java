@@ -35,7 +35,7 @@ public class Productlist_Delete extends HttpServlet {
            ProductDBContext dao = new ProductDBContext();
            
            dao.deleteProduct(id);
-           response.sendRedirect("listp");
+           response.sendRedirect("productlist_list");
         }
     } 
 

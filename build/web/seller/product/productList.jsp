@@ -16,7 +16,7 @@
 
         <div class="container">
             <div class="bttCreate">
-                <a href="AddProduct.jsp"> <button type="button" class="btn btn-primary">Create</button></a>
+                <a href="productAdd.jsp"> <button type="button" class="btn btn-primary">Create</button></a>
             </div>         
             <div class="content">
                 <form action="search"  method="post"  class="d-flex" role="search">

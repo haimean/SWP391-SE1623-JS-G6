@@ -1,8 +1,8 @@
+package Model;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
 import java.sql.Date;
 /**
  *
@@ -22,12 +22,11 @@ public class User {
     public User() {
     }
 
-    public User(int id, int role, String fullName, String email, String password, String phone, Date createdAt, Date updatedAt, boolean status) {
+    public User(int id, int role, String fullName, String email,  String phone, boolean status, Date createdAt, Date updatedAt) {
         this.id = id;
         this.role = role;
         this.fullName = fullName;
         this.email = email;
-        this.password = password;
         this.phone = phone;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

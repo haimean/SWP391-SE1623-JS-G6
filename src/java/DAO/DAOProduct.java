@@ -27,14 +27,23 @@ public class DAOProduct extends DBContext.DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6),
-                        rs.getDouble(7), rs.getBoolean(8), rs.getInt(9), rs.getString(10), rs.getString(11));
+                Product p = new Product(
+                        rs.getInt(1), 
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4), 
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11));
                 list.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return list;
     }
 
@@ -47,8 +56,18 @@ public class DAOProduct extends DBContext.DBContext {
             ps.setString(1, "%" + txtSearch + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6),
-                        rs.getDouble(7), rs.getBoolean(8), rs.getInt(9), rs.getString(10), rs.getString(11));
+                Product p = new Product(
+                        rs.getInt(1), 
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getString(11));
                 list.add(p);
             }
         } catch (SQLException ex) {
@@ -57,7 +76,11 @@ public class DAOProduct extends DBContext.DBContext {
         return list;
     }
 
-    public void insertProduct(String name, int categoryId, int quantity, String description) {
+    public void insertProduct(
+            String name,
+            int categoryId, 
+            int quantity,
+            String description) {
         String sql = "INSERT INTO [dbo].[Product]\n"
                 + "           ([categoryID]\n"
                 + "           ,[name]\n"

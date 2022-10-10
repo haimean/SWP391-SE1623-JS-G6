@@ -26,15 +26,23 @@ public class DAOUser extends DBContext.DBContext {
 
     public ArrayList<User> getAllUsers() {
         ArrayList<User> userList = new ArrayList<>();
-        String query = "select * \n"
-                + "from [User] u ,[UserInformation] ui\n"
-                + "where u.id = ui.id";
+        String query = "select u.id, role, fullname, email, phone, status,"
+                + " u.created_at, updated_at "
+                + "from [User] u ,[UserInformation] ui"
+                + " where u.id = ui.id";
         try {
             PreparedStatement stm = connection.prepareStatement(query);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                userList.add(new User(rs.getInt(1), rs.getInt(4), rs.getString(9), rs.getString(2),
-                        rs.getString(3), rs.getString(10), rs.getDate(5), rs.getDate(6)));
+                userList.add(new User(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getDate(7),
+                        rs.getDate(8)));
             }
 
         } catch (SQLException e) {
@@ -65,10 +73,11 @@ public class DAOUser extends DBContext.DBContext {
     }
 
     public User login(String Email, String password) {
-        String sql = "select u.id, u.role, ui.fullname, u.email,"
-                + "u.password, ui.phone, u.created_at, u.updated_at, u.status\n"
+        String sql = "select u.id, role, fullname, email, phone,"
+                + " status, u.created_at, updated_at"
                 + "from UserInformation as ui, [User] as u\n"
-                + "where u.id = ui.userId and u.email = '" + Email + "' and u.password = '" + password + "'";
+                + "where u.id = ui.userId and u.email = '"
+                + Email + "' and u.password = '" + password + "'";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
@@ -79,10 +88,9 @@ public class DAOUser extends DBContext.DBContext {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getString(6),
+                        rs.getBoolean(6),
                         rs.getDate(7),
-                        rs.getDate(8),
-                        rs.getBoolean(9));
+                        rs.getDate(8));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,7 +102,8 @@ public class DAOUser extends DBContext.DBContext {
     public String getUserName(int userSenderId) {
         String userName = "";
         try {
-            String sql = "select fullname from UserInformation where userId = ?";
+            String sql = "select fullname from UserInformation"
+                    + " where userId = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, userSenderId);
             ResultSet rs = ps.executeQuery();

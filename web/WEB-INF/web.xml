@@ -21,18 +21,6 @@
         <servlet-class>controller.Category_Create</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Userlist List</servlet-name>
-        <servlet-class>ControllerAdmin.Userlist_List</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Userlist_Delete</servlet-name>
-        <servlet-class>ControllerAuthen.Userlist_Delete</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Userlist_Search</servlet-name>
-        <servlet-class>ControllerAuthen.Userlist_Search</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Productlist_List</servlet-name>
         <servlet-class>controller.Productlist_List</servlet-class>
     </servlet>
@@ -77,14 +65,6 @@
         <url-pattern>/category_create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Userlist_Delete</servlet-name>
-        <url-pattern>/userlist_delete</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Userlist_Search</servlet-name>
-        <url-pattern>/userlist_search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Productlist_List</servlet-name>
         <url-pattern>/productlist_list</url-pattern>
     </servlet-mapping>
@@ -119,10 +99,6 @@
     <servlet-mapping>
         <servlet-name>SellerDashbroad</servlet-name>
         <url-pattern>/seller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Userlist List</servlet-name>
-        <url-pattern>/admin/user</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Category Delete</servlet-name>

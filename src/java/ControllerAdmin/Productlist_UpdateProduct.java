@@ -3,24 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package ControllerAdmin;
 
-import dal.ProductDBContext;
+import DAO.DAOProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Category;
-import model.Product;
 
 /**
  *
  * @author ngolu
  */
-public class Productlist_GetInforProduct extends HttpServlet {
+public class Productlist_UpdateProduct extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +34,10 @@ public class Productlist_GetInforProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Productlist_GetInforProduct</title>");  
+            out.println("<title>Servlet Productlist_UpdateProduct</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Productlist_GetInforProduct at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Productlist_UpdateProduct at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,15 +54,7 @@ public class Productlist_GetInforProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id = request.getParameter("pid");
-            ProductDBContext dao = new ProductDBContext();           
-            Product p = dao.getProductById(id);
-            List<Category> listc = dao.getAllCategory();
-            
-            
-            request.setAttribute("detail", p);
-            request.setAttribute("listc", listc);
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -78,7 +67,20 @@ public class Productlist_GetInforProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("pid");
+        String name = request.getParameter("name");
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        String origin = request.getParameter("origin");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        double price = Double.parseDouble(request.getParameter("price"));
+        int viewNumber = Integer.parseInt(request.getParameter("viewnumber"));
+        String create = request.getParameter("create");
+        String update = request.getParameter("update");
+        String description = request.getParameter("description");
+
+        DAOProduct dao = new DAOProduct();
+        dao.updateProductById(id, categoryId, name, description, origin, quantity, price, true, viewNumber, create, update);
+        response.sendRedirect("productlist_list");
     }
 
     /** 

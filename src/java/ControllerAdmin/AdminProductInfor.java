@@ -3,21 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package ControllerAdmin;
 
-import dal.ProductDBContext;
+import DAO.DAOProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import Model.Category;
+import Model.Product;
 
 /**
  *
  * @author ngolu
  */
-public class Productlist_Delete extends HttpServlet {
+public class AdminProductInfor extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,11 +34,15 @@ public class Productlist_Delete extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           int id = Integer.parseInt(request.getParameter("pid"));
-           ProductDBContext dao = new ProductDBContext();
-           
-           dao.deleteProduct(id);
-           response.sendRedirect("productlist_list");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Productlist_GetInforProduct</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Productlist_GetInforProduct at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     } 
 
@@ -50,7 +57,12 @@ public class Productlist_Delete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("pid");        
+            Product p = new DAOProduct().getProductById(id);
+            List<Product> listc = new DAOProduct().getProduct();
+            request.setAttribute("detail", p);
+            request.setAttribute("listc", listc);
+            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
     } 
 
     /** 

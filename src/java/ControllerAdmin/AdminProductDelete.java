@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package ControllerAdmin;
 
-import dal.ProductDBContext;
+import DAO.DAOProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ngolu
  */
-public class Productlist_insertProduct extends HttpServlet {
+public class AdminProductDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,15 +32,10 @@ public class Productlist_insertProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Productlist_insertProduct</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Productlist_insertProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            int id = Integer.parseInt(request.getParameter("pid"));
+            DAOProduct dao = new DAOProduct();
+            dao.deleteProduct(id);
+            response.sendRedirect("productlist_list");
         }
     }
 
@@ -70,19 +65,7 @@ public class Productlist_insertProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-        String origin = request.getParameter("origin");
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        double price = Double.parseDouble(request.getParameter("price"));
-        int viewNumber = Integer.parseInt(request.getParameter("viewnumber"));
-        String create = request.getParameter("create");
-        String update = request.getParameter("update");
-        String description = request.getParameter("description");
-
-        ProductDBContext dao = new ProductDBContext();
-        dao.insertProduct(categoryId, name, description, origin, quantity, price, true, viewNumber, create, update);
-        response.sendRedirect("productlist_list");
+        processRequest(request, response);
     }
 
     /**

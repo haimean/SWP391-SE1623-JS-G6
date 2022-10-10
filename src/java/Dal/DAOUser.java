@@ -89,4 +89,20 @@ public class DAOUser extends DBContext.DBContext {
 
         return null;
     }
+
+    public String getUserName(int userSenderId) {
+        String userName = "";
+        try {
+            String sql = "select fullname from UserInformation where userId = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userSenderId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                userName = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+        }
+        return userName;
+
+    }
 }

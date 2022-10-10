@@ -1,5 +1,5 @@
-<%@page import="Model.*"
-        import="Dal.*"
+ <%@page import="Model.*"
+        import="Dal.*"    
         import="java.util.ArrayList"
         %>
 <!DOCTYPE html>
@@ -19,6 +19,9 @@
     a{
         text-decoration: none;
         color: black
+    }
+    body{
+        background-color: #D9D8E1;
     }
 </style>
 <nav class="navbar bg-warning">
@@ -64,7 +67,7 @@
 <div class="offcanvas-lg offcanvas-start " tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
     <div class="offcanvas-body  bg-warning" style="
          float: left;
-         height: 100vh;
+         height: 83vh;
          "
          >
         <div class=" bg-warning" style="
@@ -76,9 +79,9 @@
             <ul class="list-group  list-group-flush  bg-warning">
                 <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller"> <h4>Dashboard</h3></a></li>
                 <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/product"> <h4>Product</h3></a></li>
-                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/"> <h4>Order</h3></a></li>
+                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/order"> <h4>Order</h3></a></li>
             </ul>
-            <a class="btn btn-primary mx-auto" href="#" role="button">Message  <span class="badge bg-light text-body">2</span></a>
+            <a class="btn btn-primary mx-auto" href="<%= request.getContextPath()%>/seller/message">Message<span class="badge bg-light text-body">2</span></a>
         </div>
     </div>
 </div>

@@ -1,28 +1,27 @@
+package Model;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
-
 /**
  *
  * @author MrTuan
  */
 public class Product {
 
-   private String id;
-    private int categoryID;
+    private int id, categoryID;
     private String name, description, original;
     private int quantity;
     private double price;
     private boolean status;
     private int viewNumber;
-    private String create, update;
+    private String Create_at, Update_at;
 
     public Product() {
     }
 
-    public Product(String id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String create, String update) {
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String Create_at, String Update_at) {
         this.id = id;
         this.categoryID = categoryID;
         this.name = name;
@@ -32,15 +31,15 @@ public class Product {
         this.price = price;
         this.status = status;
         this.viewNumber = viewNumber;
-        this.create = create;
-        this.update = update;
+        this.Create_at = Create_at;
+        this.Update_at = Update_at;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -108,24 +107,24 @@ public class Product {
         this.viewNumber = viewNumber;
     }
 
-    public String getCreate() {
-        return create;
+    public String getCreate_at() {
+        return Create_at;
     }
 
-    public void setCreate(String create) {
-        this.create = create;
+    public void setCreate_at(String Create_at) {
+        this.Create_at = Create_at;
     }
 
-    public String getUpdate() {
-        return update;
+    public String getUpdate_at() {
+        return Update_at;
     }
 
-    public void setUpdate(String update) {
-        this.update = update;
+    public void setUpdate_at(String Update_at) {
+        this.Update_at = Update_at;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", create=" + create + ", update=" + update + '}';
+        return "DAO{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", Create_at=" + Create_at + ", Update_at=" + Update_at + '}';
     }
 }

@@ -16,7 +16,7 @@
 
         <div class="container">
             <div class="bttCreate">
-                <button type="button" class="btn btn-primary">Create</button>
+                <a href="AddProduct.jsp"> <button type="button" class="btn btn-primary">Create</button></a>
             </div>         
             <div class="content">
                 <form action="search"  method="post"  class="d-flex" role="search">
@@ -36,10 +36,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <c:set var="i" value="0"></c:set>
                         <c:forEach items="${listP}" var="o">
+                            <c:set var="i" value="${i+1}"></c:set>
                         <tr>
                             
-                            <th scope="row">${o.id}</th>
+                            <th scope="row">${i}</th>
                             
                             <td>
                                 ${o.name}
@@ -54,12 +56,15 @@
                             
                             <td>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<!--                                <a href="deletep?pid=${o.id}"> <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Delete
-                                </button>
-
+                                </button></a>-->
+                                <button  class="btn btn-danger" onclick="deleteA(${o.id})">Delete</button>
+<!--                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Delete
+                                </button>-->
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -75,15 +80,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 
-                                <a href="updatep?pid=${o.id}"> <button type="button" class="btn btn-info">Update</button></a>
-                            </td>
-                           
+                                <a href="loadProduct?pid=${o.id}"> <button type="button" class="btn btn-info">Update</button></a>
+                            </td>                          
                         </tr>    
                          </c:forEach>
                     </tbody>
                 </table>
             </div>
     </body>
+    <script>
+        function deleteA(id){
+            result=confirm("do you want to delete?");
+            if(result===true){
+                window.location.href="deletep?pid="+id;
+            }
+        }
+    </script>
 </html>

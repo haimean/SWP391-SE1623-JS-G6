@@ -56,6 +56,26 @@
         <servlet-name>ProductlistforUser</servlet-name>
         <servlet-class>controller.ProductlistforUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Productlist_Delete</servlet-name>
+        <servlet-class>controller.Productlist_Delete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Productlist_insertProduct</servlet-name>
+        <servlet-class>controller.Productlist_insertProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Productlist_GetInforProduct</servlet-name>
+        <servlet-class>controller.Productlist_GetInforProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Productlist_SearchProduct</servlet-name>
+        <servlet-class>controller.Productlist_SearchProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Productlist_UpdateProduct</servlet-name>
+        <servlet-class>controller.Productlist_UpdateProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Category_List</servlet-name>
         <url-pattern>/category_list</url-pattern>
@@ -111,6 +131,26 @@
     <servlet-mapping>
         <servlet-name>ProductlistforUser</servlet-name>
         <url-pattern>/productlistforUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Productlist_Delete</servlet-name>
+        <url-pattern>/seller/deleteproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Productlist_insertProduct</servlet-name>
+        <url-pattern>/seller/insertproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Productlist_GetInforProduct</servlet-name>
+        <url-pattern>/seller/getinforproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Productlist_SearchProduct</servlet-name>
+        <url-pattern>/seller/searchproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Productlist_UpdateProduct</servlet-name>
+        <url-pattern>/seller/updateproduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

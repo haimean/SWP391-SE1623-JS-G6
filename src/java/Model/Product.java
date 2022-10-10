@@ -10,18 +10,19 @@ package model;
  */
 public class Product {
 
-    private int id, categoryID;
+   private String id;
+    private int categoryID;
     private String name, description, original;
     private int quantity;
     private double price;
     private boolean status;
     private int viewNumber;
-    private String Create_at, Update_at;
+    private String create, update;
 
     public Product() {
     }
 
-    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String Create_at, String Update_at) {
+    public Product(String id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String create, String update) {
         this.id = id;
         this.categoryID = categoryID;
         this.name = name;
@@ -31,15 +32,15 @@ public class Product {
         this.price = price;
         this.status = status;
         this.viewNumber = viewNumber;
-        this.Create_at = Create_at;
-        this.Update_at = Update_at;
+        this.create = create;
+        this.update = update;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -107,24 +108,24 @@ public class Product {
         this.viewNumber = viewNumber;
     }
 
-    public String getCreate_at() {
-        return Create_at;
+    public String getCreate() {
+        return create;
     }
 
-    public void setCreate_at(String Create_at) {
-        this.Create_at = Create_at;
+    public void setCreate(String create) {
+        this.create = create;
     }
 
-    public String getUpdate_at() {
-        return Update_at;
+    public String getUpdate() {
+        return update;
     }
 
-    public void setUpdate_at(String Update_at) {
-        this.Update_at = Update_at;
+    public void setUpdate(String update) {
+        this.update = update;
     }
 
     @Override
     public String toString() {
-        return "DAO{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", Create_at=" + Create_at + ", Update_at=" + Update_at + '}';
+        return "Product{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", create=" + create + ", update=" + update + '}';
     }
 }

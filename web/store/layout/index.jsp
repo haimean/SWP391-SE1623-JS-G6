@@ -1,5 +1,5 @@
 <%@page import="Model.*"
-        import="Dal.*"
+        import="DAO.*"
         import="java.util.ArrayList"
         %>
 <!DOCTYPE html>

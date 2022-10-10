@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAdmin;
+package ControllerSeller;
 
 import DAO.DAOProduct;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ngolu
  */
-public class AdminProductDelete extends HttpServlet {
+public class SellerProductDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +35,7 @@ public class AdminProductDelete extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("pid"));
             DAOProduct dao = new DAOProduct();
             dao.deleteProduct(id);
-            response.sendRedirect("productlist_list");
+            response.sendRedirect(request.getContextPath() + "/seller/product");
         }
     }
 

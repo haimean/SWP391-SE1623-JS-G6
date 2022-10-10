@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAdmin;
+package ControllerSeller;
 
 import DAO.DAOProduct;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ngolu
  */
-public class Productlist_insertProduct extends HttpServlet {
+public class SellerProductCreate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,7 +56,7 @@ public class Productlist_insertProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("productAdd.jsp").forward(request, response);
     }
 
     /**
@@ -79,20 +79,9 @@ public class Productlist_insertProduct extends HttpServlet {
         String create = request.getParameter("create");
         String update = request.getParameter("update");
         String description = request.getParameter("description");
-
         DAOProduct dao = new DAOProduct();
         dao.insertProduct(categoryId, name, description, origin, quantity, price, true, viewNumber, create, update);
-        response.sendRedirect("productlist_list");
+        response.sendRedirect(request.getContextPath() + "/seller/product");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

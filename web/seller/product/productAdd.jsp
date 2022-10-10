@@ -17,7 +17,7 @@
         <title>Document</title>
     </head>
     <body>
-        <form action="addProduct" method="post">
+        <form action="" method="post">
             <div class="container">
                 <h3>Add New Product </h3>
 

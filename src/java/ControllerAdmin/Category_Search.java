@@ -4,9 +4,9 @@
  */
 package ControllerAdmin;
 
-import Dal.DAOCategory;
+import DAO.DAOCategory;
 import java.io.IOException;
-import Dal.DAOUser;
+import DAO.DAOUser;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;

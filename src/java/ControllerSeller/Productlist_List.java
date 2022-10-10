@@ -4,7 +4,7 @@
  */
 package ControllerSeller;
 
-import Dal.DAOProduct;
+import DAO.DAOProduct;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;

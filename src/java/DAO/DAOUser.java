@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Dal;
+package DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,8 +65,8 @@ public class DAOUser extends DBContext.DBContext {
     }
 
     public User login(String Email, String password) {
-        String sql = "select u.id, u.role, ui.fullname, u.email,	"
-                + "u.password, ui.phone, u.created_at, u.updated_at\n"
+        String sql = "select u.id, u.role, ui.fullname, u.email,"
+                + "u.password, ui.phone, u.created_at, u.updated_at, u.status\n"
                 + "from UserInformation as ui, [User] as u\n"
                 + "where u.id = ui.userId and u.email = '" + Email + "' and u.password = '" + password + "'";
         try {
@@ -81,7 +81,8 @@ public class DAOUser extends DBContext.DBContext {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getDate(7),
-                        rs.getDate(8));
+                        rs.getDate(8),
+                        rs.getBoolean(9));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);

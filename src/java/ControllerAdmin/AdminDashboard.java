@@ -4,8 +4,8 @@
  */
 package ControllerAdmin;
 
-import Dal.DAOCategory;
-import Dal.DAOUser;
+import DAO.DAOCategory;
+import DAO.DAOUser;
 import Model.Category;
 import Model.User;
 import java.io.IOException;

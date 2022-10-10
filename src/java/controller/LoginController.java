@@ -4,8 +4,7 @@
  */
 package controller;
 
-import dal.LoginDBContext;
-import dal.UserlistDBContext;
+import DAO.DAOUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.User;
+import Model.User;
 
 /**
  *
@@ -61,7 +60,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LoginDBContext db = new LoginDBContext();
+        DAOUser db = new DAOUser();
 
         HttpSession session = request.getSession();
 
@@ -69,9 +68,9 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         User user = null;
         try {
-            user = db.search(email, password);
+            user = db.login(email, password);
         } catch (Exception ex) {
-            Logger.getLogger(LoginDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         //login
         if (user == null) {

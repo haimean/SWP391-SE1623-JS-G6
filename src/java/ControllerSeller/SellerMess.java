@@ -4,7 +4,7 @@
  */
 package ControllerSeller;
 
-import Dal.DAOMessage;
+import DAO.DAOMessage;
 import Model.Message;
 import Model.User;
 import java.io.IOException;

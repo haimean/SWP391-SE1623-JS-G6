@@ -290,11 +290,11 @@ buildNumber.properties
 
 
 ### NetBeans files ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
 .nb-gradle/
 
 
@@ -616,7 +616,7 @@ node_modules/
 bower_components/
 *.log
 
-build/
-dist/
+/build/
+/dist/
 
 /src/java/DBContext/DBContext.java/

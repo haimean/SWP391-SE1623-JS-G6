@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.CategoryDBContext;
+import DAO.CategoryDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import model.Category;
+import Model.Category;
 
 /**
  *

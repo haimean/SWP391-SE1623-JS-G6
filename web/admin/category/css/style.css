@@ -34,7 +34,10 @@ ul{
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 10px;
+<<<<<<< HEAD
     margin-left: 200px;
+=======
+>>>>>>> dev
 }
 .button-create:hover{
     background-color: rgb(255, 165, 0);

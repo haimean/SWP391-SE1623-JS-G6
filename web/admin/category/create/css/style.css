@@ -3,34 +3,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : Sep 30, 2022, 5:32:33 AM
-    Author     : Mr Tuan
-*/
-
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
     Created on : Sep 19, 2022, 2:53:46 AM
     Author     : MrTuan
 */
 
-
-
 .container-category{
-    text-align: center;
-    border-radius: 10px;
+    display: inline-flex;
+    margin-top: 180px;
+    width: 1200px;
+    margin-left: 200px;
 }
-
 
 .side-nav-categories {
     border-radius: 30px;
     text-align: center;
     padding: 0px;
     position: relative;
-    margin-top: 0px;
-    padding-bottom: 0px;
     background-color: #fff;
     border-width: 1px;
     border-style: solid;
@@ -42,7 +30,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     left: 20px;
 }
 .div-title{
-    
     margin-top: 20px;
 }
 .title{
@@ -75,12 +62,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .text-name{
     border-radius: 5px;
     text-align: left;
-    width: 500px;
+    width: 550px;
     height: 32px;
     margin-right: 200px;
 }
 
-.btn-info{
+.btn-primary{
+    background-color: rgb(255, 165, 0);
     margin-top: 60px;
     margin-bottom: 60px;
     width: 100px;

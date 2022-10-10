@@ -4,6 +4,8 @@
  */
 package controller;
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:src/java/controller/Productlist_List.java
 import dal.ProductDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +15,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Product;
+========
+import DAO.DAOUser;
+import Model.User;
+import java.io.IOException;
+=======
+import DAO.ProductDBContext;
+import java.io.IOException;
+import java.io.PrintWriter;
+>>>>>>> dev
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
+import java.util.ArrayList;
+>>>>>>>> dev:src/java/ControllerAdmin/UserList.java
+=======
+import java.util.List;
+import Model.Product;
+>>>>>>> dev
 
 /**
  *
@@ -20,6 +42,10 @@ import model.Product;
  */
 public class Productlist_List extends HttpServlet {
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:src/java/controller/Productlist_List.java
+=======
+>>>>>>> dev
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,6 +80,18 @@ public class Productlist_List extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+<<<<<<< HEAD
+========
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        DAOUser daoUser = new DAOUser();
+        ArrayList<User> list = daoUser.getAllUsers();
+        request.setAttribute("listU", list);
+        request.getRequestDispatcher("/BlogShop/admin/user/index.jsp").forward(request, response);
+>>>>>>>> dev:src/java/ControllerAdmin/UserList.java
+    }
+=======
     }
 
     /**
@@ -80,4 +118,5 @@ public class Productlist_List extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+>>>>>>> dev
 }

@@ -5,7 +5,8 @@
 package dal;
 
 import java.util.ArrayList;
-import model.Category;
+
+import Model.Category;
 
 /**
  *

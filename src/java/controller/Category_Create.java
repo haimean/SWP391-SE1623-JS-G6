@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Category_Create extends HttpServlet {
 
-    /**
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -29,6 +29,7 @@ public class Category_Create extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -42,10 +43,13 @@ public class Category_Create extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
+=======
+>>>>>>> dev
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+	// + sign on the left to edit the code.">
+	/**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -56,10 +60,14 @@ public class Category_Create extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         CategoryDBContext db = new CategoryDBContext();
+=======
+        request.getRequestDispatcher("admin\\category\\create\\CreateCategory.jsp").forward(request, response);
+>>>>>>> dev
     }
 
-    /**
+	/**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -70,17 +78,25 @@ public class Category_Create extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         processRequest(request, response);
+=======
+        CategoryDBContext db = new CategoryDBContext();
+        String new_category = request.getParameter("txt");
+        db.CreateCategory(new_category);
+        response.sendRedirect("category_list");
+
+>>>>>>> dev
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+	/**
+	 * Returns a short description of the servlet.
+	 *
+	 * @return a String containing servlet description
+	 */
+	@Override
+	public String getServletInfo() {
+		return "Short description";
+	}// </editor-fold>
 
 }

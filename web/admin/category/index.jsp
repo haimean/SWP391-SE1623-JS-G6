@@ -57,7 +57,6 @@
     </div>
     <script>
         function AlertDelete(id) {
-//            window.location.href = 'category_delete?id=' + id;
             var result = confirm("Do you want to delete ?");
             if (result === true) {
                 window.location.href = 'category_delete?id=' + id;

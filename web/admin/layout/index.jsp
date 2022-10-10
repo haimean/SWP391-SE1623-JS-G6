@@ -11,6 +11,7 @@ crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
 crossorigin="anonymous"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     .offcanvas-lg {
         --bs-offcanvas-width: none;
@@ -37,19 +38,7 @@ crossorigin="anonymous"></script>
         </div>
         <ul class="nav nav-pills">
             <li class="nav-item dropdown">
-                <% User user=(User) request.getSession().getAttribute("user"); if (user==null) {
-                        response.sendRedirect(request.getContextPath()+"/login"); return; } else { int
-                        type=user.getRole(); switch (type) { case 1: %>
-                <a class=" dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                   aria-expanded="false">
-                    <%=user.getEmail()%>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout">Logout</a></li>
-                </ul>
-                <% break; case 2: response.sendRedirect(request.getContextPath()+"/seller"); break; case 3:
-                        response.sendRedirect(request.getContextPath()); break; default:
-                        response.sendRedirect(request.getContextPath()+"/login"); }}%>
+
             </li>
         </ul>
     </div>

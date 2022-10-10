@@ -34,8 +34,35 @@
             </button>
             <a class="" href="<%= request.getContextPath()%>/seller"><h3>Seller</h3></a>
         </div>
-
-        
+        <%
+                User user = (User) request.getSession().getAttribute("user");
+                if (user == null) {
+                    response.sendRedirect(request.getContextPath()+"/login");
+                    return;
+                } else {
+                    int type = user.getRole();
+                    switch (type) {
+                        case 2:
+        %>
+        <ul class="nav nav-pills">
+            <li class="nav-item dropdown">
+                <a class=" dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=user.getEmail()%></a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+        <%
+            break;
+        case 1:
+            response.sendRedirect(request.getContextPath()+"/admin");
+            break;
+        case 3:
+            response.sendRedirect(request.getContextPath());
+            break;
+        default:
+           response.sendRedirect(request.getContextPath()+"/login");
+        }}%>
     </div>
 </nav>
 <div class="offcanvas-lg offcanvas-start " tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">

@@ -2,23 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAdmin;
+package ControllerSeller;
 
 import DAO.DAOCategory;
+import DAO.DAOProduct;
+import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import Model.Category;
+import java.util.List;
+import Model.Product;
 
 /**
  *
- * @author Mr Tuan
+ * @author ngolu
  */
-public class CategoryUpdate extends HttpServlet {
+public class SellerProductUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +39,10 @@ public class CategoryUpdate extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Category_Update</title>");
+            out.println("<title>Servlet Productlist_GetInforProduct</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Category_Update at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Productlist_GetInforProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,11 +60,12 @@ public class CategoryUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOCategory db = new DAOCategory();
-        String id = request.getParameter("id");
-        ArrayList<Category> listCategory = db.GetCategoryById(id);
-        request.setAttribute("updateinfo", listCategory);
-        request.getRequestDispatcher("admin\\category\\updateinfo\\UpdateInfo.jsp").forward(request, response);
+        String id = request.getParameter("pid");
+        Product p = new DAOProduct().getProductById(id);
+        List<Category> listc = new DAOCategory().getAllCategory();
+        request.setAttribute("detail", p);
+        request.setAttribute("listc", listc);
+        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
     }
 
     /**
@@ -76,11 +79,19 @@ public class CategoryUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOCategory db = new DAOCategory();
         String id = request.getParameter("id");
-        String namenew = request.getParameter("namenew");
-        db.updateInfo(id, namenew);
-        response.sendRedirect("category_list");
+        String name = request.getParameter("name");
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        String origin = request.getParameter("origin");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        double price = Double.parseDouble(request.getParameter("price"));
+        int viewNumber = Integer.parseInt(request.getParameter("viewnumber"));
+        String create = request.getParameter("create");
+        String update = request.getParameter("update");
+        String description = request.getParameter("description");
+        DAOProduct dao = new DAOProduct();
+        dao.updateProductById(id, categoryId, name, description, origin, quantity, price, true, viewNumber, create, update);
+         response.sendRedirect(request.getContextPath() + "/seller/product");
     }
 
     /**

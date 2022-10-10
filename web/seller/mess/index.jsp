@@ -1,6 +1,4 @@
 <%@include file="../layout/index.jsp"  %>
-
-
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <div style="
      display: flex;

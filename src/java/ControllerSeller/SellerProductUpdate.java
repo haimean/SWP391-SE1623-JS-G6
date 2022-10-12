@@ -22,14 +22,41 @@ import Model.Product;
  */
 public class SellerProductUpdate extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request  servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Productlist_GetInforProduct</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Productlist_GetInforProduct at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,10 +72,10 @@ public class SellerProductUpdate extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -64,8 +91,9 @@ public class SellerProductUpdate extends HttpServlet {
         String update = request.getParameter("update");
         String description = request.getParameter("description");
         DAOProduct dao = new DAOProduct();
-        dao.updateProductById(id, categoryId, name, description, origin, quantity, price, true, viewNumber, create, update);
-         response.sendRedirect(request.getContextPath() + "/seller/product");
+        dao.updateProductById(id, categoryId, name, description, origin, quantity, price, true, viewNumber, create,
+                update);
+        response.sendRedirect(request.getContextPath() + "/seller/product");
     }
 
     /**

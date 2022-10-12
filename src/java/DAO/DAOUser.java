@@ -123,4 +123,60 @@ public class DAOUser extends DBContext.DBContext {
         }
         return null;
     }
+
+    public void updateUserStatusByID(int id, boolean status) {
+        String query = "UPDATE [User]\n"
+                + "SET [status] = ?\n"
+                + "WHERE id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            stm.setInt(2, id);
+            stm.setBoolean(1, status);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            this.status += "Error at ban user" + e.getMessage();
+            System.out.println(this.status);
+        }
+    }
+
+    public void updateUserRoleByID(int id, int role) {
+        String query = "UPDATE [User]\n"
+                + "SET [role] = ?\n"
+                + "WHERE id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            stm.setInt(2, id);
+            stm.setInt(1, role);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            status += "Error at update role user" + e.getMessage();
+            System.out.println(status);
+        }
+    }
+
+    public ArrayList<User> searchUser(String seachValue) {
+        ArrayList<User> userList = new ArrayList<>();
+        String query = "select u.id, role, fullname, email, phone,"
+                + " status, u.created_at, updated_at"
+                + "from UserInformation as ui, [User] as u\n"
+                + "where (u.id = ui.id) and (email like ?)";
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            stm.setString(1, "%" + seachValue + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                userList.add(new User(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getDate(7),
+                        rs.getDate(8)));
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
 }

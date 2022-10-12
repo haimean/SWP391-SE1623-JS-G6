@@ -112,6 +112,10 @@
         <servlet-name>AdminCategoryUpdate</servlet-name>
         <url-pattern>/admin/category/update</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserList</servlet-name>
+        <url-pattern>/admin/user</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

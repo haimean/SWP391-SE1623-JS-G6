@@ -30,10 +30,10 @@ public class Login extends HttpServlet {
             int type = user.getRole();
             switch (type) {
                 case 1:
-                    response.sendRedirect(request.getContextPath()+"/admin");
+                    response.sendRedirect(request.getContextPath() + "/admin");
                     break;
                 case 2:
-                    response.sendRedirect(request.getContextPath()+"/seller");
+                    response.sendRedirect(request.getContextPath() + "/seller");
                     break;
                 case 3:
                     response.sendRedirect(request.getContextPath());
@@ -58,6 +58,7 @@ public class Login extends HttpServlet {
             u = db.login(email, password);
             if (u == null) {
                 String noti = "Incorrect user name or password,please try again";
+                request.setAttribute("noti", noti);
                 request.getRequestDispatcher("login/login.jsp").forward(request, response);
             } else {
                 int type = u.getRole();
@@ -65,15 +66,17 @@ public class Login extends HttpServlet {
                 request.getSession().setMaxInactiveInterval(600);
                 switch (type) {
                     case 1:
-                        response.sendRedirect(request.getContextPath()+"/admin");
+                        response.sendRedirect(request.getContextPath() + "/admin");
                         break;
                     case 2:
-                        response.sendRedirect(request.getContextPath()+"/seller");
+                        response.sendRedirect(request.getContextPath() + "/seller");
                         break;
                     case 3:
                         response.sendRedirect(request.getContextPath());
                         break;
                     default:
+                        String noti = "aorn";
+                        request.setAttribute("noti", noti);
                         request.getRequestDispatcher("/login/login.jsp").forward(request, response);
                 }
             }
@@ -82,15 +85,17 @@ public class Login extends HttpServlet {
             int type = user.getRole();
             switch (type) {
                 case 1:
-                    response.sendRedirect(request.getContextPath()+"/admin");
+                    response.sendRedirect(request.getContextPath() + "/admin");
                     break;
                 case 2:
-                    response.sendRedirect(request.getContextPath()+"/seller");
+                    response.sendRedirect(request.getContextPath() + "/seller");
                     break;
                 case 3:
                     response.sendRedirect(request.getContextPath());
                     break;
                 default:
+                    String noti = "Incoaoasdf";
+                    request.setAttribute("noti", noti);
                     request.getRequestDispatcher("/login/login.jsp").forward(request, response);
             }
         }

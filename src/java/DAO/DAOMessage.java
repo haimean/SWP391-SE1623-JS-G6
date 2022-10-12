@@ -10,8 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -69,7 +67,8 @@ public class DAOMessage extends DBContext.DBContext {
 
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    messages.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5), rs.getDate(6)));
+                    messages.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5),
+                            rs.getDate(6)));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,7 +90,8 @@ public class DAOMessage extends DBContext.DBContext {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5), rs.getDate(6)));
+                list.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5),
+                        rs.getDate(6)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);

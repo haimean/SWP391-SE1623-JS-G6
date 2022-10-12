@@ -213,18 +213,13 @@
 <body>
 	<div class="container">
 		<header>Login Form</header>
-                
-                ${noti}
-                
-                
-                
 		<form action="<%=request.getContextPath()%>/login" method="POST">
 			<div class="input-field">
 				<input type="text" name="email" required>
 				<label>Email or Username</label>
 			</div>
 			<div class="input-field">
-				<input class="password" type="password" name="password" required>
+				<input class="pswrd" type="password" name="password" required>
 				<span class="show">SHOW</span>
 				<label>Password</label>
 			</div>

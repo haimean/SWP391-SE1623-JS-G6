@@ -29,7 +29,7 @@ public class DAOUser extends DBContext.DBContext {
         String query = "select u.id, role, fullname, email, phone, status,"
                 + " u.created_at, updated_at "
                 + "from [User] u ,[UserInformation] ui"
-                + " where u.id = ui.id";
+                + " where u.id = ui.userId";
         try {
             PreparedStatement stm = connection.prepareStatement(query);
             ResultSet rs = stm.executeQuery();
@@ -72,14 +72,13 @@ public class DAOUser extends DBContext.DBContext {
         }
     }
 
-    public User login(String email, String password) {
-        String sql = "select u.id, role, fullname, email, phone,"
-                + " status, u.created_at, updated_at"
-                + "from UserInformation as ui, [User] as u\n"
-                + "where u.id = ui.userId and u.email = ? and u.password = ? ";
+    public User login(String Email, String password) {
+        String sql = "select u.id, role, fullname, email, phone, status, u.created_at, updated_at\n"
+                + "                from UserInformation as ui, [User] as u\n"
+                + "                where u.id = ui.userId and u.email = ? and u.password = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, email);
+            stm.setString(1, Email);
             stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -100,21 +99,29 @@ public class DAOUser extends DBContext.DBContext {
         return null;
     }
 
-    public String getUserName(int userSenderId) {
-        String userName = "";
+    public User getUser(int userSenderId) {
         try {
-            String sql = "select fullname from UserInformation"
-                    + " where userId = ?";
+            String sql = "select u.id, role, fullname, email, phone, status,"
+                    + " u.created_at, updated_at "
+                    + "from [User] u ,[UserInformation] ui"
+                    + " where u.id = ui.userId and u.id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, userSenderId);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                userName = rs.getString(1);
+            if (rs.next()) {
+                return new User(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getDate(7),
+                        rs.getDate(8));
             }
         } catch (SQLException ex) {
         }
-        return userName;
-
+        return null;
     }
 
     public void updateUserStatusByID(int id, boolean status) {
@@ -168,10 +175,8 @@ public class DAOUser extends DBContext.DBContext {
                         rs.getDate(7),
                         rs.getDate(8)));
             }
-        } catch (SQLException e) {
-            status += "Error at search user " + e.getMessage();
-            System.out.println(status);
+        } catch (SQLException ex) {
         }
-        return userList;
+        return null;
     }
 }

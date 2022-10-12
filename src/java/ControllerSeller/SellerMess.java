@@ -5,6 +5,8 @@
 package ControllerSeller;
 
 import DAO.DAOMessage;
+
+import DAO.DAOUser;
 import Model.Message;
 import Model.User;
 import java.io.IOException;
@@ -29,12 +31,12 @@ public class SellerMess extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
+        User userReceiver;
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        int userPnId = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id"))
-                : 0;
+        int userPnId = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         ArrayList<Message> messages = new DAOMessage().getMessageList(user.getId());
         if (userPnId <= 0) {
             if (user.getId() == messages.get(0).getUserReceiverId()) {
@@ -44,8 +46,15 @@ public class SellerMess extends HttpServlet {
             }
         }
         ArrayList<Message> messagesUser = new DAOMessage().getMessage(user.getId(), userPnId);
+        if (user.getId() == messagesUser.get(0).getUserReceiverId()) {
+            userReceiver = new DAOUser().getUser(messagesUser.get(0).getUserSenderId());
+        } else {
+            userReceiver = new DAOUser().getUser(messagesUser.get(0).getUserReceiverId());
+        }
         request.setAttribute("messages", messages);
         request.setAttribute("messagesUser", messagesUser);
+        request.setAttribute("userNameReceiver", userReceiver.getFullName());
+        request.setAttribute("userIdReceiver", userReceiver.getId());
 
         request.getRequestDispatcher("/seller/mess/index.jsp").forward(request, response);
     }
@@ -61,17 +70,29 @@ public class SellerMess extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        User userReceiver;
+        int userIdReceiver = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+        String message = request.getParameter("mess").trim();
+        if (userIdReceiver != 0 && message != null) {
+            new DAOMessage().insertMessage(user.getId(), userIdReceiver, message);
+        }
+        
+        ArrayList<Message> messages = new DAOMessage().getMessageList(user.getId());
+        ArrayList<Message> messagesUser = new DAOMessage().getMessage(user.getId(), userIdReceiver);
+        if (user.getId() == messagesUser.get(0).getUserReceiverId()) {
+            userReceiver = new DAOUser().getUser(messagesUser.get(0).getUserSenderId());
+        } else {
+            userReceiver = new DAOUser().getUser(messagesUser.get(0).getUserReceiverId());
+        }
+        request.setAttribute("messages", messages);
+        request.setAttribute("messagesUser", messagesUser);
+        request.setAttribute("userNameReceiver", userReceiver.getFullName());
+        request.setAttribute("userIdReceiver", userReceiver.getId());
         request.getRequestDispatcher("/seller/mess/index.jsp").forward(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

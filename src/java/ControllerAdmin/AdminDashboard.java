@@ -6,8 +6,8 @@ package ControllerAdmin;
 
 import Dal.DAOCategory;
 import Dal.DAOUser;
-import Model.Category;
-import Model.User;
+import model.Category;
+import model.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

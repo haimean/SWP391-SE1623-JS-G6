@@ -5,7 +5,7 @@
 package ControllerSeller;
 
 import Dal.DAOProduct;
-import Model.Product;
+import model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

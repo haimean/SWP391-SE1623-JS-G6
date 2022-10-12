@@ -6,7 +6,7 @@ package ControllerSeller;
 
 import Dal.DAOMessage;
 import Model.Message;
-import Model.User;
+import model.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

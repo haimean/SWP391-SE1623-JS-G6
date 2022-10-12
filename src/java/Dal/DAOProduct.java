@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Model.Product;
+import model.Product;
+import DBContext.DBContext;
 
 /**
  *
  * @author MrTuan
  */
-public class DAOProduct extends DBContext.DBContext {
+public class DAOProduct extends DBContext {
 
     public List<Product> getProduct() {
         List<Product> list = new ArrayList<>();

@@ -8,13 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Model.Category;
+import model.Category;
+import DBContext.DBContext;
 
 /**
  *
  * @author Mr Tuan
  */
-public class DAOCategory extends DBContext.DBContext {
+public class DAOCategory extends DBContext{
 
     public ArrayList<Category> getAllCategory() {
         ArrayList<Category> listCategory = new ArrayList<>();

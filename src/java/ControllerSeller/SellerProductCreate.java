@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAdmin;
+package ControllerSeller;
 
-import Dal.DAOCategory;
+import DAO.DAOProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,9 +14,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Mr Tuan
+ * @author ngolu
  */
-public class CategoryDelete extends HttpServlet {
+public class SellerProductCreate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +35,10 @@ public class CategoryDelete extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CategoryController_UD</title>");
+            out.println("<title>Servlet Productlist_insertProduct</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CategoryController_UD at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Productlist_insertProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,11 +56,7 @@ public class CategoryDelete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//delete        
-        DAOCategory db = new DAOCategory();
-        String id = request.getParameter("id");
-        db.deleteByID(id);
-        response.sendRedirect("category_list");
+        request.getRequestDispatcher("productAdd.jsp").forward(request, response);
     }
 
     /**
@@ -74,17 +70,18 @@ public class CategoryDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        String origin = request.getParameter("origin");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        double price = Double.parseDouble(request.getParameter("price"));
+        int viewNumber = Integer.parseInt(request.getParameter("viewnumber"));
+        String create = request.getParameter("create");
+        String update = request.getParameter("update");
+        String description = request.getParameter("description");
+        DAOProduct dao = new DAOProduct();
+        dao.insertProduct(categoryId, name, description, origin, quantity, price, true, viewNumber, create, update);
+        response.sendRedirect(request.getContextPath() + "/seller/product");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

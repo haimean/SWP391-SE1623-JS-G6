@@ -9,18 +9,17 @@
      float: left;
      ">
     <%
-    ArrayList<Message> messages = (ArrayList<Message>)  request.getAttribute("messages");              
- if (messages != null) {
-            String userName;
-            int userId;
-            for (Message m : messages) {
-                if (user.getId() == m.getUserReceiverId()) {
-                    userName = new DAOUser().getUserName(m.getUserSenderId());
-                    userId = m.getUserSenderId();
-                } else {
-                    userName = new DAOUser().getUserName(m.getUserReceiverId());
-                    userId = m.getUserReceiverId();
-                }
+    ArrayList<Message> messages = (ArrayList<Message>)  request.getAttribute("messages");   
+    ArrayList<Message> messagesUser = (ArrayList<Message>)  request.getAttribute("messagesUser");  
+    if (messages != null) {
+        String userName;
+        User userReceiver;
+        for (Message m : messages) {
+            if (user.getId() == m.getUserReceiverId()) {
+                userReceiver = (User) new DAOUser().getUser(m.getUserSenderId());
+            } else {
+                userReceiver = (User) new DAOUser().getUser(m.getUserReceiverId());
+            }
     %>
     <div class="mb-3" style="
          display: flex;
@@ -35,7 +34,7 @@
              ">
             <a style="margin-bottom: 0;    white-space: nowrap;
                overflow: hidden;
-               text-overflow: ellipsis;" href="<%= request.getContextPath()%>/seller/message?id=<%=userId%>"><%=userName%></a>
+               text-overflow: ellipsis;" href="<%= request.getContextPath()%>/seller/message?id=<%=userReceiver.getId()%>"><%=userReceiver.getFullName()%></a>
             <p style="margin-bottom: 0;    white-space: nowrap;
                overflow: hidden;
                text-overflow: ellipsis;     max-width: 160px;"><small class="text-muted"><%=m.getContent()%></small></p>
@@ -55,14 +54,34 @@
          justify-content: flex-start;
          background-color: #FFF3CD;">       
         <img src="https://tse2.mm.bing.net/th?id=OIP.xHGWUXjqRhEXJd1ObAlkWAHaH1&pid=Api&P=0" width="60px" height="60px" class="rounded-circle float-start m-2" alt="...">
-        <h4>Nguoi dung</h4>
+        <h4>  
+            ${userNameReceiver}
+        </h4>
     </div>
     <div class="m-2">
-        <div>tin n    ${messagesUser}
-            han</div>
+        <div>
+            <% 
+            for (Message m : messagesUser) {
+            if (user.getId() != m.getUserReceiverId()) {
+            %>
+            <div style="display: flex; justify-content: flex-end; align-items: center;">
+                <h5 style="margin: auto 0"><span class="badge bg-secondary">  <%=m.getContent()%></span></h5>
+                <img src="https://tse2.mm.bing.net/th?id=OIP.xHGWUXjqRhEXJd1ObAlkWAHaH1&pid=Api&P=0" width="24px" height="24px" class="rounded-circle float-start m-2" alt="...">
+            </div>
+            <%
+            } else {
+            %>
+            <div style="display: flex; justify-content: flex-start; align-items: center;">
+                <img src="https://tse2.mm.bing.net/th?id=OIP.xHGWUXjqRhEXJd1ObAlkWAHaH1&pid=Api&P=0" width="24px" height="24px" class="rounded-circle float-start m-2" alt="...">
+                <h5 style="margin: auto 0"><span class="badge bg-secondary">  <%=m.getContent()%></span></h5>
+            </div>
+            <%
+            }}%>
+        </div>
         <div class="mt-2" >  
-            <form action="<%= request.getContextPath()%>/seller/message"  method="post"  class="d-flex" >
-                <input name="txt" class="form-control me-2" type="text" placeholder="Message" aria-label="Search">
+            <form action="<%= request.getContextPath()%>/seller/message"  method="POST"  class="d-flex" >
+                <input type="hidden" name="id" value="${userIdReceiver}">
+                <input name="mess" class="form-control me-2" type="text" placeholder="Message" >
                 <button class="btn  bg-warning" type="submit">Seen</button>
             </form>
         </div>

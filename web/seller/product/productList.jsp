@@ -16,10 +16,10 @@
 
         <div class="container">
             <div class="bttCreate">
-                <button type="button" class="btn btn-primary">Create</button>
+                <a href="product/create"> <button type="button" class="btn btn-primary">Create</button></a>
             </div>         
             <div class="content">
-                <form action="search"  method="post"  class="d-flex" role="search">
+                <form action=""  method="post"  class="d-flex" role="search">
                     <input name="txt" class="form-control me-2" type="text" placeholder="Enter Name" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
@@ -36,54 +36,66 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listP}" var="o">
-                        <tr>
-                            
-                            <th scope="row">${o.id}</th>
-                            
-                            <td>
-                                ${o.name}
-                            </td>
-                            <td>
-                                ${o.categoryID}
-                            </td>
-                            <td>
-                                ${o.quantity}
-                            </td>
-                            <td></td>
-                            
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Delete
-                                </button>
+                        <c:set var="i" value="0"></c:set>
+                        <c:forEach items="${products}" var="o">
+                            <c:set var="i" value="${i+1}"></c:set>
+                                <tr>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete confirm</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Do you agree to delete product ?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <a href="updatep?pid=${o.id}"> <button type="button" class="btn btn-info">Update</button></a>
-                            </td>
-                           
-                        </tr>    
-                         </c:forEach>
+                                    <th scope="row">${i}</th>
+
+                                <td>
+                                    ${o.name}
+                                </td>
+                                <td>
+                                    ${o.categoryID}
+                                </td>
+                                <td>
+                                    ${o.quantity}
+                                </td>
+                                <td></td>
+
+                                <td>
+                                    <!-- Button trigger modal -->
+    <!--                                <a href="deletep?pid=${o.id}"> <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Delete
+                                    </button></a>-->
+                                    <button  class="btn btn-danger" onclick="deleteA(${o.id})">Delete</button>
+                                    <!--                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                        Delete
+                                                                    </button>-->
+                                    <!-- Modal -->
+                                    <!--                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">Delete confirm</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <p>Do you agree to delete product ?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>-->
+
+                                    <a href="product/update?id=${o.id}"> <button type="button" class="btn btn-info">Update</button></a>
+                                </td>                          
+                            </tr>    
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
     </body>
+    <script>
+        function deleteA(id) {
+            result = confirm("Do you want to delete?");
+            if (result === true) {
+                window.location.href = "product/deletep?id=" + id;
+            }
+        }
+    </script>
 </html>

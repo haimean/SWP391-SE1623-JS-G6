@@ -4,8 +4,9 @@
  */
 package ControllerAdmin;
 
-import Dal.DAOCategory;
+import DAO.DAOCategory;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,22 +16,9 @@ import Model.Category;
 
 /**
  *
- * @author Mr Tuan
+ * @author haimi
  */
-public class CategoryList extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+public class AdminCategoryUpdate extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,15 +33,10 @@ public class CategoryList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOCategory db = new DAOCategory();
-        ArrayList<Category> categories = new ArrayList<Category>();
-        String search = request.getParameter("search");
-        if (search != "") {
-            categories = db.SearchName(search);
-        } else {
-            categories = db.getAllCategory();
-        }
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("category/index.jsp").forward(request, response);
+        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+        Category category = db.getCategory(id);
+        request.setAttribute("category", category);
+        request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
     }
 
     /**
@@ -67,17 +50,10 @@ public class CategoryList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        DAOCategory db = new DAOCategory();
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        db.updateCategory(id, name);
+        response.sendRedirect(request.getContextPath() + "/admin/category");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

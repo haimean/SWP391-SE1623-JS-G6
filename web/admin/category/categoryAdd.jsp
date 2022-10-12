@@ -1,17 +1,14 @@
+
 <%-- 
     Document   : CreateCetegory
     Created on : Sep 30, 2022, 2:30:11 AM
     Author     : Mr Tuan
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="../../layout/index.jsp"  %>
-<link href="<%=request.getContextPath()%>/admin/category/create/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<%@include file="../layout/index.jsp" %>
 <div class="container-category">
     <div class="side-nav-categories">
-        <form action="category_create" method="POST">
+        <form action="create" method="POST">
             <div class="div-title">
                 <h1 class="title">Create Category</h1>
             </div>
@@ -23,4 +20,3 @@
         </form>
     </div>
 </div>
-

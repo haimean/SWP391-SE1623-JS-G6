@@ -1,13 +1,9 @@
-<%-- 
-    Document   : index
-    Created on : 18-09-2022, 23:04:55
-    Author     : haimi
---%>
+<%-- Document : index Created on : 18-09-2022, 23:04:55 Author : haimi --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<!DOCTYPE html>
+			<!DOCTYPE html>
 
 <%@include file="../layout/index.jsp"  %>
 

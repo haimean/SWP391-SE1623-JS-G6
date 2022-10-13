@@ -41,10 +41,10 @@
                                             ArrayList<Category> categories = new DAOCategory().getCategories();
                                             if(categories != null){
                                                for(Category c : categories){
-                                                %>
-                                                <a class="dropdown-item" href="<%= request.getContextPath()%>/product?categoryId=<%=c.getId()%>"><%=c.getName()%></a>
-                                                <%
-                                                          }}
+                                        %>
+                                        <a class="dropdown-item" href="<%= request.getContextPath()%>/product?categoryId=<%=c.getId()%>"><%=c.getName()%></a>
+                                        <%
+                                                  }}
                                         %>
                                     </div>
                                 </div>
@@ -75,19 +75,18 @@
                                         if(user == null){
                                         %>
                                         <a class="dropdown-item" href="<%= request.getContextPath()%>/login">Login</a>    
-                                            <%
-                                            }else{
-                                            %>
+                                        <%
+                                        }else{
+                                        %>
                                         <a href="<%= request.getContextPath()%>/profile">Profile<ion-icon name="person-outline" style="margin-left: 15px;font-size: 25px;"></ion-icon></a>
-                                        <a href="<%= request.getContextPath()%>/message">Message <ion-icon name="chatbubbles-outline" style="margin-left: 15px;font-size: 25px;"></ion-icon></a>
+                                        <a href="<%= request.getContextPath()%>/seller/message">Message <ion-icon name="chatbubbles-outline" style="margin-left: 15px;font-size: 25px;"></ion-icon></a>
                                         <a href="<%= request.getContextPath()%>/logout">Logout<ion-icon name="log-out-outline" style="margin-left: 15px;font-size: 25px;"></ion-icon></a>
-                                        <%}%> 
+                                                <%}%> 
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </nav>
         </div>
@@ -96,8 +95,8 @@
         function ListCategory() {
             window.location.href = "#";
         }
-        function ShopCart(){
-            window.location.href ="#";
+        function ShopCart() {
+            window.location.href = "#";
         }
     </script>
 </html>
@@ -230,4 +229,5 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
         background-color: rgb(119, 73, 248);
     }
+
 </style>

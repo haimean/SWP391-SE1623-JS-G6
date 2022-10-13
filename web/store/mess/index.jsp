@@ -4,8 +4,8 @@
      display: flex;
      padding: 30px 20px;
      height: 83vh;
-     background-color: #FFE69C;
      flex-direction: column;
+     background-color: #fff4e9;
      float: left;
      ">
     <%
@@ -26,7 +26,11 @@
          flex-direction: row;
          align-items: center;
          ">
-        <img  src="https://tse2.mm.bing.net/th?id=OIP.xHGWUXjqRhEXJd1ObAlkWAHaH1&pid=Api&P=0" width="40px" height="40px" class="rounded float-start " alt="...">
+        <a style="margin-bottom: 0;    white-space: nowrap;
+           overflow: hidden;
+           text-overflow: ellipsis;" href="<%= request.getContextPath()%>/message?id=<%=userReceiver.getId()%>">
+            <img  src="https://tse2.mm.bing.net/th?id=OIP.xHGWUXjqRhEXJd1ObAlkWAHaH1&pid=Api&P=0" width="40px" height="40px" class="rounded float-start " alt="...">
+        </a>
         <div class="d-none d-lg-block" style="margin-left: 1rem;
              white-space: nowrap;
              overflow: hidden;
@@ -34,7 +38,9 @@
              ">
             <a style="margin-bottom: 0;    white-space: nowrap;
                overflow: hidden;
-               text-overflow: ellipsis;" href="<%= request.getContextPath()%>/seller/message?id=<%=userReceiver.getId()%>"><%=userReceiver.getFullName()%></a>
+               text-overflow: ellipsis;" href="<%= request.getContextPath()%>/message?id=<%=userReceiver.getId()%>">
+                <%=userReceiver.getFullName()%>
+            </a>
             <p style="margin-bottom: 0;    white-space: nowrap;
                overflow: hidden;
                text-overflow: ellipsis;     max-width: 160px;"><small class="text-muted"><%=m.getContent()%></small></p>
@@ -49,10 +55,11 @@
      justify-content: space-between;
      height: 83vh;
      ">
-    <div style="    display: flex;
+    <div style="
+         display: flex;
          align-items: center;
-         justify-content: flex-start;
-         background-color: #FFF3CD;">       
+         background-color: #fdffd6;
+         justify-content: flex-start;">       
         <img src="https://tse2.mm.bing.net/th?id=OIP.xHGWUXjqRhEXJd1ObAlkWAHaH1&pid=Api&P=0" width="60px" height="60px" class="rounded-circle float-start m-2" alt="...">
         <h4>  
             ${userNameReceiver}
@@ -79,7 +86,7 @@
             }}%>
         </div>
         <div class="mt-2" >  
-            <form action="<%= request.getContextPath()%>/seller/message"  method="POST"  class="d-flex" >
+            <form action="<%= request.getContextPath()%>/message"  method="POST"  class="d-flex" >
                 <input type="hidden" name="id" value="${userIdReceiver}">
                 <input name="mess" class="form-control me-2" type="text" placeholder="Message" >
                 <button class="btn  bg-warning" type="submit">Seen</button>

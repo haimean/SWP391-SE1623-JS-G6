@@ -1,6 +1,6 @@
 <%-- 
-    Document   : productDetail
-    Created on : Sep 30, 2022, 4:44:05 PM
+    Document   : productAdd
+    Created on : Oct 10, 2022, 4:48:59 PM
     Author     : ngolu
 --%>
 
@@ -17,56 +17,50 @@
         <title>Document</title>
     </head>
     <body>
-        <form action="update" method="post">
+        <form action="" method="post">
             <div class="container">
-                <h3>Product</h3>
+                <h3>Add New Product </h3>
+
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Id</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="id" readonly="" value="${detail.id}"placeholder="">
+                    <label for="exampleFormControlInput1" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="">
                 </div>
                 <div>
                     <label for="exampleFormControlInput1" class="form-label">Category</label>
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="categoryId">
-                        <c:forEach items="${requestScope.listc}" var="o">
-                            <option value="${o.id}"  ${detail.id == o.id ? "selected": "" }   >${o.name}</option>     
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="pid" name="name" value="${detail.name}" placeholder="">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="categoryId" placeholder="" value="1">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Origin</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="origin" value="${detail.original}" placeholder="">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="origin" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" name="quantity" value="${detail.quantity}" placeholder="">
+                    <input type="number" class="form-control" id="exampleFormControlInput1" name="quantity" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Price</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="price" value="${detail.price}" placeholder="">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="price" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">View Number</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" name="viewnumber" value="${detail.viewNumber}" placeholder="">
+                    <input type="number" class="form-control" id="exampleFormControlInput1" name="viewnumber" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Time Create</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput1" name="create" value="${detail.create}" placeholder="">
+                    <input type="date" class="form-control" id="exampleFormControlInput1" name="create" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Time Update</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput1" name="update" value="${detail.update}" placeholder="">
+                    <input type="date" class="form-control" id="exampleFormControlInput1" name="update" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
                 </div>
+
                 <div class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-primary" value="Save">
-                    <!--        <button type="button" class="btn btn-primary">Save</button>-->
+                    <!--                    <button type="button" class="btn btn-primary">Save</button>-->
                 </div>   
             </div>
         </form>

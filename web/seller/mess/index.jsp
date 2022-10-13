@@ -15,11 +15,6 @@
         String userName;
         User userReceiver;
         for (Message m : messages) {
-            if (user.getId() == m.getUserReceiverId()) {
-                userReceiver = (User) new DAOUser().getUser(m.getUserSenderId());
-            } else {
-                userReceiver = (User) new DAOUser().getUser(m.getUserReceiverId());
-            }
     %>
     <div class="mb-3" style="
          display: flex;
@@ -32,17 +27,34 @@
              overflow: hidden;
              text-overflow: ellipsis;
              ">
+            <%
+               if (user.getId() == m.getUserReceiverId()) {
+                userReceiver = (User) new DAOUser().getUser(m.getUserSenderId());
+            
+            %>
             <a style="margin-bottom: 0;    white-space: nowrap;
                overflow: hidden;
                text-overflow: ellipsis;" href="<%= request.getContextPath()%>/seller/message?id=<%=userReceiver.getId()%>"><%=userReceiver.getFullName()%></a>
             <p style="margin-bottom: 0;    white-space: nowrap;
                overflow: hidden;
                text-overflow: ellipsis;     max-width: 160px;"><small class="text-muted"><%=m.getContent()%></small></p>
+                <% 
+                } else {
+                userReceiver = (User) new DAOUser().getUser(m.getUserReceiverId());
+                %>
+            <a style="margin-bottom: 0;    white-space: nowrap;
+               overflow: hidden;
+               text-overflow: ellipsis;" href="<%= request.getContextPath()%>/seller/message?id=<%=userReceiver.getId()%>"><%=userReceiver.getFullName()%></a>
+            <p style="margin-bottom: 0;    white-space: nowrap;
+               overflow: hidden;
+               text-overflow: ellipsis;     max-width: 160px;"><small class="text-muted">You: <%=m.getContent()%></small></p>
+                <% 
+                }
+                %>
         </div>
     </div>
     <%}}%>    
 </div>   
-
 <div style="
      display: flex;
      flex-direction: column;

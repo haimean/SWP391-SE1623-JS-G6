@@ -31,8 +31,18 @@ public class AdminCategoryCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String new_category = request.getParameter("name");
-        new DAOCategory().createCategory(new_category);
-        response.sendRedirect(request.getContextPath() + "/admin/category");
+        request.getRequestDispatcher("categoryAdd.jsp").forward(request, response);
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        DAOCategory dbCategory=new DAOCategory();
+        String new_category=request.getParameter("txt");
+        if(new_category == null || new_category.equals("")){
+            response.sendRedirect(request.getContextPath()+"/admin/category");
+        }else{
+            dbCategory.createCategory(new_category);
+            response.sendRedirect(request.getContextPath()+"/admin/category");
+        }
     }
 }

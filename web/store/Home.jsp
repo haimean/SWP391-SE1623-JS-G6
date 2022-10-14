@@ -7,15 +7,15 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="grid-category">
-        <%
-        ArrayList<Category> categories = new DAOCategory().getCategories();
-          if(categories != null){
-                               for(Category c : categories){
-        %>
-        <button class= "grid-item-button-category" onclick="FilterCategory(<%=c.getId()%>)"><%=c.getName()%></button>
-            <%
-                      }}
-            %>
+    <%
+    ArrayList<Category> categories = new DAOCategory().getCategories();
+      if(categories != null){
+                           for(Category c : categories){
+    %>
+    <button class= "grid-item-button-category" onclick="FilterCategory(<%=c.getId()%>)"><%=c.getName()%></button>
+    <%
+              }}
+    %>
 </div> 
 <div class= "grid-container">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/lala.jpg">
@@ -118,15 +118,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     }
     .grid-category button {
         margin-top: 5px;
-        border: 1px solid #6759ff;
-        padding: 0.5em 2em;
+        border: 1px solid rgb(13,110,253);
+        padding: 0.4em 2em;
         border-radius: 3em;
         background-color: transparent;
         color: #6759ff;
         cursor: pointer;
+        height: 37px;
     }
     .grid-category button:focus {
-        background-color: #6759ff;
+        background-color: rgb(13,110,253);
         color: white;
     }
 </style>

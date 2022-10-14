@@ -11,14 +11,11 @@
 <%@include file="../store/layout/index.jsp" %>
 
 <body>
-    <form action="category" method="post">
-        <div class="grid-category">
-            <button class= "grid-item-button-category" onclick="">Loa</button>
-            <c:forEach items="${requestScope.categories}" var="c">
-                <button class= "grid-item-button-category" onclick="">${c.name}</button>
-            </c:forEach>
-        </div> 
-    </form>
+    <div class="grid-category">
+        <c:forEach items="${requestScope.listCategory}" var="c">
+            <button class= "grid-item-button-category" onclick="FilterCategory(${c.id})">${c.name}</button>
+        </c:forEach>
+    </div> 
     <div class= "grid-container">
         <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/lala.jpg">
         <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/ghegamming.jpg">
@@ -80,6 +77,10 @@
             function DetailProduct(id) {
                 window.location.href = "#";
             }
+            
+            function FilterCategory(idCategory){
+                window.onload
+            }
     </script>
 </body>
 
@@ -124,7 +125,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         color: #6759ff;
         cursor: pointer;
     }
-    .grid-category button:hover {
+    .grid-category button:focus {
         background-color: #6759ff;
         color: white;
     }

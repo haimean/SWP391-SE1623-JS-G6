@@ -29,22 +29,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="<%= request.getContextPath()%>/about">About</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Category
-                    </a>
-                    <ul class="dropdown-menu" style="height: 13rem; overflow: auto;">
-                        <%
-                        ArrayList<Category> categories = new DAOCategory().getCategories();
-                          if(categories != null){
-                                               for(Category c : categories){
-                        %>
-                        <li><a class="dropdown-item" href="<%= request.getContextPath()%>/product?categoryId=<%=c.getId()%>"><%=c.getName()%></a></li>
-                            <%
-                                      }}
-                            %>
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="<%= request.getContextPath()%>/product">Shop</a>
                 </li>

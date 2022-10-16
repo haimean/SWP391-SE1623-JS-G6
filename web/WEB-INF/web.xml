@@ -65,6 +65,10 @@
         <servlet-class>ControllerStore.Message</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>ControllerStore.Buy</servlet-class>
+    </servlet>
+      <servlet>
         <servlet-name>UserProductList</servlet-name>
         <servlet-class>ControllerUser.UserProductList</servlet-class>
     </servlet>
@@ -133,6 +137,11 @@
         <url-pattern>/message</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+
+    </servlet-mapping>
+     <servlet-mapping>
         <servlet-name>UserProductList</servlet-name>
         <url-pattern>/userProductList</url-pattern>
     </servlet-mapping>

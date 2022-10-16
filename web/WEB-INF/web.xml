@@ -64,6 +64,10 @@
         <servlet-name>Message</servlet-name>
         <servlet-class>ControllerStore.Message</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProductList</servlet-name>
+        <servlet-class>ControllerUser.UserProductList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>Message</servlet-name>
         <url-pattern>/message</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProductList</servlet-name>
+        <url-pattern>/userProductList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

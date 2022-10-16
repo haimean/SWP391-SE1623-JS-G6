@@ -26,7 +26,7 @@ public class DAOMessage extends DBContext.DBContext {
         ArrayList<Integer> listId = new ArrayList<>();
         String sql = "select top 1 * from Message"
                 + " where( userSenderId = ?  and userReceiverId = ?) "
-                + " or ( userSenderId = ?  and userReceiverId = ?)";
+                + " or ( userSenderId = ?  and userReceiverId = ? ) ORDER BY id  DESC";
         String sqlgetListIdReceiver = "select DISTINCT   userReceiverId from Message where userSenderId = ?";
         String sqlgetListIdSender = "select DISTINCT   userSenderId from Message where userReceiverId = ?";
         try {

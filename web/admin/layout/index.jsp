@@ -38,7 +38,28 @@ crossorigin="anonymous"></script>
         </div>
         <ul class="nav nav-pills">
             <li class="nav-item dropdown">
-
+                <% User user=(User) request.getSession().getAttribute("user"); if (user==null) {
+                                response.sendRedirect(request.getContextPath()+"/login"); return; } else { int
+                                type=user.getRole(); switch (type) { case 1: %>
+                <a class=" dropdown-toggle" data-bs-toggle="dropdown" 
+                   href="#" role="button" aria-expanded="false">
+                    <%=user.getEmail()%>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="<%= request.getContextPath()%>/logout">Logout</a>
+                    </li>
+                </ul>
+                <% break; 
+                case 2: response.sendRedirect(request.getContextPath()+"/seller");
+                    break;
+                case 3:
+                    response.sendRedirect(request.getContextPath());
+                    break;
+                default:
+                    response.sendRedirect(request.getContextPath()+"/login");
+                    }}
+                %>
             </li>
         </ul>
     </div>
@@ -50,15 +71,21 @@ crossorigin="anonymous"></script>
          height: 1000px;""
          >
         <ul class=" list-group list-group-flush bg-secondary">
-            <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin">
+            <li class="list-group-item  bg-secondary">
+                <a href="<%= request.getContextPath()%>/admin">
                     <h4>Dashboard</h3>
-                </a></li>
-            <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin/category">
+                </a>
+            </li>
+            <li class="list-group-item  bg-secondary">
+                <a href="<%= request.getContextPath()%>/admin/category">
                     <h4>Category</h3>
-                </a></li>
-            <li class="list-group-item  bg-secondary"><a href="<%= request.getContextPath()%>/admin/user">
+                </a>
+            </li>
+            <li class="list-group-item  bg-secondary">
+                <a href="<%= request.getContextPath()%>/admin/user">
                     <h4>User</h3>
-                </a></li>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

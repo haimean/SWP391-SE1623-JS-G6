@@ -8,16 +8,16 @@ package Model;
  *
  * @author PiPi
  */
-public class Item {
+public class ItemCart {
 
     private Product product;
     private int quantity;
     private double price;
 
-    public Item() {
+    public ItemCart() {
     }
 
-    public Item(Product product, int quantity, double price) {
+    public ItemCart(Product product, int quantity, double price) {
         this.product = product;
         this.quantity = quantity;
         this.price = price;

@@ -26,34 +26,10 @@ enum Mode {
 }
 
 public class Buy extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
     }
 
     /**
@@ -85,7 +61,7 @@ public class Buy extends HttpServlet {
             DAOProduct dao = new DAOProduct();
             Product product = dao.getProductById(id);
             double price = product.getPrice();
-            Item item = new Item(product, num, price);
+            ItemCart item = new ItemCart(product, num, price);
             try {
                 cart.addItem(item);
             } catch (Exception e) {
@@ -101,7 +77,7 @@ public class Buy extends HttpServlet {
             } else {
                 DAOProduct dao = new DAOProduct();
                 Product product = dao.getProductById(id);
-                Item t = new Item(product, num, product.getPrice());
+                ItemCart t = new ItemCart(product, num, product.getPrice());
                 cart.addItem(t);
             }
         }
@@ -113,21 +89,10 @@ public class Buy extends HttpServlet {
             cart.removeAllItems();
         }
 
-        ArrayList<Item> list = cart.getItems();
+        ArrayList<ItemCart> list = cart.getItems();
         session.setAttribute("cart", cart);
         session.setAttribute("total", cart.getTotalMoney());
         session.setAttribute("size", list.size());
         request.getRequestDispatcher("/store/cart/index.jsp").forward(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

@@ -12,16 +12,16 @@ import java.util.ArrayList;
  */
 public class Cart {
 
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<ItemCart> items = new ArrayList<>();
 
     public Cart() {
     }
 
-    public Cart(ArrayList<Item> items) {
+    public Cart(ArrayList<ItemCart> items) {
         this.items = new ArrayList<>();
     }
 
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(ArrayList<ItemCart> items) {
         this.items = items;
     }
 
@@ -29,8 +29,8 @@ public class Cart {
         return getItemById(id).getQuantity();
     }
 
-    public Item getItemById(int id) {
-        for (Item i : items) {
+    public ItemCart getItemById(int id) {
+        for (ItemCart i : items) {
             if (i.getProduct().getId() == id) {
                 return i;
             }
@@ -38,9 +38,9 @@ public class Cart {
         return null;
     }
 
-    public void addItem(Item t) {
+    public void addItem(ItemCart t) {
         if (getItemById(t.getProduct().getId()) != null) {
-            Item i = getItemById(t.getProduct().getId());
+            ItemCart i = getItemById(t.getProduct().getId());
             i.setQuantity(i.getQuantity() + t.getQuantity());
         } else {
             items.add(t);
@@ -59,13 +59,13 @@ public class Cart {
 
     public double getTotalMoney() {
         double t = 0;
-        for (Item item : items) {
+        for (ItemCart item : items) {
             t += (item.getQuantity() * item.getProduct().getPrice());
         }
         return t;
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<ItemCart> getItems() {
         return items;
     }
 

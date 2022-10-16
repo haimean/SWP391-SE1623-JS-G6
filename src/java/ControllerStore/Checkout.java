@@ -97,15 +97,4 @@ public class Checkout extends HttpServlet {
             response.sendRedirect("store/Home.jsp");
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

@@ -5,7 +5,7 @@
 package DAO;
 
 import Model.Cart;
-import Model.Item;
+import Model.ItemCart;
 import Model.User;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -48,7 +48,7 @@ public class DAOCart extends DBContext.DBContext {
 
             if (rs.next()) {
                 int oid = rs.getInt(1);
-                for (Item item : cart.getItems()) {
+                for (ItemCart item : cart.getItems()) {
                     String query2 = "insert into OrderDetail values(?,?,?,?,?,?)";
                     PreparedStatement ps2 = connection.prepareStatement(query2);
                     ps2.setInt(1, oid);
@@ -61,7 +61,7 @@ public class DAOCart extends DBContext.DBContext {
 
             String query3 = "update Product set quantity = quantity - ? where id = ?";
             PreparedStatement ps3 = connection.prepareStatement(query3);
-            for (Item i : cart.getItems()) {
+            for (ItemCart i : cart.getItems()) {
                 ps3.setInt(1, i.getQuantity());
                 ps3.setInt(2, i.getProduct().getId());
                 ps3.executeUpdate();

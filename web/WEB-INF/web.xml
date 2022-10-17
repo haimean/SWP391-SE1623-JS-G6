@@ -64,6 +64,14 @@
         <servlet-name>Message</servlet-name>
         <servlet-class>ControllerStore.Message</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>ControllerStore.Profile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileUpdate</servlet-name>
+        <servlet-class>ControllerStore.ProfileUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>Message</servlet-name>
         <url-pattern>/message</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileUpdate</servlet-name>
+        <url-pattern>/profile/update</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,5 +1,5 @@
 <%@page import="Model.*"
-        import="Dal.*"
+        import="DAO.*"
         import="java.util.ArrayList"
         %>
 <!DOCTYPE html>
@@ -11,7 +11,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
 
 
-
+<style>  
+    a{
+        text-decoration: none;
+        color: black
+    }
+</style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
@@ -24,24 +29,8 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="<%= request.getContextPath()%>/about">About</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Category
-                    </a>
-                    <ul class="dropdown-menu" style="height: 13rem; overflow: auto;">
-                        <%
-                        ArrayList<Category> categories = new DAOCategory().getAllCategory();
-                          if(categories != null){
-                                               for(Category c : categories){
-                        %>
-                        <li><a class="dropdown-item" href="<%= request.getContextPath()%>/product?categoryId=<%=c.getId()%>"><%=c.getName()%></a></li>
-                            <%
-                                      }}
-                            %>
-                    </ul>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<%= request.getContextPath()%>/product">Shop</a>
+                    <a class="nav-link active" href="<%= request.getContextPath()%>/userProductList">Shop</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="<%= request.getContextPath()%>/blog">Blog</a>

@@ -1,9 +1,9 @@
 package Model;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 import java.sql.Date;
 
 /**
@@ -24,13 +24,12 @@ public class User {
 	public User() {
 	}
 
-	public User(int id, int role, String fullName, String email, String password, String phone, Date createdAt,
-			Date updatedAt, boolean status) {
+	public User(int id, int role, String fullName, String email, String phone, boolean status, Date createdAt,
+			Date updatedAt) {
 		this.id = id;
 		this.role = role;
 		this.fullName = fullName;
 		this.email = email;
-		this.password = password;
 		this.phone = phone;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -102,17 +101,18 @@ public class User {
 	}
 
 	public boolean isStatus() {
-        return status;
-    }<<<<<<<HEAD:src/java/model/User.java=======
+		return status;
+	}
 
 	public void setStatus(boolean status) {
-        this.status = status;
-    }
+		this.status = status;
+	}
 
 	@Override
-    public String toString() {
-        return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status=" + status + '}';
-    }
+	public String toString() {
+		return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password="
+				+ password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status=" + status
+				+ '}';
+	}
 
-	>>>>>>>dev:src/java/Model/User.java
 }

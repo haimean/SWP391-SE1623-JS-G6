@@ -1,22 +1,20 @@
-<%-- 
-    Document   : index
-    Created on : 18-09-2022, 23:04:55
-    Author     : haimi
---%>
+<%-- Document : index Created on : 18-09-2022, 23:04:55 Author : haimi --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<!DOCTYPE html>
+			<!DOCTYPE html>
 
 <%@include file="../layout/index.jsp"  %>
+
 <link href="<%=request.getContextPath()%>/admin/user/css/style.css" rel="stylesheet">
+
 <div class="container">
     <div class="table-responsive table-container mx-auto">
         <div class="shadow-sm p-3 mb-5 bg-white rounded px-5 py-5 d-flex flex-column align-items-center">
             <div class="w-75 pb-5">
                 <form action="user" method="post" class="d-flex flex-row">
-                    <input type="search" name="search" class="form-control" value="${value}"placeholder="Search"/>
+                    <input type="search" name="search" class="form-control" placeholder="Search"/>
                     <input type="hidden" name="mode" value="SEARCH"/>
                     <button class="btn-search px-3">Search</button>
                 </form>

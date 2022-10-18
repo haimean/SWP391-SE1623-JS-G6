@@ -65,7 +65,7 @@
                                 <%
                                 }else{
                                 %>
-                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/profile">Profile</a></li>    
+                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/profile?mail=${user.email}">Profile</a></li>    
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/message">Message</a></li>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout"">Logout</a></li>
                                 <%}%>       

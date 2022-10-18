@@ -4,51 +4,48 @@
     Author     : MrTuan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../store/layout/index.jsp" %>
 <div class="container-profile">
     <div class="side-nav-categories">
         <!--<form action="profile/update" method="POST">-->
-            <div class="div-option">
-                <!--<button class="button-update-profile" onclick="EditProfile(${profile.getId()})">Edit</button>-->
-                <button class="button-logout-update-profile" onclick="Logout(${profile.getId()})"><u>Log Out <ion-icon name="log-out-outline"></ion-icon></u></button>
-            </div>
-            <div class="div-image-profile">
-                <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
-            </div>
-            <div class="div-title">
-                <!--<h1 class="title">${profile.getFullname()}</h1>-->
-                <h1 class="title">Nguyen Ngoc Tuan</h1>
-            </div>
-            <div class="div-bio">
-                <!--<span>${profile.getBio()}</span>-->
-                <span>Khong co ap luc khong tao ra thanh cong!</span>
-            </div>
-            <div class="div-information">
-                <div class="div-info">
-                    <h4 class="title-infomation">
-                        <b>Thong tin ca nhan</b>
-                    </h4>
-                    <!--<button class="button-logout-update-profile" onclick="EditProfile(${profile.getId()})"><u>Edit</u></button>-->
-                    <button class="button-logout-update-profile" onclick="EditProfile()"><u>Edit</u></button>
-                </div><br>
-                <span><ion-icon name="person-circle-outline"></ion-icon> Full Name: <b>Nguyen Ngoc Tuan</b></span><br>
-                <span><ion-icon name="transgender"></ion-icon> Gender: <b>Nam</b></span><br>
-                <span><ion-icon name="call-outline"></ion-icon> Phone: <b>032xxxxxx</b></span><br>
-                <span><ion-icon name="mail-outline"></ion-icon> Email: <b>tnxxxxxxx@gmail.com</b></span><br>
-                <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <b>Cu Dinh-Viet Hung-Van Lam-Hung Yen</b></span><br>
-                <span><ion-icon name="business-outline"></ion-icon> City: <b>Hung Yen</b></span>
-            </div>
+        <div class="div-image-profile">
+            <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
+        </div>
+        <div class="div-title">
+            <h1 class="title">${userinf.getFullname()}</h1>
+        </div>
+        <div class="div-bio">
+            <span>${userinf.getBio()}</span>
+        </div>
+        <div class="div-information">
+            <div class="div-info">
+                <h4 class="title-infomation">
+                    <b>Information Profile</b>
+                </h4>
+                <button class="button-logout-update-profile" onclick="EditProfile(${userinf.getId()})"><u>Edit</u></button>
+            </div><br>
+            <span><ion-icon name="person-circle-outline"></ion-icon> Full Name: <b>${userinf.getFullname()}</b></span><br>
+            <span><ion-icon name="transgender"></ion-icon> Gender: <b>
+                    <c:if test="${userinf.isGender()==1}">
+                        Male
+                    </c:if>
+                    <c:if test="${userinf.isGender()==0}">
+                        Female
+                    </c:if>
+                </b></span><br>
+            <span><ion-icon name="call-outline"></ion-icon> Phone: <b>${userinf.getPhone()}</b></span><br>
+            <span><ion-icon name="mail-outline"></ion-icon> Email: <b>${userinf.getMail()}</b></span><br>
+            <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <b>${userinf.getAddress()}</b></span><br>
+            <span><ion-icon name="business-outline"></ion-icon> City: <b>${userinf.getCity()}</b></span>
+        </div>
         <!--</form>-->
     </div>
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script>
-    function EditProfile() {
-//        window.location.href = "/profile/update?id=" + id;
-        window.location.href = "<%= request.getContextPath()%>/profile/update";
-    }
-    function Logout(id) {
-        window.location.href = "logout?id=" + id;
+    function EditProfile(id) {
+        window.location.href = "<%= request.getContextPath()%>/profile/update?id=" + id;
     }
 </script>
 

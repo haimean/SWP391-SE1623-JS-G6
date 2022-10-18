@@ -4,6 +4,8 @@
  */
 package ControllerStore;
 
+import DAO.DAOProfile;
+import Model.UserInformation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -55,6 +57,10 @@ public class ProfileUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DAO.DAOProfile dbProfile=new DAOProfile();
+        String id=request.getParameter("id");
+        UserInformation userinf=dbProfile.getProfile(id);
+        request.setAttribute("userinf", userinf);
         request.getRequestDispatcher("profile_update.jsp").forward(request, response);
     }
 
@@ -69,7 +75,17 @@ public class ProfileUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+//        DAO.DAOProfile dbProfile=new DAOProfile();
+//        String id=request.getParameter("id");
+//        String fullname=request.getParameter("fullname");
+////        boolean sex=request.getParameter("sex");
+//        String mail=request.getParameter("mail");
+//        String phone=request.getParameter("phone");
+//        String address=request.getParameter("address");
+//        String city=request.getParameter("city");
+//        dbProfile.updateProfile(id,fullname,sex,mail,phone,address,city);
+//        response.sendRedirect(request.getContextPath() + "/profile");
     }
 
     /**

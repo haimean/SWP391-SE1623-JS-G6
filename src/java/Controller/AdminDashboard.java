@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ControllerAdmin;
+package Controller;
 
-import DAO.DAOCategory;
-import DAO.DAOUser;
-import Model.Category;
 import Model.User;
+import Model.Category;
+import Dao.CategoryDao;
+import Dao.UserDao;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -23,8 +23,8 @@ public class AdminDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Category> categories =  new DAOCategory().getCategories();       
-        ArrayList<User> users =  new DAOUser().getAllUsers();
+        ArrayList<Category> categories =  new CategoryDao().getCategories();       
+        ArrayList<User> users =  new UserDao().getAllUsers();
         request.setAttribute("categoriesCount", categories.size());    
         request.setAttribute("usersCount", users.size());
         System.out.println(users.size());

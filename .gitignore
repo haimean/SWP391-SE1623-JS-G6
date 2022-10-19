@@ -115,7 +115,6 @@ _book
 *.class
 
 # Package Files #
-*.jar
 *.war
 
 # gwt caches and compiled units #
@@ -157,7 +156,6 @@ www-test/
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
@@ -276,8 +274,6 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
-!/.mvn/wrapper/maven-wrapper.jar
 
 
 ### Mercurial files ###
@@ -619,5 +615,5 @@ bower_components/
 /build/
 /dist/
 
-/src/java/DBContext/
+/src/java/DBContext/DBContext.java/
 /SWP391-SE1623-JS-G6/nbproject/private/

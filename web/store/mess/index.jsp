@@ -10,9 +10,8 @@
                             method="get"
                             class="d-flex"
                             >
-                            <input type="hidden" name="id" value="${userIdReceiver}" />
                             <input
-                                name="mess"
+                                name="search"
                                 class="form-control me-2"
                                 type="text"
                                 placeholder="Name"
@@ -24,17 +23,17 @@
                         <ui class="contacts">
                             <!-- list -->
                             <%
-  ArrayList<Message> messages = (ArrayList<Message>)  request.getAttribute("messages");   
-  ArrayList<Message> messagesUser = (ArrayList<Message>)  request.getAttribute("messagesUser");  
-  if (messages != null) {
-      String userName;
-      User userReceiver;
-      for (Message m : messages) {
-          if (user.getId() == m.getUserReceiverId()) {
-              userReceiver = (User) new DAOUser().getUser(m.getUserSenderId());
-          } else {
-              userReceiver = (User) new DAOUser().getUser(m.getUserReceiverId());
-          }
+                                ArrayList<Message> messages = (ArrayList<Message>)  request.getAttribute("messages");   
+                                ArrayList<Message> messagesUser = (ArrayList<Message>)  request.getAttribute("messagesUser");  
+                                if (messages != null) {
+                                    String userName;
+                                    User userReceiver;
+                                    for (Message m : messages) {
+                                        if (user.getId() == m.getUserReceiverId()) {
+                                            userReceiver = (User) new DAOUser().getUser(m.getUserSenderId());
+                                        } else {
+                                            userReceiver = (User) new DAOUser().getUser(m.getUserReceiverId());
+                                        }
                             %>
                             <li>
                                 <div class="d-flex bd-highlight">
@@ -76,8 +75,8 @@
                     </div>
                     <div class="card-body msg_card_body">
                         <% 
-           for (Message m : messagesUser) {
-           if (user.getId() != m.getUserReceiverId()) {
+                            for (Message m : messagesUser) {
+                            if (user.getId() != m.getUserReceiverId()) {
                         %>
                         <div class="d-flex justify-content-end mb-4">
                             <div class="msg_cotainer_send">

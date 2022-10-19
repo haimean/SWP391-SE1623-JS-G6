@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package Dao;
 
+import DBContext.DBContext;
 import Model.Message;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author haimi
  */
-public class DAOMessage extends DBContext.DBContext {
+public class MessageDao extends DBContext {
 
     public ArrayList<Message> getMessageList(int id) {
         ArrayList<Message> messages = new ArrayList<>();
@@ -39,7 +40,7 @@ public class DAOMessage extends DBContext.DBContext {
                 listId.add(rs.getInt(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             PreparedStatement ps = connection.prepareStatement(sqlgetListIdSender);
@@ -51,7 +52,7 @@ public class DAOMessage extends DBContext.DBContext {
                 listId.add(rs.getInt(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         Set<Integer> set = new LinkedHashSet<>();
         set.addAll(listId);
@@ -71,7 +72,7 @@ public class DAOMessage extends DBContext.DBContext {
                             rs.getDate(6)));
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return messages;
@@ -94,7 +95,7 @@ public class DAOMessage extends DBContext.DBContext {
                         rs.getDate(6)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -114,15 +115,73 @@ public class DAOMessage extends DBContext.DBContext {
             ps.executeUpdate();
             System.out.println("ok");
         } catch (SQLException ex) {
-            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static void main(String[] args) {
-        ArrayList<Message> list = new DAOMessage().getMessageList(3);
+        ArrayList<Message> list = new MessageDao().getMessageList(3);
         for (Message message : list) {
             System.out.println(message.toString());
         }
 
+    }
+
+    public ArrayList<Message> getMessageList(int id, String search) {
+        ArrayList<Message> messages = new ArrayList<>();
+        ArrayList<Integer> listId = new ArrayList<>();
+        String sql = "select top 1 * from Message"
+                + " where( userSenderId = ?  and userReceiverId = ?) "
+                + " or ( userSenderId = ?  and userReceiverId = ? ) ORDER BY id  DESC";
+        String sqlgetListIdReceiver = "select DISTINCT   userReceiverId from Message where userSenderId = ? and Message.userReceiverId = UserInformation.userId and UserInformation.fullname LIKE  '%'+?+'%'";
+        String sqlgetListIdSender = "select DISTINCT   userSenderId from Message where userReceiverId = ? and Message.userSenderId = UserInformation.userId and UserInformation.fullname LIKE  '%'+?+'%'";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sqlgetListIdReceiver);
+            ps.setInt(1, id);
+            ps.setString(2, search);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getInt(1));
+                listId.add(rs.getInt(1));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            PreparedStatement ps = connection.prepareStatement(sqlgetListIdSender);
+            ps.setInt(1, id);
+            ps.setString(2, search);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getInt(1));
+
+                listId.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Set<Integer> set = new LinkedHashSet<>();
+        set.addAll(listId);
+        listId.clear();
+        listId.addAll(set);
+        for (Integer userId : listId) {
+            try {
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, userId);
+                ps.setInt(2, id);
+                ps.setInt(3, id);
+                ps.setInt(4, userId);
+
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    messages.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5),
+                            rs.getDate(6)));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return messages;
     }
 }

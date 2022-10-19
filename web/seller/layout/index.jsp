@@ -1,7 +1,4 @@
-<%@page import="Model.*"
-        import="DAO.*"    
-        import="java.util.ArrayList"
-        %>
+<%@page import="Entity.*" import="Dal.*" import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

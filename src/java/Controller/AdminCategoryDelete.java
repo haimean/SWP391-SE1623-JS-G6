@@ -1,31 +1,22 @@
-package ControllerAdmin;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package Controller;
 
-import DAO.DAOCategory;
-import DAO.DAOUser;
-import Model.User;
+import Dao.CategoryDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author haimi
  */
-enum Mode {
-	SEARCH,
-	BAN,
-	ROLE
-}
-
-public class AdminUserList extends HttpServlet {
+public class AdminCategoryDelete extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +29,18 @@ public class AdminUserList extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String modeParam = request.getParameter("mode");
-		DAOUser db = new DAOUser();
-		ArrayList<User> list;
-		if (modeParam == null) {
-			list = db.getAllUsers();
-			request.setAttribute("listU", list);
-			request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
-		}
-		if (modeParam.equals(Mode.BAN.toString())) {
-			String idParam = request.getParameter("id");
-			String statusParam = request.getParameter("status");
-			int id = Integer.parseInt(idParam);
-			boolean status = Boolean.parseBoolean(statusParam);
-			db.updateUserStatusByID(id, !status);
-			list = db.getAllUsers();
-			request.setAttribute("listU", list);
-			request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+		response.setContentType("text/html;charset=UTF-8");
+		try (PrintWriter out = response.getWriter()) {
+			/* TODO output your page here. You may use following sample code. */
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Servlet AdminCategoryDelete</title>");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h1>Servlet AdminCategoryDelete at " + request.getContextPath() + "</h1>");
+			out.println("</body>");
+			out.println("</html>");
 		}
 	}
 
@@ -71,7 +57,9 @@ public class AdminUserList extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
+		int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+		new CategoryDao().deleteCategory(id);
+		response.sendRedirect(request.getContextPath() + "/admin/category");
 	}
 
 	/**
@@ -85,25 +73,17 @@ public class AdminUserList extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<User> list;
-		DAOUser db = new DAOUser();
-		String modeParam = request.getParameter("mode");
-
-		if (modeParam.equals(Mode.ROLE.toString())) {
-			String idParam = request.getParameter("id");
-			String roleParam = request.getParameter("role");
-			int id = Integer.parseInt(idParam);
-			int role = Integer.parseInt(roleParam);
-			db.updateUserRoleByID(id, role);
-			list = db.getAllUsers();
-			request.setAttribute("listU", list);
-			request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
-		}
-		if ((modeParam.equals(Mode.SEARCH.toString()))) {
-			String searchValue = request.getParameter("search");
-			list = db.searchUser(searchValue);
-			request.setAttribute("listU", list);
-			request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
-		}
+		processRequest(request, response);
 	}
+
+	/**
+	 * Returns a short description of the servlet.
+	 *
+	 * @return a String containing servlet description
+	 */
+	@Override
+	public String getServletInfo() {
+		return "Short description";
+	}// </editor-fold>
+
 }

@@ -15,14 +15,14 @@ import java.sql.SQLException;
  */
 public class DAOProfile extends DBContext.DBContext {
 
-    public UserInformation getProfile(String mail) {
+    public UserInformation getProfileById(String id) {
         UserInformation listprofile = new UserInformation();
         try {
             String sql = "select u.id,u.email,uf.fullname,uf.gender,uf.bio,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
                     + "on u.id=uf.id\n"
-                    + "where u.email=?";
+                    + "where u.id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, mail);
+            stm.setString(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 listprofile.setId(rs.getInt("id"));
@@ -40,27 +40,26 @@ public class DAOProfile extends DBContext.DBContext {
         return listprofile;
     }
 
-//    public void updateProfile(String id, String fullname, int sex, String phone, String mail, String address, String city) {
-//        try {
-//            String sql = "update UserInformation\n"
-//                    + "set fullname=?,sex=?,phone=?,mail=?,[address]=?,city=?\n"
-//                    + "where userId=?";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setString(7, id);
-//            stm.setString(1, fullname);
-//            stm.setBoolean(2, sex);
-//            stm.setString(3, phone);
-//            stm.setString(4, mail);
-//            stm.setString(5, address);
-//            stm.setString(6, city);
-//            stm.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//    }
+    public void updateProfile(String id, String fullname, String gender, String bio, String address, String city) {
+        try {
+            String sql = "update UserInformation\n"
+                    + "set fullname=?,gender=?,bio=?,[address]=?,city=?\n"
+                    + "where id=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(6, id);
+            stm.setString(1, fullname);
+            stm.setString(2, gender);
+            stm.setString(3, bio);
+            stm.setString(4, address);
+            stm.setString(5, city);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public static void main(String[] args) {
         DAOProfile db = new DAOProfile();
-        System.out.println(db.getProfile("user2@gmail.com").isGender());
+        System.out.println(db.getProfileById("1").isGender());
     }
 }

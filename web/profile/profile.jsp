@@ -8,7 +8,6 @@
 <%@include file="../store/layout/index.jsp" %>
 <div class="container-profile">
     <div class="side-nav-categories">
-        <!--<form action="profile/update" method="POST">-->
         <div class="div-image-profile">
             <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
         </div>
@@ -39,7 +38,6 @@
             <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <b>${userinf.getAddress()}</b></span><br>
             <span><ion-icon name="business-outline"></ion-icon> City: <b>${userinf.getCity()}</b></span>
         </div>
-        <!--</form>-->
     </div>
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

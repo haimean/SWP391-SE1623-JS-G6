@@ -11,48 +11,100 @@
     />
 <div class="container-profile">
     <div class="side-nav-categories">
-        <form action="update" method="get">
-        <div class="div-option">
-            <button class="button-logout-update-profile"><u>Save</u></button>
-        </div>
-        <div class="div-image-profile">
-            <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
-        </div>
-        <div class="div-title">
-            <h1 class="title">${userinf.getFullname()}</h1>
-        </div>
-        <div class="div-bio">
-            <span>${userinf.getBio()}</span>
-        </div>
-        <div class="div-information">
-            <div class="div-info">
-                <h4 class="title-infomation">
-                    <b>Update Information Profile</b>
-                </h4>
-            </div><br>
-            <span><ion-icon name="person-circle-outline"></ion-icon> Full Name:  <input type="search" id="search-input" placeholder="ex:Nguyen Ngoc Tuan"/></span><br>
-            <span><ion-icon name="transgender"></ion-icon> Gender:<br>
-                <input type="radio" id="sex" name="radio-item" value="male">Male<br>
-                <input type="radio" id="sex" name="radio-item" value="female">Female<br>
-                <input type="radio" id="sex" name="radio-item" value="other">Other...
-            </span><br>
-            <span><ion-icon name="call-outline"></ion-icon> Phone: <input type="search" id="search-input" placeholder="ex:+8432xxxxxx,032xxxxxx,.."/></span><br>
-            <span><ion-icon name="mail-outline"></ion-icon> Email: <input type="search" id="search-input" placeholder="ex:tnxxxxxxxx@gmail.com"/></span><br>
-            <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <input type="search" id="search-input" placeholder="ex:Cu Dinh-Viet Hung,..."/></span><br>
-            <span><ion-icon name="business-outline"></ion-icon> City: <input type="search" id="search-input" placeholder="ex:Hung Yen"/></span>
-        </div>
+        <form id="form" action="update?id=${userinf.getId()}" method="POST">
+            <div class="div-option">
+                <button type="submit" class="button-logout-update-profile"><u>Save</u></button>
+            </div>
+            <div class="div-image-profile">
+                <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
+            </div>
+            <div class="div-title">
+                <h1 class="title">${userinf.getFullname()}</h1>
+            </div>
+            <div class="div-bio">
+                <span>${userinf.getBio()}</span>
+            </div>
+            <div class="div-information">
+                <div class="div-info">
+                    <h4 class="title-infomation">
+                        <b>Update Information Profile</b>
+                    </h4>
+                </div><br>
+                <span><ion-icon name="person-circle-outline"></ion-icon> Full Name:  <input value="${userinf.getFullname()}" onkeydown="ValidateFullname()" type="search" id="fullname-input" placeholder="ex:Nguyen Ngoc Tuan" name="fullname"/></span><span id="text"></span><br>
+                
+                <span><ion-icon name="transgender"></ion-icon> Gender:<br>
+                    <input type="radio" id="sex" name="gender" value="1" ${userinf.isGender()==1?"checked":""}>Male<br>
+                    <input type="radio" id="sex" name="gender" value="0" ${userinf.isGender()==0?"checked":""}>Female
+                </span><br>
+                <span><ion-icon name="hand-right-outline"></ion-icon>Bio: <input value="${userinf.getBio()}" onkeydown="ValidateData()" type="text" id="data-input" placeholder="ex:about me,..." name="bio"/></span><span id="text-1"></span><br>
+                <span><ion-icon name="call-outline"></ion-icon> Phone: ${userinf.getPhone()}</span><br>
+                <span><ion-icon name="mail-outline"></ion-icon> Email: ${userinf.getMail()}</span><br>
+                <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <input value="${userinf.getAddress()}" onkeydown="ValidateData()" type="search" id="data-input" placeholder="ex:Cu Dinh-Viet Hung,..." name="address"/></span><span id="text-1"></span><br>
+                <span><ion-icon name="business-outline"></ion-icon> City: <input value="${userinf.getCity()}" onkeydown="ValidateData()" type="text" id="data-input" placeholder="ex:Hung Yen" name="city"/></span><span id="text-1"></span>
+            </div>
         </form>
     </div>
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
-<!--<script>
-    function UpdateProfile(id){
-        window.location.href = "<%= request.getContextPath()%>/profile/update?id="+id;
+<script type="text/javascript">
+    function ValidateFullname(){
+        var form=document.getElementById("form");
+        var fullname=document.getElementById("fullname-input").value;
+        var data=document.getElementById("data-input");
+        var text=document.getElementById("text");
+//        var pattern=[a-zA-Z ];
+        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+        
+        if(fullname.match(pattern)){
+            form.classList.add("valid");
+            form.classList.remove("invalid");
+            text.innerHTML="Fullname valid!";
+            text.style.color="#00ff00";
+        }else{
+            form.classList.remove("valid");
+            form.classList.add("valid");
+            text.innerHTML="Please enter fullname!";
+            text.style.color="#ff0000";
+        }
+        
+        if(fullname === ""){
+            form.classList.remove("valid");
+            form.classList.remove("invalid");
+            text.innerHTML="";
+            text.style.color="#00ff00";
+        }
     }
-</script>-->
-<style>
+    function ValidateData(){
+        var form=document.getElementById("form");
+        var fullname=document.getElementById("fullname-input").value;
+        var data=document.getElementById("data-input");
+        var text=document.getElementById("text-1");
+//        var pattern=[a-zA-Z ];
+        var pattern = /^([^0-9]*)$/;
+        
+        if(fullname.match(pattern)){
+            form.classList.add("valid");
+            form.classList.remove("invalid");
+            text.innerHTML="Input Valid!";
+            text.style.color="#00ff00";
+        }else{
+            form.classList.remove("valid");
+            form.classList.add("valid");
+            text.innerHTML="Input Invalid!Please enter again!";
+            text.style.color="#ff0000";
+        }
+        
+        if(fullname === ""){
+            form.classList.remove("valid");
+            form.classList.remove("invalid");
+            text.innerHTML="";
+            text.style.color="#00ff00";
+        }
+    }
+</script>
 
+<style>
 
     .side-nav-categories {
         border-radius: 30px;
@@ -104,6 +156,7 @@
         color: #6759ff;
         cursor: pointer;
         height: 35px;
+        width: 60px;
     }
     .img-profile{
         width: 200px;

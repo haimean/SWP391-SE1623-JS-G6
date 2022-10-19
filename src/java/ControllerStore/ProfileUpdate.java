@@ -57,9 +57,9 @@ public class ProfileUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAO.DAOProfile dbProfile=new DAOProfile();
         String id=request.getParameter("id");
-        UserInformation userinf=dbProfile.getProfile(id);
+        DAO.DAOProfile dbProfile=new DAOProfile();
+        UserInformation userinf=dbProfile.getProfileById(id);
         request.setAttribute("userinf", userinf);
         request.getRequestDispatcher("profile_update.jsp").forward(request, response);
     }
@@ -76,16 +76,15 @@ public class ProfileUpdate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-//        DAO.DAOProfile dbProfile=new DAOProfile();
-//        String id=request.getParameter("id");
-//        String fullname=request.getParameter("fullname");
-////        boolean sex=request.getParameter("sex");
-//        String mail=request.getParameter("mail");
-//        String phone=request.getParameter("phone");
-//        String address=request.getParameter("address");
-//        String city=request.getParameter("city");
-//        dbProfile.updateProfile(id,fullname,sex,mail,phone,address,city);
-//        response.sendRedirect(request.getContextPath() + "/profile");
+        DAO.DAOProfile dbProfile=new DAOProfile();
+        String id=request.getParameter("id");
+        String fullname=request.getParameter("fullname");
+        String gender=request.getParameter("gender");
+        String bio=request.getParameter("bio");
+        String address=request.getParameter("address");
+        String city=request.getParameter("city");
+        dbProfile.updateProfile(id,fullname,gender,bio,address,city);
+        response.sendRedirect(request.getContextPath() + "/profile?id="+id);
     }
 
     /**

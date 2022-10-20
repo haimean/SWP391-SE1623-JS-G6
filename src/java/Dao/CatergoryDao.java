@@ -4,15 +4,14 @@
  */
 package Dao;
 
-import Model.Message;
-import java.util.ArrayList;
+import Model.Category;
+import java.util.List;
 
 /**
  *
  * @author haimi
  */
-public interface MessageDao extends BaseDAO<Message> {
-ArrayList<Message> getAll(int id);
-ArrayList<Message> get(int userid, int userReceiverId);
-ArrayList<Message> getAll(int id, String search);
+public interface CatergoryDao extends BaseDAO<Category> {
+
+    List<Category> search(String name);
 }

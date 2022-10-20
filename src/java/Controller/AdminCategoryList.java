@@ -5,13 +5,14 @@ package Controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 import Model.Category;
-import Dao.CategoryDao;
+import Dao.Impl.CategoryDaoImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -32,11 +33,12 @@ public class AdminCategoryList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String search = request.getParameter("search");
-        ArrayList<Category> categories = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
+        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         if (search != null) {
-            categories = new CategoryDao().searchName(search);
+            categories = categoryDaoImpl.search(search);
         } else {
-            categories = new CategoryDao().getCategories();
+            categories = categoryDaoImpl.getAll();
         }
         request.setAttribute("categories", categories);
         request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);

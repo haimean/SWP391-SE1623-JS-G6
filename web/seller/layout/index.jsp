@@ -78,7 +78,7 @@
                 <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller"> <h4>Dashboard</h4></a></li>
                 <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/product"> <h4>Product</h4></a></li>
                 <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/order"> <h4>Order</h4></a></li>  
-                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/message"> <h4>Message<span class="badge bg-light text-body">2</span></h4></a></li>
+                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/message"> <h4>Message<span class="badge bg-light text-body">2</span></h4></a></li>
             </ul>
         </div>
     </div>

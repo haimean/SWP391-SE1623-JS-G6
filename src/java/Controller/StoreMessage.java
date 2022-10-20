@@ -4,16 +4,17 @@
  */
 package Controller;
 
+import Dao.Impl.MessageDaoImpl;
 import Model.Message;
 import Model.User;
-import Dao.MessageDao;
-import Dao.UserDao;
+import Dao.Impl.UserDaoImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,9 +43,9 @@ public class StoreMessage extends HttpServlet {
         String search = request.getParameter("search");
         ArrayList<Message> messages = new ArrayList<>();
         if (search != null) {
-            messages = new MessageDao().getMessageList(user.getId(), search);
+            messages = new MessageDaoImpl().getAll(user.getId(), search);
         } else {
-            messages = new MessageDao().getMessageList(user.getId());
+            messages = new MessageDaoImpl().getAll(user.getId());
         }
         int userPnId = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         if (userPnId == 0) {
@@ -54,11 +55,11 @@ public class StoreMessage extends HttpServlet {
                 userPnId = messages.get(0).getUserReceiverId();
             }
         }
-        ArrayList<Message> messagesUser = new MessageDao().getMessage(user.getId(), userPnId);
+        ArrayList<Message> messagesUser = new MessageDaoImpl().get(user.getId(), userPnId);
         if (user.getId() == messagesUser.get(0).getUserReceiverId()) {
-            userReceiver = new UserDao().getUser(messagesUser.get(0).getUserSenderId());
+            userReceiver = new UserDaoImpl().get(messagesUser.get(0).getUserSenderId());
         } else {
-            userReceiver = new UserDao().getUser(messagesUser.get(0).getUserReceiverId());
+            userReceiver = new UserDaoImpl().get(messagesUser.get(0).getUserReceiverId());
         }
         request.setAttribute("messages", messages);
         request.setAttribute("messagesUser", messagesUser);
@@ -83,19 +84,18 @@ public class StoreMessage extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        User userReceiver;
+       User userReceiver;
         int userIdReceiver = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         String message = request.getParameter("mess").trim();
         if (userIdReceiver != 0 && message != null) {
-            new MessageDao().insertMessage(user.getId(), userIdReceiver, message);
+            new MessageDaoImpl().insert(new Message(user.getId(), userIdReceiver, message));
         }
-
-        ArrayList<Message> messages = new MessageDao().getMessageList(user.getId());
-        ArrayList<Message> messagesUser = new MessageDao().getMessage(user.getId(), userIdReceiver);
+        List<Message> messages = new MessageDaoImpl().getAll(user.getId());
+        List<Message> messagesUser = new MessageDaoImpl().get(user.getId(), userIdReceiver);
         if (user.getId() == messagesUser.get(0).getUserReceiverId()) {
-            userReceiver = new UserDao().getUser(messagesUser.get(0).getUserSenderId());
+            userReceiver = new UserDaoImpl().get(messagesUser.get(0).getUserSenderId());
         } else {
-            userReceiver = new UserDao().getUser(messagesUser.get(0).getUserReceiverId());
+            userReceiver = new UserDaoImpl().get(messagesUser.get(0).getUserReceiverId());
         }
         request.setAttribute("messages", messages);
         request.setAttribute("messagesUser", messagesUser);

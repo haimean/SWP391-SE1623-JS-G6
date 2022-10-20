@@ -37,10 +37,6 @@
         <servlet-class>Controller.SellerDashbroad</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SellerMess</servlet-name>
-        <servlet-class>Controller.SellerMess</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SellerProductCreate</servlet-name>
         <servlet-class>Controller.SellerProductCreate</servlet-class>
     </servlet>
@@ -107,10 +103,6 @@
     <servlet-mapping>
         <servlet-name>SellerDashbroad</servlet-name>
         <url-pattern>/seller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SellerMess</servlet-name>
-        <url-pattern>/seller/message</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SellerProductCreate</servlet-name>

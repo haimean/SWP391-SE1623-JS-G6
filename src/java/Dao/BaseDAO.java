@@ -4,16 +4,22 @@
  */
 package Dao;
 
-import Model.Cart;
-import Model.User;
+import java.util.List;
 
 /**
  *
- * @author haimi
+ * @author Admin
  */
-public interface CartDao extends BaseDAO<Cart> {
+public interface BaseDAO<T> {
 
-    String getStatus();
+    T get(int id);
 
-    Boolean addOrder(User user, Cart cart);
+    List<T> getAll();
+
+    boolean insert(T t);
+
+    boolean update(T t);
+
+    boolean delete(int id);
+
 }

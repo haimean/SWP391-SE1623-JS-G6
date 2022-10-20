@@ -7,7 +7,7 @@ package Controller;
 import Model.ItemCart;
 import Model.Product;
 import Model.Cart;
-import Dao.ProductDao;
+import Dao.Impl.ProductDaoImpl;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +28,7 @@ enum Type {
 }
 
 public class StoreBuy extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,10 +59,10 @@ public class StoreBuy extends HttpServlet {
         String mode = request.getParameter("mode");
 
         if (mode.equals(Type.ADD.toString())) {
-            int num = Integer.parseInt(request.getParameter("num"));
-            String id = request.getParameter("id");
-            ProductDao dao = new ProductDao();
-            Product product = dao.getProductById(id);
+            int num = request.getParameter("num") != null ? Integer.parseInt(request.getParameter("num")) : 0;
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+            ProductDaoImpl dao = new ProductDaoImpl();
+            Product product = dao.get(id);
             double price = product.getPrice();
             ItemCart item = new ItemCart(product, num, price);
             try {
@@ -71,14 +72,14 @@ public class StoreBuy extends HttpServlet {
             }
         }
         if (mode.equals(Type.CHANGE_QUANTITY.toString())) {
-            int num = Integer.parseInt(request.getParameter("num"));
-            String id = request.getParameter("id");
+            int num = request.getParameter("num") != null ? Integer.parseInt(request.getParameter("num")) : 0;
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
 
-            if ((num == -1) && (cart.getQuantityById(Integer.parseInt(id)) <= 1)) {
-                cart.removeItem(Integer.parseInt(id));
+            if ((num == -1) && (cart.getQuantityById(id) <= 1)) {
+                cart.removeItem(id);
             } else {
-                ProductDao dao = new ProductDao();
-                Product product = dao.getProductById(id);
+                ProductDaoImpl dao = new ProductDaoImpl();
+                Product product = dao.get(id);
                 ItemCart t = new ItemCart(product, num, product.getPrice());
                 cart.addItem(t);
             }
@@ -90,7 +91,6 @@ public class StoreBuy extends HttpServlet {
         if (mode.equals(Type.ALL_DELETE.toString())) {
             cart.removeAllItems();
         }
-
         ArrayList<ItemCart> list = cart.getItems();
         session.setAttribute("cart", cart);
         session.setAttribute("total", cart.getTotalMoney());

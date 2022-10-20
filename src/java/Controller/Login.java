@@ -5,7 +5,7 @@
 package Controller;
 
 import Model.User;
-import Dao.UserDao;
+import Dao.Impl.UserDaoImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -51,10 +51,10 @@ public class Login extends HttpServlet {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
-            UserDao db = new UserDao();
+            UserDaoImpl db = new UserDaoImpl();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            User u = new UserDao().login(email, password);
+            User u = new UserDaoImpl().login(email, password);
             if (u == null) {
                 String noti = "Incorrect user name or password,please try again";
                 request.setAttribute("noti", noti);

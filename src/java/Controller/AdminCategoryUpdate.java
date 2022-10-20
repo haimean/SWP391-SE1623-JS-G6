@@ -4,8 +4,8 @@
  */
 package Controller;
 
+import Dao.Impl.CategoryDaoImpl;
 import Model.Category;
-import Dao.CategoryDao;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -30,9 +30,9 @@ public class AdminCategoryUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDao db = new CategoryDao();
+        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-        Category category = db.getCategory(id);
+        Category category = categoryDaoImpl.get(id);
         request.setAttribute("category", category);
         request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
     }
@@ -48,10 +48,10 @@ public class AdminCategoryUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDao db = new CategoryDao();
-        String id = request.getParameter("id");
+        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
+        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         String name = request.getParameter("name");
-        db.updateCategory(id, name);
+        categoryDaoImpl.update(new Category(id, name));
         response.sendRedirect(request.getContextPath() + "/admin/category");
     }
 }

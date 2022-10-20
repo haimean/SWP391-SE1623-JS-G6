@@ -6,10 +6,9 @@ package Controller;
 
 import Model.Product;
 import Model.Category;
-import Dao.CategoryDao;
-import Dao.ProductDao;
+import Dao.Impl.CategoryDaoImpl;
+import Dao.Impl.ProductDaoImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,48 +21,22 @@ import java.util.List;
  */
 public class SellerProductUpdate extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request  servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Productlist_GetInforProduct</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Productlist_GetInforProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
     // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("pid");
-        Product p = new ProductDao().getProductById(id);
-        List<Category> listc = new CategoryDao().getCategories();
+        int id = request.getParameter("pid") != null ? Integer.parseInt(request.getParameter("pid")) : 0;
+        Product p = new ProductDaoImpl().get(id);
+        List<Category> listc = new CategoryDaoImpl().getAll();
         request.setAttribute("detail", p);
         request.setAttribute("listc", listc);
         request.getRequestDispatcher("productDetail.jsp").forward(request, response);
@@ -72,38 +45,26 @@ public class SellerProductUpdate extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         String name = request.getParameter("name");
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         String origin = request.getParameter("origin");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         double price = Double.parseDouble(request.getParameter("price"));
         int viewNumber = Integer.parseInt(request.getParameter("viewnumber"));
-        String create = request.getParameter("create");
-        String update = request.getParameter("update");
         String description = request.getParameter("description");
-        ProductDao dao = new ProductDao();
-        dao.updateProductById(id, categoryId, name, description, origin, quantity, price, true, viewNumber, create,
-                update);
+        ProductDaoImpl dao = new ProductDaoImpl();
+        Product procudt = new Product(id, categoryId, name, description, origin, quantity, price, true, viewNumber);
+        dao.update(procudt);
         response.sendRedirect(request.getContextPath() + "/seller/product");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

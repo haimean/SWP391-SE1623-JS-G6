@@ -5,7 +5,7 @@
 package Controller;
 
 import Model.Product;
-import Dao.ProductDao;
+import Dao.Impl.ProductDaoImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -20,29 +20,27 @@ import java.util.ArrayList;
  */
 public class SellerProductList extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String txtSearch = request.getParameter("txt");
-        ProductDao dao = new ProductDao();
+        ProductDaoImpl dao = new ProductDaoImpl();
         List<Product> products = new ArrayList<Product>();
         if (txtSearch != null) {
             products = dao.searchByName(txtSearch);
         } else {
-            products = new ProductDao().getProduct();
+            products = new ProductDaoImpl().getAll();
         }
         request.setAttribute("products", products);
         request.getRequestDispatcher("product/productList.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 }

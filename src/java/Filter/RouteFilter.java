@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpServletResponseWrapper;
  *
  * @author haimi
  */
-public class NewFilter implements Filter {
+public class RouteFilter implements Filter {
     
     private static final boolean debug = false;
 
@@ -37,7 +37,7 @@ public class NewFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public NewFilter() {
+    public RouteFilter() {
     }    
     
     private void doBeforeProcessing(RequestWrapper request, ResponseWrapper response)

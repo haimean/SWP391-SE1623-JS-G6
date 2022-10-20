@@ -4,20 +4,19 @@
  */
 package Controller;
 
-import Dao.Impl.CategoryDaoImpl;
-import Model.Category;
+import Dao.Impl.UserInformationDaoImpl;
+import Model.UserInformation;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
- * @author haimi
+ * @author MrTuan
  */
-public class AdminCategoryUpdate extends HttpServlet {
+public class ProfileUserUpdate extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -31,11 +30,12 @@ public class AdminCategoryUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
-        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-        Category category = categoryDaoImpl.get(id);
-        request.setAttribute("category", category);
-        request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
+        UserInformation userinf = userInformationDaoImpl.get(id);
+        request.setAttribute("userinf", userinf);
+        request.getRequestDispatcher("/store/profile/ProfileUpdate.jsp").forward(request, response);
+
     }
 
     /**
@@ -49,13 +49,18 @@ public class AdminCategoryUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
-        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-        String name = request.getParameter("name");
-        boolean status= categoryDaoImpl.update(new Category(id, name));
-        ArrayList<Category> categories = categoryDaoImpl.getAll();
+        UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
+        int id = Integer.parseInt(request.getParameter("id"));
+        String fullname = request.getParameter("fullname").trim();
+        String gender = request.getParameter("gender");
+        String bio = request.getParameter("bio").trim();
+        String address = request.getParameter("address").trim();
+        String city = request.getParameter("city").trim();
+        boolean status = userInformationDaoImpl.updateProfile(id, fullname, gender, bio, address, city);
+        UserInformation userInf = userInformationDaoImpl.get(id);
         request.setAttribute("status", status);
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+        request.setAttribute("userinf", userInf);
+        request.getRequestDispatcher("/store/profile/Profile.jsp").forward(request, response);
     }
+
 }

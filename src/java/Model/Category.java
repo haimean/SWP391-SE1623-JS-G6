@@ -18,9 +18,8 @@ public class Category {
     }
 
     public Category(String new_category) {
-        this.name = name;
+        this.name = new_category;
     }
-
     public int getId() {
         return id;
     }

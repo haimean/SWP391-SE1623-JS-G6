@@ -4,23 +4,21 @@
  */
 package Controller;
 
-import Dao.Impl.CategoryDaoImpl;
-import Model.Category;
+import Dao.Impl.UserInformationDaoImpl;
+import Model.UserInformation;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
- * @author haimi
+ * @author MrTuan
  */
-public class AdminCategoryDelete extends HttpServlet {
+public class ProfileUserDisplay extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
-    // + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -32,14 +30,12 @@ public class AdminCategoryDelete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
-        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-        boolean status = categoryDaoImpl.delete(id);
-        ArrayList<Category> categories = categoryDaoImpl.getAll();
-        request.setAttribute("status", status);
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("categoryList.jsp").forward(request, response);
-
+        UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
+        int id=Integer.parseInt(request.getParameter("id"));
+        UserInformation userInf=userInformationDaoImpl.get(id);
+        request.setAttribute("userinf", userInf);
+        request.getRequestDispatcher("/store/profile/Profile.jsp").forward(request, response);
+        
     }
 
 }

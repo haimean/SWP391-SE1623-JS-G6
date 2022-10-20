@@ -1,4 +1,4 @@
-<%@page import="Entity.*" import="Dal.*" import="java.util.ArrayList" %>
+<%@page import="Model.*" import="Dao.*" import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +84,7 @@
                                 <%
                                 }else{
                                 %>
-                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/profile">Profile</a></li>    
+                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/profile?id=${user.id}">Profile</a></li>    
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/message">Message</a></li>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout"">Logout</a></li>
                                 <%}%>       

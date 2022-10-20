@@ -1,9 +1,5 @@
 package Model;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ 
 /**
  *
  * @author MrTuan
@@ -17,10 +13,25 @@ public class Product {
     private boolean status;
     private int viewNumber;
     private String Create_at, Update_at;
-
+    private String proImg;
     public Product() {
     }
 
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String Create_at, String Update_at, String proImg) {
+        this.id = id;
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+        this.original = original;
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+        this.viewNumber = viewNumber;
+        this.Create_at = Create_at;
+        this.Update_at = Update_at;
+        this.proImg = proImg;
+    }
+    
     public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String Create_at, String Update_at) {
         this.id = id;
         this.categoryID = categoryID;
@@ -33,6 +44,21 @@ public class Product {
         this.viewNumber = viewNumber;
         this.Create_at = Create_at;
         this.Update_at = Update_at;
+        
+    }
+    
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber) {
+        this.id = id;
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+        this.original = original;
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+        this.viewNumber = viewNumber;
+        
+        
     }
 
     public int getId() {
@@ -123,8 +149,20 @@ public class Product {
         this.Update_at = Update_at;
     }
 
+    public String getproImg() {
+        return proImg;
+    }
+
+    public void setproImg(String proImg) {
+        this.proImg = proImg;
+    }
+    
+
+   
+
     @Override
     public String toString() {
-        return "DAO{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", Create_at=" + Create_at + ", Update_at=" + Update_at + '}';
+        return "DAO{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", Create_at=" + Create_at + ", Update_at=" + Update_at + ", proImg=" + proImg + '}';
     }
+   
 }

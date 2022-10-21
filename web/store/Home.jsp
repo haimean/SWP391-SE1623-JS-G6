@@ -3,21 +3,12 @@
     Created on : Oct 12, 2022, 5:53:01 AM
     Author     : MrTuan
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="Model.*" import="Dao.*" import="Dao.Impl.*" import="java.util.ArrayList" %>
 <%@include file="../store/layout/index.jsp" %>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="grid-category">
-    <%
-        CategoryDaoImpl categoryDaoImpl= new CategoryDaoImpl();
-    ArrayList<Category> categories = categoryDaoImpl.getAll();
-      if(categories != null){
-                           for(Category c : categories){
-    %>
-    <button class= "grid-item-button-category" onclick="FilterCategory(<=%c.getId()%>)"><%=c.getName()%></button>
-    <%
-              }}
-    %>
+    <c:forEach items="${requestScope.categories}" var="c">
+        <button class= "grid-item-button-category" onclick="FilterCategory(${c.getId()})">${c.getName()}</button>
+    </c:forEach>
 </div>
 
 <div class= "grid-container">

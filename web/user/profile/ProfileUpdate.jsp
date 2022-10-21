@@ -5,8 +5,7 @@
 --%>
 
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="../layout/index.jsp" %>
+<%@include file="../../store/layout/index.jsp" %>
 <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
     rel="stylesheet"
@@ -80,7 +79,6 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("bio").value;
         var text = document.getElementById("text-bio");
-//        var pattern=[a-zA-Z ];
         var pattern = /^([^0-9]*)$/;
 
         if (fullname.match(pattern)) {
@@ -107,7 +105,6 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("address").value;
         var text = document.getElementById("text-address");
-//        var pattern=[a-zA-Z ];
         var pattern = /^([^0-9]*)$/;
 
         if (fullname.match(pattern)) {
@@ -134,7 +131,6 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("city").value;
         var text = document.getElementById("text-city");
-//        var pattern=[a-zA-Z ];
         var pattern = /^([^0-9]*)$/;
 
         if (fullname.match(pattern)) {

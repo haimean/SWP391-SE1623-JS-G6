@@ -34,7 +34,7 @@ public class ProfileUserUpdate extends HttpServlet {
         UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
         UserInformation userinf = userInformationDaoImpl.get(id);
         request.setAttribute("userinf", userinf);
-        request.getRequestDispatcher("/store/profile/ProfileUpdate.jsp").forward(request, response);
+        request.getRequestDispatcher("/user/profile/ProfileUpdate.jsp").forward(request, response);
 
     }
 
@@ -60,7 +60,7 @@ public class ProfileUserUpdate extends HttpServlet {
         UserInformation userInf = userInformationDaoImpl.get(id);
         request.setAttribute("status", status);
         request.setAttribute("userinf", userInf);
-        request.getRequestDispatcher("/store/profile/Profile.jsp").forward(request, response);
+        request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
     }
 
 }

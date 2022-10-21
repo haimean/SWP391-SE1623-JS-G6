@@ -5,8 +5,7 @@
 --%>
 
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="../layout/index.jsp" %>
+<%@include file="../../store/layout/index.jsp" %>
 <div class="container-profile">
     <div class="side-nav-categories">
         <div class="div-image-profile">

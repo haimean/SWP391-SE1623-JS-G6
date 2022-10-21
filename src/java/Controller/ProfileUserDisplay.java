@@ -5,6 +5,7 @@
 package Controller;
 
 import Dao.Impl.UserInformationDaoImpl;
+import Model.User;
 import Model.UserInformation;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -30,12 +31,16 @@ public class ProfileUserDisplay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
-        int id=Integer.parseInt(request.getParameter("id"));
-        UserInformation userInf=userInformationDaoImpl.get(id);
-        request.setAttribute("userinf", userInf);
-        request.getRequestDispatcher("/store/profile/Profile.jsp").forward(request, response);
-        
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath());
+        } else {
+            UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
+            UserInformation userInf = userInformationDaoImpl.get(user.getId());
+            request.setAttribute("userinf", userInf);
+            request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
+        }
+
     }
 
 }

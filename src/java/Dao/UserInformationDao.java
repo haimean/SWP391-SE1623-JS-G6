@@ -4,14 +4,18 @@
  */
 package Dao;
 
-import Model.Category;
-import java.util.List;
+import Model.UserInformation;
 
 /**
  *
- * @author haimi
+ * @author MrTuan
  */
-public interface CatergoryDao extends BaseDAO<Category> {
+public interface UserInformationDao extends BaseDAO<UserInformation>{
 
-    List<Category> search(String name);
+    @Override
+    UserInformation get(int id);
+
+    @Override
+    boolean update(UserInformation t);
+    
 }

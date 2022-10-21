@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,12 +17,11 @@ import java.util.logging.Logger;
  * @author s
  */
 public class DBContext {
-
-    private final String serverName = "localhost";
-    private final String dbName = "LibraryDB";
+    private final String serverName = "DESKTOP-87C8QAF\\SQLEXPRESS";
+    private final String dbName = "SWP391-G6-SE1623";
     private final String portNumber = "1433";
     private final String userID = "sa";
-    private final String password = "123";
+    private final String password = "12345";
 
     public Connection getConnection() {
 
@@ -46,6 +44,22 @@ public class DBContext {
                 Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
             }
         }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+       public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {
                 preparedStatement.close();

@@ -1,7 +1,7 @@
 <%@include file="../layout/index.jsp" %>
 <div class="container-category">
     <div class="side-nav-categories">
-        <form action="update" method="POST">
+        <form id="form" action="update" method="POST">
             <div class="div-title">
                 <h1 class="title">${category.getName()}</h1>
             </div>
@@ -11,22 +11,40 @@
             </div>
             <div class="div-name">
                 <h3 class="title-name">Name</h3>
-                <input class="text-name" type="text"  placeholder="Name..." value="${category.name}"name="name">
+                <input class="text-name" type="text" onkeydown="ValidateCategory()"  placeholder="Name..." value="${category.name}"name="name" id="category-input"><span id="text-category"></span>
             </div>
             <input type="submit" class="btn btn-primary" style="font-family: serif;color: #fff;" value="Update">
         </form>
     </div>
 </div>
+<script>
+    function ValidateCategory() {
+        var form = document.getElementById("form");
+        var category = document.getElementById("category-input").value;
+        var text = document.getElementById("text-category");
+        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+
+        if (category.match(pattern)) {
+            form.classList.add("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "Fullname valid!";
+            text.style.color = "#00ff00";
+        } else {
+            form.classList.remove("valid");
+            form.classList.add("valid");
+            text.innerHTML = "Please enter fullname!";
+            text.style.color = "#ff0000";
+        }
+
+        if (category === "") {
+            form.classList.remove("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "";
+            text.style.color = "#00ff00";
+        }
+    }
+</script>
 <style>
-
-/*    .container-category{
-        text-align: center;
-        display: inline-flex;
-        margin-top: 150px;
-        width: 1200px;
-        margin-left: 35px;
-    }*/
-
     .side-nav-categories {
         border-radius: 30px;
         text-align: center;
@@ -88,4 +106,8 @@
         width: 100px;
         height: 45px;
     }
+    #text-category{
+        margin-right: 540px;
+    }
+
 </style>

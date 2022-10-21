@@ -5,7 +5,7 @@
 package Dao.Impl;
 
 import Model.User;
-import DBContext.DBContext;
+import Dao.DBContext;
 import Dao.UserDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

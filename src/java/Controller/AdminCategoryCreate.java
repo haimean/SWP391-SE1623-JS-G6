@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -31,7 +32,7 @@ public class AdminCategoryCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("categoryAdd.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin/category/categoryAdd.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
@@ -48,12 +49,16 @@ public class AdminCategoryCreate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
-        String categoryName = request.getParameter("txt");
+        String categoryName = request.getParameter("txt").trim();
         if (categoryName == null || categoryName.equals("")) {
             response.sendRedirect(request.getContextPath() + "/admin/category");
         } else {
-            categoryDaoImpl.insert(new Category(categoryName));
-            response.sendRedirect(request.getContextPath() + "/admin/category");
+            boolean status = categoryDaoImpl.insert(new Category(categoryName));
+            ArrayList<Category> categories = categoryDaoImpl.getAll();
+            request.setAttribute("status", status);
+            request.setAttribute("categories", categories);
+            request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+//            response.sendRedirect(request.getContextPath() + "/admin/category");
         }
     }
 }

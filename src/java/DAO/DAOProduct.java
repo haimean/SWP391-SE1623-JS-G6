@@ -288,4 +288,18 @@ public class DAOProduct extends DBContext.DBContext {
         }
         return list;
     }
+     public void increaseView(int proId) {
+        String sql = "update Products\n"
+                + "set proView = proView +1 \n"
+                + "where proId = " + proId;
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+           
+            ResultSet rs = stm.executeQuery();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+     
 }

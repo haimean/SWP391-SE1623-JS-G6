@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import Model.AddressReceiver;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -174,6 +175,28 @@ public class DAOUser extends DBContext.DBContext {
                         rs.getBoolean(6),
                         rs.getDate(7),
                         rs.getDate(8)));
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    public AddressReceiver getUserById(int userId) {
+        try {
+            String sql = "SELECT userId, fullname, phone, email, [address] + ', ' + city as [address]\n"
+                    + "FROM AddressReceiver\n"
+                    + "WHERE userId = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new AddressReceiver(
+                       rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+                        
             }
         } catch (SQLException ex) {
         }

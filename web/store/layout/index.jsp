@@ -33,7 +33,7 @@
                     <a class="nav-link active" href="<%= request.getContextPath()%>/userProductList">Shop</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<%= request.getContextPath()%>/blog">Blog</a>
+                    <a class="nav-link active" href="blogList">Blog</a>
                 </li>
 
 

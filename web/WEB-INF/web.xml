@@ -68,6 +68,18 @@
         <servlet-name>UserProductList</servlet-name>
         <servlet-class>ControllerUser.UserProductList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogList</servlet-name>
+        <servlet-class>ControllerStore.BlogList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDetails</servlet-name>
+        <servlet-class>ControllerStore.BlogDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogUpdate</servlet-name>
+        <servlet-class>ControllerStore.BlogUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -135,6 +147,18 @@
     <servlet-mapping>
         <servlet-name>UserProductList</servlet-name>
         <url-pattern>/userProductList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogList</servlet-name>
+        <url-pattern>/blogList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDetails</servlet-name>
+        <url-pattern>/blogDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogUpdate</servlet-name>
+        <url-pattern>/blogUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

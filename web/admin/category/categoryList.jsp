@@ -7,11 +7,12 @@
         <button class="button-create" onclick="CreateCategory()" style="margin-left: 140px;">Create</button>
     </div>
     <div class="side-nav-categories">
-        <form action="category" method="GET">
+        <form id="form" action="category" method="GET">
             <div class="search">
-                <input name="txt" class="text-search" type="text" placeholder="Name...">
+                <input name="search" class="text-search" type="text" onkeydown="ValidateSearch()" placeholder="Name..." id="search-input">
                 <button class="button-search">Search</button>
-            </div>
+            </div><br>
+            <span id="text-search"></span>
         </form>
         <ul id="category-tabs">
             <li><a>#</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a>Name</a></li>
@@ -24,7 +25,7 @@
                         <div class="name" style="margin-left: 150px;width: 200px;">${c.name}</div>
                         <div class="footer-category" style="margin-left: 200px;">
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${c.id}">Delete</button>
-                            <button type="button" class="btn btn-info" onclick="UpdateInfo(${c.id})">Update</button>
+                            <button type="button" class="btn btn-info" onclick="UpdateInfo(${c.id})" name="id" value="${c.id}">Update</button>
                         </div>
                     </div>
                 </li>
@@ -39,38 +40,76 @@
                                 Do you want delete '${c.name}' ?
                             </div>
                             <div class="modal-footer">
-                                <button  type="button" class="btn btn-danger"><a href="category/delete?id=${c.id}">Delete</a></button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button  type="submit" class="btn btn-danger" onclick="DeleteCategory(${c.id})" name="id" value="${c.id}">Delete</button>
+                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </c:forEach>
         </ul>
-
     </div>
-    <div class="alert alert-success d-flex align-items-center" id="succsess-delete" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-        <div>
-            Delete Successful!
-        </div>
-    </div>
-    <div class="alert alert-danger d-flex align-items-center" id="failed-delete" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-        <div>
-            Delete Failed!
-        </div>
-    </div>
-    <script>
-        function CreateCategory() {
-            window.location.href = "category/create";
-        }
-        function UpdateInfo(id) {
-            window.location.href = 'category/update?id=' + id;
-        }
-    </script>
 </div>
 
+<div class="position-fixed w-100">
+    <c:if test="${status == true}">
+        <button class="alert alert-success d-flex align-items-center position-absolute ms-3 pe-auto" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+                Successful!
+            </div>
+        </button>
+    </c:if>
+    <c:if test="${status == false}">
+        <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+                Failed!
+            </div>
+        </button>
+    </c:if>
+</div>
+<script>
+    function DeleteCategory(id){
+        window.location.href = "category/delete?id="+id;
+    }
+    function CreateCategory() {
+        window.location.href = "category/create";
+    }
+    function UpdateInfo(id) {
+        window.location.href = 'category/update?id=' + id;
+    }
+    function closeAlertModal() {
+        let modal = document.getElementById("alert");
+        modal.classList.add("fadeOutLeft");
+        console.log(modal);
+    }
+    function ValidateSearch() {
+        var form = document.getElementById("form");
+        var search = document.getElementById("search-input").value;
+        var text = document.getElementById("text-search");
+        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+
+        if (search.match(pattern)) {
+            form.classList.add("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "Fullname valid!";
+            text.style.color = "#00ff00";
+        } else {
+            form.classList.remove("valid");
+            form.classList.add("valid");
+            text.innerHTML = "Please enter fullname!";
+            text.style.color = "#ff0000";
+        }
+
+        if (search === "") {
+            form.classList.remove("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "";
+            text.style.color = "#00ff00";
+        }
+    }
+</script>
 <style>
     ul{
         list-style:none;
@@ -209,5 +248,33 @@
     }
     .items{
         display: flex;
+    }
+    .position-fixed .w-100{
+        margin-top: 1500px;
+    }
+    #text-search{
+        margin-left: 210px;
+    }
+    .fadeOutLeft{
+        animation: fadeOutLeft 0.3s ease-in;
+        animation-fill-mode: forwards;
+    }
+    @keyframes fadeOutLeft {
+        0% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        50%{
+            opacity: 1;
+            transform: skewX(-5deg);
+        }
+        75%{
+            opacity: 1;
+            transform: skewX(5deg);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
     }
 </style>

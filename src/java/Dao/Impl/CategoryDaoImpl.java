@@ -4,23 +4,22 @@
  */
 package Dao.Impl;
 
-import DBContext.DBContext;
-import Dao.CatergoryDao;
+import Dao.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Model.Category;
 import java.sql.Connection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Dao.CategoryDao;
 
 /**
  *
  * @author Mr Tuan
  */
-public class CategoryDaoImpl implements CatergoryDao {
+public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public ArrayList<Category> search(String name) {
@@ -67,7 +66,7 @@ public class CategoryDaoImpl implements CatergoryDao {
     }
 
     @Override
-    public List<Category> getAll() {
+    public ArrayList<Category> getAll() {
         DBContext dBContext = new DBContext();
         ArrayList<Category> listCategory = new ArrayList<>();
         try {

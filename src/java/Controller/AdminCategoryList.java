@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -32,15 +31,16 @@ public class AdminCategoryList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search");
-        List<Category> categories = new ArrayList<>();
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
+        String search = request.getParameter("search");
         if (search != null) {
-            categories = categoryDaoImpl.search(search);
+            ArrayList<Category> categories = categoryDaoImpl.search(search);
+            request.setAttribute("categories", categories);
+            request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
         } else {
-            categories = categoryDaoImpl.getAll();
+            ArrayList<Category> categories = categoryDaoImpl.getAll();
+            request.setAttribute("categories", categories);
+            request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
         }
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
     }
 }

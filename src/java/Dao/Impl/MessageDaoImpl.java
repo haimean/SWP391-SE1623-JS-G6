@@ -4,7 +4,7 @@
  */
 package Dao.Impl;
 
-import DBContext.DBContext;
+import Dao.DBContext;
 import Dao.MessageDao;
 import Model.Message;
 import java.sql.Connection;

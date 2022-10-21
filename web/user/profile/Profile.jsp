@@ -22,7 +22,7 @@
                 <h4 class="title-infomation">
                     <b>Information Profile</b>
                 </h4>
-                <button class="button-logout-update-profile" onclick="EditProfile(${userinf.getId()})"><u>Edit</u></button>
+                <a href="<%= request.getContextPath()%>/profile/update">Edit</a>
             </div><br>
             <span><ion-icon name="person-circle-outline"></ion-icon> Full Name: <b>${userinf.getFullname()}</b></span><br>
             <span><ion-icon name="transgender"></ion-icon> Gender: <b>
@@ -61,8 +61,9 @@
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script>
-    function EditProfile(id) {
-        window.location.href = "<%= request.getContextPath()%>/profile/update?id=" + id;
+    function EditProfile() {
+        window.location.href = "<%= request.getContextPath()%>/profile/update"";
+//        window.location.href = "<%= request.getContextPath()%>/profile/update?id=" + id;
     }
     function closeAlertModal() {
         let modal = document.getElementById("alert");

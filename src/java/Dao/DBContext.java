@@ -17,11 +17,11 @@ import java.util.logging.Logger;
  * @author s
  */
 public class DBContext {
-    private final String serverName = "MRTUAN\\SQLEXPRESS";
+    private final String serverName = "DESKTOP-87C8QAF\\SQLEXPRESS";
     private final String dbName = "SWP391-G6-SE1623";
     private final String portNumber = "1433";
     private final String userID = "sa";
-    private final String password = "12345678";
+    private final String password = "12345";
 
     public Connection getConnection() {
 
@@ -44,6 +44,22 @@ public class DBContext {
                 Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
             }
         }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+       public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {
                 preparedStatement.close();

@@ -4,7 +4,7 @@
  */
 package Dao.Impl;
 
-import DBContext.DBContext;
+import Dao.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

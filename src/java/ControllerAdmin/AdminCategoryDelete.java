@@ -5,12 +5,14 @@
 package ControllerAdmin;
 
 import DAO.DAOCategory;
+import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,8 +60,12 @@ public class AdminCategoryDelete extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-		new DAOCategory().deleteCategory(id);
-		response.sendRedirect(request.getContextPath() + "/admin/category");
+		boolean status = new DAOCategory().deleteCategory(id);
+                ArrayList<Category> categories = new DAOCategory().getCategories();
+//		new DAOCategory().deleteCategory(id);
+                request.setAttribute("status", status);
+                request.setAttribute("categories", categories);
+                request.getRequestDispatcher("/admin/category/categoryList.jsp").forward(request, response);
 	}
 
 	/**

@@ -156,7 +156,7 @@
                     </c:if>
 
                     <c:forEach begin="1" end="${endP}" var="i">
-                        <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/admin/user?page=${i}">${i}</a></li>
+                        <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/admin/user?page=${i}&search=${search}&mode=SEARCH">${i}</a></li>
                         </c:forEach>
                         <c:if test="${tag < endP}">
                         <li class="page-item">

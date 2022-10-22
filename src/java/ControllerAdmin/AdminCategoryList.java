@@ -5,7 +5,6 @@ package ControllerAdmin;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +30,7 @@ public class AdminCategoryList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search");
+        String search = request.getParameter("txt");
         ArrayList<Category> categories = new ArrayList<>();
         if (search != null) {
             categories = new DAO.DAOCategory().searchName(search);
@@ -39,6 +38,7 @@ public class AdminCategoryList extends HttpServlet {
             categories = new DAO.DAOCategory().getCategories();
         }
         request.setAttribute("categories", categories);
+        request.setAttribute("value", search);
         request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
     }
 }

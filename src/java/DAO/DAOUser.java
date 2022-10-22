@@ -154,15 +154,21 @@ public class DAOUser extends DBContext.DBContext {
         }
     }
 
-    public ArrayList<User> searchUser(String seachValue) {
+    public ArrayList<User> searchUser(String seachValue, int index) {
         ArrayList<User> userList = new ArrayList<>();
-        String query = "select u.id, role, fullname, email, phone,"
-                + " status, u.created_at, updated_at"
+        String query = "select u.id, role, fullname, email, phone,\n"
+                + "status, u.created_at, updated_at\n"
                 + "from UserInformation as ui, [User] as u\n"
-                + "where (u.id = ui.id) and (email like ?)";
+                + "where (u.id = ui.id) and (email like ?)\n"
+                + "order by id\n"
+                + "offset ? rows fetch next ? rows only";
+        final int recordsPerPage = 4;
+
         try {
             PreparedStatement stm = connection.prepareStatement(query);
-            stm.setString(1, "%" + seachValue + "%");
+            stm.setString(1, '%' + seachValue + '%');
+            stm.setInt(2, (index - 1) * recordsPerPage);
+            stm.setInt(3, recordsPerPage);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 userList.add(new User(
@@ -175,8 +181,88 @@ public class DAOUser extends DBContext.DBContext {
                         rs.getDate(7),
                         rs.getDate(8)));
             }
+            if (!userList.isEmpty()) {
+                return userList;
+            }
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
         return null;
+    }
+
+    public int getTotalUsers() {
+        String query = "select count(*) from [User]";
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
+    public int getTotalUsersSearch(String seachValue) {
+        String query = "select count(*) from \n"
+                + "(select u.id, role, fullname, email, phone,\n"
+                + "status, u.created_at, updated_at\n"
+                + "from UserInformation as ui, [User] as u\n"
+                + "where (u.id = ui.id) and (email like ?)\n"
+                + ") as totalRecord";
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            stm.setString(1, '%' + seachValue + '%');
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
+    public ArrayList<User> paginate(int index) {
+        ArrayList<User> list = new ArrayList<>();
+        String query = "select u.id, role, fullname, email, phone, status,\n"
+                + "u.created_at, updated_at\n"
+                + "from [User] u ,[UserInformation] ui\n"
+                + "where u.id = ui.userId\n"
+                + "order by id\n"
+                + "offset ? rows fetch next ? rows only";
+        final int recordsPerPage = 4;
+        try {
+            PreparedStatement stm = connection.prepareStatement(query);
+            stm.setInt(1, (index - 1) * recordsPerPage);
+            stm.setInt(2, recordsPerPage);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new User(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getDate(7),
+                        rs.getDate(8)));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        DAOUser dao = new DAOUser();
+        ArrayList<User> userList = dao.searchUser("i", 1);
+//        int a = dao.getTotalUsersSearch("@", 1);
+
+        for (User user : userList) {
+            System.out.println(user.toString());
+        }
     }
 }

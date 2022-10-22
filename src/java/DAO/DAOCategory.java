@@ -34,7 +34,7 @@ public class DAOCategory extends DBContext.DBContext {
         return listCategory;
     }
 
-    public void deleteCategory(int id) {
+    public boolean deleteCategory(int id) {
         try {
             String sql = "delete from Category  where id=?\n"
                     + "delete from Product where categoryID=?";
@@ -42,8 +42,10 @@ public class DAOCategory extends DBContext.DBContext {
             stm.setInt(1, id);
             stm.setInt(2, id);
             stm.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.out.println(e);
+            return false;
         }
     }
 
@@ -105,5 +107,12 @@ public class DAOCategory extends DBContext.DBContext {
             System.out.println(e);
         }
         return category;
+    }
+    
+    public static void main(String[] args) {
+        DAOCategory dao = new DAOCategory();
+        for (Category c : dao.searchName("ghe")) {
+            System.out.println(c.toString());
+        }
     }
 }

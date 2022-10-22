@@ -174,9 +174,9 @@
                 </div>
             </div>
         </div>  
-    </c:if>
+    </c:if> 
 </section>
-
+    
 <script>
     let formAllDelete = document.getElementById("form-all-delete");
     let formsSingelDelete = document.querySelectorAll("#form-delete");

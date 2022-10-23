@@ -52,10 +52,42 @@ public class AdminCategoryUpdate extends HttpServlet {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         String name = request.getParameter("name");
-        boolean status= categoryDaoImpl.update(new Category(id, name));
-        ArrayList<Category> categories = categoryDaoImpl.getAll();
-        request.setAttribute("status", status);
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+        String indexpasge = request.getParameter("index");
+        if (indexpasge == null) {
+            indexpasge = "1";
+            int index = Integer.parseInt(indexpasge);
+            if (name == null || name.equals("")) {
+                response.sendRedirect(request.getContextPath() + "/admin/category");
+            } else {
+                int count = categoryDaoImpl.getTotalCategory();
+                int endpage = count / 5;
+                if (count % 5 != 0) {
+                    endpage++;
+                }
+                boolean status = categoryDaoImpl.update(new Category(id, name));
+                ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+                request.setAttribute("status", status);
+                request.setAttribute("categories", categories);
+                request.setAttribute("endpage", endpage);
+                request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+            }
+        } else {
+            int index = Integer.parseInt(indexpasge);
+            if (name == null || name.equals("")) {
+                response.sendRedirect(request.getContextPath() + "/admin/category");
+            } else {
+                int count = categoryDaoImpl.getTotalCategory();
+                int endpage = count / 5;
+                if (count % 5 != 0) {
+                    endpage++;
+                }
+                boolean status = categoryDaoImpl.update(new Category(id, name));
+                ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+                request.setAttribute("status", status);
+                request.setAttribute("categories", categories);
+                request.setAttribute("endpage", endpage);
+                request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+            }
+        }
     }
 }

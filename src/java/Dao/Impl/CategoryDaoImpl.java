@@ -144,4 +144,44 @@ public class CategoryDaoImpl implements CategoryDao {
         }
         return false;
     }
+
+    @Override
+    public int getTotalCategory() {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select count(*) from Category";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
+    }
+    @Override
+    public ArrayList<Category> pagingCategory(int index) {
+        Dao.DBContext dBContext = new Dao.DBContext();
+        ArrayList<Category> listCategory = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select * from Category\n"
+                    + "order by id\n"
+                    + "offset ? rows fetch next 5 rows only;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (index-1)*5);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {    
+                Category category=new Category();
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                listCategory.add(category);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return listCategory;
+    }
 }

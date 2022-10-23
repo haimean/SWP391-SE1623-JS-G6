@@ -49,6 +49,13 @@
             </c:forEach>
         </ul>
     </div>
+    <div class="paging">
+        <ul class="pagination justify-content-center">
+            <c:forEach begin="1" end="${endpage}" var="p">
+                <li class="page-item"><a class="page-link" href="category?index=${p}">${p}</a></li>
+                </c:forEach>
+        </ul>
+    </div>
 </div>
 
 <div class="position-fixed w-100">
@@ -70,8 +77,8 @@
     </c:if>
 </div>
 <script>
-    function DeleteCategory(id){
-        window.location.href = "category/delete?id="+id;
+    function DeleteCategory(id) {
+        window.location.href = "category/delete?id=" + id;
     }
     function CreateCategory() {
         window.location.href = "category/create";
@@ -276,5 +283,9 @@
             opacity: 0;
             transform: translateX(-100%);
         }
+    }
+    .paging{
+        margin-top: 100px;
+        margin-right: 100px;
     }
 </style>

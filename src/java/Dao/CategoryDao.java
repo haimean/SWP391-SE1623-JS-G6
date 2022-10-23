@@ -30,4 +30,7 @@ public interface CategoryDao extends BaseDAO<Category> {
     @Override
     public boolean delete(int id);
     
+    public int getTotalCategory();
+    
+    public ArrayList<Category> pagingCategory(int index);
 }

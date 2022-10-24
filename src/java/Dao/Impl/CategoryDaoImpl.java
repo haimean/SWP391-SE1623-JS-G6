@@ -162,7 +162,7 @@ public class CategoryDaoImpl implements CategoryDao {
         return 0;
     }
     @Override
-    public ArrayList<Category> pagingCategory(int index) {
+    public ArrayList<Category> getAll(int page) {
         Dao.DBContext dBContext = new Dao.DBContext();
         ArrayList<Category> listCategory = new ArrayList<>();
         try {
@@ -171,7 +171,7 @@ public class CategoryDaoImpl implements CategoryDao {
                     + "order by id\n"
                     + "offset ? rows fetch next 5 rows only;";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, (index-1)*5);
+            ps.setInt(1, (page-1)*5);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {    
                 Category category=new Category();

@@ -33,38 +33,38 @@ public class AdminCategoryList extends HttpServlet {
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         String search = request.getParameter("search");
-        String indexpasge = request.getParameter("index");
+        String indexpasge = request.getParameter("page");
         if (indexpasge == null) {
             indexpasge = "1";
-            int index = Integer.parseInt(indexpasge);
+            int page = Integer.parseInt(indexpasge);
             if (search != null) {
                 ArrayList<Category> categories = categoryDaoImpl.search(search);
             } else {
-                ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
             }
             int count = categoryDaoImpl.getTotalCategory();
             int endpage = count / 5;
             if (count % 5 != 0) {
                 endpage++;
             }
-            ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
             request.setAttribute("endpage", endpage);
             request.setAttribute("categories", categories);
             request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
         }
         else{
-            int index = Integer.parseInt(indexpasge);
+            int page = Integer.parseInt(indexpasge);
             if (search != null) {
                 ArrayList<Category> categories = categoryDaoImpl.search(search);
             } else {
-                ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
             }
             int count = categoryDaoImpl.getTotalCategory();
             int endpage = count / 5;
             if (count % 5 != 0) {
                 endpage++;
             }
-            ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
             request.setAttribute("endpage", endpage);
             request.setAttribute("categories", categories);
             request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);

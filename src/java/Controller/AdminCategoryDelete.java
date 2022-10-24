@@ -34,30 +34,30 @@ public class AdminCategoryDelete extends HttpServlet {
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-        String indexpasge = request.getParameter("index");
+        String indexpasge = request.getParameter("page");
         if (indexpasge == null) {
             indexpasge = "1";
-            int index = Integer.parseInt(indexpasge);
+            int page = Integer.parseInt(indexpasge);
             int count = categoryDaoImpl.getTotalCategory();
             int endpage = count / 5;
             if (count % 5 != 0) {
                 endpage++;
             }
             boolean status = categoryDaoImpl.delete(id);
-            ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
             request.setAttribute("status", status);
             request.setAttribute("categories", categories);
             request.setAttribute("endpage", endpage);
             request.getRequestDispatcher("categoryList.jsp").forward(request, response);
         }else{
-            int index = Integer.parseInt(indexpasge);
+            int page = Integer.parseInt(indexpasge);
             int count = categoryDaoImpl.getTotalCategory();
             int endpage = count / 5;
             if (count % 5 != 0) {
                 endpage++;
             }
             boolean status = categoryDaoImpl.delete(id);
-            ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
             request.setAttribute("status", status);
             request.setAttribute("categories", categories);
             request.setAttribute("endpage", endpage);

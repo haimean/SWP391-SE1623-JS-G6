@@ -32,5 +32,5 @@ public interface CategoryDao extends BaseDAO<Category> {
     
     public int getTotalCategory();
     
-    public ArrayList<Category> pagingCategory(int index);
+    public ArrayList<Category> getAll(int page);
 }

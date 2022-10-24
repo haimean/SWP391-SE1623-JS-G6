@@ -50,10 +50,10 @@ public class AdminCategoryCreate extends HttpServlet {
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         String categoryName = request.getParameter("txt").trim();
-        String indexpasge = request.getParameter("index");
+        String indexpasge = request.getParameter("page");
         if (indexpasge == null) {
             indexpasge = "1";
-            int index = Integer.parseInt(indexpasge);
+            int page = Integer.parseInt(indexpasge);
             if (categoryName == null || categoryName.equals("")) {
                 response.sendRedirect(request.getContextPath() + "/admin/category");
             } else {
@@ -63,7 +63,7 @@ public class AdminCategoryCreate extends HttpServlet {
                 if (count % 5 != 0) {
                     endpage++;
                 }
-                ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
                 request.setAttribute("status", status);
                 request.setAttribute("categories", categories);
                 request.setAttribute("endpage", endpage);
@@ -72,7 +72,7 @@ public class AdminCategoryCreate extends HttpServlet {
             }
         }
         else{
-            int index = Integer.parseInt(indexpasge);
+            int page = Integer.parseInt(indexpasge);
             if (categoryName == null || categoryName.equals("")) {
                 response.sendRedirect(request.getContextPath() + "/admin/category");
             } else {
@@ -82,7 +82,7 @@ public class AdminCategoryCreate extends HttpServlet {
                 if (count % 5 != 0) {
                     endpage++;
                 }
-                ArrayList<Category> categories = categoryDaoImpl.pagingCategory(index);
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
                 request.setAttribute("status", status);
                 request.setAttribute("categories", categories);
                 request.setAttribute("endpage", endpage);

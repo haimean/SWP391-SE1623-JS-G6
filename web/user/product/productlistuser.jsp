@@ -31,7 +31,7 @@
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
         <!--===============================================================================================-->
-
+        
         <!--========================================
         <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css"> 
@@ -150,10 +150,9 @@
                                             <figure class="card card-product-grid" style="width: 250px; height: 400px">
                                                 <div class="img-wrap" > 
                                                     <span class="badge badge-danger" > New </span>
-                                                    <a href="product-detail?productid=${requestScope.listP.get(i).id}">
-                                                     <img src="https://tse2.mm.bing.net/th?id=OIP.8oNhoiG6blzFsAZq62hpmAHaHa&pid=Api&P=0" style="width: 300px" alt="https://tse2.mm.bing.net/th?id=OIP.8oNhoiG6blzFsAZq62hpmAHaHa&pid=Api&P=0" class="img-fluid reponsive"/>
-                                                        <!--<img src="${requestScope.listP.get(i).proImg}" style="width: 300px" alt="${requestScope.listP.get(i).proImg}" class="img-fluid reponsive"/>-->
-                                                    </a>
+<!--                                                    <a href="product-detail?productid=${requestScope.listP.get(i).id}">
+                                                        <img src="${requestScope.listP.get(i).proImg}" style="width: 300px" alt="${requestScope.listP.get(i).proImg}" class="img-fluid reponsive"/>
+                                                    </a>-->
                                                     <div class="col-lg-4 col-md-12 mb-4">
                                                     </div>
 
@@ -217,7 +216,7 @@
                 </div> <!-- container .//  -->
             </section>
         </form>
-
+        
     </body>
 </html>
 

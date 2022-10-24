@@ -1,11 +1,11 @@
 package Model;
 
-
 /**
  *
  * @author Mr Tuan
  */
 public class Category {
+
     private int id;
     private String name;
 
@@ -14,6 +14,10 @@ public class Category {
 
     public Category(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public Category(String new_category) {
         this.name = name;
     }
 
@@ -32,6 +36,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
 }

@@ -2,83 +2,71 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>AdminCategoryCreate</servlet-name>
-        <servlet-class>ControllerAdmin.AdminCategoryCreate</servlet-class>
+        <servlet-class>Controller.AdminCategoryCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminCategoryDelete</servlet-name>
-        <servlet-class>ControllerAdmin.AdminCategoryDelete</servlet-class>
+        <servlet-class>Controller.AdminCategoryDelete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminCategoryList</servlet-name>
-        <servlet-class>ControllerAdmin.AdminCategoryList</servlet-class>
+        <servlet-class>Controller.AdminCategoryList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminCategoryUpdate</servlet-name>
-        <servlet-class>ControllerAdmin.AdminCategoryUpdate</servlet-class>
+        <servlet-class>Controller.AdminCategoryUpdate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminDashboard</servlet-name>
-        <servlet-class>ControllerAdmin.AdminDashboard</servlet-class>
+        <servlet-class>Controller.AdminDashboard</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminUserList</servlet-name>
-        <servlet-class>ControllerAdmin.AdminUserList</servlet-class>
+        <servlet-class>Controller.AdminUserList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>ControllerAuthen.Login</servlet-class>
+        <servlet-class>Controller.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>ControllerAuthen.Logout</servlet-class>
+        <servlet-class>Controller.Logout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SellerDashbroad</servlet-name>
-        <servlet-class>ControllerSeller.SellerDashbroad</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SellerMess</servlet-name>
-        <servlet-class>ControllerSeller.SellerMess</servlet-class>
+        <servlet-class>Controller.SellerDashbroad</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SellerProductCreate</servlet-name>
-        <servlet-class>ControllerSeller.SellerProductCreate</servlet-class>
+        <servlet-class>Controller.SellerProductCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SellerProductDelete</servlet-name>
-        <servlet-class>ControllerSeller.SellerProductDelete</servlet-class>
+        <servlet-class>Controller.SellerProductDelete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SellerProductList</servlet-name>
-        <servlet-class>ControllerSeller.SellerProductList</servlet-class>
+        <servlet-class>Controller.SellerProductList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SellerProductUpdate</servlet-name>
-        <servlet-class>ControllerSeller.SellerProductUpdate</servlet-class>
+        <servlet-class>Controller.SellerProductUpdate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Home</servlet-name>
-        <servlet-class>ControllerStore.Home</servlet-class>
+        <servlet-class>Controller.Home</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Message</servlet-name>
-        <servlet-class>ControllerStore.Message</servlet-class>
+        <servlet-class>Controller.StoreMessage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>Controller.StoreBuy</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserProductList</servlet-name>
-        <servlet-class>ControllerUser.UserProductList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogList</servlet-name>
-        <servlet-class>ControllerStore.BlogList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogDetails</servlet-name>
-        <servlet-class>ControllerStore.BlogDetails</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogUpdate</servlet-name>
-        <servlet-class>ControllerStore.BlogUpdate</servlet-class>
+        <servlet-class>Controller.StoreProductList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -117,10 +105,6 @@
         <url-pattern>/seller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SellerMess</servlet-name>
-        <url-pattern>/seller/message</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SellerProductCreate</servlet-name>
         <url-pattern>/seller/product/create</url-pattern>
     </servlet-mapping>
@@ -145,20 +129,12 @@
         <url-pattern>/message</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserProductList</servlet-name>
         <url-pattern>/userProductList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogList</servlet-name>
-        <url-pattern>/blogList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogDetails</servlet-name>
-        <url-pattern>/blogDetails</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogUpdate</servlet-name>
-        <url-pattern>/blogUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

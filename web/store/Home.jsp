@@ -3,12 +3,14 @@
     Created on : Oct 12, 2022, 5:53:01 AM
     Author     : MrTuan
 --%>
+<%@page import="Dao.Impl.CategoryDaoImpl"%>
+<%@page import="Model.Category"%>
 <%@include file="../store/layout/index.jsp" %>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<div class="grid-category">
+<!--<div class="grid-category">
     <%
-    ArrayList<Category> categories = new DAOCategory().getCategories();
+    ArrayList<Category> categories = new CategoryDaoImpl().getCategories();
       if(categories != null){
                            for(Category c : categories){
     %>
@@ -16,7 +18,7 @@
     <%
               }}
     %>
-</div> 
+</div>-->
 <div class= "grid-container">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/lala.jpg">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/ghegamming.jpg">

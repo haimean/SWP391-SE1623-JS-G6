@@ -49,7 +49,7 @@ public class AdminCategoryCreate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
-        String categoryName = request.getParameter("txt").trim();
+        String categoryName = request.getParameter("name").trim();
         String indexpasge = request.getParameter("page");
         if (indexpasge == null) {
             indexpasge = "1";

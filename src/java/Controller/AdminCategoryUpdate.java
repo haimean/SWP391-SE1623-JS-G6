@@ -59,16 +59,15 @@ public class AdminCategoryUpdate extends HttpServlet {
             if (name == null || name.equals("")) {
                 response.sendRedirect(request.getContextPath() + "/admin/category");
             } else {
+                boolean status = categoryDaoImpl.update(new Category(id,name));
                 int count = categoryDaoImpl.getTotalCategory();
                 int endpage = count / 5;
                 if (count % 5 != 0) {
                     endpage++;
                 }
-                boolean status = categoryDaoImpl.update(new Category(id, name));
                 ArrayList<Category> categories = categoryDaoImpl.getAll(page);
                 request.setAttribute("categories", categories);
                 request.setAttribute("endpage", endpage);
-                request.getRequestDispatcher("categoryList.jsp").forward(request, response);
                 response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
             }
         } else {
@@ -76,12 +75,12 @@ public class AdminCategoryUpdate extends HttpServlet {
             if (name == null || name.equals("")) {
                 response.sendRedirect(request.getContextPath() + "/admin/category");
             } else {
+                boolean status = categoryDaoImpl.update(new Category(id,name));
                 int count = categoryDaoImpl.getTotalCategory();
                 int endpage = count / 5;
                 if (count % 5 != 0) {
                     endpage++;
                 }
-                boolean status = categoryDaoImpl.update(new Category(id, name));
                 ArrayList<Category> categories = categoryDaoImpl.getAll(page);
                 request.setAttribute("categories", categories);
                 request.setAttribute("endpage", endpage);

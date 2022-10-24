@@ -59,7 +59,7 @@
 </div>
 
 <div class="position-fixed w-100">
-    <c:if test="${status == true}">
+    <c:if test="${status==true}">
         <button class="alert alert-success d-flex align-items-center position-absolute ms-3 pe-auto" role="alert">
             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
             <div>
@@ -67,7 +67,7 @@
             </div>
         </button>
     </c:if>
-    <c:if test="${status == false}">
+    <c:if test="${status==false}">
         <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
             <div>

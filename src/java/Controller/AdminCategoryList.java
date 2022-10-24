@@ -51,8 +51,7 @@ public class AdminCategoryList extends HttpServlet {
             request.setAttribute("endpage", endpage);
             request.setAttribute("categories", categories);
             request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
-        }
-        else{
+        } else {
             int page = Integer.parseInt(indexpasge);
             if (search != null) {
                 ArrayList<Category> categories = categoryDaoImpl.search(search);

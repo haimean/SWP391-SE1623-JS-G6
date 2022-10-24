@@ -64,14 +64,11 @@ public class AdminCategoryCreate extends HttpServlet {
                     endpage++;
                 }
                 ArrayList<Category> categories = categoryDaoImpl.getAll(page);
-                request.setAttribute("status", status);
                 request.setAttribute("categories", categories);
                 request.setAttribute("endpage", endpage);
-                request.getRequestDispatcher("categoryList.jsp").forward(request, response);
-//            response.sendRedirect(request.getContextPath() + "/admin/category");
+                response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
             }
-        }
-        else{
+        } else {
             int page = Integer.parseInt(indexpasge);
             if (categoryName == null || categoryName.equals("")) {
                 response.sendRedirect(request.getContextPath() + "/admin/category");
@@ -83,11 +80,9 @@ public class AdminCategoryCreate extends HttpServlet {
                     endpage++;
                 }
                 ArrayList<Category> categories = categoryDaoImpl.getAll(page);
-                request.setAttribute("status", status);
                 request.setAttribute("categories", categories);
                 request.setAttribute("endpage", endpage);
-                request.getRequestDispatcher("categoryList.jsp").forward(request, response);
-//            response.sendRedirect(request.getContextPath() + "/admin/category");
+                response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
             }
         }
 

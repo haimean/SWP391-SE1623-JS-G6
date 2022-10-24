@@ -45,10 +45,9 @@ public class AdminCategoryDelete extends HttpServlet {
             }
             boolean status = categoryDaoImpl.delete(id);
             ArrayList<Category> categories = categoryDaoImpl.getAll(page);
-            request.setAttribute("status", status);
             request.setAttribute("categories", categories);
             request.setAttribute("endpage", endpage);
-            request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
         }else{
             int page = Integer.parseInt(indexpasge);
             int count = categoryDaoImpl.getTotalCategory();
@@ -58,10 +57,9 @@ public class AdminCategoryDelete extends HttpServlet {
             }
             boolean status = categoryDaoImpl.delete(id);
             ArrayList<Category> categories = categoryDaoImpl.getAll(page);
-            request.setAttribute("status", status);
             request.setAttribute("categories", categories);
             request.setAttribute("endpage", endpage);
-            request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
         }
 
     }

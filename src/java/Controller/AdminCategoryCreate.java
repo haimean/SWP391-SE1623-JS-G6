@@ -49,16 +49,42 @@ public class AdminCategoryCreate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
-        String categoryName = request.getParameter("txt").trim();
-        if (categoryName == null || categoryName.equals("")) {
-            response.sendRedirect(request.getContextPath() + "/admin/category");
+        String categoryName = request.getParameter("name").trim();
+        String indexpasge = request.getParameter("page");
+        if (indexpasge == null) {
+            indexpasge = "1";
+            int page = Integer.parseInt(indexpasge);
+            if (categoryName == null || categoryName.equals("")) {
+                response.sendRedirect(request.getContextPath() + "/admin/category");
+            } else {
+                boolean status = categoryDaoImpl.insert(new Category(categoryName));
+                int count = categoryDaoImpl.getTotalCategory();
+                int endpage = count / 5;
+                if (count % 5 != 0) {
+                    endpage++;
+                }
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+                request.setAttribute("categories", categories);
+                request.setAttribute("endpage", endpage);
+                response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
+            }
         } else {
-            boolean status = categoryDaoImpl.insert(new Category(categoryName));
-            ArrayList<Category> categories = categoryDaoImpl.getAll();
-            request.setAttribute("status", status);
-            request.setAttribute("categories", categories);
-            request.getRequestDispatcher("categoryList.jsp").forward(request, response);
-//            response.sendRedirect(request.getContextPath() + "/admin/category");
+            int page = Integer.parseInt(indexpasge);
+            if (categoryName == null || categoryName.equals("")) {
+                response.sendRedirect(request.getContextPath() + "/admin/category");
+            } else {
+                boolean status = categoryDaoImpl.insert(new Category(categoryName));
+                int count = categoryDaoImpl.getTotalCategory();
+                int endpage = count / 5;
+                if (count % 5 != 0) {
+                    endpage++;
+                }
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+                request.setAttribute("categories", categories);
+                request.setAttribute("endpage", endpage);
+                response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
+            }
         }
+
     }
 }

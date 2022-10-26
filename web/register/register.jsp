@@ -21,41 +21,33 @@
                 <div class="col-lg-6 col-12 mx-auto">
                     <div class="p-5 bg-white rounded shadow-lg">
                         <h2 class="mb-2 text-center">Sign In</h2>
-                        <form action="<%=request.getContextPath()%>/login" method="POST">
+                        <form action="<%=request.getContextPath()%>/register" method="POST">
                             <h4 class="font-500">Email</h4>
-                            <input name="email" class="form-control form-control-lg mb-3" type="email"  placeholder="Email" >
+                            <input name="email" class="form-control form-control-lg mb-3" type="email" placeholder="Email" >
                             <h4 class="font-500">Password</h4>
-                            <div class="input-group ">
+                            <div class="input-group  mb-3 ">
                                 <input class="form-control form-control-lg" id="password" name="password" placeholder="Password" value="">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye" id="togglePassword" 
                                        style="cursor: pointer"></i>
                                 </span>
                             </div>
-                            <div class="d-flex my-3  justify-content-between">
-                                <div class="form-check">
-                                    <input
-                                        type="checkbox"
-                                        class="form-check-input uf-form-check-input"
-                                        id="exampleCheck1"
-                                        />
-                                    <h4 class="form-check-h4 " for="exampleCheck1"
-                                        >Remember Me</h4
-                                    >
-                                </div>
-                                <a href="#">Forgot password?</a>
+
+                            <h4 class="font-500 ">Confirm Password</h4>
+                            <div class="input-group  mb-3 ">
+                                <input class="form-control form-control-lg" id="rePassword" name="rePassword" placeholder="Confirm Password" value="">
+                                <span class="input-group-text">
+                                    <i class="fa fa-eye" id="toggleRePassword" 
+                                       style="cursor: pointer"></i>
+                                </span>
                             </div>
-                            <input class="btn btn-primary btn-lg w-100 shadow-lg"  type="submit" value="Login" />
+                            <h4 class="font-500 ">Full Name</h4>
+                            <input name="fullName" class="form-control form-control-lg mb-3" type="text" placeholder="Full Name" >
+                            <input class="btn btn-primary btn-lg w-100 shadow-lg"  type="submit" value="Register" />
                         </form>
-                        <h6 class="separator my-4 text-center">or connect with</h6>
-                        <div class="uf-social-login d-flex justify-content-center">
-                            <a href="#" class="uf-social-ic" title="Login with Google">
-                                <i class="fab fa-google"></i>
-                            </a>
-                        </div>
                     </div>
                     <div class="text-center pt-4">
-                        <p class="m-0 ">Do not have an account? <a href="<%=request.getContextPath()%>/register" class="text-black">Sign Up</a></p>
+                        <p class="m-0 ">Already a member? <a href="<%=request.getContextPath()%>/login" class="text-black">Login</a></p>
                     </div>      
                 </div>        
             </div>
@@ -65,12 +57,21 @@
         <script>
             const togglePassword = document.querySelector("#togglePassword");
             const password = document.querySelector("#password");
-
+            const toggleRePassword = document.querySelector("#toggleRePassword");
+            const rePassword = document.querySelector("#rePassword");
             togglePassword.addEventListener("click", function () {
 
                 // toggle the type attribute
                 const type = password.getAttribute("type") === "password" ? "text" : "password";
                 password.setAttribute("type", type);
+                // toggle the eye icon
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+            toggleRePassword.addEventListener("click", function () {
+                // toggle the type attribute
+                const type = rePassword.getAttribute("type") === "password" ? "text" : "password";
+                rePassword.setAttribute("type", type);
                 // toggle the eye icon
                 this.classList.toggle('fa-eye');
                 this.classList.toggle('fa-eye-slash');

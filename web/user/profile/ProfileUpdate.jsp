@@ -54,7 +54,7 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("fullname").value;
         var text = document.getElementById("text-fullname");
-        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+        var pattern = /^([^0-9!@#$=+/\|;.,?<'":~>}{%^&*()]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");
@@ -80,7 +80,7 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("address").value;
         var text = document.getElementById("text-address");
-        var pattern = /^([^!@#$%^&*()]*]*)$/;
+        var pattern = /^([^!@#$=+/\|;.,?<'":~>}{%^&*()]*]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");
@@ -106,7 +106,7 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("city").value;
         var text = document.getElementById("text-city");
-        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+        var pattern = /^([^0-9!@#$=+/\|;.,?<'":~>}{%^&*()]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");

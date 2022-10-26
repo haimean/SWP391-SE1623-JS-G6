@@ -68,6 +68,14 @@
         <servlet-name>UserProductList</servlet-name>
         <servlet-class>Controller.StoreProductList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserBlogList</servlet-name>
+        <servlet-class>Controller.UserBlogList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogDetails</servlet-name>
+        <servlet-class>Controller.UserBlogDetails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -135,6 +143,14 @@
     <servlet-mapping>
         <servlet-name>UserProductList</servlet-name>
         <url-pattern>/userProductList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogList</servlet-name>
+        <url-pattern>/userBlogList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogDetails</servlet-name>
+        <url-pattern>/userBlogDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

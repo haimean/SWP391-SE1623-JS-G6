@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>How To Create Blog Section Design In Bootstrap</title>
+        <title>Blog</title>
         <link rel="stylesheet" href="blogList.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

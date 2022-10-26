@@ -27,7 +27,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
         UserInformation listprofile = new UserInformation();
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select u.id,u.email,uf.fullname,uf.gender,uf.bio,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
+            String sql = "select u.id,u.email,uf.fullname,uf.gender,uf.biography,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
                     + "on u.id=uf.id\n"
                     + "where u.id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -36,7 +36,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
             while (rs.next()) {
                 listprofile.setId(rs.getInt("id"));
                 listprofile.setFullname(rs.getString("fullname"));
-                listprofile.setBio(rs.getString("bio"));
+                listprofile.setBiography(rs.getString("biography"));
                 listprofile.setGender(rs.getInt("gender"));
                 listprofile.setPhone(rs.getString("phone"));
                 listprofile.setMail(rs.getString("email"));
@@ -49,18 +49,18 @@ public class UserInformationDaoImpl implements UserInformationDao {
         return listprofile;
     }
 
-    public boolean updateProfile(int id, String fullname, String gender, String bio, String address, String city) {
+    public boolean updateProfile(int id, String fullname, String gender, String biography, String address, String city) {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
             String sql = "update UserInformation\n"
-                    + "set fullname=?,gender=?,bio=?,[address]=?,city=?\n"
+                    + "set fullname=?,gender=?,biography=?,[address]=?,city=?\n"
                     + "where id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(6, id);
             stm.setString(1, fullname);
             stm.setString(2, gender);
-            stm.setString(3, bio);
+            stm.setString(3, biography);
             stm.setString(4, address);
             stm.setString(5, city);
             stm.executeUpdate();

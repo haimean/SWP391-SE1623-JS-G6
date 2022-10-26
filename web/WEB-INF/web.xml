@@ -76,6 +76,10 @@
         <servlet-name>ProfileUserUpdate</servlet-name>
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileUserChangePassword</servlet-name>
+        <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>ProfileUserUpdate</servlet-name>
         <url-pattern>/profile/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileUserChangePassword</servlet-name>
+        <url-pattern>/profile/changepassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

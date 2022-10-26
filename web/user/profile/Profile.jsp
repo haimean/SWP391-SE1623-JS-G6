@@ -18,7 +18,7 @@
     </symbol>
 </svg>
 <div class="container-profile">
-    <div class="side-nav-categories">
+    <div class="side-nav-profile">
         <div class="div-image-profile">
             <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
         </div>
@@ -26,21 +26,22 @@
             <h1 class="title">${userinf.getFullname()}</h1>
         </div>
         <div class="div-bio">
-            <span>${userinf.getBio()}</span>
+            <span>${userinf.getBiography()}</span>
         </div>
         <div class="div-information">
             <div class="div-info">
                 <h4 class="title-infomation">
                     <b>Information Profile</b>
                 </h4>
-                <a href="<%= request.getContextPath()%>/profile/update">Edit</a>
+                <a href="<%= request.getContextPath()%>/profile/update" style="margin-right: 50px;color: red;"><u>Edit</u></a>
+                <a href="<%= request.getContextPath()%>/profile/changepassword" style="color: rgb(41,156,223)"><u>Change Password</u></a>
             </div><br>
             <span><ion-icon name="person-circle-outline"></ion-icon> Full Name: <b>${userinf.getFullname()}</b></span><br>
             <span><ion-icon name="transgender"></ion-icon> Gender: <b>
-                    <c:if test="${userinf.isGender()==1}">
+                    <c:if test="${userinf.getGender()==1}">
                         Male
                     </c:if>
-                    <c:if test="${userinf.isGender()==0}">
+                    <c:if test="${userinf.getGender()==0}">
                         Female
                     </c:if>
                 </b></span><br>
@@ -50,8 +51,18 @@
             <span><ion-icon name="business-outline"></ion-icon> City: <b>${userinf.getCity()}</b></span>
         </div>
     </div>
+    <div class="side-nav-blog">
+        <h1>blog</h1>
+    </div>
 </div>
 <div class="position-fixed w-100">
+    <script>
+        function closeAlertModal() {
+            let modal = document.getElementById("alert");
+            modal.classList.add("fadeOutLeft");
+            console.log(modal);
+        }
+    </script>
     <c:if test="${status == true}">
         <button class="alert alert-success d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
             <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
@@ -68,24 +79,22 @@
             </div>
         </button>
     </c:if>
-
 </div>
+        
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script>
     function EditProfile() {
         window.location.href = "<%= request.getContextPath()%>/profile/update"";
     }
-    function closeAlertModal() {
-        let modal = document.getElementById("alert");
-        modal.classList.add("fadeOutLeft");
-        console.log(modal);
-    }
 </script>
 
 <style>
+    .container-profile{
+        width: auto;
+        height: auto;
+    }
 
-
-    .side-nav-categories {
+    .side-nav-profile {
         border-radius: 30px;
         text-align: center;
         padding: 0px;
@@ -99,6 +108,7 @@
         margin: auto;
         top:15px;
         left: 20px;
+        margin-bottom: 10px;
     }
     .div-title{
         margin-top: 20px;
@@ -106,6 +116,9 @@
     .title{
         font-family: serif;
 
+    }
+    .div-image-profile{
+        margin-top: 20px;
     }
 
     .div-information{
@@ -117,7 +130,7 @@
     .title-infomation{
         font-family: serif;
         text-align: left;
-        margin-right: 480px;
+        margin-right: 350px;
     }
     .div-option{
         text-align: right;
@@ -145,6 +158,21 @@
     }
     ion-icon {
         font-size: 20px;
+    }
+    .side-nav-blog {
+        border-radius: 10px;
+        text-align: center;
+        padding: 0px;
+        position: relative;
+        background-color: #fff;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #f5f5f5 #eee #d5d5d5 #eee;
+        box-shadow: 0 5px 0 rgba(200,200,200,.2);
+        width: 1700px;
+        margin: auto;
+        top:15px;
+        left: 20px;
     }
     .fadeOutLeft{
         animation: fadeOutLeft 0.3s ease-in;

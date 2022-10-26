@@ -12,7 +12,7 @@ public class UserInformation {
     private int id;
     private String fullname;
     private int gender;
-    private String bio;
+    private String biography;
     private String phone;
     private String mail;
     private String address;
@@ -21,11 +21,11 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(int id, String fullname, int gender, String bio, String phone, String mail, String address, String city) {
+    public UserInformation(int id, String fullname, int gender, String biography, String phone, String mail, String address, String city) {
         this.id = id;
         this.fullname = fullname;
         this.gender = gender;
-        this.bio = bio;
+        this.biography = biography;
         this.phone = phone;
         this.mail = mail;
         this.address = address;
@@ -48,7 +48,7 @@ public class UserInformation {
         this.fullname = fullname;
     }
 
-    public int isGender() {
+    public int getGender() {
         return gender;
     }
 
@@ -56,12 +56,12 @@ public class UserInformation {
         this.gender = gender;
     }
 
-    public String getBio() {
-        return bio;
+    public String getBiography() {
+        return biography;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 
     public String getPhone() {
@@ -95,4 +95,7 @@ public class UserInformation {
     public void setCity(String city) {
         this.city = city;
     }
+    
+    
+
 }

@@ -219,4 +219,21 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
+    
+    @Override
+    public boolean updatePassword(String email,String password){
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "update [User] set [password]= ? where email= ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(2, email);
+            ps.setString(1, password);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
+    }
 }

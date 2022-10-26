@@ -57,10 +57,10 @@ public class ProfileUserUpdate extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String fullname = request.getParameter("fullname").trim();
         String gender = request.getParameter("gender");
-        String bio = request.getParameter("bio").trim();
+        String biography = request.getParameter("biography").trim();
         String address = request.getParameter("address").trim();
         String city = request.getParameter("city").trim();
-        boolean status = userInformationDaoImpl.updateProfile(id, fullname, gender, bio, address, city);
+        boolean status = userInformationDaoImpl.updateProfile(id, fullname, gender, biography, address, city);
         UserInformation userInf = userInformationDaoImpl.get(id);
         request.setAttribute("status", status);
         request.setAttribute("userinf", userInf);

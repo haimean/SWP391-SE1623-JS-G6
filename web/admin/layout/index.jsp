@@ -68,7 +68,7 @@ crossorigin="anonymous"></script>
      aria-labelledby="offcanvasResponsiveLabel">
     <div class="offcanvas-body  bg-secondary" style="
          float: left;
-         height: 1000px;""
+         height: 1500px;""
          >
         <ul class=" list-group list-group-flush bg-secondary">
             <li class="list-group-item  bg-secondary">
@@ -84,6 +84,16 @@ crossorigin="anonymous"></script>
             <li class="list-group-item  bg-secondary">
                 <a href="<%= request.getContextPath()%>/admin/user">
                     <h4>User</h3>
+                </a>
+            </li>
+            <li class="list-group-item  bg-secondary">
+                <a href="<%= request.getContextPath()%>/admin/qna">
+                    <h4>Question</h4>
+                </a>
+            </li>
+            <li class="list-group-item  bg-secondary">
+                <a href="<%= request.getContextPath()%>/admin/qna-type">
+                    <h4>Question Type</h4>
                 </a>
             </li>
         </ul>

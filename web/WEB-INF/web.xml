@@ -68,9 +68,33 @@
         <servlet-name>Cart</servlet-name>
         <servlet-class>ControllerStore.Buy</servlet-class>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>UserProductList</servlet-name>
         <servlet-class>ControllerUser.UserProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminQuesionList</servlet-name>
+        <servlet-class>ControllerAdmin.AdminQuesionList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminQuestionUpdate</servlet-name>
+        <servlet-class>ControllerAdmin.AdminQuestionUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminQuestionCreate</servlet-name>
+        <servlet-class>ControllerAdmin.AdminQuestionCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminQuestionTypeList</servlet-name>
+        <servlet-class>ControllerAdmin.AdminQuestionTypeList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminQuestionTypeCreate</servlet-name>
+        <servlet-class>ControllerAdmin.AdminQuestionTypeCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminQuestionTypeUpdate</servlet-name>
+        <servlet-class>ControllerAdmin.AdminQuestionTypeUpdate</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -139,11 +163,34 @@
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
         <url-pattern>/cart</url-pattern>
-
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserProductList</servlet-name>
         <url-pattern>/userProductList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminQuesionList</servlet-name>
+        <url-pattern>/admin/qna</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminQuestionUpdate</servlet-name>
+        <url-pattern>/admin/qna/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminQuestionCreate</servlet-name>
+        <url-pattern>/admin/qna/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminQuestionTypeList</servlet-name>
+        <url-pattern>/admin/qna-type</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminQuestionTypeCreate</servlet-name>
+        <url-pattern>/admin/qna-type/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminQuestionTypeUpdate</servlet-name>
+        <url-pattern>/admin/qna-type/update</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

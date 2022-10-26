@@ -4,22 +4,18 @@
  */
 package ControllerAdmin;
 
-import DAO.DAOUser;
-import Model.User;
+import DAO.*;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author PiPi
  */
-@WebServlet(name = "AdminPaginate", urlPatterns = {"/paginate"})
-public class AdminPaginate extends HttpServlet {
+public class AdminQuestionTypeCreate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,35 +28,7 @@ public class AdminPaginate extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAOUser db = new DAOUser();
-        ArrayList<User> list;
-        String indexParam = request.getParameter("page");
-        if (indexParam == null) {
-            indexParam = "1";
-        }
-        int index;
-
-        try {
-            index = Integer.parseInt(indexParam);
-        } catch (Exception e) {
-            index = 1;
-        }
-        int totalPage = db.getTotalUsers();
-        final int recordsPerPage = 4;
-        int endPage = totalPage / recordsPerPage;
-
-        if (totalPage % recordsPerPage != 0) {
-            endPage++;
-        }
-
-        if (index > endPage) {
-            index = endPage;
-        }
-        list = db.paginate(index);
-        request.setAttribute("tag", index);
-        request.setAttribute("list", list);
-        request.setAttribute("endP", endPage);
-        request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin/question-type/qnaTypeAdd.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,17 +57,11 @@ public class AdminPaginate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        DAOQuestionType db = new DAOQuestionType();
+        String name = request.getParameter("name");
+        String status = db.add(name);
+        response.sendRedirect(request.getContextPath() + "/admin/qna-type?status=" + status);
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    }
 
 }

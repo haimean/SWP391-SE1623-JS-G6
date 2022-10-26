@@ -258,7 +258,7 @@ public class DAOUser extends DBContext.DBContext {
 
     public static void main(String[] args) {
         DAOUser dao = new DAOUser();
-        ArrayList<User> userList = dao.searchUser("i", 1);
+        ArrayList<User> userList = dao.searchUser("gmail", 1);
 //        int a = dao.getTotalUsersSearch("@", 1);
 
         for (User user : userList) {

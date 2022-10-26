@@ -17,7 +17,7 @@
         padding: 8rem 4rem;
     }
 
-    table th:hover{
+    table th:not(:nth-last-child(-n+2)):hover{
         background-color: #f7f7f7;
         cursor: pointer;
     }
@@ -88,13 +88,13 @@
         form.submit();
     }
 </script>
-              <p>${test}</p>
+
 <div class="container">
     <div class="table-responsive table-container mx-auto">
         <div class="shadow-sm p-3 mb-5 bg-white rounded px-5 py-5 d-flex flex-column align-items-center">
             <div class="w-75 pb-5">
                 <form action="user" method="post" class="d-flex flex-row">
-                    <input type="search" name="search" class="form-control" placeholder="Search" value="${search}"/>
+                    <input type="search" name="search" class="form-control" placeholder="Search"/>
                     <input type="hidden" name="mode" value="SEARCH"/>
                     <button class="btn-search px-3">Search</button>
                 </form>
@@ -156,7 +156,7 @@
                     </c:if>
 
                     <c:forEach begin="1" end="${endP}" var="i">
-                        <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/admin/user?page=${i}">${i}</a></li>
+                        <li class="page-item ${tag == i ? "active" : ""}"><a class="page-link" href="<%= request.getContextPath()%>/admin/user?page=${i}">${i}</a></li>
                         </c:forEach>
                         <c:if test="${tag < endP}">
                         <li class="page-item">

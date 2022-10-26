@@ -65,16 +65,20 @@
         <servlet-class>Controller.StoreBuy</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserProductList</servlet-name>
-        <servlet-class>Controller.StoreProductList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProfileUserDisplay</servlet-name>
         <servlet-class>Controller.ProfileUserDisplay</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileUserUpdate</servlet-name>
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StoreProductList</servlet-name>
+        <servlet-class>Controller.StoreProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogList</servlet-name>
+        <servlet-class>Controller.UserBlogList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -141,16 +145,20 @@
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserProductList</servlet-name>
-        <url-pattern>/userProductList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ProfileUserDisplay</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProfileUserUpdate</servlet-name>
         <url-pattern>/profile/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StoreProductList</servlet-name>
+        <url-pattern>/storeProductList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogList</servlet-name>
+        <url-pattern>/userBlogList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

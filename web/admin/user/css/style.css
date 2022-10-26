@@ -21,3 +21,20 @@ table th:hover{
     background-color: #f7f7f7;
     cursor: pointer;    
 }
+
+.btn-search{
+    background-color: rgb(23, 162, 184);
+    width: 80px;
+    height: auto;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    transition: 0.1s;
+    border-radius: 0.375rem;
+    margin-left: 2rem;
+}
+.btn-search:hover{
+    background-color: rgb(255, 165, 0);
+    color: white;
+}

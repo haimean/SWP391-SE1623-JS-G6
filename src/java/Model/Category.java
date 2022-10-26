@@ -1,11 +1,11 @@
 package Model;
 
-
 /**
  *
  * @author Mr Tuan
  */
 public class Category {
+
     private int id;
     private String name;
 
@@ -17,6 +17,9 @@ public class Category {
         this.name = name;
     }
 
+    public Category(String name) {
+        this.name = name;
+    }
     public int getId() {
         return id;
     }
@@ -32,6 +35,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
 }

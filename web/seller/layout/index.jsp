@@ -1,7 +1,4 @@
-<%@page import="Model.*"
-        import="Dal.*"    
-        import="java.util.ArrayList"
-        %>
+<%@page import="Entity.*" import="Dal.*" import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,8 +31,35 @@
             </button>
             <a class="" href="<%= request.getContextPath()%>/seller"><h3>Seller</h3></a>
         </div>
-
-        
+        <%
+                User user = (User) request.getSession().getAttribute("user");
+                if (user == null) {
+                    response.sendRedirect(request.getContextPath()+"/login");
+                    return;
+                } else {
+                    int type = user.getRole();
+                    switch (type) {
+                        case 2:
+        %>
+        <ul class="nav nav-pills">
+            <li class="nav-item dropdown">
+                <a class=" dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><%=user.getEmail()%></a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+        <%
+            break;
+        case 1:
+            response.sendRedirect(request.getContextPath()+"/admin");
+            break;
+        case 3:
+            response.sendRedirect(request.getContextPath());
+            break;
+        default:
+           response.sendRedirect(request.getContextPath()+"/login");
+        }}%>
     </div>
 </nav>
 <div class="offcanvas-lg offcanvas-start " tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
@@ -51,11 +75,11 @@
              padding-bottom: 2rem">
 
             <ul class="list-group  list-group-flush  bg-warning">
-                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller"> <h4>Dashboard</h3></a></li>
-                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/product"> <h4>Product</h3></a></li>
-                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/order"> <h4>Order</h3></a></li>
+                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller"> <h4>Dashboard</h4></a></li>
+                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/product"> <h4>Product</h4></a></li>
+                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/seller/order"> <h4>Order</h4></a></li>  
+                <li class="list-group-item  bg-warning"><a href="<%= request.getContextPath()%>/message"> <h4>Message<span class="badge bg-light text-body">2</span></h4></a></li>
             </ul>
-            <a class="btn btn-primary mx-auto" href="<%= request.getContextPath()%>/seller/message">Message<span class="badge bg-light text-body">2</span></a>
         </div>
     </div>
 </div>

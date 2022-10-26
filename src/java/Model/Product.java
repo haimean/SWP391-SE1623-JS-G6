@@ -1,5 +1,7 @@
 package Model;
- 
+
+import java.sql.Timestamp;
+
 /**
  *
  * @author MrTuan
@@ -12,12 +14,14 @@ public class Product {
     private double price;
     private boolean status;
     private int viewNumber;
-    private String Create_at, Update_at;
+    private Timestamp create_at;
+    private Timestamp update_at;
+    private String proImg;
 
     public Product() {
     }
 
-    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String Create_at, String Update_at) {
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, Timestamp create_at, Timestamp update_at, String proImg) {
         this.id = id;
         this.categoryID = categoryID;
         this.name = name;
@@ -27,8 +31,35 @@ public class Product {
         this.price = price;
         this.status = status;
         this.viewNumber = viewNumber;
-        this.Create_at = Create_at;
-        this.Update_at = Update_at;
+        this.create_at = create_at;
+        this.update_at = update_at;
+        this.proImg = proImg;
+    }
+
+    public Product(int categoryID, String name, String description, String original, int quantity, double price, boolean status) {
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+        this.original = original;
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+    }
+
+    public Product(int id, int categoryId, String name, String description, String origin, int quantity, double price, boolean b, int viewNumber) {
+        this.id = id;
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+        this.original = original;
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+        this.viewNumber = viewNumber;
+    }
+
+    public Product(String string, int aInt, String string0, String string1, String string2, int aInt0, double aDouble, boolean aBoolean, int aInt1, String string3, String string4) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getId() {
@@ -87,7 +118,7 @@ public class Product {
         this.price = price;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -103,24 +134,28 @@ public class Product {
         this.viewNumber = viewNumber;
     }
 
-    public String getCreate_at() {
-        return Create_at;
+    public Timestamp getCreate_at() {
+        return create_at;
     }
 
-    public void setCreate_at(String Create_at) {
-        this.Create_at = Create_at;
+    public void setCreate_at(Timestamp create_at) {
+        this.create_at = create_at;
     }
 
-    public String getUpdate_at() {
-        return Update_at;
+    public Timestamp getUpdate_at() {
+        return update_at;
     }
 
-    public void setUpdate_at(String Update_at) {
-        this.Update_at = Update_at;
+    public void setUpdate_at(Timestamp update_at) {
+        this.update_at = update_at;
     }
 
-    @Override
-    public String toString() {
-        return "DAO{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", Create_at=" + Create_at + ", Update_at=" + Update_at + '}';
+    public String getProImg() {
+        return proImg;
     }
+
+    public void setProImg(String proImg) {
+        this.proImg = proImg;
+    }
+
 }

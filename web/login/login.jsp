@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Animated Login Form</title>
+        <title>Sign In</title>
         <link href="<%=request.getContextPath()%>/login/css/style.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -26,9 +26,9 @@
                             <input name="email" class="form-control form-control-lg mb-3" type="email"  placeholder="Email" >
                             <h4 class="font-500">Password</h4>
                             <div class="input-group ">
-                                <input class="form-control form-control-lg" id="password" name="password" placeholder="Password" value="">
+                                <input class="form-control form-control-lg" id="password" name="password" type="password" placeholder="Password" value="">
                                 <span class="input-group-text">
-                                    <i class="fa fa-eye" id="togglePassword" 
+                                    <i class="fa fa-eye-slash" id="togglePassword" 
                                        style="cursor: pointer"></i>
                                 </span>
                             </div>
@@ -38,6 +38,7 @@
                                         type="checkbox"
                                         class="form-check-input uf-form-check-input"
                                         id="exampleCheck1"
+                                        style="margin-top: 0.65rem;"
                                         />
                                     <h4 class="form-check-h4 " for="exampleCheck1"
                                         >Remember Me</h4
@@ -47,12 +48,6 @@
                             </div>
                             <input class="btn btn-primary btn-lg w-100 shadow-lg"  type="submit" value="Login" />
                         </form>
-                        <h6 class="separator my-4 text-center">or connect with</h6>
-                        <div class="uf-social-login d-flex justify-content-center">
-                            <a href="#" class="uf-social-ic" title="Login with Google">
-                                <i class="fab fa-google"></i>
-                            </a>
-                        </div>
                     </div>
                     <div class="text-center pt-4">
                         <p class="m-0 ">Do not have an account? <a href="<%=request.getContextPath()%>/register" class="text-black">Sign Up</a></p>
@@ -60,22 +55,15 @@
                 </div>        
             </div>
         </div>
-
-
         <script>
             const togglePassword = document.querySelector("#togglePassword");
             const password = document.querySelector("#password");
-
             togglePassword.addEventListener("click", function () {
-
-                // toggle the type attribute
                 const type = password.getAttribute("type") === "password" ? "text" : "password";
                 password.setAttribute("type", type);
-                // toggle the eye icon
                 this.classList.toggle('fa-eye');
                 this.classList.toggle('fa-eye-slash');
             });
         </script>
     </body>
-
 </html>

@@ -5,6 +5,7 @@ package Model;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 import java.sql.Date;
+import sun.security.util.Password;
 
 /**
  *
@@ -38,9 +39,10 @@ public class User {
         this.status = status;
     }
 
-    public User(String name, String email, String code) {
+    public User(String name, String email, String password, String code) {
         this.fullName = name;
         this.email = email;
+        this.password = password;
         this.code = code;
     }
 

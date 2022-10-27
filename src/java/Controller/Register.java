@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Dao.Impl.UserDaoImpl;
 import Model.User;
 import SendEmail.SendEmail;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -47,43 +50,57 @@ public class Register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            //feth form value
-            String name = request.getParameter("fullName");
-            String email = request.getParameter("email");
 
+        //feth form value
+        String email = request.getParameter("email").trim();
+        String password = request.getParameter("password").trim();
+        String rePassword = request.getParameter("rePassword").trim();
+        String fullName = request.getParameter("fullName").trim();
+        if (!UserDaoImpl.haveAccount(email) && isValid(password) && password.equals(rePassword)) {
             //create instance object of the SendEmail Class
             SendEmail sm = new SendEmail();
             //get the 6-digit code
             String code = sm.getRandom();
-
             //craete new user using all information
-            User user = new User(name, email, code);
-
+            User user = new User(fullName, email, password, code);
             //call the send email method
             boolean test = sm.sendEmail(user);
-
             //check if the email send successfully
             if (test) {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(180);
                 session.setAttribute("authcode", user);
                 response.sendRedirect("verify");
+                return;
             } else {
-                out.println("Failed to send verification email");
+                request.getRequestDispatcher("/register/register.jsp").forward(request, response);
             }
-
         }
-    }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        if (UserDaoImpl.haveAccount(email)) {
+            //trung mail
+            request.setAttribute("emailError", "Email already exists");
+        }
+        if (!isValid(password)) {
+            //sai dinh dang pass
+            request.setAttribute("passwordError", "Password is not valid");
+        }
+        if (!password.equals(rePassword)) {
+            //k trung pass
+            request.setAttribute("rePasswordError", "Confirm Password don't same the password");
+        }
+        request.setAttribute("email", email);
+        request.setAttribute("password", password);
+        request.setAttribute("rePassword", rePassword);
+        request.setAttribute("fullName", fullName);
+        request.getRequestDispatcher("/register/register.jsp").forward(request, response);
+    }
+    public static boolean isValid(String password) {
+        String PASSWORD_PATTERN
+                = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
 
 }

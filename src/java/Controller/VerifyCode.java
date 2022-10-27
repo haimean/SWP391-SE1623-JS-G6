@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import Dao.Impl.UserDaoImpl;
+import Dao.UserDao;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,15 +51,16 @@ public class VerifyCode extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("authcode");
-            String code = request.getParameter("authcode");
+            String code = request.getParameter("authcode").trim();
             out.println(code);
             out.println(user.code);
             out.println(code.equals(user.code));
             if (code.trim().equals(user.code)) {
-                out.println("Verification Done");
-            } else {
-                out.println("Incorrect verification code");
+                if (new UserDaoImpl().insert(user)) {
+                    response.sendRedirect("login");
+                }
             }
+            response.sendRedirect("register");
         }
     }
 }

@@ -1,20 +1,100 @@
 <%-- Document : index Created on : 18-09-2022, 23:04:55 Author : haimi --%>
 
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-			<!DOCTYPE html>
+<!DOCTYPE html>
 
 <%@include file="../layout/index.jsp"  %>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-<link href="<%=request.getContextPath()%>/admin/user/css/style.css" rel="stylesheet">
+    .table-container{
+        padding: 8rem 4rem;
+    }
+
+    table th:not(:nth-last-child(-n+2)):hover{
+        background-color: #f7f7f7;
+        cursor: pointer;
+    }
+
+    .btn-search{
+        background-color: rgb(23, 162, 184);
+        width: 80px;
+        height: auto;
+        border: none;
+        color: white;
+        text-align: center;
+        font-size: 15px;
+        transition: 0.1s;
+        border-radius: 0.375rem;
+        margin-left: 2rem;
+    }
+    .btn-search:hover{
+        background-color: rgb(255, 165, 0);
+        color: white;
+    }
+</style>
+
+<script>
+    function sortTable(el) {
+        let thead = document.getElementsByTagName("thead")[0];
+        let th = [...thead.getElementsByTagName("th")];
+        let index = th.indexOf(el);
+        let rows, switching, i, x, y, shouldSwitch, sort, switchcount = 0;
+        let table = document.querySelector(".table");
+        switching = true;
+        sort = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[index];
+                y = rows[i + 1].getElementsByTagName("td")[index];
+                if (sort == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (sort == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && sort == "asc") {
+                    sort = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+    function changeRole(el, id) {
+        let form = document.getElementById("form-role");
+        let value = el.value;
+        let url = 'user?id=' + id + '&role=' + value + '&mode=ROLE';
+        form.action = url;
+        form.submit();
+    }
+</script>
 
 <div class="container">
     <div class="table-responsive table-container mx-auto">
         <div class="shadow-sm p-3 mb-5 bg-white rounded px-5 py-5 d-flex flex-column align-items-center">
             <div class="w-75 pb-5">
                 <form action="user" method="post" class="d-flex flex-row">
-                    <input type="search" name="search" class="form-control" placeholder="Search"/>
+                    <input type="search" name="search" class="form-control" placeholder="Search" required/>
                     <input type="hidden" name="mode" value="SEARCH"/>
                     <button class="btn-search px-3">Search</button>
                 </form>
@@ -65,6 +145,30 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <nav class="mt-5">
+                <ul class="pagination">
+                    <c:if test="${tag > 1}">
+                        <li class="page-item">
+                            <a class="page-link" href="<%= request.getContextPath()%>/admin/user?page=1" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+
+                    <c:forEach begin="1" end="${endP}" var="i">
+                        <li class="page-item ${tag == i ? "active" : ""}"><a class="page-link" href="<%= request.getContextPath()%>/admin/user?page=${i}">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${tag < endP}">
+                        <li class="page-item">
+                            <a class="page-link" href="<%= request.getContextPath()%>/admin/user?page=${endP}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
+      
+

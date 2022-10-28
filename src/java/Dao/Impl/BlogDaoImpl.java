@@ -22,27 +22,7 @@ public class BlogDaoImpl implements Dao.BlogDao{
 
     //Blog List (tât ca moi thu lien quan den list ra blog, vi du nhu method getAllBlog, deu se duoc de o duoi nay):
 
-    public ArrayList<Blog> getAllBlog() {
-        DBContext dBContext = new DBContext();
-        ArrayList<Blog> listBlog = new ArrayList<>();
-        try {
-            String sql = "SELECT id, title, description, viewNumber FROM Blog WHERE 1=1";
-            Connection connection = dBContext.getConnection();
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Blog blog = new Blog();
-                blog.setId(rs.getInt("id"));
-                blog.setTitle(rs.getString("title"));
-                blog.setDescription(rs.getString("description"));
-                blog.setViewNumber(rs.getInt("viewNumber"));
-                listBlog.add(blog);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return listBlog;
-    }
+    
 
     public int getPageCount() throws Exception {
         DBContext dBContext = new DBContext();
@@ -121,22 +101,6 @@ public class BlogDaoImpl implements Dao.BlogDao{
 
    
 
-//    public static void main(String[] args) {
-//        
-//        
-//        ArrayList<Blog> list = dao.getTop3Blog();
-//        Blog b = dao.getBlogById(1);
-//        for (Blog blog : list) {
-//            if (b.getId() == blog.getId()) {
-//                list.remove(blog);
-//            }
-//        }
-//        for (Blog blog : list) {
-//            System.out.println(blog);
-//        }
-////System.out.println(b);
-//
-//    }
 
     @Override
     public Blog get(int id) {
@@ -221,20 +185,5 @@ DBContext dBContext = new DBContext();
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public static void main(String[] args) {
-        BlogDaoImpl dao = new BlogDaoImpl();
-        List<Blog> list = dao.getAllBlogByConstrain(0);
-//        Blog b = dao.getBlogById(1);
-//        for (Blog blog : list) {
-//            if (b.getId() == blog.getId()) {
-//                list.remove(blog);
-//            }
-//        }
-        for (Blog blog : list) {
-            System.out.println(blog);
-        }
-//System.out.println(b);
 
-    }
 }

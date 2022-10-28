@@ -16,6 +16,5 @@ public interface BlogDao extends BaseDAO<Blog>{
       public int getPageCount() throws Exception ;
     public List<Blog> getAllBlogByConstrain(int index) ;
     public ArrayList<Blog> getTop3Blog() ;
-    
     public void increaseView(int proId) ;
 }

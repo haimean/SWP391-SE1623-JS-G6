@@ -5,22 +5,24 @@
 package Controller;
 
 import Dao.Impl.BlogDaoImpl;
+import Dao.Impl.UserDaoImpl;
+import Model.AddressReceiver;
 import Model.Blog;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author nguye
  */
-public class UserBlogList extends HttpServlet {
+public class UserBlogDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +33,7 @@ public class UserBlogList extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,45 +47,35 @@ public class UserBlogList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDaoImpl bdao = new BlogDaoImpl();
+       //lay ra thong tin user
+        UserDaoImpl daoUser = new UserDaoImpl();
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+      
+//        AddressReceiver userInformation = daoUser.getUserById(u.getId());
         
-        int pagecount = 0;
-        try {
-            pagecount = bdao.getPageCount();
-        } catch (Exception ex) {
-            Logger.getLogger(UserBlogList.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("numberPage", pagecount);
-        //get and set current page
-        int page = 1;
-        if (null != request.getParameter("page")) {
-            page = Integer.parseInt(request.getParameter("page"));
-        }
-        request.setAttribute("pageCurrent", page);
-        //paging calculation
-        int beginPage = page - 1;
-        int endPage = page + 1;
-        if (page < 3) {
-            beginPage = 1;
-            endPage = 3;
-            if (endPage > pagecount) {
-                endPage = pagecount;
-            }
-        } else {
-            if (page > pagecount - 2) {
-                endPage = pagecount;
-                beginPage = pagecount - 2;
+        
+        
+        //lay ra list top 3 popular blog va blog detail voi id da lay duoc
+        int id = Integer.parseInt(request.getParameter("id"));
+        BlogDaoImpl daoB = new BlogDaoImpl();
+        Blog b = daoB.get(id);
+        Blog bRemove = null;
+        ArrayList<Blog> listB = daoB.getTop3Blog();
+        for (Blog blog : listB) {
+            if(b.getId() == blog.getId()){
+                bRemove = blog;
             }
         }
-
-//        List<Blog> blog = bdao.getAllBlog();
-        List<Blog> blog = bdao.getAllBlogByConstrain(page - 1);
-        request.setAttribute("beginPage", beginPage);
-        request.setAttribute("endPage", endPage);
-        request.setAttribute("lstzsize", blog.size() - 1);
-        request.setAttribute("listB", blog);
-        request.getRequestDispatcher("./user/blog/bloglist.jsp").forward(request, response);
-
+        listB.remove(bRemove);
+        if(listB.size() > 3){
+            listB.remove(3);
+        }
+        request.setAttribute("listB", listB);
+        request.setAttribute("blog", b);
+//        request.setAttribute("userInformation", userInformation);
+        request.setAttribute("lstzsize", listB.size() - 1);
+         request.getRequestDispatcher("./user/blog/blogdetails.jsp").forward(request, response);
     }
 
     /**
@@ -93,13 +85,6 @@ public class UserBlogList extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
-   
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
      */
     
 

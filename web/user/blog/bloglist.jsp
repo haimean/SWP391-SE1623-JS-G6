@@ -103,9 +103,6 @@
                         </div> 
                     </c:forEach>
 </c:if>
-
-                   
-
                                     </div>
                 <c:if test="${numberPage>1}">
                         <nav class="mt-4 " aria-label="Page navigation sample">

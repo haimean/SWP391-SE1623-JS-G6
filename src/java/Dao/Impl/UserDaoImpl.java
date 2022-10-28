@@ -7,6 +7,7 @@ package Dao.Impl;
 import Model.User;
 import Dao.DBContext;
 import Dao.UserDao;
+import Model.AddressReceiver;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -218,5 +219,34 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
+    }
+
+    @Override
+    public AddressReceiver getUserById(int id) {
+        DBContext dBContext = new DBContext();
+
+        try {
+            Connection connection = dBContext.getConnection();
+
+            String sql = "SELECT userId, fullname, phone, email, [address] + ', ' + city as [address]\n"
+                    + "FROM AddressReceiver\n"
+                    + "WHERE userId = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new AddressReceiver(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+
+            }
+            dBContext.closeConnection(connection, ps);
+
+        } catch (SQLException ex) {
+        }
+        return null;
     }
 }

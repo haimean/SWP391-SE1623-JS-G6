@@ -12,9 +12,12 @@ import java.sql.Date;
  */
 public class Blog {
     
-    private int  id,viewNumber;
-    private String  title, description;
-    Date create_at, update_at;
+    private int  id;
+    private int  viewNumber;
+    private String  title;
+    private String  description;
+    Date create_at;
+    Date update_at;
     
 
     public Blog() {

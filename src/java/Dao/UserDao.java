@@ -4,6 +4,7 @@
  */
 package Dao;
 
+import Model.AddressReceiver;
 import Model.User;
 import java.util.ArrayList;
 
@@ -20,5 +21,7 @@ public interface UserDao extends BaseDAO<User> {
     boolean updateUserRoleByID(int id, int role);
 
     ArrayList<User> search(String seachValue);
+    
+     AddressReceiver getUserById(int id);
 
 }

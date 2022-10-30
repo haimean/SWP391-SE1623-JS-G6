@@ -13,7 +13,5 @@ import Model.User;
  */
 public interface CartDao extends BaseDAO<Cart> {
 
-    String getStatus();
-
     Boolean addOrder(User user, Cart cart);
 }

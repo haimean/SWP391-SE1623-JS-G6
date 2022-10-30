@@ -12,7 +12,7 @@
 </div>
 
 <div class= "grid-container">
-    <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/lala.jpg">
+    <img class= "grid-item" src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1667077075/gxopjo3lincjn6zxfbeg.jpg">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/ghegamming.jpg">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/mic.jpg">
     <img class= "grid-item" src="<%=request.getContextPath()%>/images/Product/loa.jpg">

@@ -11,6 +11,7 @@ package Model;
 public class UserInformation {
     private int id;
     private String fullname;
+    private String image;
     private int gender;
     private String biography;
     private String phone;
@@ -21,9 +22,10 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(int id, String fullname, int gender, String biography, String phone, String mail, String address, String city) {
+    public UserInformation(int id, String fullname, String image, int gender, String biography, String phone, String mail, String address, String city) {
         this.id = id;
         this.fullname = fullname;
+        this.image = image;
         this.gender = gender;
         this.biography = biography;
         this.phone = phone;
@@ -46,6 +48,14 @@ public class UserInformation {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getGender() {
@@ -97,5 +107,4 @@ public class UserInformation {
     }
     
     
-
 }

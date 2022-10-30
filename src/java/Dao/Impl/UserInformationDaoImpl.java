@@ -49,20 +49,21 @@ public class UserInformationDaoImpl implements UserInformationDao {
         return listprofile;
     }
 
-    public boolean updateProfile(int id, String fullname, String gender, String biography, String address, String city) {
+    public boolean updateProfile(int id, String fullname,String image, String gender, String biography, String address, String city) {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
             String sql = "update UserInformation\n"
-                    + "set fullname=?,gender=?,biography=?,[address]=?,city=?\n"
+                    + "set fullname=?,image=?,gender=?,biography=?,[address]=?,city=?\n"
                     + "where id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(6, id);
+            stm.setInt(7, id);
             stm.setString(1, fullname);
-            stm.setString(2, gender);
-            stm.setString(3, biography);
-            stm.setString(4, address);
-            stm.setString(5, city);
+            stm.setString(2, image);
+            stm.setString(3, gender);
+            stm.setString(4, biography);
+            stm.setString(5, address);
+            stm.setString(6, city);
             stm.executeUpdate();
             return true;
         } catch (SQLException e) {

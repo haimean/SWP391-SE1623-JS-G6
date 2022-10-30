@@ -17,7 +17,7 @@
                 <button type="submit" class="button-logout-update-profile" name="id" value="${userinf.getId()}"><u>Save</u></button>
             </div>
             <div class="div-image-profile">
-                <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
+                <img class= "img-profile" src="${urlimage}">
             </div>
             <div class="div-title">
                 <h1 class="title">${userinf.getFullname()}</h1>

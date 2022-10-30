@@ -7,11 +7,15 @@ package Controller;
 import Dao.Impl.UserInformationDaoImpl;
 import Model.User;
 import Model.UserInformation;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.util.Map;
 
 /**
  *
@@ -53,17 +57,30 @@ public class ProfileUserUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "ddrjnfihc",
+                "api_key", "295827132792413",
+                "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
+        cloudinary.config.secure = true;
         UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
         int id = Integer.parseInt(request.getParameter("id"));
         String fullname = request.getParameter("fullname").trim();
+        String image = request.getParameter("image");
         String gender = request.getParameter("gender");
         String biography = request.getParameter("biography").trim();
         String address = request.getParameter("address").trim();
         String city = request.getParameter("city").trim();
-        boolean status = userInformationDaoImpl.updateProfile(id, fullname, gender, biography, address, city);
+        File file = new File(image);
+        Map path = ObjectUtils.asMap(
+                "public_id", "Home/Images/UserProfile/"+id
+        );
+        Map uploadResult = cloudinary.uploader().upload(file, path);
+        String geturl = uploadResult.get("secure_url").toString();
+        boolean status = userInformationDaoImpl.updateProfile(id, fullname, geturl, gender, biography, address, city);
         UserInformation userInf = userInformationDaoImpl.get(id);
         request.setAttribute("status", status);
         request.setAttribute("userinf", userInf);
+        request.setAttribute("urlimage", geturl);
         request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
     }
 

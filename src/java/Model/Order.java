@@ -19,7 +19,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(String id, String name, String phone, String email, double price, int status) {
+    public Order(String id, String name, 
+            String phone, String email, double price, int status) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -76,8 +77,4 @@ public class Order {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", email=" + email + ", price=" + price + ", status=" + status + '}';
-    }
 }

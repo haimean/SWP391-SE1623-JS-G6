@@ -59,7 +59,6 @@ public class SellerOrderList extends HttpServlet {
         OrderDaoimpl dao = new OrderDaoimpl();
         List<Order> listO = dao.getOrder();
         
-        
         request.setAttribute("listO", listO);
         request.getRequestDispatcher("/seller/order/orderlist.jsp").forward(request, response);
     } 

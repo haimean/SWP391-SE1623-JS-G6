@@ -12,15 +12,17 @@ import java.util.List;
  *
  * @author ngolu
  */
-public interface OrderDAO {
-    
-    public List<Order> search(String userName);
+public interface OrderDao {
     
     public List<Order> getOrder();
-     
+    
     public Order getOrderById(String id);
     
     public OrderDetail getOrderDetailById(String id);
-     
     
+    public List<Order> searchByFullName(String txtFullName);
+    
+    public int getTotalOrder();
+    
+     public List<Order> getOrder(int page);
 }

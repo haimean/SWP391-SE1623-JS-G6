@@ -66,9 +66,4 @@ public class OrderDetail {
     public void setTotal(double total) {
         this.total = total;
     }
-
-    @Override
-    public String toString() {
-        return "OrderDetail{" + "id=" + id + ", name=" + name + ", quantity=" + quantity + ", price=" + price + ", total=" + total + '}';
-    }
 }

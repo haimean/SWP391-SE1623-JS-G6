@@ -77,16 +77,16 @@
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>Controller.Register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyCode</servlet-name>
+        <servlet-class>Controller.VerifyCode</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SellerOrderList</servlet-name>
         <servlet-class>Controller.SellerOrderList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SellerOrderDetail</servlet-name>
-        <servlet-class>Controller.SellerOrderDetail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SellerOrderSearch</servlet-name>
-        <servlet-class>Controller.SellerOrderSearch</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -165,16 +165,16 @@
         <url-pattern>/profile/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyCode</servlet-name>
+        <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SellerOrderList</servlet-name>
         <url-pattern>/seller/order/list</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SellerOrderDetail</servlet-name>
-        <url-pattern>/seller/order/detail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SellerOrderSearch</servlet-name>
-        <url-pattern>/seller/order/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

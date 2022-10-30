@@ -8,6 +8,34 @@
      flex-direction: column;
      padding: 4rem;
      ">
+
+    <style>
+        .container{
+            width: 1051px;
+            height: 714px;
+            padding-top: 165px;
+            background-color: rgba(255, 255, 255, 0.884);
+        }
+        .bttCreate{
+            padding-bottom: 19px;
+        }
+        .me-2 {
+            margin-right: .5rem!important;
+            height: 40px;
+            width: 480px;
+        }
+        [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+            cursor: pointer;
+            height: 40px;
+        }
+        .d-flex {
+            display: flex!important;
+            padding-bottom: 91px;
+        }
+        h3{
+            text-align: center;
+        }
+    </style>
     <div>
 
         <a class="btn btn-primary" href="create" role="button">Create</a>

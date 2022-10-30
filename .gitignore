@@ -614,6 +614,6 @@ bower_components/
 
 /build/
 /dist/
-
-/src/java/DBContext/DBContext.java/
+/DBContext.java/
+/src/java/Dao
 /SWP391-SE1623-JS-G6/nbproject/private/

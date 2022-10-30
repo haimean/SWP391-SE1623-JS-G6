@@ -33,14 +33,44 @@ public class AdminCategoryList extends HttpServlet {
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         String search = request.getParameter("search");
-        if (search != null) {
-            ArrayList<Category> categories = categoryDaoImpl.search(search);
+        String indexpasge = request.getParameter("page");
+        String status=request.getParameter("status");
+        if (indexpasge == null) {
+            indexpasge = "1";
+            int page = Integer.parseInt(indexpasge);
+            if (search != null) {
+                ArrayList<Category> categories = categoryDaoImpl.search(search);
+            } else {
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+            }
+            int count = categoryDaoImpl.getTotalCategory();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+            request.setAttribute("endpage", endpage);
             request.setAttribute("categories", categories);
+            request.setAttribute("status", status);
             request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
         } else {
-            ArrayList<Category> categories = categoryDaoImpl.getAll();
+            int page = Integer.parseInt(indexpasge);
+            if (search != null) {
+                ArrayList<Category> categories = categoryDaoImpl.search(search);
+            } else {
+                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+            }
+            int count = categoryDaoImpl.getTotalCategory();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+            request.setAttribute("endpage", endpage);
             request.setAttribute("categories", categories);
+            request.setAttribute("status", status);
             request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
+
         }
     }
 }

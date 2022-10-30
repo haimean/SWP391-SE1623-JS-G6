@@ -31,17 +31,17 @@
                         <b>Update Information Profile</b>
                     </h4>
                 </div><br>
-                <span><ion-icon name="person-circle-outline"></ion-icon> Full Name:  <input value="${userinf.getFullname()}" onkeydown="ValidateFullname()" type="search" id="fullname" placeholder="ex:Nguyen Ngoc Tuan" name="fullname"/></span>&emsp;<span id="text-fullname"></span><br>
+                <span><ion-icon name="person-circle-outline"></ion-icon> Full Name:  <input value="${userinf.getFullname()}" onkeyup="ValidateFullname()" type="search" id="fullname" placeholder="ex:Nguyen Ngoc Tuan" name="fullname"/></span>&emsp;<span id="text-fullname"></span><br>
 
                 <span><ion-icon name="transgender"></ion-icon> Gender:<br>
                     <input type="radio" id="sex" name="gender" value="1" ${userinf.isGender()==1?"checked":""}>Male<br>
                     <input type="radio" id="sex" name="gender" value="0" ${userinf.isGender()==0?"checked":""}>Female
                 </span><br>
-                <span><ion-icon name="hand-right-outline"></ion-icon>Bio: <input value="${userinf.getBio()}" onkeydown="ValidateBio()" type="text" id="bio" placeholder="ex:about me,..." name="bio"/></span>&emsp;<span id="text-bio"></span><br>
+                <span><ion-icon name="hand-right-outline"></ion-icon>Bio: <input value="${userinf.getBio()}"  type="text" id="bio" placeholder="ex:about me,..." name="bio"/></span>&emsp;<span id="text-bio"></span><br>
                 <span><ion-icon name="call-outline"></ion-icon> Phone: ${userinf.getPhone()}</span><br>
                 <span><ion-icon name="mail-outline"></ion-icon> Email: ${userinf.getMail()}</span><br>
-                <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <input value="${userinf.getAddress()}" onkeydown="ValidateAddress()" type="search" id="address" placeholder="ex:Cu Dinh-Viet Hung,..." name="address"/></span><span id="text-address"></span><br>
-                <span><ion-icon name="business-outline"></ion-icon> City: <input value="${userinf.getCity()}" onkeydown="ValidateCity()" type="text" id="city" placeholder="ex:Hung Yen" name="city"/></span>&emsp;<span id="text-city"></span>
+                <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <input value="${userinf.getAddress()}" onkeyup="ValidateAddress()" type="search" id="address" placeholder="ex:Cu Dinh-Viet Hung,..." name="address"/></span><span id="text-address"></span><br>
+                <span><ion-icon name="business-outline"></ion-icon> City: <input value="${userinf.getCity()}" onkeyup="ValidateCity()" type="text" id="city" placeholder="ex:Hung Yen" name="city"/></span>&emsp;<span id="text-city"></span>
             </div>
         </form>
     </div>
@@ -75,37 +75,12 @@
             text.style.color = "#00ff00";
         }
     }
-    function ValidateBio() {
-        var form = document.getElementById("form");
-        var fullname = document.getElementById("bio").value;
-        var text = document.getElementById("text-bio");
-        var pattern = /^([^0-9]*)$/;
-
-        if (fullname.match(pattern)) {
-            form.classList.add("valid");
-            form.classList.remove("invalid");
-            text.innerHTML = "Input Valid!";
-            text.style.color = "#00ff00";
-        } else {
-            form.classList.remove("valid");
-            form.classList.add("valid");
-            text.innerHTML = "Input Invalid!Please enter again!";
-            text.style.color = "#ff0000";
-        }
-
-        if (fullname === "") {
-            form.classList.remove("valid");
-            form.classList.remove("invalid");
-            text.innerHTML = "";
-            text.style.color = "#00ff00";
-        }
-        
-    }
+    
     function ValidateAddress() {
         var form = document.getElementById("form");
         var fullname = document.getElementById("address").value;
         var text = document.getElementById("text-address");
-        var pattern = /^([^0-9]*)$/;
+        var pattern = /^([^!@#$%^&*()]*]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");
@@ -131,7 +106,7 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("city").value;
         var text = document.getElementById("text-city");
-        var pattern = /^([^0-9]*)$/;
+        var pattern = /^([^0-9!@#$%^&*()]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");

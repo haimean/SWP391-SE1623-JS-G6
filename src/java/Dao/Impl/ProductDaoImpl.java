@@ -23,7 +23,7 @@ import java.time.Instant;
  * @author MrTuan
  */
 public class ProductDaoImpl implements ProductDao {
-
+    Timestamp ts = Timestamp.from(Instant.now());
     @Override
     public Product get(int id) {
         DBContext dBContext = new DBContext();
@@ -112,8 +112,8 @@ public class ProductDaoImpl implements ProductDao {
             ps.setDouble(6, item.getPrice());
             ps.setBoolean(7, item.getStatus());
             ps.setInt(8, 0);
-            ps.setTimestamp(9, item.getCreate_at());
-            ps.setTimestamp(10, item.getUpdate_at());
+            ps.setTimestamp(9, ts);
+            ps.setTimestamp(10, ts);
             ps.executeUpdate();
             dBContext.closeConnection(connection, ps);
             return true;

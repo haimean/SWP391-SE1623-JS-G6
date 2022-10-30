@@ -58,10 +58,6 @@ public class Product {
         this.viewNumber = viewNumber;
     }
 
-    public Product(String string, int aInt, String string0, String string1, String string2, int aInt0, double aDouble, boolean aBoolean, int aInt1, String string3, String string4) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public int getId() {
         return id;
     }

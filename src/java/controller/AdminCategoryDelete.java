@@ -34,11 +34,33 @@ public class AdminCategoryDelete extends HttpServlet {
             throws ServletException, IOException {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-        boolean status = categoryDaoImpl.delete(id);
-        ArrayList<Category> categories = categoryDaoImpl.getAll();
-        request.setAttribute("status", status);
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("categoryList.jsp").forward(request, response);
+        String indexpasge = request.getParameter("page");
+        if (indexpasge == null) {
+            indexpasge = "1";
+            int page = Integer.parseInt(indexpasge);
+            int count = categoryDaoImpl.getTotalCategory();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            boolean status = categoryDaoImpl.delete(id);
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+            request.setAttribute("categories", categories);
+            request.setAttribute("endpage", endpage);
+            response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
+        }else{
+            int page = Integer.parseInt(indexpasge);
+            int count = categoryDaoImpl.getTotalCategory();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            boolean status = categoryDaoImpl.delete(id);
+            ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+            request.setAttribute("categories", categories);
+            request.setAttribute("endpage", endpage);
+            response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
+        }
 
     }
 

@@ -9,7 +9,7 @@
     <div class="side-nav-categories">
         <form id="form" action="category" method="GET">
             <div class="search">
-                <input name="search" class="text-search" type="text" onkeydown="ValidateSearch()" placeholder="Name..." id="search-input">
+                <input name="search" class="text-search" type="text" onkeyup="ValidateSearch()" placeholder="Name..." id="search-input">
                 <button class="button-search">Search</button>
             </div><br>
             <span id="text-search"></span>
@@ -25,7 +25,7 @@
                         <div class="name" style="margin-left: 150px;width: 200px;">${c.name}</div>
                         <div class="footer-category" style="margin-left: 200px;">
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${c.id}">Delete</button>
-                            <button type="button" class="btn btn-info" onclick="UpdateInfo(${c.id})" name="id" value="${c.id}">Update</button>
+                            <button type="button" class="btn btn-info"  onclick="UpdateInfo(${c.id})" name="id" value="${c.id}">Update</button>
                         </div>
                     </div>
                 </li>
@@ -49,20 +49,26 @@
             </c:forEach>
         </ul>
     </div>
+    <div class="paging">
+        <ul class="pagination justify-content-center">
+            <c:forEach begin="1" end="${endpage}" var="p">
+                <li class="page-item"><a class="page-link" href="category?page=${p}">${p}</a></li>
+                </c:forEach>
+        </ul>
+    </div>
 </div>
-
-<div class="position-fixed w-100">
-    <c:if test="${status == true}">
-        <button class="alert alert-success d-flex align-items-center position-absolute ms-3 pe-auto" role="alert">
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+<div class="position-fixed w-100" id="alert-div">
+    <c:if test="${status.equals('true')}">
+        <button class="alert alert-success d-flex align-items-center position-absolute ms-3 pe-auto" role="alert" onclick="closeAlertModal()">
+            <svg id="suc" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
             <div>
                 Successful!
             </div>
         </button>
     </c:if>
-    <c:if test="${status == false}">
+    <c:if test="${status.equals('false')}">
         <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <svg id="fa" class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
             <div>
                 Failed!
             </div>
@@ -70,8 +76,13 @@
     </c:if>
 </div>
 <script>
-    function DeleteCategory(id){
-        window.location.href = "category/delete?id="+id;
+    function hideAlert(){
+        var form = document.getElementById("alert-div");
+        form.classList.remove("suc");
+        form.classList.remove("fa");
+    }
+    function DeleteCategory(id) {
+        window.location.href = "category/delete?id=" + id;
     }
     function CreateCategory() {
         window.location.href = "category/create";
@@ -276,5 +287,12 @@
             opacity: 0;
             transform: translateX(-100%);
         }
+    }
+    .paging{
+        margin-top: 100px;
+        margin-right: 100px;
+    }
+    .hide{
+        display: none;
     }
 </style>

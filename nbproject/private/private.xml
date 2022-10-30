@@ -3,13 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/haimi/OneDrive/Desktop/SWP391-SE1623-JS-G6/web/seller/mess/index.jsp</file>
-            <file>file:/C:/Users/haimi/OneDrive/Desktop/SWP391-SE1623-JS-G6/web/login/login.jsp</file>
-            <file>file:/C:/Users/haimi/OneDrive/Desktop/SWP391-SE1623-JS-G6/src/java/ControllerSeller/SellerMess.java</file>
-            <file>file:/C:/Users/haimi/OneDrive/Desktop/SWP391-SE1623-JS-G6/src/java/ControllerAuthen/Login.java</file>
-            <file>file:/C:/Users/haimi/OneDrive/Desktop/SWP391-SE1623-JS-G6/web/seller/layout/index.jsp</file>
-            <file>file:/C:/Users/haimi/OneDrive/Desktop/SWP391-SE1623-JS-G6/src/java/Dal/DAOMessage.java</file>
-            <file>file:/C:/Users/haimi/OneDrive/Desktop/SWP391-SE1623-JS-G6/web/login/css/style.css</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Controller/SellerOrderList.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Dao/Impl/OrderDaoimpl.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Dao/DBContext.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Controller/Login.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Dao/Impl/CategoryDaoImpl.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Dao/CategoryDao.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Dao/Impl/ProductDaoImpl.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Model/Order.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Model/OrderDetail.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/src/java/Dao/OrderDao.java</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/web/seller/product/productList.jsp</file>
+            <file>file:/E:/Code_Group/SWP391-SE1623-JS-G6/web/seller/order/orderlist.jsp</file>
         </group>
     </open-files>
 </project-private>

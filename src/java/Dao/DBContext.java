@@ -59,7 +59,7 @@ public class DBContext {
             }
         }
     }
-       public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
+    public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {
                 preparedStatement.close();

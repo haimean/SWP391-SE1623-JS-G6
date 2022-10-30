@@ -5,55 +5,30 @@
 package Dao.Impl;
 
 import Dao.DBContext;
-import Dao.OrderDAO;
+import Dao.OrderDao;
 import Model.Order;
 import Model.OrderDetail;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Connection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author ngolu
  */
-public class OrderDaoimpl implements OrderDAO {
-
-    DBContext dBContext = new DBContext();
-    Connection connection = dBContext.getConnection();
-
-    @Override
-    public List<Order> search(String userName) {
-        String sql = "select [order].id, [UserInformation].fullname,\n"
-                + "[UserInformation].phone, [user].email ,\n"
-                + "(select sum( price * quantity) from  OrderDetail\n"
-                + "where [order].id = OrderDetail.orderId) as price,[order].status\n"
-                + "from  [order],UserInformation ,[User]\n"
-                + "where [order].userId = UserInformation.userId\n"
-                + "and  [order].userId = [user].id\n"
-                + "and [UserInformation].fullname = ?";
-        List<Order> list = new ArrayList<>();
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, userName);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Order o = new Order(rs.getString(1),
-                        rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getDouble(5), rs.getInt(6));
-                list.add(o);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        return list;
-    }
-
+public class OrderDaoimpl implements OrderDao{
+    
+    DBContext db = new DBContext();
+    Connection connection = db.getConnection();
+    
     @Override
     public List<Order> getOrder() {
-        List<Order> list = new ArrayList<>();
+         List<Order> list = new ArrayList<>();
         String sql = "select [order].id, [UserInformation].fullname,[UserInformation].phone, [user].email ,\n"
                 + "(select sum( price * quantity) from  OrderDetail where [order].id = OrderDetail.orderId) as price,\n"
                 + "[order].status\n"
@@ -101,7 +76,7 @@ public class OrderDaoimpl implements OrderDAO {
 
     @Override
     public OrderDetail getOrderDetailById(String id) {
-        String sql = "Select [Order].id,[Product].name ,\n"
+       String sql = "Select [Order].id,[Product].name ,\n"
                 + "[OrderDetail].quantity , [Product].price,\n"
                 + "(select sum( price * quantity) from  OrderDetail\n"
                 + "where [order].id = OrderDetail.orderId) as Totalprice\n"
@@ -123,4 +98,77 @@ public class OrderDaoimpl implements OrderDAO {
         }
         return null;
     }
+
+    @Override
+    public List<Order> searchByFullName(String txtFullName) {
+       String sql = "select [order].id, [UserInformation].fullname,\n"
+                + "[UserInformation].phone, [user].email ,\n"
+                + "(select sum( price * quantity) from  OrderDetail\n"
+                + "where [order].id = OrderDetail.orderId) as price,[order].status\n"
+                + "from  [order],UserInformation ,[User]\n"
+                + "where [order].userId = UserInformation.userId\n"
+                + "and  [order].userId = [user].id\n"
+                + "and [UserInformation].fullname = ?";
+        List<Order> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, txtFullName);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order o = new Order(rs.getString(1),
+                        rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getDouble(5), rs.getInt(6));
+                list.add(o);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+
+    @Override
+    public int getTotalOrder() {
+        String sql = "select count(*)\n"
+                + "from  [order],UserInformation ,[User]\n"
+                + "where [order].userId = UserInformation.userId\n"
+                + "and  [order].userId = [user].id";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public List<Order> getOrder(int page) {
+        List<Order> list = new ArrayList<>();
+        String sql = "select * from  [order],UserInformation ,[User]\n"
+                + "where [order].userId = UserInformation.userId\n"
+                + "and  [order].userId = [user].id\n"
+                + "order by [order].userId \n"
+                + "offset ? rows fetch next 5 rows only ";
+       
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (page-1)*5);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Order o = new Order(rs.getString(1),
+                        rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getDouble(5), rs.getInt(6));
+                list.add(o);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+    
 }

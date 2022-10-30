@@ -7,18 +7,45 @@
 <%@include file="../layout/index.jsp" %>
 <div class="container-category">
     <div class="side-nav-categories">
-        <form action="create" method="POST">
+        <form id="form" action="create" method="POST">
             <div class="div-title">
                 <h1 class="title">Create Category</h1>
             </div>
             <div class="div-name">
                 <h3 class="title-name">Name</h3>
-                <input class="text-name" type="text"  placeholder="Name..." name="txt">
+                <input class="text-name" type="text" onkeyup="ValidateCategory()"  placeholder="Name..." name="name" id="category-input"><span id="text-category"></span>
             </div>
-            <input type="submit" class="btn btn-primary" style="font-family: serif;color: #fff;" value="Create">
+            <input type="submit" class="btn btn-primary"  style="font-family: serif;color: #fff;" value="Create" >
         </form>
     </div>
 </div>
+<script>
+    function ValidateCategory() {
+        var form = document.getElementById("form");
+        var category = document.getElementById("category-input").value;
+        var text = document.getElementById("text-category");
+        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+
+        if (category.match(pattern)) {
+            form.classList.add("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "Fullname valid!";
+            text.style.color = "#00ff00";
+        } else {
+            form.classList.remove("valid");
+            form.classList.add("valid");
+            text.innerHTML = "Please enter fullname!";
+            text.style.color = "#ff0000";
+        }
+
+        if (category === "") {
+            form.classList.remove("valid");
+            form.classList.remove("invalid");
+            text.innerHTML = "";
+            text.style.color = "#00ff00";
+        }
+    }
+</script>
 <style>
     .side-nav-categories {
         border-radius: 30px;
@@ -82,5 +109,8 @@
         margin-bottom: 60px;
         width: 100px;
         height: 45px;
+    }
+    #text-category{
+        margin-right: 540px;
     }
 </style>

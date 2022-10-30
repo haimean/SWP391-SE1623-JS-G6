@@ -79,6 +79,12 @@
     <servlet>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>Controller.Register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyCode</servlet-name>
+        <servlet-class>Controller.VerifyCode</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -159,6 +165,12 @@
     <servlet-mapping>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <url-pattern>/profile/changepassword</url-pattern>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyCode</servlet-name>
+        <url-pattern>/verify</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

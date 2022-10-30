@@ -27,7 +27,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
         UserInformation listprofile = new UserInformation();
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select u.id,u.email,uf.fullname,uf.gender,uf.biography,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
+            String sql = "select u.id,u.email,uf.fullname,uf.image,uf.gender,uf.biography,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
                     + "on u.id=uf.id\n"
                     + "where u.id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -36,6 +36,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
             while (rs.next()) {
                 listprofile.setId(rs.getInt("id"));
                 listprofile.setFullname(rs.getString("fullname"));
+                listprofile.setImage(rs.getString("image"));
                 listprofile.setBiography(rs.getString("biography"));
                 listprofile.setGender(rs.getInt("gender"));
                 listprofile.setPhone(rs.getString("phone"));

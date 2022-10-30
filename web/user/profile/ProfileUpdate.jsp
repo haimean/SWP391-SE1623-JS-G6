@@ -17,7 +17,7 @@
                 <button type="submit" class="button-logout-update-profile" name="id" value="${userinf.getId()}"><u>Save</u></button>
             </div>
             <div class="div-image-profile">
-                <img class= "img-profile" src="${urlimage}">
+                <img class= "img-profile" src="${userinf.getImage()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default_lqkxt3.jpg" : userinf.getImage()}">
             </div>
             <div class="div-title">
                 <h1 class="title">${userinf.getFullname()}</h1>

@@ -83,6 +83,6 @@ public class Message {
     public void setUpdate_at(Date Update_at) {
         this.Update_at = Update_at;
     }
-    
+
 
 }

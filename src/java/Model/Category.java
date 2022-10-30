@@ -1,15 +1,11 @@
 package Model;
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 
 /**
  *
  * @author Mr Tuan
  */
 public class Category {
+
     private int id;
     private String name;
 
@@ -21,6 +17,9 @@ public class Category {
         this.name = name;
     }
 
+    public Category(String name) {
+        this.name = name;
+    }
     public int getId() {
         return id;
     }
@@ -36,6 +35,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
 }

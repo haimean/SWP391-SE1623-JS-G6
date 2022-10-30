@@ -1,89 +1,95 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="CSS/style.css">
-        <title>Admin Product</title>
-    </head>
-    <body>
+<%@include file="../layout/index.jsp" %>
+<div class="container"  style="
+     border: 1px solid #0000004a;
+     background: white;
+     margin-top: 3rem;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     padding: 4rem;
+     ">
 
-        <div class="container">
-            <div class="bttCreate">
-                <button type="button" class="btn btn-primary">Create</button>
-            </div>         
-            <div class="content">
-                <form action="search"  method="post"  class="d-flex" role="search">
-                    <input name="txt" class="form-control me-2" type="text" placeholder="Enter Name" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+    <style>
+        .container{
+            width: 1051px;
+            height: 714px;
+            padding-top: 165px;
+            background-color: rgba(255, 255, 255, 0.884);
+        }
+        .bttCreate{
+            padding-bottom: 19px;
+        }
+        .me-2 {
+            margin-right: .5rem!important;
+            height: 40px;
+            width: 480px;
+        }
+        [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+            cursor: pointer;
+            height: 40px;
+        }
+        .d-flex {
+            display: flex!important;
+            padding-bottom: 91px;
+        }
+        h3{
+            text-align: center;
+        }
+    </style>
+    <div>
 
-                <table class="table">
-                    <thead>
+        <a class="btn btn-primary" href="create" role="button">Create</a>
+    </div>
+    <div class="content" style="margin-top: 2rem">
+        <form action=""  method="post"  class="d-flex" role="search">
+            <input name="txt" class="form-control me-2" type="text" placeholder="Enter Name" aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Quanlity</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:set var="i" value="0"></c:set>
+                <c:forEach items="${products}" var="o">
+                    <c:set var="i" value="${i+1}"></c:set>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Quanlity</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${listP}" var="o">
-                        <tr>
-                            
-                            <th scope="row">${o.id}</th>
-                            
-                            <td>
-                                ${o.name}
-                            </td>
-                            <td>
-                                ${o.categoryID}
-                            </td>
-                            <td>
-                                ${o.quantity}
-                            </td>
-                            <td></td>
-                            
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Delete
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete confirm</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Do you agree to delete product ?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
+                            <th >${i}</th>        
+                        <th >${o.name}</th>
+                        <th >${o.categoryID}</th>
+                        <th >${o.quantity}</th>
+                        <th ><img src="https://static.vecteezy.com/system/resources/previews/000/395/417/original/modern-company-logo-design-vector.jpg" width="120" alt="${o.name}"/></th>     
+                        <th >  
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${o.id}">Delete</button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel${o.id}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete confirm</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Do you agree to delete product ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a class="btn btn-danger" href="delete?id=${o.id}" role="button">Delete</a>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <a href="updatep?pid=${o.id}"> <button type="button" class="btn btn-info">Update</button></a>
-                            </td>
-                           
-                        </tr>    
-                         </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-    </body>
-</html>
+                            </div>
+                            <a class="btn btn-info" href="update?id=${o.id}" role="button">Update</a></th>
+
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>

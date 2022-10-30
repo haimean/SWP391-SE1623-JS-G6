@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  * @author s
  */
 public class DBContext {
-    private final String serverName = "LAPTOP-JHJQ889Q\\SQLEXPRESS";
-    private final String dbName = "se1623JS-Gr6-SWP391";
+    private final String serverName = "localhost";
+    private final String dbName = "SWP391-G6-SE1623";
     private final String portNumber = "1433";
     private final String userID = "sa";
     private final String password = "samsunggears3";
@@ -59,7 +59,7 @@ public class DBContext {
             }
         }
     }
-       public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
+    public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {
                 preparedStatement.close();

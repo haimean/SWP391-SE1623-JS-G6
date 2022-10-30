@@ -11,7 +11,7 @@
             </div>
             <div class="div-name">
                 <h3 class="title-name">Name</h3>
-                <input class="text-name" type="text" onkeydown="ValidateCategory()"  placeholder="Name..." value="${category.name}"name="name" id="category-input"><span id="text-category"></span>
+                <input class="text-name" type="text" onkeyup="ValidateCategory()"  placeholder="Name..." value="${category.name}"name="name" id="category-input"><span id="text-category"></span>
             </div>
             <input type="submit" class="btn btn-primary" style="font-family: serif;color: #fff;" value="Update">
         </form>
@@ -22,7 +22,7 @@
         var form = document.getElementById("form");
         var category = document.getElementById("category-input").value;
         var text = document.getElementById("text-category");
-        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+        var pattern = /^([^0-9!@#$=+/\|;.,?<'":~>}{%^&*()]*)$/;
 
         if (category.match(pattern)) {
             form.classList.add("valid");

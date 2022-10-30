@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,6 +23,32 @@ import java.util.logging.Logger;
  * @author MrTuan
  */
 public class UserDaoImpl implements UserDao {
+
+    Timestamp ts = Timestamp.from(Instant.now());
+
+    public static boolean haveAccount(String email) {
+        DBContext dBContext = new DBContext();
+        int numberAccount = 0;
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = " select count(id) from [user] where email = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                numberAccount = rs.getInt(1);
+            }
+            dBContext.closeConnection(connection, ps);
+            if (numberAccount > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
+    }
 
     @Override
     public User login(String Email, String password) {
@@ -206,6 +234,45 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return 0;
+     }
+    public boolean insert(User item) {
+        DBContext dBContext = new DBContext();
+
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "INSERT INTO [dbo].[user]\n"
+                    + "           ([email]\n"
+                    + "           ,[password]\n"
+                    + "           ,[create_at]\n"
+                    + "           ,[update_at]\n"
+                    + "     VALUES(?,?,?,4)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, item.getEmail());
+            ps.setString(2, item.getPassword());
+            ps.setTimestamp(3, ts);
+            ps.setTimestamp(4, ts);
+            ps.executeUpdate();
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        item = login(item.getEmail(), item.getPassword());
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "INSERT INTO UserInformation (userId,fullName,create_at)  VALUES(?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, item.getId());
+            ps.setString(2, item.getFullName());
+            ps.setTimestamp(3, ts);
+            ps.executeUpdate();
+            dBContext.closeConnection(connection, ps);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 
     @Override
@@ -280,5 +347,22 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public boolean updatePassword(String email,String password){
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "update [User] set [password]= ? where email= ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(2, email);
+            ps.setString(1, password);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
     }
 }

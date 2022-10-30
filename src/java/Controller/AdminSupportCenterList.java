@@ -1,27 +1,29 @@
-package Controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-import Model.User;
-import Dao.Impl.UserDaoImpl;
+package Controller;
+
+import Dao.Impl.SupportCenterDaolmpl;
+import Model.SupportCenter;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
- * @author haimi
+ * @author PiPi
  */
-public class AdminUserList extends HttpServlet {
+@WebServlet(name = "AdminSupportCenterList", urlPatterns = {"/admin/qna"})
+public class AdminSupportCenterList extends HttpServlet {
 
-    public void paginate(List<User> list, UserDaoImpl db, HttpServletRequest request, HttpServletResponse response, String mode, String... searchValue)
+    public void paginate(ArrayList<SupportCenter> list, SupportCenterDaolmpl db, HttpServletRequest request, HttpServletResponse response, String mode, String... searchValue)
             throws ServletException, IOException {
-        final int recordsPerPage = 4;
+        final int RECORD_PER_PAGE = 4;
         int index;
         String indexParam = request.getParameter("page");
         if (indexParam == null) {
@@ -37,10 +39,10 @@ public class AdminUserList extends HttpServlet {
         } catch (NumberFormatException e) {
             index = 1;
         }
-        int totalPage = db.getTotalUsers();
-        int endPage = totalPage / recordsPerPage;
+        int totalPage = db.getTotalQna();
+        int endPage = totalPage / RECORD_PER_PAGE;
 
-        if (totalPage % recordsPerPage != 0) {
+        if (totalPage % RECORD_PER_PAGE != 0) {
             endPage++;
         }
 
@@ -49,35 +51,45 @@ public class AdminUserList extends HttpServlet {
         }
 
         if (mode.equals("SEARCH")) {
-            totalPage = db.getTotalUsersSearch(searchValue[0]);
-            endPage = totalPage / recordsPerPage;
+            totalPage = db.getTotalQnaSearch(searchValue[0]);
+            endPage = totalPage / RECORD_PER_PAGE;
 
-            if (totalPage % recordsPerPage != 0) {
+            if (totalPage % RECORD_PER_PAGE != 0) {
                 endPage++;
             }
 
             if (index > endPage) {
                 index = endPage;
             }
-            list = db.search(searchValue[0], index);
+            list = db.searchQna(searchValue[0], index);
             request.setAttribute("tag", index);
-            request.setAttribute("listU", list);
+            request.setAttribute("listQna", list);
             request.setAttribute("size", list.size());
             request.setAttribute("endP", endPage);
             request.setAttribute("search", searchValue[0]);
-            request.getRequestDispatcher("/admin/user/userSearch.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/question/qnaSearch.jsp").forward(request, response);
 
-        } else {
+        } else if (mode.equals("DELETE")) {
+            String id = request.getParameter("id");
+            boolean status = db.delete(Integer.parseInt(id));
             list = db.paginate(index);
+            request.setAttribute("tag", index);
+            request.setAttribute("listQna", list);
+            request.setAttribute("endP", endPage);
+            request.setAttribute("status", status);
+            request.getRequestDispatcher("/admin/question/index.jsp").forward(request, response);
+        } else {
+            String status = request.getParameter("status");
+            list = db.paginate(index);
+            request.setAttribute("status", status);
+            request.setAttribute("tag", index);
+            request.setAttribute("listQna", list);
+            request.setAttribute("endP", endPage);
+            request.getRequestDispatcher("/admin/question/index.jsp").forward(request, response);
         }
-        request.setAttribute("tag", index);
-        request.setAttribute("listU", list);
-        request.setAttribute("endP", endPage);
-        request.getRequestDispatcher("/admin/user/index.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
-    // + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -89,22 +101,14 @@ public class AdminUserList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        SupportCenterDaolmpl db = new SupportCenterDaolmpl();
         String modeParam = request.getParameter("mode");
-        UserDaoImpl db = new UserDaoImpl();
-        List<User> list = null;
-        
+        ArrayList<SupportCenter> list = null;
+
         if (modeParam == null) {
             paginate(list, db, request, response, "NORMAL");
-
-        } else if (modeParam.equals("BAN")) {
-            String idParam = request.getParameter("id");
-            String statusParam = request.getParameter("status");
-            int id = Integer.parseInt(idParam);
-            boolean status = Boolean.parseBoolean(statusParam);
-            db.updateUserStatusByID(id, !status);
-            paginate(list, db, request, response, "BAN");
         } else if ((modeParam.equals("SEARCH"))) {
-            String searchValue = request.getParameter("search");
+            String searchValue = request.getParameter("search").trim();
             paginate(list, db, request, response, "SEARCH", searchValue);
         }
     }
@@ -120,21 +124,17 @@ public class AdminUserList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> list = null;
-        UserDaoImpl db = new UserDaoImpl();
+        ArrayList<SupportCenter> list = null;
+        SupportCenterDaolmpl db = new SupportCenterDaolmpl();
         String modeParam = request.getParameter("mode");
 
-        if (modeParam.equals("ROLE")) {
-            String idParam = request.getParameter("id");
-            String roleParam = request.getParameter("role");
-            int id = Integer.parseInt(idParam);
-            int role = Integer.parseInt(roleParam);
-            db.updateUserRoleByID(id, role);
-            paginate(list, db, request, response, "ROLE");
-        }
         if ((modeParam.equals("SEARCH"))) {
             String searchValue = request.getParameter("search").trim();
             paginate(list, db, request, response, "SEARCH", searchValue);
         }
+        if ((modeParam.equals("DELETE"))) {
+            paginate(list, db, request, response, "DELETE");
+        }
     }
+
 }

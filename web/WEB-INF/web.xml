@@ -77,6 +77,24 @@
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AdminSupportCenterCreate</servlet-name>
+        <servlet-class>Controller.AdminSupportCenterCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSupportCenterUpdate</servlet-name>
+        <servlet-class>Controller.AdminSupportCenterUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminTypeSupportCenterList</servlet-name>
+        <servlet-class>Controller.AdminTypeSupportCenterList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminTypeSupportCenterCreate</servlet-name>
+        <servlet-class>Controller.AdminTypeSupportCenterCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
+        <servlet-class>Controller.AdminTypeSupportCenterUpdate</servlet-class>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
         <servlet-name>Register</servlet-name>
@@ -163,6 +181,24 @@
         <url-pattern>/profile/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AdminSupportCenterCreate</servlet-name>
+        <url-pattern>/admin/qna/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSupportCenterUpdate</servlet-name>
+        <url-pattern>/admin/qna/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminTypeSupportCenterList</servlet-name>
+        <url-pattern>/admin/qna-type</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminTypeSupportCenterCreate</servlet-name>
+        <url-pattern>/admin/qna-type/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
+        <url-pattern>/admin/qna-type/update</url-pattern>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <url-pattern>/profile/changepassword</url-pattern>
         <servlet-name>Register</servlet-name>

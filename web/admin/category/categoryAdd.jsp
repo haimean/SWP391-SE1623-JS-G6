@@ -24,7 +24,7 @@
         var form = document.getElementById("form");
         var category = document.getElementById("category-input").value;
         var text = document.getElementById("text-category");
-        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+        var pattern = /^([^0-9!@#$=+/\|;.,?<'":~>}{%^&*()]*)$/;
 
         if (category.match(pattern)) {
             form.classList.add("valid");

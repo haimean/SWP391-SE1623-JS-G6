@@ -20,5 +20,7 @@ public interface UserDao extends BaseDAO<User> {
     boolean updateUserRoleByID(int id, int role);
 
     ArrayList<User> search(String seachValue);
+    
+    boolean updatePassword(String email,String password);
 
 }

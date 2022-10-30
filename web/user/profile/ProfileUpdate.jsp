@@ -17,13 +17,13 @@
                 <button type="submit" class="button-logout-update-profile" name="id" value="${userinf.getId()}"><u>Save</u></button>
             </div>
             <div class="div-image-profile">
-                <img class= "img-profile" src="https://picsum.photos/950/600.jpg">
+                <img class= "img-profile" src="${urlimage}">
             </div>
             <div class="div-title">
                 <h1 class="title">${userinf.getFullname()}</h1>
             </div>
             <div class="div-bio">
-                <span>${userinf.getBio()}</span>
+                <span>${userinf.getBiography()}</span>
             </div>
             <div class="div-information">
                 <div class="div-info">
@@ -34,10 +34,10 @@
                 <span><ion-icon name="person-circle-outline"></ion-icon> Full Name:  <input value="${userinf.getFullname()}" onkeyup="ValidateFullname()" type="search" id="fullname" placeholder="ex:Nguyen Ngoc Tuan" name="fullname"/></span>&emsp;<span id="text-fullname"></span><br>
 
                 <span><ion-icon name="transgender"></ion-icon> Gender:<br>
-                    <input type="radio" id="sex" name="gender" value="1" ${userinf.isGender()==1?"checked":""}>Male<br>
-                    <input type="radio" id="sex" name="gender" value="0" ${userinf.isGender()==0?"checked":""}>Female
+                    <input type="radio" id="sex" name="gender" value="1" ${userinf.getGender()==1?"checked":""}>Male<br>
+                    <input type="radio" id="sex" name="gender" value="0" ${userinf.getGender()==0?"checked":""}>Female
                 </span><br>
-                <span><ion-icon name="hand-right-outline"></ion-icon>Bio: <input value="${userinf.getBio()}"  type="text" id="bio" placeholder="ex:about me,..." name="bio"/></span>&emsp;<span id="text-bio"></span><br>
+                <span><ion-icon name="hand-right-outline"></ion-icon>Bio: <input value="${userinf.getBiography()}"  type="text" id="bio" placeholder="ex:about me,..." name="biography"/></span>&emsp;<span id="text-bio"></span><br>
                 <span><ion-icon name="call-outline"></ion-icon> Phone: ${userinf.getPhone()}</span><br>
                 <span><ion-icon name="mail-outline"></ion-icon> Email: ${userinf.getMail()}</span><br>
                 <span><ion-icon name="navigate-circle-outline"></ion-icon> Address: <input value="${userinf.getAddress()}" onkeyup="ValidateAddress()" type="search" id="address" placeholder="ex:Cu Dinh-Viet Hung,..." name="address"/></span><span id="text-address"></span><br>
@@ -54,7 +54,7 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("fullname").value;
         var text = document.getElementById("text-fullname");
-        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+        var pattern = /^([^0-9!@#$=+/\|;.,?<'":~>}{%^&*()]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");
@@ -80,7 +80,7 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("address").value;
         var text = document.getElementById("text-address");
-        var pattern = /^([^!@#$%^&*()]*]*)$/;
+        var pattern = /^([^!@#$=+/\|;.,?<'":~>}{%^&*()]*]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");
@@ -106,7 +106,7 @@
         var form = document.getElementById("form");
         var fullname = document.getElementById("city").value;
         var text = document.getElementById("text-city");
-        var pattern = /^([^0-9!@#$%^&*()]*)$/;
+        var pattern = /^([^0-9!@#$=+/\|;.,?<'":~>}{%^&*()]*)$/;
 
         if (fullname.match(pattern)) {
             form.classList.add("valid");

@@ -77,6 +77,8 @@
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ProfileUserChangePassword</servlet-name>
+        <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
         <servlet-name>Register</servlet-name>
         <servlet-class>Controller.Register</servlet-class>
     </servlet>
@@ -161,6 +163,8 @@
         <url-pattern>/profile/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ProfileUserChangePassword</servlet-name>
+        <url-pattern>/profile/changepassword</url-pattern>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>

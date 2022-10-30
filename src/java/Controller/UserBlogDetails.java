@@ -24,29 +24,11 @@ import javax.servlet.http.HttpSession;
  */
 public class UserBlogDetails extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
        //lay ra thong tin user
         UserDaoImpl daoUser = new UserDaoImpl();
         HttpSession session = request.getSession();
@@ -75,17 +57,9 @@ public class UserBlogDetails extends HttpServlet {
         request.setAttribute("blog", b);
 //        request.setAttribute("userInformation", userInformation);
         request.setAttribute("lstzsize", listB.size() - 1);
-         request.getRequestDispatcher("./user/blog/blogdetails.jsp").forward(request, response);
+         request.getRequestDispatcher("blogdetails.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     
 
 }

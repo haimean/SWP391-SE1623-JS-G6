@@ -4,7 +4,6 @@
  */
 package Dao.Impl;
 
-
 import Dao.DBContext;
 import Model.Blog;
 import java.sql.Connection;
@@ -13,17 +12,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author nguye
  */
-public class BlogDaoImpl implements Dao.BlogDao{
+public class BlogDaoImpl implements Dao.BlogDao {
 
     //Blog List (tât ca moi thu lien quan den list ra blog, vi du nhu method getAllBlog, deu se duoc de o duoi nay):
-
-    
-
     public int getPageCount() throws Exception {
         DBContext dBContext = new DBContext();
         int st = 0;
@@ -48,7 +46,10 @@ public class BlogDaoImpl implements Dao.BlogDao{
     public List<Blog> getAllBlogByConstrain(int index) {
         DBContext dBContext = new DBContext();
         List<Blog> list = new ArrayList<>();
-        String sql = "SELECT id, title, description, viewNumber FROM Blog ";
+        String sql = "SELECT b.id, b.title, b.[description], b.viewNumber, ib.[image], b.content\n"
+                + "FROM Blog b\n"
+                + "LEFT JOIN ImageBlog ib\n"
+                + "ON b.id = ib.blogID ";
         StringBuilder sb = new StringBuilder(sql);
         sb.append(" ORDER BY id ASC OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY");
         try {
@@ -62,7 +63,9 @@ public class BlogDaoImpl implements Dao.BlogDao{
                 Blog blog = new Blog(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getInt(4)
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6)
                 );
                 list.add(blog);
 
@@ -73,6 +76,11 @@ public class BlogDaoImpl implements Dao.BlogDao{
     }
 
 //Blog Details: day la noi de nem nhung code lien quan den details blog:
+    /**
+     *
+     * @return
+     */
+    @Override
     public ArrayList<Blog> getTop3Blog() {
         DBContext dBContext = new DBContext();
         ArrayList<Blog> listBlog = new ArrayList<>();
@@ -99,12 +107,9 @@ public class BlogDaoImpl implements Dao.BlogDao{
         return listBlog;
     }
 
-   
-
-
     @Override
     public Blog get(int id) {
- DBContext dBContext = new DBContext();
+        DBContext dBContext = new DBContext();
         Blog blog = new Blog();
         try {
             String sql = "SELECT id, title,  [description], viewNumber,created_at, updated_at\n"
@@ -141,12 +146,12 @@ public class BlogDaoImpl implements Dao.BlogDao{
 
         } catch (SQLException ex) {
             System.out.println(ex);
-        }    
+        }
     }
 
     @Override
     public List<Blog> getAll() {
-DBContext dBContext = new DBContext();
+        DBContext dBContext = new DBContext();
         List<Blog> listBlog = new ArrayList<>();
         try {
             String sql = "SELECT id, title, description, viewNumber FROM Blog WHERE 1=1";
@@ -166,11 +171,8 @@ DBContext dBContext = new DBContext();
         }
         return listBlog;
     }
-    
-    
+
 //Tat ca lien quan den Blog update and Create
-    
-    
     @Override
     public boolean insert(Blog t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -178,7 +180,28 @@ DBContext dBContext = new DBContext();
 
     @Override
     public boolean update(Blog t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+//            Timestamp ts = Timestamp.from(Instant.now());
+            String sql = "UPDATE [dbo].[Blog]\n"
+                    + "   SET [title] = ?\n"
+                    + "      ,[description] = ?\n"
+                    + ",[content] = ?"
+                    + " WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ps.setString(1, t.getTitle());
+            ps.setString(2, t.getDescription());
+            ps.setString(3, t.getContent());
+            ps.setInt(4, t.getId());
+            ps.execute();
+            dBContext.closeConnection(connection, ps);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override

@@ -92,6 +92,10 @@
         <servlet-name>UserBlogCreate</servlet-name>
         <servlet-class>Controller.UserBlogCreate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DemoFont</servlet-name>
+        <servlet-class>DemoFont</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -166,15 +170,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StoreProductList</servlet-name>
-        <url-pattern>/storeProductList</url-pattern>
+        <url-pattern>/product</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserBlogList</servlet-name>
-        <url-pattern>/user/blog/list</url-pattern>
+        <url-pattern>/user/blog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserBlogDetails</servlet-name>
-        <url-pattern>/user/blog/details</url-pattern>
+        <url-pattern>/user/blog/detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserBlogUpdate</servlet-name>
@@ -182,7 +186,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserBlogCreate</servlet-name>
-        <url-pattern>/user/blog/reate</url-pattern>
+        <url-pattern>/user/blog/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

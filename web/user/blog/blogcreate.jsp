@@ -4,7 +4,7 @@
     Author     : nguye
 --%>
 <%@include file="../../store/layout/index.jsp" %>
-<%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
@@ -102,11 +102,11 @@
     <div class="leftcolumn">
 
         <div class="card2">
-            <form action="update" method="POST">
-                <input type="hidden" name="id" value="${requestScope.blog.id}">
-                <h2>Title: <input style=" width: 1000px;" value=" ${requestScope.blog.title}" name="title"></h2> 
-                <h5>Description: <textarea maxlength="255" style=" width: 1000px;" name="description">${requestScope.blog.description}</textarea></h5>
-                <h5>Date of create: ${requestScope.blog.create_at}</h5><br>
+            <form action="create" method="get">
+                
+                <h2>Title: <input style=" width: 1000px;" value="  name="title"></h2> 
+                <h5>Description: <textarea maxlength="255" style=" width: 1000px;" name="description"></textarea></h5>
+                
                 <div class="middle">
                     <img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid avatar" style="max-height:700px; max-width: 75%;">
                     <input class="file-upload" type="file" id="img" name="image" accept="image/*" style="margin-top: 20px;">

@@ -114,14 +114,14 @@
                           
                         
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="userBlogUpdate?id=${requestScope.listB.get(i).id}">Update</a></li>                           
+                            <li><a class="dropdown-item" href="update?id=${requestScope.blog.id}">Update</a></li>                           
                         </ul>
                     </div>
                     <h2>${requestScope.blog.title}</h2>
                     <h5>${requestScope.blog.description}.</h5>
                     <h5>${requestScope.blog.create_at}</h5><br>
                     <div class="" ><img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid" style="height:400px; width: 75%;"></div>
-                    <p>Some text..</p>
+                    <h5>${requestScope.blog.content}.</h5>
                 </div>
             </div>
             <div class="rightcolumn">

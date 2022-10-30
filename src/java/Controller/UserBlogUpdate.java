@@ -7,61 +7,36 @@ package Controller;
 import Dao.Impl.BlogDaoImpl;
 import Dao.Impl.UserDaoImpl;
 import Model.AddressReceiver;
+//import Dao.Impl.UserDaoImpl;
 import Model.Blog;
 import Model.User;
+//import Model.User;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.OutputStreamWriter;
+//import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author nguye
  */
+@MultipartConfig
 public class UserBlogUpdate extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserBlogUpdate</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserBlogUpdate at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         //lay ra thong tin user
 //        UserDaoImpl daoUser = new UserDaoImpl();
 //        HttpSession session = request.getSession();
@@ -71,7 +46,7 @@ public class UserBlogUpdate extends HttpServlet {
         
         
         
-        //lay ra list top 3 popular blog va blog detail voi id da lay duoc
+      
         int id = Integer.parseInt(request.getParameter("id"));
         BlogDaoImpl daoB = new BlogDaoImpl();
         Blog b = daoB.get(id);
@@ -79,31 +54,75 @@ public class UserBlogUpdate extends HttpServlet {
         request.setAttribute("blog", b);
 //        request.setAttribute("userInformation", userInformation);
 //       
-         request.getRequestDispatcher("./user/blog/blogupdate.jsp").forward(request, response);
+         request.getRequestDispatcher("/user/blog/blogupdate.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("./user/blog/DemoCarousel.jsp").forward(request, response);
+       response.setContentType("text/html;charset=UTF-8");
+       request.setCharacterEncoding("utf-8");
+        //Get parameter
+        int id = Integer.parseInt(request.getParameter("id"));
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String content = request.getParameter("content");
+//        Part part = request.getPart("image");
+//        String realPath = request.getServletContext().getRealPath("/image");
+//        String filename = 
+        
+        //Update image
+//        String fileName = null;
+//        
+//         for (Part part : request.getParts()) {
+//      fileName = extractFileName(part);
+//      // refines the fileName in case it is an absolute path
+//      fileName = new File(fileName).getName();
+//      part.write(this.getFolderUpload().getAbsolutePath() + File.separator + fileName);
+//    }
+
+        //Update title, content and description
+        BlogDaoImpl daoB = new BlogDaoImpl();
+        Blog b = new Blog(id, title, description, content);
+        daoB.update(b);
+        
+        
+//        
+        Blog bRemove = null;
+        ArrayList<Blog> listB = daoB.getTop3Blog();
+        for (Blog blog : listB) {
+            if(b.getId() == blog.getId()){
+                bRemove = blog;
+            }
+        }
+        listB.remove(bRemove);
+        if(listB.size() > 3){
+            listB.remove(3);
+        }
+        request.setAttribute("listB", listB);
+        request.setAttribute("blog", b);
+        request.setAttribute("lstzsize", listB.size() - 1);
+        request.getRequestDispatcher("blogdetails.jsp").forward(request, response);
+//response.sendRedirect(request.getContextPath()+ "/user/blog");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    private String extractFileName(Part part) {
+    String contentDisp = part.getHeader("content-disposition");
+    String[] items = contentDisp.split(";");
+    for (String s : items) {
+      if (s.trim().startsWith("filename")) {
+        return s.substring(s.indexOf("=") + 2, s.length() - 1);
+      }
+    }
+    return "";
+  }
+     public File getFolderUpload() {
+    File folderUpload = new File("C:\\Users\\nguye\\OneDrive\\Documents\\NetBeansProjects\\SWP391-SE1623-JS-G6\\web\\image\\blogImage");
+    if (!folderUpload.exists()) {
+      folderUpload.mkdirs();
+    }
+    return folderUpload;
+    }
 
 }

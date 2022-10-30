@@ -12,34 +12,79 @@ import java.sql.Date;
  */
 public class Blog {
     
+
+
     private int  id;
     private int  viewNumber;
     private String  title;
     private String  description;
+    private String  image;
+    private String  content;
     Date create_at;
     Date update_at;
-    
+
 
     public Blog() {
     }
 
-    public Blog(int id, String title, String description, Date create_at, Date update_at, int viewNumber) {
+    public Blog(int id, String title, String description, int viewNumber, Date create_at, Date update_at,  String image, String  content) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.viewNumber = viewNumber;
         this.create_at = create_at;
         this.update_at = update_at;
-        this.viewNumber = viewNumber;
+        this.image = image;
+        this.content = content;
+    }
+
+    public String getimage() {
+        return image;
+    }
+
+    public void setimage(String image) {
+        this.image = image;
     }
     
-    public Blog(int id, String title, String description, int viewNumber) {
+    public Blog(int id, String title, String description, int viewNumber, String image, String  content) {
         this.id = id;
         this.title = title;
         this.description = description;
-        
         this.viewNumber = viewNumber;
+        this.image = image;
+        this.content = content;
+    }
+    public Blog(int id, String title, String description, String image, String  content) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.content = content;
+    }
+    public Blog(int id, String title, String description, String  content) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+      this.content = content;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    
     public int getId() {
         return id;
     }

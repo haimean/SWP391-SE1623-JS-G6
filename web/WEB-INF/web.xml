@@ -247,7 +247,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
-        <url-pattern>/verify</url-pattern>
+        <url-pattern>/register/verify</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

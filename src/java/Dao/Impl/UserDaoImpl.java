@@ -235,33 +235,34 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return 0;
-     }
+    }
+
     public boolean insert(User item) {
         DBContext dBContext = new DBContext();
-
         try {
             Connection connection = dBContext.getConnection();
             String sql = "INSERT INTO [dbo].[user]\n"
                     + "           ([email]\n"
                     + "           ,[password]\n"
-                    + "           ,[create_at]\n"
-                    + "           ,[update_at]\n"
-                    + "     VALUES(?,?,?,4)";
+                    + "           ,[created_at]\n"
+                    + "           ,[updated_at],role)\n"
+                    + "     VALUES(?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, item.getEmail());
             ps.setString(2, item.getPassword());
             ps.setTimestamp(3, ts);
             ps.setTimestamp(4, ts);
+            ps.setInt(5, 3);
             ps.executeUpdate();
             dBContext.closeConnection(connection, ps);
         } catch (SQLException ex) {
             Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        item = login(item.getEmail(), item.getPassword());
         try {
+            item.setId(getUserId(item));
             Connection connection = dBContext.getConnection();
-            String sql = "INSERT INTO UserInformation (userId,fullName,create_at)  VALUES(?,?,?)";
+            String sql = "INSERT INTO UserInformation (userId,fullName,created_at)  VALUES(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, item.getId());
             ps.setString(2, item.getFullName());
@@ -334,6 +335,7 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
     }
+
     @Override
     public boolean update(User t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -343,9 +345,9 @@ public class UserDaoImpl implements UserDao {
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
-    public boolean updatePassword(String email,String password){
+    public boolean updatePassword(String email, String password) {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
@@ -393,5 +395,25 @@ public class UserDaoImpl implements UserDao {
     @Override
     public ArrayList<User> search(String seachValue) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getUserId(User user) {
+        DBContext dBContext = new DBContext();
+        int userId = 0;
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select id from [User] where email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                userId = rs.getInt(1);
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return userId;
     }
 }

@@ -33,7 +33,7 @@ public class VerifyCode extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/verify/verify.jsp").forward(request, response);
+        request.getRequestDispatcher("/register/verify.jsp").forward(request, response);
     }
 
     /**
@@ -58,6 +58,7 @@ public class VerifyCode extends HttpServlet {
             if (code.trim().equals(user.code)) {
                 if (new UserDaoImpl().insert(user)) {
                     response.sendRedirect("login");
+                    return;
                 }
             }
             response.sendRedirect("register");

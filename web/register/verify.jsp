@@ -22,7 +22,7 @@
             <div class="col-lg-6 col-12 mx-auto">
                 <div class="p-5 bg-white rounded shadow-lg">
                     <h2 class="mb-2 text-center">We already send a verification  code to your email</h2>
-                    <form action="<%=request.getContextPath()%>/verify" method="post">
+                    <form action="<%=request.getContextPath()%>/register/verify" method="post">
                         <h4 class="font-500">Code</h4>
                         <input name="authcode" class="form-control form-control-lg mb-3" type="text"  placeholder="Code" >
                         <input class="btn btn-primary btn-lg w-100 shadow-lg"  type="submit" value="Verify" />
@@ -31,6 +31,4 @@
             </div>        
         </div>
     </div>
-    <div id="liveAlertPlaceholder"></div>
-    <button type="button" class="btn btn-primary" id="liveAlertBtn">Show live alert</button>
 </body>

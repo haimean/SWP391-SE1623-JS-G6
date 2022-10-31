@@ -52,8 +52,8 @@ public class Login extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             UserDaoImpl db = new UserDaoImpl();
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            String email = request.getParameter("email").trim();
+            String password = request.getParameter("password").trim();
             User u = new UserDaoImpl().login(email, password);
             if (u == null) {
                 String noti = "Incorrect user name or password,please try again";

@@ -12,11 +12,12 @@
     />
 <div class="container-profile">
     <div class="side-nav-categories">
-        <form id="form" action="update" method="POST">
+        <form id="form" action="update" method="POST" enctype="multipart/form-data">
             <div class="div-option">
                 <button type="submit" class="button-logout-update-profile" name="id" value="${userinf.getId()}"><u>Save</u></button>
             </div>
             <div class="div-image-profile">
+                <input type="file" name="image" accept="image/png,image/jpeg" multiple="multiple">
                 <img class= "img-profile" src="${userinf.getImage()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default_lqkxt3.jpg" : userinf.getImage()}">
             </div>
             <div class="div-title">
@@ -31,8 +32,7 @@
                         <b>Update Information Profile</b>
                     </h4>
                 </div><br>
-                <span><ion-icon name="person-circle-outline"></ion-icon> Full Name:  <input value="${userinf.getFullname()}" onkeyup="ValidateFullname()" type="search" id="fullname" placeholder="ex:Nguyen Ngoc Tuan" name="fullname"/></span>&emsp;<span id="text-fullname"></span><br>
-
+                <span><ion-icon name="person-circle-outline"></ion-icon> Full Name:  <input value="${userinf.getFullname()}" onkeyup="ValidateFullname()" type="search" id="fullname" placeholder="ex:Nguyen Ngoc Tuan" name="fullName"/></span>&emsp;<span id="text-fullname"></span><br>
                 <span><ion-icon name="transgender"></ion-icon> Gender:<br>
                     <input type="radio" id="sex" name="gender" value="1" ${userinf.getGender()==1?"checked":""}>Male<br>
                     <input type="radio" id="sex" name="gender" value="0" ${userinf.getGender()==0?"checked":""}>Female
@@ -75,7 +75,7 @@
             text.style.color = "#00ff00";
         }
     }
-    
+
     function ValidateAddress() {
         var form = document.getElementById("form");
         var fullname = document.getElementById("address").value;
@@ -100,7 +100,7 @@
             text.innerHTML = "";
             text.style.color = "#00ff00";
         }
-        
+
     }
     function ValidateCity() {
         var form = document.getElementById("form");
@@ -126,7 +126,7 @@
             text.innerHTML = "";
             text.style.color = "#00ff00";
         }
-        
+
     }
 </script>
 

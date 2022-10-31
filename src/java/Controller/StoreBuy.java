@@ -86,7 +86,13 @@ public class StoreBuy extends HttpServlet {
             }
         }
         if (mode.equals(Type.CHANGE_QUANTITY_ONFOCUS.toString())) {
-            int num = request.getParameter("num") != null ? Integer.parseInt(request.getParameter("num")) : 0;
+            String numStr = request.getParameter("num");
+            int num;
+            if(numStr != null && !numStr.isEmpty()){
+                num = Integer.parseInt(numStr);
+            }else{
+                num = 1;
+            }
             int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
             cart.removeAllItems();
             if(num == 0){

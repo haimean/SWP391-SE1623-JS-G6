@@ -95,14 +95,26 @@
     <servlet>
         <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
         <servlet-class>Controller.AdminTypeSupportCenterUpdate</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>Controller.Register</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>VerifyCode</servlet-name>
         <servlet-class>Controller.VerifyCode</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerOrderList</servlet-name>
+        <servlet-class>Controller.SellerOrderList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerOrderDetail</servlet-name>
+        <servlet-class>Controller.SellerOrderDetail</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -199,18 +211,28 @@
     <servlet-mapping>
         <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
         <url-pattern>/admin/qna-type/update</url-pattern>
-        <servlet-name>ProfileUserChangePassword</servlet-name>
-        <url-pattern>/profile/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileUserChangePassword</servlet-name>
+        <url-pattern>/profile/changepassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
         <url-pattern>/verify</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderList</servlet-name>
+        <url-pattern>/seller/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderDetail</servlet-name>
+        <url-pattern>/seller/order/detail</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

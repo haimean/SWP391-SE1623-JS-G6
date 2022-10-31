@@ -334,10 +334,7 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    @Override
-    public boolean insert(User t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     @Override
     public boolean update(User t) {
@@ -364,5 +361,10 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
+    }
+
+    @Override
+    public ArrayList<User> search(String seachValue) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -94,9 +94,6 @@
         <servlet-class>Controller.UserBlogCreate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DemoFont</servlet-name>
-        <servlet-class>DemoFont</servlet-class>
-
         <servlet-name>AdminSupportCenterCreate</servlet-name>
         <servlet-class>Controller.AdminSupportCenterCreate</servlet-class>
     </servlet>
@@ -115,15 +112,18 @@
     <servlet>
         <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
         <servlet-class>Controller.AdminTypeSupportCenterUpdate</servlet-class>
+    </servlet>
+    <servlet>        
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
+    </servlet>
+    <servlet>        
         <servlet-name>Register</servlet-name>
         <servlet-class>Controller.Register</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>VerifyCode</servlet-name>
         <servlet-class>Controller.VerifyCode</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -216,7 +216,8 @@
     <servlet-mapping>
         <servlet-name>UserBlogCreate</servlet-name>
         <url-pattern>/user/blog/create</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>        
         <servlet-name>AdminSupportCenterCreate</servlet-name>
         <url-pattern>/admin/qna/create</url-pattern>
     </servlet-mapping>
@@ -235,15 +236,18 @@
     <servlet-mapping>
         <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
         <url-pattern>/admin/qna-type/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>        
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <url-pattern>/profile/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>        
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
         <url-pattern>/verify</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>

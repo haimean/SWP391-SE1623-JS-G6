@@ -20,7 +20,7 @@
 <div class="container-profile">
     <div class="side-nav-profile">
         <div class="div-image-profile">
-            <img class= "img-profile" src="${userinf.getImage()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default_lqkxt3.jpg" : userinf.getImage()}">
+            <img class= "img-profile" src="${userinf.getImage()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default.jpg" : userinf.getImage()}">
         </div>
         <div class="div-title">
             <h1 class="title">${userinf.getFullname()}</h1>
@@ -148,6 +148,15 @@
         color: #6759ff;
         cursor: pointer;
         height: 35px;
+    }
+    .div-image-profile{
+        height: 200px;
+        width: 200px;
+        position: relative;
+        margin: 35px auto;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid grey;
     }
     .img-profile{
         width: 200px;

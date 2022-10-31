@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.Map;
 
@@ -72,19 +71,17 @@ public class ProfileUserUpdate extends HttpServlet {
             cloudinary.config.secure = true;
             UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
             String fullname = request.getParameter("fullName");
-//            String image = request.getParameter("image");
             String gender = request.getParameter("gender");
             String biography = request.getParameter("biography");
             String address = request.getParameter("address");
             String city = request.getParameter("city");
-//            File file = new File(image);
             Part filePart = request.getPart("image");
-//            String fileName = filePart.getSubmittedFileName();
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
             filePart.write(request.getRealPath("image") + fileName);
             Map path = ObjectUtils.asMap(
                     "public_id", "Home/Images/UserProfile/" + user.getId(),
-                    "overwrite", true
+                    "overwrite", true,
+                    "resource_type", "image"
             );
             Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
             filePart.delete();

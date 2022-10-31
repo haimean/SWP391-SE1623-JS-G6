@@ -47,7 +47,7 @@
     </head>
     <body>
         <%@include file="/store/layout/index.jsp" %>
-        <form action="/SWP391-SE1623-JS-G6/userProductList" method="get" name="frGate" class="mt-5 mb-5">
+        <form action="product" method="get" name="frGate" class="mt-5 mb-5">
 
             <section class="section-content padding-y">
                 <div class="container">
@@ -184,7 +184,7 @@
                                             <li class="page-item"><p class="page-link"><<</p></li>
                                             </c:if>
                                             <c:if test="${pageCurrent !=1}">
-                                            <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/userProductList?category=${requestScope.category}&beginp=${beginprice}&endp=${endprice}&page=1&s="/SWP391-SE1623-JS-G6/userProductListort=${requestScope.sortabc}&search=${requestScope.searchname}"">First</a></li>
+                                            <li class="page-item"><a class="page-link" href="product?category=${requestScope.category}&beginp=${beginprice}&endp=${endprice}&page=1&s="productort=${requestScope.sortabc}&search=${requestScope.searchname}"">First</a></li>
                                             </c:if>
 
                                         <!--page-->
@@ -193,7 +193,7 @@
                                                 <li class="page-item active"><p class="page-link">${page}</p></li>
                                                 </c:if>
                                                 <c:if test="${pageCurrent != page}">
-                                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/userProductList?category=${requestScope.category}&beginp=${beginprice}&endp=${endprice}&page=${page}&sort=${requestScope.sortabc}&search=${requestScope.searchname}">${page}</a></li>
+                                                <li class="page-item"><a class="page-link" href="product?category=${requestScope.category}&beginp=${beginprice}&endp=${endprice}&page=${page}&sort=${requestScope.sortabc}&search=${requestScope.searchname}">${page}</a></li>
                                                 </c:if>
                                             </c:forEach>
 
@@ -202,7 +202,7 @@
                                             <li class="page-item"><p class="page-link">>></p></li>
                                             </c:if>
                                             <c:if test="${pageCurrent !=numberPage}">
-                                            <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/userProductList?category=${requestScope.category}&beginp=${beginprice}&endp=${endprice}&page=${numberPage}&sort=${requestScope.sortabc}&search=${requestScope.searchname}">Last</a></li>
+                                            <li class="page-item"><a class="page-link" href="product?category=${requestScope.category}&beginp=${beginprice}&endp=${endprice}&page=${numberPage}&sort=${requestScope.sortabc}&search=${requestScope.searchname}">Last</a></li>
                                             </c:if>
                                     </ul>
                                 </nav>

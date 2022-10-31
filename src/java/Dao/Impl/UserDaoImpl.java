@@ -7,6 +7,7 @@ package Dao.Impl;
 import Model.User;
 import Dao.DBContext;
 import Dao.UserDao;
+import Model.AddressReceiver;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -122,17 +123,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ArrayList<User> search(String seachValue) {
+    public ArrayList<User> search(String seachValue, int index) {
         ArrayList<User> userList = new ArrayList<>();
+        final int RECORD_PER_PAGE = 4;
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
-            String query = "select u.id, role, fullname, email, phone,"
-                    + " status, u.created_at, updated_at"
+            String query = "select u.id, role, fullname, email, phone,\n"
+                    + "status, u.created_at, updated_at\n"
                     + "from UserInformation as ui, [User] as u\n"
-                    + "where (u.id = ui.id) and (email like ?)";
+                    + "where (u.id = ui.id) and (email like ?)\n"
+                    + "order by id\n"
+                    + "offset ? rows fetch next ? rows only";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, "%" + seachValue + "%");
+            ps.setInt(2, (index - 1) * RECORD_PER_PAGE);
+            ps.setInt(3, RECORD_PER_PAGE);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 userList.add(new User(
@@ -214,6 +220,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int getTotalUsers() {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select count(*) from [User]";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
+     }
     public boolean insert(User item) {
         DBContext dBContext = new DBContext();
 
@@ -255,32 +277,121 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int getTotalUsersSearch(String seachValue) {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select count(*) from \n"
+                    + "(select u.id, role, fullname, email, phone,\n"
+                    + "status, u.created_at, updated_at\n"
+                    + "from UserInformation as ui, [User] as u\n"
+                    + "where (u.id = ui.id) and (email like ?)\n"
+                    + ") as totalRecord";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, '%' + seachValue + '%');
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
+    }
+
+    @Override
+    public ArrayList<User> paginate(int index) {
+        DBContext dBContext = new DBContext();
+        final int RECORD_PER_PAGE = 4;
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select u.id, role, fullname, email, phone, status,\n"
+                    + "u.created_at, updated_at\n"
+                    + "from [User] u ,[UserInformation] ui\n"
+                    + "where u.id = ui.userId\n"
+                    + "order by id\n"
+                    + "offset ? rows fetch next ? rows only";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, (index - 1) * RECORD_PER_PAGE);
+            ps.setInt(2, RECORD_PER_PAGE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(new User(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getDate(7),
+                        rs.getDate(8)));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return users;
+    }
+    @Override
     public boolean update(User t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public boolean updatePassword(String email,String password){
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
-            String query = "delete from [Notification] where userId = ?\n"
-                    + "delete from [Message] where userSenderId = ?\n"
-                    + "delete from [UserInformation] where userId = ?\n"
-                    + "delete from [AddressReceiver] where userId = ?\n"
-                    + "delete from [User] where id = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, id);
-            ps.setInt(2, id);
-            ps.setInt(3, id);
-            ps.setInt(4, id);
-            ps.setInt(5, id);
+            String sql = "update [User] set [password]= ? where email= ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(2, email);
+            ps.setString(1, password);
             ps.executeUpdate();
-            dBContext.closeConnection(connection, ps);
             return true;
         } catch (SQLException e) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
+    }
+
+    @Override
+    public AddressReceiver getUserById(int id) {
+        DBContext dBContext = new DBContext();
+
+        try {
+            Connection connection = dBContext.getConnection();
+
+            String sql = "SELECT userId, fullname, phone, email, [address] + ', ' + city as [address]\n"
+                    + "FROM AddressReceiver\n"
+                    + "WHERE userId = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new AddressReceiver(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+
+            }
+            dBContext.closeConnection(connection, ps);
+
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<User> search(String seachValue) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -73,7 +73,7 @@ public class Register extends HttpServlet {
                 response.sendRedirect("verify");
                 return;
             } else {
-                request.getRequestDispatcher("/register/register.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath());
             }
         }
 

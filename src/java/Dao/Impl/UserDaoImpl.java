@@ -236,6 +236,7 @@ public class UserDaoImpl implements UserDao {
         }
         return 0;
      }
+    @Override
     public boolean insert(User item) {
         DBContext dBContext = new DBContext();
 

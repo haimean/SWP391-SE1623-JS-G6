@@ -40,6 +40,7 @@ public class AdminCategoryList extends HttpServlet {
             int page = Integer.parseInt(indexpasge);
             if (search != null) {
                 ArrayList<Category> categories = categoryDaoImpl.search(search);
+                request.setAttribute("search", search);
                 request.setAttribute("categories", categories);
                 request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
             } else {
@@ -59,6 +60,7 @@ public class AdminCategoryList extends HttpServlet {
             int page = Integer.parseInt(indexpasge);
             if (search != null) {
                 ArrayList<Category> categories = categoryDaoImpl.search(search);
+                request.setAttribute("search", search);
                 request.setAttribute("categories", categories);
                 request.getRequestDispatcher("category/categoryList.jsp").forward(request, response);
             } else {

@@ -4,26 +4,37 @@
  */
 package Controller;
 
+import Dao.Impl.CategoryDaoImpl;
+import Model.Category;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author haimi
  */
 public class Home extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("/store/Home.jsp").forward(request, response);
+        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
+        String indexpasge = "1";
+        int page = Integer.parseInt(indexpasge);
+        ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+        request.setAttribute("categories", categories);
+        request.getRequestDispatcher("/store/Home.jsp").forward(request, response);
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

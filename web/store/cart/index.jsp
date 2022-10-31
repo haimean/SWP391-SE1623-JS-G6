@@ -8,7 +8,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../layout/index.jsp"  %>
 
-
+<style>
+    #inputQuantity::-webkit-outer-spin-button,
+    #inputQuantity::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
 <div class="modal fade" id="modal-all-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -69,9 +75,9 @@
                                             <p class="mb-0" style="font-weight: 500;">${item.product.categoryID}</p>
                                         </td>
                                         <td class="align-middle">
-                                            <div class="d-flex flex-row justify-content-center">
+                                            <div class="d-flex flex-row justify-content-center align-items-center">
                                                 <form action="cart" method="post">
-                                                    <button class="btn btn-link px-2"
+                                                    <button class="btn btn-link px-2 d-flex"
                                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="submit">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                                                             <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
@@ -81,10 +87,16 @@
                                                     <input name="mode" value="CHANGE_QUANTITY" type="hidden"/>
                                                     <input name="num" value="-1" type="hidden"/>
                                                 </form>
-                                                <input id="form1" min="0" name="quantity" value="${item.quantity}" type="number"
-                                                       class="form-control form-control-sm" style="width: 50px;" readonly/> 
+                                                <form action="cart" method="post" id="form-quantity">
+                                                    <input id="inputQuantity" min="0" name="quantity" value="${item.quantity}" type="number" 
+                                                           class="form-control form-control-sm text-center" onkeydown="return event.keyCode !== 69 && event.keyCode !== 187 && event.keyCode !== 189"
+                                                           style="width: 50px;" min="0" onblur="changeQuantityOnBlur(this)"/> 
+                                                    <input name="mode" value="CHANGE_QUANTITY_ONFOCUS" type="hidden"/>
+                                                    <input name="num" type="hidden" id="num"/>
+                                                    <input name="id" value="${item.product.id}" type="hidden"/>
+                                                </form>
                                                 <form action="cart" method="post">
-                                                    <button class="btn btn-link px-2"
+                                                    <button class="btn btn-link px-2 d-flex"
                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()" type="submit">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -193,7 +205,15 @@
                 if (index1 === index2) {
                     form.submit();
                 }
-            })
+            });
         });
     });
+
+    function changeQuantityOnBlur(el) {
+        let formQuantity = document.getElementById("form-quantity");
+        let input = document.getElementById("num");
+        input.value = el.value;
+        formQuantity.submit();
+        console.log(el.value);
+    }
 </script>

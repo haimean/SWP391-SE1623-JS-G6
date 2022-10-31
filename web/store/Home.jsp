@@ -57,24 +57,48 @@
     <img class= "grid-item" src= "https://picsum.photos/610/910.jpg">
     <img class= "grid-item" src= "https://picsum.photos/500/910.jpg">
 </div>
+<div class="text-center mb-5">
+    <button type="button" class="btn btn-outline-primary rounded-3" id="loadMore" onclick="loadMore()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+        See More
+    </button>
+</div>
+
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-        var elem = document.querySelector('.grid-container');
-        imagesLoaded(elem, () => {
-            var msnry = new Masonry(elem, {
-                itemSelector: '.grid-item',
-                columnWidth: 220
+            let elem = document.querySelector('.grid-container');
+            imagesLoaded(elem, () => {
+                let msnry = new Masonry(elem, {
+                    itemSelector: '.grid-item',
+                    columnWidth: 220
+                });
             });
-        });
 
-        function DetailProduct(id) {
-            window.location.href = "#";
-        }
+            function DetailProduct(id) {
+                window.location.href = "#";
+            }
 
-        function FilterCategory(idCategory) {
-            window.onload
-        }
+            function FilterCategory(idCategory) {
+                window.onload
+            }
+            function loadMore() {
+                $.ajax({
+                    url: '/<%= request.getContextPath()%>',
+                    type: 'get',
+                    data: {field1: "hello", field2: "hello2"},
+                    success: function (data) {
+                        let container = document.querySelector(".grid-container");
+                        container.innerHTML += data;
+                    },
+                    error: function () {
+                    }
+                });
+            }
 </script>
 
 

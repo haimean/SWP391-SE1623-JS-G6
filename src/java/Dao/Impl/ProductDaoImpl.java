@@ -23,7 +23,9 @@ import java.time.Instant;
  * @author MrTuan
  */
 public class ProductDaoImpl implements ProductDao {
+
     Timestamp ts = Timestamp.from(Instant.now());
+
     @Override
     public Product get(int id) {
         DBContext dBContext = new DBContext();
@@ -310,6 +312,41 @@ public class ProductDaoImpl implements ProductDao {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
         }
         return products;
+    }
+
+    @Override
+    public List<Product> getTop7Products(int id, int categoryId) {
+        DBContext dBContext = new DBContext();
+        List<Product> products = new ArrayList<>();
+        String sql = "select top 7 * from Product\n"
+                + "where categoryID = ? and id <> ?";
+        try {
+            Connection connection = dBContext.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, categoryId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getTimestamp(10),
+                        rs.getTimestamp(11), "image");
+                products.add(p);
+            }
+            dBContext.closeConnection(connection, ps);
+            return products;
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

@@ -23,6 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 enum Type {
     ADD,
     CHANGE_QUANTITY,
+    CHANGE_QUANTITY_ONFOCUS,
     SINGAL_DELETE,
     ALL_DELETE
 }
@@ -83,6 +84,19 @@ public class StoreBuy extends HttpServlet {
                 ItemCart t = new ItemCart(product, num, product.getPrice());
                 cart.addItem(t);
             }
+        }
+        if (mode.equals(Type.CHANGE_QUANTITY_ONFOCUS.toString())) {
+            int num = request.getParameter("num") != null ? Integer.parseInt(request.getParameter("num")) : 0;
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+            cart.removeAllItems();
+            if(num == 0){
+                num = 1;
+            }
+            ProductDaoImpl dao = new ProductDaoImpl();
+            Product product = dao.get(id);
+            ItemCart t = new ItemCart(product, num, product.getPrice());
+            cart.addItem(t);
+
         }
         if (mode.equals(Type.SINGAL_DELETE.toString())) {
             int id = Integer.parseInt(request.getParameter("id"));

@@ -112,7 +112,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
         DBContext dBContext = new DBContext();
         Blog blog = new Blog();
         try {
-            String sql = "SELECT id, title,  [description], viewNumber,created_at, updated_at\n"
+            String sql = "SELECT id, title,  [description], viewNumber,created_at, updated_at, content\n"
                     + "FROM [Blog]\n"
                     + "WHERE id = ?";
             Connection connection = dBContext.getConnection();
@@ -126,6 +126,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
                 blog.setViewNumber(rs.getInt("viewNumber"));
                 blog.setCreate_at(rs.getDate("created_at"));
                 blog.setUpdate_at(rs.getDate("updated_at"));
+                blog.setContent(rs.getString("content"));
             }
         } catch (SQLException e) {
             System.out.println(e);

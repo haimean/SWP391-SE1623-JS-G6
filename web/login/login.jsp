@@ -23,21 +23,22 @@
                         <h2 class="mb-2 text-center">Sign In</h2>
                         <form action="<%=request.getContextPath()%>/login" method="POST">
                             <h4 class="font-500">Email</h4>
-                            <input name="email" class="form-control form-control-lg mb-3" type="email"  placeholder="Email" >
+                            <input name="email" class="form-control form-control-lg mb-3" type="email"  placeholder="Email" value="${email}" >
                             <h4 class="font-500">Password</h4>
                             <div class="input-group ">
-                                <input class="form-control form-control-lg" id="password" name="password" type="password" placeholder="Password" value="">
+                                <input class="form-control form-control-lg" id="password" name="password" type="password" placeholder="Password" value="${password}">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye-slash" id="togglePassword" 
                                        style="cursor: pointer"></i>
                                 </span>
                             </div>
+                            <span style="color: red" class="mb-3">${errorPassword}</span>
                             <div class="d-flex my-3  justify-content-between">
                                 <div class="form-check">
                                     <input
                                         type="checkbox"
                                         class="form-check-input uf-form-check-input"
-                                        id="exampleCheck1"
+                                        id="remember"
                                         style="margin-top: 0.65rem;"
                                         />
                                     <h4 class="form-check-h4 " for="exampleCheck1"
@@ -54,6 +55,30 @@
                     </div>      
                 </div>        
             </div>
+        </div>
+        <div class="position-fixed w-100">
+            <script>
+                function closeAlertModal() {
+                    let modal = document.getElementById("alert");
+                    modal.classList.add("fadeOutLeft");
+                }
+            </script>
+            <c:if test="${status == "incorect"}">
+                <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                        Your email or password is incorrect!
+                    </div>
+                </button>
+            </c:if>
+            <c:if test="${status == "loginFail"}">
+                <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                        Login false!
+                    </div>
+                </button>
+            </c:if>
         </div>
         <script>
             const togglePassword = document.querySelector("#togglePassword");

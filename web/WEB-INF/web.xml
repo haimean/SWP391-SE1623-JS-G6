@@ -88,6 +88,10 @@
         <servlet-name>VerifyCode</servlet-name>
         <servlet-class>Controller.VerifyCode</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MessageUser</servlet-name>
+        <servlet-class>Controller.MessageUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
         <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageUser</servlet-name>
+        <url-pattern>/messages</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

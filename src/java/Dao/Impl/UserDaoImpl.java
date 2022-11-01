@@ -56,7 +56,7 @@ public class UserDaoImpl implements UserDao {
         User user = new User();
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select u.id, role, fullname, email, phone, status, u.created_at, updated_at\n"
+            String sql = "select u.id, role, fullname, u.email, phone, status, u.created_at, updated_at\n"
                     + "                from UserInformation as ui, [User] as u\n"
                     + "                where u.id = ui.userId and u.email = ? and u.password = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -283,9 +283,9 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
-    
+
     @Override
-    public boolean updatePassword(String email,String password){
+    public boolean updatePassword(String email, String password) {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +51,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
         return listprofile;
     }
 
-    public boolean updateProfile(int id, String fullname,String image, String gender, String biography, String address, String city) {
+    public boolean updateProfile(int id, String fullname, String image, String gender, String biography, String address, String city) {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
@@ -91,5 +92,40 @@ public class UserInformationDaoImpl implements UserInformationDao {
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<UserInformation> findFriends(String email) {
+        DBContext dBContext = new DBContext();
+        List<UserInformation> listUserInformation = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select distinct uf1.email,uf1.fullname,uf1.gender,uf1.[image] from UserInformation uf\n"
+                    + "join Friends fr\n"
+                    + "on uf.email=fr.receiver\n"
+                    + "join UserInformation uf1\n"
+                    + "on uf1.email=fr.sender\n"
+                    + "where uf.email like '%'+?+'%'";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                UserInformation userInformation = new UserInformation();
+                userInformation.setMail(rs.getString("email"));
+                userInformation.setFullname(rs.getString("fullname"));
+                userInformation.setGender(rs.getInt("gender"));
+                userInformation.setImage(rs.getString("image"));
+                listUserInformation.add(userInformation);
+            }
+            dBContext.closeConnection(connection, ps, rs);
+        } catch (SQLException e) {
+        }
+        return listUserInformation;
+    }
+    public static void main(String[] args) {
+        UserInformationDaoImpl db= new UserInformationDaoImpl();
+        List<UserInformation> listUserInformation=db.findFriends("user@gmail.com");
+        for (UserInformation userInformation : listUserInformation) {
+            System.out.println(userInformation.getImage());
+        }
     }
 }

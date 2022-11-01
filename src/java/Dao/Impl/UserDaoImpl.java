@@ -235,8 +235,9 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return 0;
-    }
-
+     }
+     
+    @Override
     public boolean insert(User item) {
         DBContext dBContext = new DBContext();
         try {

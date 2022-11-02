@@ -122,7 +122,6 @@ public class Login extends HttpServlet {
                     response.sendRedirect(request.getContextPath());
                     break;
                 default:
-                    request.setAttribute("status", "loginFail");
                     request.getRequestDispatcher("/login/login.jsp").forward(request, response);
             }
         }

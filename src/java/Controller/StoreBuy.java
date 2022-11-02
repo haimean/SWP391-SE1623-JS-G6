@@ -33,7 +33,36 @@ public class StoreBuy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Cart cart;
+        Object object = session.getAttribute("cart");
+
+        if (object != null) {
+            cart = (Cart) object;
+        } else {
+            cart = new Cart();
+        }
+
+        String mode = request.getParameter("mode");
+        if (mode == null) {
+            session.setAttribute("total", cart.getTotalMoney());
+            request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
+        } else if (mode.equals(Type.CHANGE_QUANTITY_ONFOCUS.toString())) {
+            String numStr = request.getParameter("num");
+            int num;
+            if (numStr != null && !numStr.isEmpty()) {
+                num = Integer.parseInt(numStr);
+            } else {
+                num = 1;
+            }
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+            if (num == 0) {
+                num = 1;
+            }
+            cart.getItemById(id).setQuantity(num);
+            session.setAttribute("total", cart.getTotalMoney());
+            request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -60,17 +89,24 @@ public class StoreBuy extends HttpServlet {
         String mode = request.getParameter("mode");
 
         if (mode.equals(Type.ADD.toString())) {
-            int num = request.getParameter("num") != null ? Integer.parseInt(request.getParameter("num")) : 0;
+            String numStr = request.getParameter("num");
+            int num;
+            if (numStr != null && !numStr.isEmpty()) {
+                num = Integer.parseInt(numStr);
+            } else {
+                num = 1;
+            }
             int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+            if (num == 0) {
+                num = 1;
+            }
             ProductDaoImpl dao = new ProductDaoImpl();
             Product product = dao.get(id);
             double price = product.getPrice();
             ItemCart item = new ItemCart(product, num, price);
-            try {
-                cart.addItem(item);
-            } catch (Exception e) {
-                num = 1;
-            }
+            boolean status = cart.addItem(item);
+            request.setAttribute("status", status);
+            request.getRequestDispatcher("/store/product-detail/productDetail.jsp").forward(request, response);
         }
         if (mode.equals(Type.CHANGE_QUANTITY.toString())) {
             int num = request.getParameter("num") != null ? Integer.parseInt(request.getParameter("num")) : 0;
@@ -84,19 +120,6 @@ public class StoreBuy extends HttpServlet {
                 ItemCart t = new ItemCart(product, num, product.getPrice());
                 cart.addItem(t);
             }
-        }
-        if (mode.equals(Type.CHANGE_QUANTITY_ONFOCUS.toString())) {
-            int num = request.getParameter("num") != null ? Integer.parseInt(request.getParameter("num")) : 0;
-            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-            cart.removeAllItems();
-            if(num == 0){
-                num = 1;
-            }
-            ProductDaoImpl dao = new ProductDaoImpl();
-            Product product = dao.get(id);
-            ItemCart t = new ItemCart(product, num, product.getPrice());
-            cart.addItem(t);
-
         }
         if (mode.equals(Type.SINGAL_DELETE.toString())) {
             int id = Integer.parseInt(request.getParameter("id"));

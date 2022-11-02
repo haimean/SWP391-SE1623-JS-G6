@@ -47,7 +47,8 @@ public class ProductDaoImpl implements ProductDao {
                         rs.getBoolean(8),
                         rs.getInt(9),
                         rs.getTimestamp(10),
-                        rs.getTimestamp(11), "image");
+                        rs.getTimestamp(11),
+                        rs.getString(12));
             }
             dBContext.closeConnection(connection, ps);
         } catch (SQLException e) {
@@ -78,7 +79,8 @@ public class ProductDaoImpl implements ProductDao {
                         rs.getBoolean(8),
                         rs.getInt(9),
                         rs.getTimestamp(10),
-                        rs.getTimestamp(11), "image");
+                        rs.getTimestamp(11),
+                        rs.getString(12));
                 list.add(p);
             }
             dBContext.closeConnection(connection, ps);
@@ -302,7 +304,7 @@ public class ProductDaoImpl implements ProductDao {
                         rs.getInt(9),
                         rs.getTimestamp(10),
                         rs.getTimestamp(11),
-                        "image");
+                        rs.getString(12));
 
                 products.add(product);
 
@@ -323,8 +325,8 @@ public class ProductDaoImpl implements ProductDao {
         try {
             Connection connection = dBContext.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.setInt(2, categoryId);
+            ps.setInt(2, id);
+            ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(
@@ -338,7 +340,8 @@ public class ProductDaoImpl implements ProductDao {
                         rs.getBoolean(8),
                         rs.getInt(9),
                         rs.getTimestamp(10),
-                        rs.getTimestamp(11), "image");
+                        rs.getTimestamp(11),
+                        rs.getString(12));
                 products.add(p);
             }
             dBContext.closeConnection(connection, ps);
@@ -347,6 +350,43 @@ public class ProductDaoImpl implements ProductDao {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public List<Product> getNextTop45Products(int productExisted) {
+        DBContext dBContext = new DBContext();
+        final int RECORD_PER_PAGE = 45;
+        ArrayList<Product> users = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select *\n"
+                    + "from Product \n"
+                    + "order by id\n"
+                    + "offset ? rows fetch next ? rows only";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, productExisted);
+            ps.setInt(2, RECORD_PER_PAGE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getTimestamp(10),
+                        rs.getTimestamp(11),
+                        rs.getString(12)));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return users;
     }
 
 }

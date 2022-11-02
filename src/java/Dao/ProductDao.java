@@ -18,6 +18,9 @@ public interface ProductDao extends BaseDAO<Product> {
     int getPageCount(int CategoryID, long begin, long end, String name);
 
     List<Product> searchByName(String txtSearch);
-    
+
     List<Product> getTop7Products(int id, int categoryId);
+
+    List<Product> getNextTop45Products(int productExisted);
+
 }

@@ -51,10 +51,12 @@ public class StoreCheckout extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login");
         } else {
             account = (User) object2;
-            dao.addOrder(account, cart);
+            boolean status = dao.addOrder(account, cart);
             session.removeAttribute("cart");
             session.setAttribute("size", 0);
-            response.sendRedirect(request.getContextPath()+ "/cart");
+            request.setAttribute("status", status);
+//            response.sendRedirect(request.getContextPath()+ "/cart");
+            request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
         }
     }
 }

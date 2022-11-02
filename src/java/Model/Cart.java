@@ -39,13 +39,14 @@ public class Cart {
         return null;
     }
 
-    public void addItem(ItemCart t) {
+    public boolean addItem(ItemCart t) {
         if (getItemById(t.getProduct().getId()) != null) {
             ItemCart i = getItemById(t.getProduct().getId());
             i.setQuantity(i.getQuantity() + t.getQuantity());
         } else {
             items.add(t);
         }
+        return true;
     }
 
     public void removeItem(int id) {

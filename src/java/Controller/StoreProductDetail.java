@@ -5,12 +5,16 @@
 package Controller;
 
 import Dao.Impl.ProductDaoImpl;
+import Model.Cart;
+import Model.ItemCart;
 import Model.Product;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +35,14 @@ public class StoreProductDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        ProductDaoImpl db = new ProductDaoImpl();
+        Product product = db.get(id);
+        List<Product> list = db.getTop7Products(id, categoryId);
+        request.setAttribute("p", product);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("/store/product-detail/productDetail.jsp").forward(request, response);
     }
 
     /**
@@ -45,17 +56,46 @@ public class StoreProductDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //        int id = Integer.parseInt(request.getParameter("id"));
-//        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        HttpSession session = request.getSession();
+        Cart cart;
+        Object object = session.getAttribute("cart");
+
+        if (object != null) {
+            cart = (Cart) object;
+        } else {
+            cart = new Cart();
+        }
+
+        String mode = request.getParameter("mode");
         ProductDaoImpl db = new ProductDaoImpl();
-//        Product product = db.get(id);
-        Product product = db.get(5);
-//        ArrayList<Product> list = db.getTop7Products(id, categoryId);
-        List<Product> list = db.getTop7Products(5, 5);
-        request.setAttribute("p", product);
-        request.setAttribute("list", list);
-        request.setAttribute("sizeL", list.size());
-        request.getRequestDispatcher("/store/product-detail/productDetail.jsp").forward(request, response);
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+
+        if (mode.equals(Type.ADD.toString())) {
+            String numStr = request.getParameter("num");
+            int num;
+            if (numStr != null && !numStr.isEmpty()) {
+                num = Integer.parseInt(numStr);
+            } else {
+                num = 1;
+            }
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+            if (num == 0) {
+                num = 1;
+            }
+            ProductDaoImpl dao = new ProductDaoImpl();
+            Product product = dao.get(id);
+            double price = product.getPrice();
+            ItemCart item = new ItemCart(product, num, price);
+            boolean status = cart.addItem(item);
+            ArrayList<ItemCart> list = cart.getItems();
+            List<Product> listProductsRelated = db.getTop7Products(id, categoryId);
+            request.setAttribute("status", status);
+            request.setAttribute("p", product);
+            request.setAttribute("list", listProductsRelated);
+            session.setAttribute("cart", cart);
+            session.setAttribute("size", list.size());
+            request.getRequestDispatcher("/store/product-detail/productDetail.jsp").forward(request, response);
+        }
     }
 
 }

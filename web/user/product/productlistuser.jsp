@@ -150,9 +150,9 @@
                                             <figure class="card card-product-grid" style="width: 250px; height: 400px">
                                                 <div class="img-wrap" > 
                                                     <span class="badge badge-danger" > New </span>
-<!--                                                    <a href="product-detail?productid=${requestScope.listP.get(i).id}">
+                                                    <a href="product/detail?id=${requestScope.listP.get(i).id}&categoryId=${requestScope.listP.get(i).categoryID}">
                                                         <img src="${requestScope.listP.get(i).proImg}" style="width: 300px" alt="${requestScope.listP.get(i).proImg}" class="img-fluid reponsive"/>
-                                                    </a>-->
+                                                    </a>
                                                     <div class="col-lg-4 col-md-12 mb-4">
                                                     </div>
 
@@ -160,7 +160,7 @@
                                                 <figcaption class="info-wrap">
                                                     <div class="fix-height">
                                                         <div id="productnamefix">
-                                                            <a href="product-detail?productid=${requestScope.listP.get(i).id}" class="title">${requestScope.listP.get(i).name}</a>
+                                                            <a href="product/detail?id=${requestScope.listP.get(i).id}&categoryId=${requestScope.listP.get(i).categoryID}" class="title">${requestScope.listP.get(i).name}</a>
                                                         </div>
 
                                                         <div class="price-wrap mt-2" style="padding-top: 5px">

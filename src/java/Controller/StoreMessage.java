@@ -22,14 +22,15 @@ import java.util.List;
  */
 public class StoreMessage extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -65,16 +66,16 @@ public class StoreMessage extends HttpServlet {
         request.setAttribute("messagesUser", messagesUser);
         request.setAttribute("userNameReceiver", userReceiver.getFullName());
         request.setAttribute("userIdReceiver", userReceiver.getId());
-        request.getRequestDispatcher( "/store/mess/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/store/mess/index.jsp").forward(request, response);
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -84,7 +85,7 @@ public class StoreMessage extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-       User userReceiver;
+        User userReceiver;
         int userIdReceiver = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         String message = request.getParameter("mess").trim();
         if (userIdReceiver != 0 && message != null) {
@@ -103,5 +104,5 @@ public class StoreMessage extends HttpServlet {
         request.setAttribute("userIdReceiver", userReceiver.getId());
         request.getRequestDispatcher("/store/mess/index.jsp").forward(request, response);
     }
-    
+
 }

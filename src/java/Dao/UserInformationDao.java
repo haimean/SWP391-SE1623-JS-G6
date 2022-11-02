@@ -10,12 +10,12 @@ import Model.UserInformation;
  *
  * @author MrTuan
  */
-public interface UserInformationDao extends BaseDAO<UserInformation>{
+public interface UserInformationDao extends BaseDAO<UserInformation> {
 
     @Override
     UserInformation get(int id);
 
     @Override
     boolean update(UserInformation t);
-    
+
 }

@@ -23,14 +23,15 @@ import java.util.regex.Pattern;
  */
 public class Register extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,31 +42,31 @@ public class Register extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        //feth form value
+        // feth form value
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
         String rePassword = request.getParameter("rePassword").trim();
         String fullName = request.getParameter("fullName").trim();
         if (!UserDaoImpl.haveAccount(email) && isValid(password) && password.equals(rePassword)) {
-            //create instance object of the SendEmail Class
+            // create instance object of the SendEmail Class
             SendEmail sm = new SendEmail();
-            //get the 6-digit code
+            // get the 6-digit code
             String code = sm.getRandom();
-            //craete new user using all information
+            // craete new user using all information
             User user = new User(fullName, email, password, code);
-            //call the send email method
+            // call the send email method
             boolean test = sm.sendEmail(user);
-            //check if the email send successfully
+            // check if the email send successfully
             if (test) {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(180);
@@ -78,15 +79,15 @@ public class Register extends HttpServlet {
         }
 
         if (UserDaoImpl.haveAccount(email)) {
-            //trung mail
+            // trung mail
             request.setAttribute("emailError", "Email already exists");
         }
         if (!isValid(password)) {
-            //sai dinh dang pass
+            // sai dinh dang pass
             request.setAttribute("passwordError", "Password is not valid");
         }
         if (!password.equals(rePassword)) {
-            //k trung pass
+            // k trung pass
             request.setAttribute("rePasswordError", "Confirm Password don't same the password");
         }
         request.setAttribute("email", email);
@@ -95,9 +96,9 @@ public class Register extends HttpServlet {
         request.setAttribute("fullName", fullName);
         request.getRequestDispatcher("/register/register.jsp").forward(request, response);
     }
+
     public static boolean isValid(String password) {
-        String PASSWORD_PATTERN
-                = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+        String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();

@@ -19,14 +19,15 @@ import java.util.ArrayList;
  */
 public class AdminCategoryList extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +35,7 @@ public class AdminCategoryList extends HttpServlet {
         CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
         String search = request.getParameter("search");
         String indexpasge = request.getParameter("page");
-        String status=request.getParameter("status");
+        String status = request.getParameter("status");
         if (indexpasge == null) {
             indexpasge = "1";
             int page = Integer.parseInt(indexpasge);

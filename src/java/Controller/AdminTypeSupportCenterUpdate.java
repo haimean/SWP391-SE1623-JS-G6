@@ -23,10 +23,10 @@ public class AdminTypeSupportCenterUpdate extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +42,8 @@ public class AdminTypeSupportCenterUpdate extends HttpServlet {
         if (modeParam.equals("UPDATE")) {
             int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("name");
-            boolean status = db.update(new TypeSupportCenter(id, name, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now())));
+            boolean status = db.update(
+                    new TypeSupportCenter(id, name, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now())));
             response.sendRedirect(request.getContextPath() + "/admin/qna-type?status=" + status);
         }
     }

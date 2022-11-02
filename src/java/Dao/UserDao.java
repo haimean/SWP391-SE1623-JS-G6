@@ -19,19 +19,19 @@ public interface UserDao extends BaseDAO<User> {
     boolean updateUserStatusByID(int id, boolean status);
 
     boolean updateUserRoleByID(int id, int role);
+
     ArrayList<User> search(String seachValue, int index);
-    
+
     int getTotalUsers();
-    
+
     int getTotalUsersSearch(String seachValue);
-    
+
     ArrayList<User> paginate(int index);
+
     ArrayList<User> search(String seachValue);
-    
 
-     AddressReceiver getUserById(int id);
+    AddressReceiver getUserById(int id);
 
-
-    boolean updatePassword(String email,String password);
+    boolean updatePassword(String email, String password);
 
 }

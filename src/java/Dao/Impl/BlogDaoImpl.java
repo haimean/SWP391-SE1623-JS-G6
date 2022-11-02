@@ -21,7 +21,8 @@ import java.util.logging.Logger;
  */
 public class BlogDaoImpl implements Dao.BlogDao {
 
-    //Blog List (tât ca moi thu lien quan den list ra blog, vi du nhu method getAllBlog, deu se duoc de o duoi nay):
+    // Blog List (tât ca moi thu lien quan den list ra blog, vi du nhu method
+    // getAllBlog, deu se duoc de o duoi nay):
     public int getPageCount() throws Exception {
         DBContext dBContext = new DBContext();
         int st = 0;
@@ -65,8 +66,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
                         rs.getString(3),
                         rs.getInt(4),
                         rs.getString(5),
-                        rs.getString(6)
-                );
+                        rs.getString(6));
                 list.add(blog);
 
             }
@@ -75,7 +75,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
         return list;
     }
 
-//Blog Details: day la noi de nem nhung code lien quan den details blog:
+    // Blog Details: day la noi de nem nhung code lien quan den details blog:
     /**
      *
      * @return
@@ -173,10 +173,11 @@ public class BlogDaoImpl implements Dao.BlogDao {
         return listBlog;
     }
 
-//Tat ca lien quan den Blog update and Create
+    // Tat ca lien quan den Blog update and Create
     @Override
     public boolean insert(Blog t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -184,7 +185,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
-//            Timestamp ts = Timestamp.from(Instant.now());
+            // Timestamp ts = Timestamp.from(Instant.now());
             String sql = "UPDATE [dbo].[Blog]\n"
                     + "   SET [title] = ?\n"
                     + "      ,[description] = ?\n"
@@ -207,7 +208,8 @@ public class BlogDaoImpl implements Dao.BlogDao {
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

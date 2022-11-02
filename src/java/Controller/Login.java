@@ -71,7 +71,7 @@ public class Login extends HttpServlet {
             String email = request.getParameter("email").trim();
             String password = request.getParameter("password").trim();
             if (!isValid(password)) {
-                //sai dinh dang pass
+                // sai dinh dang pass
                 request.setAttribute("email", email);
                 request.setAttribute("password", password);
                 request.setAttribute("errorPassword", "Password is not valid");
@@ -80,7 +80,7 @@ public class Login extends HttpServlet {
             } else {
                 User u = db.login(email, password);
                 if (u == null) {
-                    request.setAttribute("status", "incorect");
+                    request.setAttribute("passFalse", false);
                     request.setAttribute("email", email);
                     request.setAttribute("password", password);
                     request.getRequestDispatcher("login/login.jsp").forward(request, response);
@@ -106,7 +106,9 @@ public class Login extends HttpServlet {
                             response.sendRedirect(request.getContextPath());
                             break;
                         default:
-                            request.setAttribute("status", "loginFail");
+                            request.setAttribute("email", email);
+                            request.setAttribute("password", password);
+                            request.setAttribute("login", false);
                             request.getRequestDispatcher("/login/login.jsp").forward(request, response);
                     }
                 }
@@ -132,8 +134,7 @@ public class Login extends HttpServlet {
     }
 
     public static boolean isValid(String password) {
-        String PASSWORD_PATTERN
-                = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+        String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();

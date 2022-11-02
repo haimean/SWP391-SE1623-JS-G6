@@ -18,10 +18,11 @@ import java.util.ArrayList;
  *
  * @author PiPi
  */
-@WebServlet(name = "AdminSupportCenterList", urlPatterns = {"/admin/qna"})
+@WebServlet(name = "AdminSupportCenterList", urlPatterns = { "/admin/qna" })
 public class AdminSupportCenterList extends HttpServlet {
 
-    public void paginate(ArrayList<SupportCenter> list, SupportCenterDaolmpl db, HttpServletRequest request, HttpServletResponse response, String mode, String... searchValue)
+    public void paginate(ArrayList<SupportCenter> list, SupportCenterDaolmpl db, HttpServletRequest request,
+            HttpServletResponse response, String mode, String... searchValue)
             throws ServletException, IOException {
         final int RECORD_PER_PAGE = 4;
         int index;
@@ -89,14 +90,15 @@ public class AdminSupportCenterList extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -116,10 +118,10 @@ public class AdminSupportCenterList extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

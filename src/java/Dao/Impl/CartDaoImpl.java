@@ -25,7 +25,6 @@ public class CartDaoImpl implements CartDao {
     @Override
     public Boolean addOrder(User user, Cart cart) {
         DBContext dBContext = new DBContext();
-        Boolean status = false;
         Date date = new Date(System.currentTimeMillis());
         try {
             Connection connection = dBContext.getConnection();
@@ -62,12 +61,10 @@ public class CartDaoImpl implements CartDao {
                 ps3.executeUpdate();
             }
             dBContext.closeConnection(connection, ps3);
-            status = true;
+            return true;
         } catch (SQLException e) {
-            status = false;
+            return false;
         }
-        return status;
-
     }
 
     @Override

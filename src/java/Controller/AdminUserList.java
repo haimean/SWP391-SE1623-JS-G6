@@ -94,19 +94,24 @@ public class AdminUserList extends HttpServlet {
         UserDaoImpl db = new UserDaoImpl();
         List<User> list = null;
 
-        if (modeParam == null) {
+        if (null == modeParam) {
             paginate(list, db, request, response, "NORMAL");
 
-        } else if (modeParam.equals("BAN")) {
-            String idParam = request.getParameter("id");
-            String statusParam = request.getParameter("status");
-            int id = Integer.parseInt(idParam);
-            boolean status = Boolean.parseBoolean(statusParam);
-            db.updateUserStatusByID(id, !status);
-            paginate(list, db, request, response, "BAN");
-        } else if ((modeParam.equals("SEARCH"))) {
-            String searchValue = request.getParameter("search");
-            paginate(list, db, request, response, "SEARCH", searchValue);
+        } else switch (modeParam) {
+            case "BAN":
+                String idParam = request.getParameter("id");
+                String statusParam = request.getParameter("status");
+                int id = Integer.parseInt(idParam);
+                boolean status = Boolean.parseBoolean(statusParam);
+                db.updateUserStatusByID(id, !status);
+                paginate(list, db, request, response, "BAN");
+                break;
+            case "SEARCH":
+                String searchValue = request.getParameter("search");
+                paginate(list, db, request, response, "SEARCH", searchValue);
+                break;
+            default:
+                break;
         }
     }
 

@@ -17,6 +17,7 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     </head>
     <body>
+
         <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-6 col-12 mx-auto">
@@ -56,15 +57,10 @@
                     </div>      
                 </div>        
             </div>
+
         </div>
         <div class="position-fixed w-100">
-            <script>
-                function closeAlertModal() {
-                    let modal = document.getElementById("alert");
-                    modal.classList.add("fadeOutLeft");
-                }
-            </script>
-            <c:if test="${pass == false}">
+            <c:if test="${login == 'false'}">
                 <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                     <div>
@@ -72,24 +68,45 @@
                     </div>
                 </button>
             </c:if>
-            <c:if test="${login == false}">
-                <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                    <div>
-                        Login false!
-                    </div>
-                </button>
-            </c:if>
         </div>
-        <script>
-            const togglePassword = document.querySelector("#togglePassword");
-            const password = document.querySelector("#password");
-            togglePassword.addEventListener("click", function () {
-                const type = password.getAttribute("type") === "password" ? "text" : "password";
-                password.setAttribute("type", type);
-                this.classList.toggle('fa-eye');
-                this.classList.toggle('fa-eye-slash');
-            });
-        </script>
     </body>
+    <script>
+        const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password");
+        togglePassword.addEventListener("click", function () {
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+        setTimeout(closeAlertModal, 2000)
+        function closeAlertModal() {
+            let modal = document.getElementById("alert");
+            modal.classList.add("fadeOutLeft");
+        }
+    </script>
+    <style>
+        .fadeOutLeft{
+            animation: fadeOutLeft 0.3s ease-in;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeOutLeft {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            50%{
+                opacity: 1;
+                transform: skewX(-5deg);
+            }
+            75%{
+                opacity: 1;
+                transform: skewX(5deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </html>

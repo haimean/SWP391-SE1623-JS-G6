@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import static Controller.Register.isValid;
 import Model.User;
 import Dao.Impl.UserDaoImpl;
 import java.io.IOException;
@@ -30,18 +29,17 @@ public class Login extends HttpServlet {
             String email = "";
             String password = "";
             Cookie ck[] = request.getCookies();
-            for (int i = 0; i < ck.length; i++) {
-                if (ck[i].getName().equalsIgnoreCase("email")) {
-                    email = ck[i].getValue();
+            for (Cookie ck1 : ck) {
+                if (ck1.getName().equalsIgnoreCase("email")) {
+                    email = ck1.getValue();
                 }
-                if (ck[i].getName().equalsIgnoreCase("password")) {
-                    password = ck[i].getValue();
+                if (ck1.getName().equalsIgnoreCase("password")) {
+                    password = ck1.getValue();
                 }
             }
             request.setAttribute("email", email);
             request.setAttribute("password", password);
             request.getRequestDispatcher("/login/login.jsp").forward(request, response);
-            return;
         } else {
             int type = user.getRole();
             switch (type) {
@@ -76,15 +74,13 @@ public class Login extends HttpServlet {
                 request.setAttribute("password", password);
                 request.setAttribute("errorPassword", "Password is not valid");
                 request.getRequestDispatcher("login/login.jsp").forward(request, response);
-                return;
             } else {
                 User u = db.login(email, password);
-                if (u == null) {
-                    request.setAttribute("passFalse", false);
+                if (u.getId() == 0) {
+                    request.setAttribute("login", false);
                     request.setAttribute("email", email);
                     request.setAttribute("password", password);
                     request.getRequestDispatcher("login/login.jsp").forward(request, response);
-                    return;
                 } else {
                     if (request.getParameter("remember") != null) {
                         Cookie userCookie = new Cookie("email", u.getEmail());
@@ -106,9 +102,9 @@ public class Login extends HttpServlet {
                             response.sendRedirect(request.getContextPath());
                             break;
                         default:
+                            request.setAttribute("login", false);
                             request.setAttribute("email", email);
                             request.setAttribute("password", password);
-                            request.setAttribute("login", false);
                             request.getRequestDispatcher("/login/login.jsp").forward(request, response);
                     }
                 }

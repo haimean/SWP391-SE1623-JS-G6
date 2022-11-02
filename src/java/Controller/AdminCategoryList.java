@@ -4,6 +4,7 @@ package Controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+import Dao.CategoryDao;
 import Model.Category;
 import Dao.Impl.CategoryDaoImpl;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -32,7 +34,7 @@ public class AdminCategoryList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
+        CategoryDao categoryDaoImpl = new CategoryDaoImpl();
         String search = request.getParameter("search");
         String indexpasge = request.getParameter("page");
         String status = request.getParameter("status");
@@ -40,9 +42,9 @@ public class AdminCategoryList extends HttpServlet {
             indexpasge = "1";
             int page = Integer.parseInt(indexpasge);
             if (search != null) {
-                ArrayList<Category> categories = categoryDaoImpl.search(search);
+                List<Category> categories = categoryDaoImpl.search(search);
             } else {
-                ArrayList<Category> categories = categoryDaoImpl.getAll(page);
+                List<Category> categories = categoryDaoImpl.getAll(page);
             }
             int count = categoryDaoImpl.getTotalCategory();
             int endpage = count / 5;

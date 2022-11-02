@@ -8,7 +8,6 @@ import Dao.Impl.UserDaoImpl;
 import Model.User;
 import SendEmail.SendEmail;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -71,7 +70,7 @@ public class Register extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(180);
                 session.setAttribute("authcode", user);
-                response.sendRedirect("verify");
+                response.sendRedirect("/login/verify");
                 return;
             } else {
                 response.sendRedirect(request.getContextPath());

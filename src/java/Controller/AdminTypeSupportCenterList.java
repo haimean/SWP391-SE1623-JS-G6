@@ -49,42 +49,45 @@ public class AdminTypeSupportCenterList extends HttpServlet {
             index = endPage;
         }
 
-        if (mode.equals("SEARCH")) {
-            totalPage = db.getTotalQnaTypeSearch(searchValue[0]);
-            endPage = totalPage / recordsPerPage;
-
-            if (totalPage % recordsPerPage != 0) {
-                endPage++;
-            }
-
-            if (index > endPage) {
-                index = endPage;
-            }
-            list = db.searchQnaType(searchValue[0], index);
-            request.setAttribute("tag", index);
-            request.setAttribute("listQnaType", list);
-            request.setAttribute("size", list.size());
-            request.setAttribute("endP", endPage);
-            request.setAttribute("search", searchValue[0]);
-            request.getRequestDispatcher("/admin/question-type/qnaTypeSearch.jsp").forward(request, response);
-
-        } else if (mode.equals("DELETE")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            boolean status = db.delete(id);
-            list = db.paginate(index);
-            request.setAttribute("tag", index);
-            request.setAttribute("listQnaType", list);
-            request.setAttribute("endP", endPage);
-            request.setAttribute("status", status);
-            request.getRequestDispatcher("/admin/question-type/index.jsp").forward(request, response);
-        } else {
-            String status = request.getParameter("status");
-            list = db.paginate(index);
-            request.setAttribute("tag", index);
-            request.setAttribute("listQnaType", list);
-            request.setAttribute("endP", endPage);
-            request.setAttribute("status", status);
-            request.getRequestDispatcher("/admin/question-type/index.jsp").forward(request, response);
+        switch (mode) {
+            case "SEARCH":
+                totalPage = db.getTotalQnaTypeSearch(searchValue[0]);
+                endPage = totalPage / recordsPerPage;
+                if (totalPage % recordsPerPage != 0) {
+                    endPage++;
+                }   if (index > endPage) {
+                    index = endPage;
+                }   list = db.searchQnaType(searchValue[0], index);
+                request.setAttribute("tag", index);
+                request.setAttribute("listQnaType", list);
+                request.setAttribute("size", list.size());
+                request.setAttribute("endP", endPage);
+                request.setAttribute("search", searchValue[0]);
+                request.getRequestDispatcher("/admin/question-type/qnaTypeSearch.jsp").forward(request, response);
+                break;
+            case "DELETE":
+                {
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    boolean status = db.delete(id);
+                    list = db.paginate(index);
+                    request.setAttribute("tag", index);
+                    request.setAttribute("listQnaType", list);
+                    request.setAttribute("endP", endPage);
+                    request.setAttribute("status", status);
+                    request.getRequestDispatcher("/admin/question-type/index.jsp").forward(request, response);
+                    break;
+                }
+            default:
+                {
+                        String status = request.getParameter("status");
+                        list = db.paginate(index);
+                        request.setAttribute("tag", index);
+                        request.setAttribute("listQnaType", list);
+                        request.setAttribute("endP", endPage);
+                        request.setAttribute("status", status);
+                        request.getRequestDispatcher("/admin/question-type/index.jsp").forward(request, response);
+                    break;
+                }
         }
     }
 

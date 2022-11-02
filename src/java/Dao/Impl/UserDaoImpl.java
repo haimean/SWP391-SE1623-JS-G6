@@ -40,11 +40,7 @@ public class UserDaoImpl implements UserDao {
                 numberAccount = rs.getInt(1);
             }
             dBContext.closeConnection(connection, ps);
-            if (numberAccount > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return numberAccount > 0;
         } catch (SQLException e) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }

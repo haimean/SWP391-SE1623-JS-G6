@@ -70,7 +70,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
                 list.add(blog);
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return list;
     }
@@ -134,6 +134,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
         return blog;
     }
 
+    @Override
     public void increaseView(int proId) {
         DBContext dBContext = new DBContext();
         String sql = "UPDATE Blog \n"

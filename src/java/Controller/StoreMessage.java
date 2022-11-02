@@ -42,7 +42,7 @@ public class StoreMessage extends HttpServlet {
             return;
         }
         String search = request.getParameter("search");
-        ArrayList<Message> messages = new ArrayList<>();
+        List<Message> messages = new ArrayList<Message>();
         if (search != null) {
             messages = new MessageDaoImpl().getAll(user.getId(), search);
         } else {

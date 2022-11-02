@@ -67,7 +67,8 @@ public class TypeSupportCenter {
 
     @Override
     public String toString() {
-        return "TypeSupportCenter{" + "id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+        return "TypeSupportCenter{" + "id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt="
+                + updatedAt + '}';
     }
 
 }

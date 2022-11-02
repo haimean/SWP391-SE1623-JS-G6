@@ -18,6 +18,6 @@ public class SellerDashbroad extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       request.getRequestDispatcher("/seller/Dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/seller/Dashboard.jsp").forward(request, response);
     }
 }

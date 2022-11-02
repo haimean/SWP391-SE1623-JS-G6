@@ -22,7 +22,7 @@ public class UserBlogCreate extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
-       request.getRequestDispatcher("./user/blog/DemoCarousel.jsp").forward(request, response);
+        request.getRequestDispatcher("./user/blog/DemoCarousel.jsp").forward(request, response);
     }
 
     @Override

@@ -11,16 +11,19 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.File;
+import jakarta.servlet.http.Part;
+import java.nio.file.Paths;
 import java.util.Map;
 
 /**
  *
  * @author MrTuan
  */
+@MultipartConfig
 public class ProfileUserUpdate extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
@@ -58,30 +61,40 @@ public class ProfileUserUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "ddrjnfihc",
-                "api_key", "295827132792413",
-                "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
-        cloudinary.config.secure = true;
-        UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
-        int id = Integer.parseInt(request.getParameter("id"));
-        String fullname = request.getParameter("fullname").trim();
-        String image = request.getParameter("image");
-        String gender = request.getParameter("gender");
-        String biography = request.getParameter("biography").trim();
-        String address = request.getParameter("address").trim();
-        String city = request.getParameter("city").trim();
-        File file = new File(image);
-        Map path = ObjectUtils.asMap(
-                "public_id", "Home/Images/UserProfile/" + id);
-        Map uploadResult = cloudinary.uploader().upload(file, path);
-        String geturl = uploadResult.get("secure_url").toString();
-        boolean status = userInformationDaoImpl.updateProfile(id, fullname, geturl, gender, biography, address, city);
-        UserInformation userInf = userInformationDaoImpl.get(id);
-        request.setAttribute("status", status);
-        request.setAttribute("userinf", userInf);
-        request.setAttribute("urlimage", geturl);
-        request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath());
+        } else {
+            Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                    "cloud_name", "ddrjnfihc",
+                    "api_key", "295827132792413",
+                    "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
+            cloudinary.config.secure = true;
+            UserInformationDaoImpl userInformationDaoImpl = new UserInformationDaoImpl();
+            String fullname = request.getParameter("fullName");
+            String gender = request.getParameter("gender");
+            String biography = request.getParameter("biography");
+            String address = request.getParameter("address");
+            String city = request.getParameter("city");
+            Part filePart = request.getPart("image");
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            filePart.write(request.getRealPath("image") + fileName);
+            Map path = ObjectUtils.asMap(
+                    "public_id", "Home/Images/UserProfile/" + user.getId(),
+                    "overwrite", true,
+                    "resource_type", "image"
+            );
+            Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
+            filePart.delete();
+            String geturl = uploadResult.get("secure_url").toString();
+            boolean status = userInformationDaoImpl.updateProfile(user.getId(), fullname,geturl, gender, biography, address, city);
+            UserInformation userInf = userInformationDaoImpl.get(user.getId());
+            request.setAttribute("status", status);
+            request.setAttribute("userinf", userInf);
+            request.setAttribute("urlimage", geturl);
+            request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
+        }
+
     }
 
 }

@@ -86,8 +86,8 @@
                                 }else{
                                 %>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/profile">Profile</a></li>    
+                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/messages">Message</a></li>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/user/blog">MyBlog</a></li>    
-                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/message">Message</a></li>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout"">Logout</a></li>
                                 <%}%>       
                         </ul>

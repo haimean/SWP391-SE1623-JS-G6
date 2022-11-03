@@ -53,10 +53,10 @@ public class UserDaoImpl implements UserDao {
         User user = new User();
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select u.id, role, fullname, email, phone, status, "
-                    + "u.created_at, updated_at\n"
-                    + "from UserInformation as ui, [User] as u\n"
-                    + "where u.id = ui.userId and u.email = ? and u.password = ?";
+            String sql = "select u.id, role, fullname, u.email, phone, status, u.created_at, updated_at\n"
+                    + "                from UserInformation as ui, [User] as u\n"
+                    + "                where u.id = ui.userId and u.email = ? and u.password = ?";
+
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, Email);
             ps.setString(2, password);
@@ -346,12 +346,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public boolean updatePassword(String email, String password) {
         DBContext dBContext = new DBContext();
         try {
@@ -401,5 +395,10 @@ public class UserDaoImpl implements UserDao {
     public ArrayList<User> search(String seachValue) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
                                                                        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

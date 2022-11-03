@@ -117,7 +117,7 @@
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
     </servlet>
-    <servlet>        
+    <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>Controller.Register</servlet-class>
     </servlet>
@@ -241,7 +241,7 @@
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <url-pattern>/profile/changepassword</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>        
+    <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>

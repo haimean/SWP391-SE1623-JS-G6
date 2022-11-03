@@ -6,6 +6,7 @@ package Dao.Impl;
 
 import Dao.DBContext;
 import Dao.ProductDao;
+import Model.Blog;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +24,9 @@ import java.time.Instant;
  * @author MrTuan
  */
 public class ProductDaoImpl implements ProductDao {
+
     Timestamp ts = Timestamp.from(Instant.now());
+
     @Override
     public Product get(int id) {
         DBContext dBContext = new DBContext();
@@ -45,7 +48,8 @@ public class ProductDaoImpl implements ProductDao {
                         rs.getBoolean(8),
                         rs.getInt(9),
                         rs.getTimestamp(10),
-                        rs.getTimestamp(11), "image");
+                        rs.getTimestamp(11),
+                        rs.getString(12));
             }
             dBContext.closeConnection(connection, ps);
         } catch (SQLException e) {
@@ -76,7 +80,8 @@ public class ProductDaoImpl implements ProductDao {
                         rs.getBoolean(8),
                         rs.getInt(9),
                         rs.getTimestamp(10),
-                        rs.getTimestamp(11), "image");
+                        rs.getTimestamp(11),
+                        rs.getString(12));
                 list.add(p);
             }
             dBContext.closeConnection(connection, ps);
@@ -256,13 +261,14 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getAllProductByConstrain(int index, int order_by, int CategoryID, long begin, long end, String name) {
+    public List<Product> getAllProductByConstrain(int index, int order_by, int CategoryID, long begin, long end,
+            String name) {
         DBContext dBContext = new DBContext();
 
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM Product p WHERE 1=1";
-        sql = addCategoryID(sql, CategoryID);  //WHERE CategoryID=
-        sql = addUnitPrice(sql, begin, end);    //WHERE UnitsPrice BETWEEN
+        sql = addCategoryID(sql, CategoryID); // WHERE CategoryID=
+        sql = addUnitPrice(sql, begin, end); // WHERE UnitsPrice BETWEEN
         sql = addSearchByName(sql, name);
         StringBuilder sb = new StringBuilder(sql);
         switch (order_by) {
@@ -300,7 +306,7 @@ public class ProductDaoImpl implements ProductDao {
                         rs.getInt(9),
                         rs.getTimestamp(10),
                         rs.getTimestamp(11),
-                        "image");
+                        rs.getString(12));
 
                 products.add(product);
 
@@ -312,4 +318,107 @@ public class ProductDaoImpl implements ProductDao {
         return products;
     }
 
+    @Override
+    public List<Product> getTop7Products(int id, int categoryId) {
+        DBContext dBContext = new DBContext();
+        List<Product> products = new ArrayList<>();
+        String sql = "select top 7 * from Product\n"
+                + "where categoryID = ? and id <> ?";
+        try {
+            Connection connection = dBContext.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(2, id);
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getTimestamp(10),
+                        rs.getTimestamp(11),
+                        rs.getString(12));
+                products.add(p);
+            }
+            dBContext.closeConnection(connection, ps);
+            return products;
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Product> getNextTop45Products(int productExisted) {
+        DBContext dBContext = new DBContext();
+        final int RECORD_PER_PAGE = 45;
+        ArrayList<Product> users = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select *\n"
+                    + "from Product \n"
+                    + "order by id\n"
+                    + "offset ? rows fetch next ? rows only";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, productExisted);
+            ps.setInt(2, RECORD_PER_PAGE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getTimestamp(10),
+                        rs.getTimestamp(11),
+                        rs.getString(12)));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return users;
+    }
+
+    @Override
+    public List<Blog> getTop7Blogs(int productId) {
+        DBContext dBContext = new DBContext();
+        ArrayList<Blog> blogs = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select m.blogId, b.title, b.[description],b.viewNumer, \n"
+                    + "b.image,b.content\n"
+                    + "from MapBlogAndProduct m\n"
+                    + "inner join Blog b on b.id = m.blogId\n"
+                    + "where m.productId = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                blogs.add(new Blog(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6)));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return blogs;
+    }
+
+    public static void main(String[] args) {
+        List<Blog> list = new ProductDaoImpl().getTop7Blogs(6);
+        for (Blog blog : list) {
+            System.out.println(blog.getTitle());
+        }
+    }
 }

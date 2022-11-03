@@ -10,10 +10,10 @@ package Model;
  */
 public class AddressReceiver {
     private int userid;
-	private String fullName;
-        private String phone;
-	private String email;
-	private String address;
+    private String fullName;
+    private String phone;
+    private String email;
+    private String address;
 
     public AddressReceiver() {
     }
@@ -65,6 +65,5 @@ public class AddressReceiver {
     public void setAddress(String address) {
         this.address = address;
     }
-	
-	
+
 }

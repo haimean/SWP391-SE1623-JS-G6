@@ -23,14 +23,14 @@ public interface CategoryDao extends BaseDAO<Category> {
 
     @Override
     public boolean insert(Category category);
-    
+
     @Override
     public boolean update(Category category);
-    
+
     @Override
     public boolean delete(int id);
-    
+
     public int getTotalCategory();
-    
+
     public ArrayList<Category> getAll(int page);
 }

@@ -20,16 +20,16 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author PiPi
  */
-@WebServlet(name = "Checkout", urlPatterns = {"/checkout"})
+@WebServlet(name = "Checkout", urlPatterns = { "/checkout" })
 public class StoreCheckout extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -48,13 +48,15 @@ public class StoreCheckout extends HttpServlet {
         CartDao dao = new CartDaoImpl();
 
         if (object2 == null) {
-            response.sendRedirect("login/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
         } else {
             account = (User) object2;
-            dao.addOrder(account, cart);
+            boolean status = dao.addOrder(account, cart);
             session.removeAttribute("cart");
             session.setAttribute("size", 0);
-            response.sendRedirect("store/Home.jsp");
+            request.setAttribute("status", status);
+//            response.sendRedirect(request.getContextPath()+ "/cart");
+            request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
         }
     }
 }

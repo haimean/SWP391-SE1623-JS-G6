@@ -199,6 +199,5 @@
     function closeAlertModal() {
         let modal = document.getElementById("alert");
         modal.classList.add("fadeOutLeft");
-        console.log(modal);
     }
 </script>

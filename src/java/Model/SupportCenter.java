@@ -38,7 +38,8 @@ public class SupportCenter {
         this.typeId = typeId;
     }
 
-    public SupportCenter(int id, Date createdAt, Date updatedAt, String question, String answer, String name, int typeId) {
+    public SupportCenter(int id, Date createdAt, Date updatedAt, String question, String answer, String name,
+            int typeId) {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -115,6 +116,7 @@ public class SupportCenter {
 
     @Override
     public String toString() {
-        return "SupportCenter{" + "id=" + id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", question=" + question + ", answer=" + answer + ", name=" + name + ", typeId=" + typeId + '}';
+        return "SupportCenter{" + "id=" + id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", question="
+                + question + ", answer=" + answer + ", name=" + name + ", typeId=" + typeId + '}';
     }
 }

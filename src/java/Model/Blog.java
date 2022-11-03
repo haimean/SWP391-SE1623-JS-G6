@@ -131,4 +131,5 @@ public class Blog {
     public void setViewNumber(int viewNumber) {
         this.viewNumber = viewNumber;
     }
+}
 

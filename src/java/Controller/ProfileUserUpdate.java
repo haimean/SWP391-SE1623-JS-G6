@@ -31,10 +31,10 @@ public class ProfileUserUpdate extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,10 +53,10 @@ public class ProfileUserUpdate extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -78,21 +78,32 @@ public class ProfileUserUpdate extends HttpServlet {
             String city = request.getParameter("city");
             Part filePart = request.getPart("image");
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            filePart.write(request.getRealPath("image") + fileName);
-            Map path = ObjectUtils.asMap(
-                    "public_id", "Home/Images/UserProfile/" + user.getId(),
-                    "overwrite", true,
-                    "resource_type", "image"
-            );
-            Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
-            filePart.delete();
-            String geturl = uploadResult.get("secure_url").toString();
-            boolean status = userInformationDaoImpl.updateProfile(user.getId(), fullname,geturl, gender, biography, address, city);
-            UserInformation userInf = userInformationDaoImpl.get(user.getId());
-            request.setAttribute("status", status);
-            request.setAttribute("userinf", userInf);
-            request.setAttribute("urlimage", geturl);
-            request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
+            if (filePart.getSize()==0) {
+                String geturl = "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667254100/Home/Images/UserProfile/" + user.getId() + ".jpg";
+                boolean status = userInformationDaoImpl.updateProfile(user.getId(), fullname, geturl, gender, biography, address, city);
+                UserInformation userInf = userInformationDaoImpl.get(user.getId());
+                request.setAttribute("status", status);
+                request.setAttribute("userinf", userInf);
+                request.setAttribute("urlimage", geturl);
+                request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
+            } else {
+                filePart.write(request.getRealPath("image") + fileName);
+                Map path = ObjectUtils.asMap(
+                        "public_id", "Home/Images/UserProfile/" + user.getId(),
+                        "overwrite", true,
+                        "resource_type", "image"
+                );
+                Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
+                filePart.delete();
+                String geturl = uploadResult.get("secure_url").toString();
+                boolean status = userInformationDaoImpl.updateProfile(user.getId(), fullname, geturl, gender, biography, address, city);
+                UserInformation userInf = userInformationDaoImpl.get(user.getId());
+                request.setAttribute("status", status);
+                request.setAttribute("userinf", userInf);
+                request.setAttribute("urlimage", geturl);
+                request.getRequestDispatcher("/user/profile/Profile.jsp").forward(request, response);
+            }
+
         }
 
     }

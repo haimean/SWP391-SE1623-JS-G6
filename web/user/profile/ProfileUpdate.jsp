@@ -16,7 +16,7 @@
             <button type="submit" class="button-logout-update-profile" name="id" value="${userinf.getId()}"><u>Save</u></button>
         </div>
         <div class="div-image-profile">
-            <img id="photo" class= "img-profile" src="${userinf.getImage()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default_lqkxt3.jpg" : userinf.getImage()}">
+            <img id="photo" class= "img-profile" src="${userinf.getImage()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default.jpg" : userinf.getImage()}">
             <input type="file" id="file" name="image" accept="image/png,image/jpeg" multiple="multiple">
             <label for="file" id="uploadBtn">Choose Photo</label>
         </div>

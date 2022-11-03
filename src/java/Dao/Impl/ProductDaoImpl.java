@@ -261,13 +261,14 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getAllProductByConstrain(int index, int order_by, int CategoryID, long begin, long end, String name) {
+    public List<Product> getAllProductByConstrain(int index, int order_by, int CategoryID, long begin, long end,
+            String name) {
         DBContext dBContext = new DBContext();
 
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM Product p WHERE 1=1";
-        sql = addCategoryID(sql, CategoryID);  //WHERE CategoryID=
-        sql = addUnitPrice(sql, begin, end);    //WHERE UnitsPrice BETWEEN
+        sql = addCategoryID(sql, CategoryID); // WHERE CategoryID=
+        sql = addUnitPrice(sql, begin, end); // WHERE UnitsPrice BETWEEN
         sql = addSearchByName(sql, name);
         StringBuilder sb = new StringBuilder(sql);
         switch (order_by) {

@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class AdminUserList extends HttpServlet {
 
-    public void paginate(List<User> list, UserDaoImpl db, HttpServletRequest request, HttpServletResponse response, String mode, String... searchValue)
+    public void paginate(List<User> list, UserDaoImpl db, HttpServletRequest request, HttpServletResponse response,
+            String mode, String... searchValue)
             throws ServletException, IOException {
         final int recordsPerPage = 4;
         int index;
@@ -81,10 +82,10 @@ public class AdminUserList extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -92,30 +93,35 @@ public class AdminUserList extends HttpServlet {
         String modeParam = request.getParameter("mode");
         UserDaoImpl db = new UserDaoImpl();
         List<User> list = null;
-        
-        if (modeParam == null) {
+
+        if (null == modeParam) {
             paginate(list, db, request, response, "NORMAL");
 
-        } else if (modeParam.equals("BAN")) {
-            String idParam = request.getParameter("id");
-            String statusParam = request.getParameter("status");
-            int id = Integer.parseInt(idParam);
-            boolean status = Boolean.parseBoolean(statusParam);
-            db.updateUserStatusByID(id, !status);
-            paginate(list, db, request, response, "BAN");
-        } else if ((modeParam.equals("SEARCH"))) {
-            String searchValue = request.getParameter("search");
-            paginate(list, db, request, response, "SEARCH", searchValue);
+        } else switch (modeParam) {
+            case "BAN":
+                String idParam = request.getParameter("id");
+                String statusParam = request.getParameter("status");
+                int id = Integer.parseInt(idParam);
+                boolean status = Boolean.parseBoolean(statusParam);
+                db.updateUserStatusByID(id, !status);
+                paginate(list, db, request, response, "BAN");
+                break;
+            case "SEARCH":
+                String searchValue = request.getParameter("search");
+                paginate(list, db, request, response, "SEARCH", searchValue);
+                break;
+            default:
+                break;
         }
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

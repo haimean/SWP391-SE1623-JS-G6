@@ -22,7 +22,8 @@ public class UserInformation {
     public UserInformation() {
     }
 
-    public UserInformation(int id, String fullname, String image, int gender, String biography, String phone, String mail, String address, String city) {
+    public UserInformation(int id, String fullname, String image, int gender, String biography, String phone,
+            String mail, String address, String city) {
         this.id = id;
         this.fullname = fullname;
         this.image = image;
@@ -105,6 +106,5 @@ public class UserInformation {
     public void setCity(String city) {
         this.city = city;
     }
-    
-    
+
 }

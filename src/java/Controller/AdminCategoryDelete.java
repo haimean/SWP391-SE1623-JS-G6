@@ -24,10 +24,10 @@ public class AdminCategoryDelete extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,7 +48,7 @@ public class AdminCategoryDelete extends HttpServlet {
             request.setAttribute("categories", categories);
             request.setAttribute("endpage", endpage);
             response.sendRedirect(request.getContextPath() + "/admin/category?status=" + status);
-        }else{
+        } else {
             int page = Integer.parseInt(indexpasge);
             int count = categoryDaoImpl.getTotalCategory();
             int endpage = count / 5;

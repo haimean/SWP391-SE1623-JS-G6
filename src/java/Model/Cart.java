@@ -54,8 +54,8 @@ public class Cart {
             items.remove(getItemById(id));
         }
     }
-    
-    public void removeAllItems(){
+
+    public void removeAllItems() {
         items.removeAll(items);
     }
 

@@ -161,6 +161,7 @@ public class CategoryDaoImpl implements CategoryDao {
         }
         return 0;
     }
+
     @Override
     public ArrayList<Category> getAll(int page) {
         Dao.DBContext dBContext = new Dao.DBContext();
@@ -171,10 +172,10 @@ public class CategoryDaoImpl implements CategoryDao {
                     + "order by id\n"
                     + "offset ? rows fetch next 5 rows only;";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, (page-1)*5);
+            ps.setInt(1, (page - 1) * 5);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {    
-                Category category=new Category();
+            while (rs.next()) {
+                Category category = new Category();
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
                 listCategory.add(category);

@@ -6,6 +6,7 @@ package Dao.Impl;
 
 import Dao.DBContext;
 import Dao.ProductDao;
+import Model.Blog;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -389,4 +390,34 @@ public class ProductDaoImpl implements ProductDao {
         return users;
     }
 
+    @Override
+    public List<Blog> getTop7Blogs(int productId) {
+        DBContext dBContext = new DBContext();
+        ArrayList<Blog> blogs = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select m.blogId, b.title, b.[description],b.viewNumer, \n"
+                    + "b.image,b.content\n"
+                    + "from MapBlogAndProduct m\n"
+                    + "inner join Blog b on b.id = m.blogId\n"
+                    + "where m.productId = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                blogs.add(new Blog(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6)));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return blogs;
+    }
+
+    public static void main(String[] args) {
+        List<Blog> list = new ProductDaoImpl().getTop7Blogs(6);
+        for (Blog blog : list) {
+            System.out.println(blog.getTitle());
+        }
+    }
 }

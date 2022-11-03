@@ -4,6 +4,7 @@
  */
 package Dao;
 
+import Model.Blog;
 import Model.Product;
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface ProductDao extends BaseDAO<Product> {
     List<Product> getTop7Products(int id, int categoryId);
 
     List<Product> getNextTop45Products(int productExisted);
+    
+    List<Blog> getTop7Blogs(int productId);
 
 }

@@ -5,6 +5,7 @@
 package Controller;
 
 import Dao.Impl.ProductDaoImpl;
+import Model.Blog;
 import Model.Cart;
 import Model.ItemCart;
 import Model.Product;
@@ -39,9 +40,11 @@ public class StoreProductDetail extends HttpServlet {
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         ProductDaoImpl db = new ProductDaoImpl();
         Product product = db.get(id);
-        List<Product> list = db.getTop7Products(id, categoryId);
+        List<Product> listProducts = db.getTop7Products(id, categoryId);
+        List<Blog> listBlogs = db.getTop7Blogs(id);
         request.setAttribute("p", product);
-        request.setAttribute("list", list);
+        request.setAttribute("list", listProducts);
+        request.setAttribute("listBlogs", listBlogs);
         request.getRequestDispatcher("/store/product-detail/productDetail.jsp").forward(request, response);
     }
 
@@ -88,10 +91,12 @@ public class StoreProductDetail extends HttpServlet {
             ItemCart item = new ItemCart(product, num, price);
             boolean status = cart.addItem(item);
             ArrayList<ItemCart> list = cart.getItems();
+            List<Blog> listBlogs = db.getTop7Blogs(id);
             List<Product> listProductsRelated = db.getTop7Products(id, categoryId);
             request.setAttribute("status", status);
             request.setAttribute("p", product);
             request.setAttribute("list", listProductsRelated);
+            request.setAttribute("listBlogs", listBlogs);
             session.setAttribute("cart", cart);
             session.setAttribute("size", list.size());
             request.getRequestDispatcher("/store/product-detail/productDetail.jsp").forward(request, response);

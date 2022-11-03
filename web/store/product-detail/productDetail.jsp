@@ -22,6 +22,10 @@
         width: auto;
         height: 12rem;
     }
+    .blog-related-img{
+        width: auto;
+        height: 12rem;
+    }
     .fadeOutLeft{
         animation: fadeOutLeft 0.3s ease-in;
         animation-fill-mode: forwards;
@@ -44,6 +48,12 @@
             transform: translateX(-100%);
         }
     }
+    .product-wrapper{
+        height: 26rem;
+    }
+    .blog-wrapper{
+        height: 28rem;
+    }
 </style>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -57,7 +67,7 @@
     </symbol>
 </svg>
 
-<section class="py-5">
+<section class="py-5 bg-light   ">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 rounded" src="${p.proImg}" alt="IMAGE" /></div>
@@ -119,50 +129,97 @@
         </c:if>
     </div>
 </section>
-<section class="py-5 bg-light">
+<section class="pt-5">
     <div class="container px-4 px-lg-5 mt-5">
         <h2 class="fw-bolder mb-4 footer-title">Related products</h2>
-        <div>${test}</div>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <c:forEach items="${list}" var="rp">
-                    <div class="swiper-slide">
-                        <div class="card h-100">
-                            <img class="card-img-top img-fluid product-related-img" src="${rp.proImg}" alt="IMAGE" />
-                            <div class="card-body p-4">
+        <c:if test="${list.size() == 0}">
+            <h4 class="text-black-50 text-center">This product has no blogs related!</h4>
+        </c:if>
+        <c:if test="${list.size() != 0}">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper product-wrapper">
+                    <c:forEach items="${list}" var="rp">
+                        <div class="swiper-slide">
+                            <div class="card h-100">
+                                <img class="card-img-top img-fluid product-related-img" src="${rp.proImg}" alt="IMAGE" />
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">${rp.name}</h5>
+                                        ${rp.price}
+                                    </div>
+                                </div>
                                 <div class="text-center">
-                                    <h5 class="fw-bolder">${rp.name}</h5>
-                                    ${rp.price}
+                                    <a class="btn btn-outline-primary flex-shrink-0" href="detail?id=${rp.id}&categoryId=${rp.categoryID}">
+                                        View Product
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="text-center">
-                                <a class="btn btn-outline-primary flex-shrink-0" href="detail?id=${rp.id}&categoryId=${rp.categoryID}">
-                                    View Product
-                                </a>
-                            </div>
-                            <div class="d-flex justify-content-center mt-4">
-                                <div class="small d-flex text-muted me-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 icon-view">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                    <p class="ms-2">${rp.viewNumber}</p>
-                                </div>
-                                <div class="small d-flex text-muted">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 icon-view">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                                    </svg>
+                                <div class="d-flex justify-content-center mt-4">
+                                    <div class="small d-flex text-muted me-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 icon-view">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        <p class="ms-2">${rp.viewNumber}</p>
+                                    </div>
+                                    <div class="small d-flex text-muted">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 icon-view">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                                        </svg>
 
-                                    <p class="ms-2">${rp.original}</p>
+                                        <p class="ms-2">${rp.original}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
+        </c:if>
+    </div>
+</section>
+<section>
+    <div class="container px-4 px-lg-5 my-5">
+        <h2 class="fw-bolder mb-4 footer-title">Related blogs</h2>
+        <c:if test="${listBlogs.size() == 0}">
+            <h4 class="text-black-50 text-center">This product has no blog related!</h4>
+        </c:if>
+        <c:if test="${listBlogs.size() != 0}">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper blog-wrapper">
+                    <c:forEach items="${listBlogs}" var="rb">
+                        <div class="swiper-slide">
+                            <div class="card h-100 card-blog">
+                                <img class="card-img-top img-fluid blog-related-img" src="${rb.image}" alt="IMAGE" />
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">${rb.title}</h5>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-outline-primary flex-shrink-0" href="detail?id=${rb.id}">
+                                        View Blog
+                                    </a>
+                                </div>
+                                <div class="d-flex justify-content-center mt-4">
+                                    <div class="small d-flex text-muted">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 icon-view">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        <p class="ms-2">${rb.viewNumber}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </c:if>
+
     </div>
 </section>
 

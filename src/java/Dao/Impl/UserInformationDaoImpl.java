@@ -93,39 +93,4 @@ public class UserInformationDaoImpl implements UserInformationDao {
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    public List<UserInformation> findFriends(String email) {
-        DBContext dBContext = new DBContext();
-        List<UserInformation> listUserInformation = new ArrayList<>();
-        try {
-            Connection connection = dBContext.getConnection();
-            String sql = "select distinct uf1.email,uf1.fullname,uf1.gender,uf1.[image] from UserInformation uf\n"
-                    + "join Friends fr\n"
-                    + "on uf.email=fr.receiver\n"
-                    + "join UserInformation uf1\n"
-                    + "on uf1.email=fr.sender\n"
-                    + "where uf.email like '%'+?+'%'";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                UserInformation userInformation = new UserInformation();
-                userInformation.setMail(rs.getString("email"));
-                userInformation.setFullname(rs.getString("fullname"));
-                userInformation.setGender(rs.getInt("gender"));
-                userInformation.setImage(rs.getString("image"));
-                listUserInformation.add(userInformation);
-            }
-            dBContext.closeConnection(connection, ps, rs);
-        } catch (SQLException e) {
-        }
-        return listUserInformation;
-    }
-    public static void main(String[] args) {
-        UserInformationDaoImpl db= new UserInformationDaoImpl();
-        List<UserInformation> listUserInformation=db.findFriends("user@gmail.com");
-        for (UserInformation userInformation : listUserInformation) {
-            System.out.println(userInformation.getImage());
-        }
-    }
 }

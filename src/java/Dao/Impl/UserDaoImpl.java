@@ -338,7 +338,6 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
     }
-
     @Override
     public boolean update(User t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from

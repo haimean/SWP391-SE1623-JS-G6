@@ -48,13 +48,15 @@ public class StoreCheckout extends HttpServlet {
         CartDao dao = new CartDaoImpl();
 
         if (object2 == null) {
-            response.sendRedirect("login/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
         } else {
             account = (User) object2;
-            dao.addOrder(account, cart);
+            boolean status = dao.addOrder(account, cart);
             session.removeAttribute("cart");
             session.setAttribute("size", 0);
-            response.sendRedirect("store/Home.jsp");
+            request.setAttribute("status", status);
+//            response.sendRedirect(request.getContextPath()+ "/cart");
+            request.getRequestDispatcher("store/cart/index.jsp").forward(request, response);
         }
     }
 }

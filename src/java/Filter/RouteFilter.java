@@ -29,17 +29,17 @@ import jakarta.servlet.http.HttpServletResponseWrapper;
  * @author haimi
  */
 public class RouteFilter implements Filter {
-    
+
     private static final boolean debug = false;
 
-    // The filter configuration object we are associated with.  If
+    // The filter configuration object we are associated with. If
     // this value is null, this filter instance is not currently
-    // configured. 
+    // configured.
     private FilterConfig filterConfig = null;
-    
+
     public RouteFilter() {
-    }    
-    
+    }
+
     private void doBeforeProcessing(RequestWrapper request, ResponseWrapper response)
             throws IOException, ServletException {
         if (debug) {
@@ -52,31 +52,31 @@ public class RouteFilter implements Filter {
         // wrapper could set parameters on the request before passing it on
         // to the filter chain.
         /*
-	String [] valsOne = {"val1a", "val1b"};
-	String [] valsTwo = {"val2a", "val2b", "val2c"};
-	request.setParameter("name1", valsOne);
-	request.setParameter("nameTwo", valsTwo);
+         * String [] valsOne = {"val1a", "val1b"};
+         * String [] valsTwo = {"val2a", "val2b", "val2c"};
+         * request.setParameter("name1", valsOne);
+         * request.setParameter("nameTwo", valsTwo);
          */
         // For example, a logging filter might log items on the request object,
         // such as the parameters.
         /*
-	for (Enumeration en = request.getParameterNames(); en.hasMoreElements(); ) {
-	    String name = (String)en.nextElement();
-	    String values[] = request.getParameterValues(name);
-	    int n = values.length;
-	    StringBuffer buf = new StringBuffer();
-	    buf.append(name);
-	    buf.append("=");
-	    for(int i=0; i < n; i++) {
-	        buf.append(values[i]);
-	        if (i < n-1)
-	            buf.append(",");
-	    }
-	    log(buf.toString());
-	}
+         * for (Enumeration en = request.getParameterNames(); en.hasMoreElements(); ) {
+         * String name = (String)en.nextElement();
+         * String values[] = request.getParameterValues(name);
+         * int n = values.length;
+         * StringBuffer buf = new StringBuffer();
+         * buf.append(name);
+         * buf.append("=");
+         * for(int i=0; i < n; i++) {
+         * buf.append(values[i]);
+         * if (i < n-1)
+         * buf.append(",");
+         * }
+         * log(buf.toString());
+         * }
          */
-    }    
-    
+    }
+
     private void doAfterProcessing(RequestWrapper request, ResponseWrapper response)
             throws IOException, ServletException {
         if (debug) {
@@ -86,53 +86,55 @@ public class RouteFilter implements Filter {
         // Write code here to process the request and/or response after
         // the rest of the filter chain is invoked.
         // For example, a logging filter might log the attributes on the
-        // request object after the request has been processed. 
+        // request object after the request has been processed.
         /*
-	for (Enumeration en = request.getAttributeNames(); en.hasMoreElements(); ) {
-	    String name = (String)en.nextElement();
-	    Object value = request.getAttribute(name);
-	    log("attribute: " + name + "=" + value.toString());
-
-	}
+         * for (Enumeration en = request.getAttributeNames(); en.hasMoreElements(); ) {
+         * String name = (String)en.nextElement();
+         * Object value = request.getAttribute(name);
+         * log("attribute: " + name + "=" + value.toString());
+         * 
+         * }
          */
         // For example, a filter might append something to the response.
         /*
-	PrintWriter respOut = new PrintWriter(response.getWriter());
-	respOut.println("<p><strong>This has been appended by an intrusive filter.</strong></p>");
-	
-	respOut.println("<p>Params (after the filter chain):<br>");
-	for (Enumeration en = request.getParameterNames(); en.hasMoreElements(); ) {
-		String name = (String)en.nextElement();
-		String values[] = request.getParameterValues(name);
-		int n = values.length;
-		StringBuffer buf = new StringBuffer();
-		buf.append(name);
-		buf.append("=");
-		for(int i=0; i < n; i++) {
-		    buf.append(values[i]);
-		    if (i < n-1)
-			buf.append(",");
-		}
-		log(buf.toString());
-		respOut.println(buf.toString() + "<br>");
-	}
-        respOut.println("</p>");
+         * PrintWriter respOut = new PrintWriter(response.getWriter());
+         * respOut.
+         * println("<p><strong>This has been appended by an intrusive filter.</strong></p>"
+         * );
+         * 
+         * respOut.println("<p>Params (after the filter chain):<br>");
+         * for (Enumeration en = request.getParameterNames(); en.hasMoreElements(); ) {
+         * String name = (String)en.nextElement();
+         * String values[] = request.getParameterValues(name);
+         * int n = values.length;
+         * StringBuffer buf = new StringBuffer();
+         * buf.append(name);
+         * buf.append("=");
+         * for(int i=0; i < n; i++) {
+         * buf.append(values[i]);
+         * if (i < n-1)
+         * buf.append(",");
+         * }
+         * log(buf.toString());
+         * respOut.println(buf.toString() + "<br>");
+         * }
+         * respOut.println("</p>");
          */
     }
 
     /**
      *
-     * @param request The servlet request we are processing
+     * @param request  The servlet request we are processing
      * @param response The servlet response we are creating
-     * @param chain The filter chain we are processing
+     * @param chain    The filter chain we are processing
      *
-     * @exception IOException if an input/output error occurs
+     * @exception IOException      if an input/output error occurs
      * @exception ServletException if a servlet error occurs
      */
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         if (debug) {
             log("NewFilter:doFilter()");
         }
@@ -147,11 +149,11 @@ public class RouteFilter implements Filter {
         // include requests.
         RequestWrapper wrappedRequest = new RequestWrapper((HttpServletRequest) request);
         ResponseWrapper wrappedResponse = new ResponseWrapper((HttpServletResponse) response);
-        
+
         doBeforeProcessing(wrappedRequest, wrappedResponse);
-        
+
         Throwable problem = null;
-        
+
         try {
             chain.doFilter(wrappedRequest, wrappedResponse);
         } catch (Throwable t) {
@@ -161,7 +163,7 @@ public class RouteFilter implements Filter {
             problem = t;
             t.printStackTrace();
         }
-        
+
         doAfterProcessing(wrappedRequest, wrappedResponse);
 
         // If there was a problem, we want to rethrow it if it is
@@ -196,16 +198,16 @@ public class RouteFilter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("NewFilter: Initializing filter");
             }
         }
@@ -223,23 +225,23 @@ public class RouteFilter implements Filter {
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
-        
+
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
-                pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
+                PrintWriter pw = new PrintWriter(ps);
+                pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); // NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
-                pw.print("</pre></body>\n</html>"); //NOI18N
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
+                pw.print("</pre></body>\n</html>"); // NOI18N
                 pw.close();
                 ps.close();
                 response.getOutputStream().close();
@@ -255,7 +257,7 @@ public class RouteFilter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -269,9 +271,9 @@ public class RouteFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
 
     /**
@@ -282,7 +284,7 @@ public class RouteFilter implements Filter {
      * access to the wrapped request using the method getRequest()
      */
     class RequestWrapper extends HttpServletRequestWrapper {
-        
+
         public RequestWrapper(HttpServletRequest request) {
             super(request);
         }
@@ -291,12 +293,13 @@ public class RouteFilter implements Filter {
         // you must also override the getParameter, getParameterValues, getParameterMap,
         // and getParameterNames methods.
         protected Hashtable localParams = null;
-        
+
         public void setParameter(String name, String[] values) {
             if (debug) {
-                System.out.println("NewFilter::setParameter(" + name + "=" + values + ")" + " localParams = " + localParams);
+                System.out.println(
+                        "NewFilter::setParameter(" + name + "=" + values + ")" + " localParams = " + localParams);
             }
-            
+
             if (localParams == null) {
                 localParams = new Hashtable();
                 // Copy the parameters from the underlying request.
@@ -310,7 +313,7 @@ public class RouteFilter implements Filter {
             }
             localParams.put(name, values);
         }
-        
+
         @Override
         public String getParameter(String name) {
             if (debug) {
@@ -329,7 +332,7 @@ public class RouteFilter implements Filter {
             }
             return (val == null ? null : val.toString());
         }
-        
+
         @Override
         public String[] getParameterValues(String name) {
             if (debug) {
@@ -340,7 +343,7 @@ public class RouteFilter implements Filter {
             }
             return (String[]) localParams.get(name);
         }
-        
+
         @Override
         public Enumeration getParameterNames() {
             if (debug) {
@@ -350,8 +353,8 @@ public class RouteFilter implements Filter {
                 return getRequest().getParameterNames();
             }
             return localParams.keys();
-        }        
-        
+        }
+
         @Override
         public Map getParameterMap() {
             if (debug) {
@@ -372,9 +375,9 @@ public class RouteFilter implements Filter {
      * get access to the wrapped response using the method getResponse()
      */
     class ResponseWrapper extends HttpServletResponseWrapper {
-        
+
         public ResponseWrapper(HttpServletResponse response) {
-            super(response);            
+            super(response);
         }
 
         // You might, for example, wish to know what cookies were set on the response
@@ -382,24 +385,24 @@ public class RouteFilter implements Filter {
         // have a get cookies method, we will need to store them locally as they
         // are being set.
         /*
-	protected Vector cookies = null;
-	
-	// Create a new method that doesn't exist in HttpServletResponse
-	public Enumeration getCookies() {
-		if (cookies == null)
-		    cookies = new Vector();
-		return cookies.elements();
-	}
-	
-	// Override this method from HttpServletResponse to keep track
-	// of cookies locally as well as in the wrapped response.
-	public void addCookie (Cookie cookie) {
-		if (cookies == null)
-		    cookies = new Vector();
-		cookies.add(cookie);
-		((HttpServletResponse)getResponse()).addCookie(cookie);
-	}
+         * protected Vector cookies = null;
+         * 
+         * // Create a new method that doesn't exist in HttpServletResponse
+         * public Enumeration getCookies() {
+         * if (cookies == null)
+         * cookies = new Vector();
+         * return cookies.elements();
+         * }
+         * 
+         * // Override this method from HttpServletResponse to keep track
+         * // of cookies locally as well as in the wrapped response.
+         * public void addCookie (Cookie cookie) {
+         * if (cookies == null)
+         * cookies = new Vector();
+         * cookies.add(cookie);
+         * ((HttpServletResponse)getResponse()).addCookie(cookie);
+         * }
          */
     }
-    
+
 }

@@ -65,10 +65,6 @@
         <servlet-class>Controller.StoreBuy</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserProductList</servlet-name>
-        <servlet-class>Controller.StoreProductList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProfileUserDisplay</servlet-name>
         <servlet-class>Controller.ProfileUserDisplay</servlet-class>
     </servlet>
@@ -77,6 +73,47 @@
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>StoreProductList</servlet-name>
+        <servlet-class>Controller.StoreProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogList</servlet-name>
+        <servlet-class>Controller.UserBlogList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogDetails</servlet-name>
+        <servlet-class>Controller.UserBlogDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogUpdate</servlet-name>
+        <servlet-class>Controller.UserBlogUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogCreate</servlet-name>
+        <servlet-class>Controller.UserBlogCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSupportCenterCreate</servlet-name>
+        <servlet-class>Controller.AdminSupportCenterCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSupportCenterUpdate</servlet-name>
+        <servlet-class>Controller.AdminSupportCenterUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminTypeSupportCenterList</servlet-name>
+        <servlet-class>Controller.AdminTypeSupportCenterList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminTypeSupportCenterCreate</servlet-name>
+        <servlet-class>Controller.AdminTypeSupportCenterCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
+        <servlet-class>Controller.AdminTypeSupportCenterUpdate</servlet-class>
+    </servlet>
+    <servlet>        
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
     </servlet>
@@ -153,10 +190,6 @@
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserProductList</servlet-name>
-        <url-pattern>/userProductList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ProfileUserDisplay</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
@@ -165,6 +198,46 @@
         <url-pattern>/profile/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>StoreProductList</servlet-name>
+        <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogList</servlet-name>
+        <url-pattern>/user/blog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogDetails</servlet-name>
+        <url-pattern>/user/blog/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogUpdate</servlet-name>
+        <url-pattern>/user/blog/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogCreate</servlet-name>
+        <url-pattern>/user/blog/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>        
+        <servlet-name>AdminSupportCenterCreate</servlet-name>
+        <url-pattern>/admin/qna/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSupportCenterUpdate</servlet-name>
+        <url-pattern>/admin/qna/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminTypeSupportCenterList</servlet-name>
+        <url-pattern>/admin/qna-type</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminTypeSupportCenterCreate</servlet-name>
+        <url-pattern>/admin/qna-type/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
+        <url-pattern>/admin/qna-type/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>        
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <url-pattern>/profile/changepassword</url-pattern>
     </servlet-mapping>

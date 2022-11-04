@@ -57,24 +57,25 @@
     <img class= "grid-item" src= "https://picsum.photos/610/910.jpg">
     <img class= "grid-item" src= "https://picsum.photos/500/910.jpg">
 </div>
+<script src="https://uhchat.net/code.php?f=9bcb69"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script>
-        var elem = document.querySelector('.grid-container');
-        imagesLoaded(elem, () => {
-            var msnry = new Masonry(elem, {
-                itemSelector: '.grid-item',
-                columnWidth: 220
+            var elem = document.querySelector('.grid-container');
+            imagesLoaded(elem, () => {
+                var msnry = new Masonry(elem, {
+                    itemSelector: '.grid-item',
+                    columnWidth: 220
+                });
             });
-        });
 
-        function DetailProduct(id) {
-            window.location.href = "#";
-        }
+            function DetailProduct(id) {
+                window.location.href = "#";
+            }
 
-        function FilterCategory(idCategory) {
-            window.onload
-        }
+            function FilterCategory(idCategory) {
+                window.onload
+            }
 </script>
 
 

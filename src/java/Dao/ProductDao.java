@@ -24,6 +24,8 @@ public interface ProductDao extends BaseDAO<Product> {
 
     List<Product> getNextTop45Products(int productExisted);
     
+    List<Product> getNextTop45ProductsByCategoryId(int productExisted, int categoryId);
+    
     List<Blog> getTop7Blogs(int productId);
 
 }

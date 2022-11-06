@@ -27,7 +27,8 @@ public class UserDaoImpl implements UserDao {
 
     Timestamp ts = Timestamp.from(Instant.now());
 
-    public static boolean haveAccount(String email) {
+    @Override
+    public boolean haveAccount(String email) {
         DBContext dBContext = new DBContext();
         int numberAccount = 0;
         try {
@@ -237,8 +238,8 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return 0;
-     }
-     
+    }
+
     @Override
     public boolean insert(User item) {
         DBContext dBContext = new DBContext();
@@ -342,7 +343,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean update(User t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -394,7 +395,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public ArrayList<User> search(String seachValue) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -420,5 +421,36 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return userId;
+    }
+
+    @Override
+    public User get(String email) {
+        DBContext dBContext = new DBContext();
+        User user = new User();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select u.id, role, fullname, email, phone, status,"
+                    + " u.created_at, updated_at "
+                    + "from [User] u ,[UserInformation] ui"
+                    + " where u.id = ui.userId and u.email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getDate(7),
+                        rs.getDate(8));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return user;
     }
 }

@@ -35,4 +35,8 @@ public interface UserDao extends BaseDAO<User> {
     boolean updatePassword(String email, String password);
 
     int getUserId(User user);
+
+    public boolean haveAccount(String email);
+
+    public User get(String email);
 }

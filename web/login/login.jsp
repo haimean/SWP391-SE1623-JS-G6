@@ -47,7 +47,7 @@
                                         >Remember Me</h4
                                     >
                                 </div>
-                                <a href="#">Forgot password?</a>
+                                <a href="reset_password">Forgot password?</a>
                             </div>
                             <input class="btn btn-primary btn-lg w-100 shadow-lg"  type="submit" value="Login" />
                         </form>

@@ -358,7 +358,7 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> getNextTop45Products(int productExisted) {
         DBContext dBContext = new DBContext();
         final int RECORD_PER_PAGE = 45;
-        ArrayList<Product> users = new ArrayList<>();
+        ArrayList<Product> list = new ArrayList<>();
         try {
             Connection connection = dBContext.getConnection();
             String query = "select *\n"
@@ -370,7 +370,7 @@ public class ProductDaoImpl implements ProductDao {
             ps.setInt(2, RECORD_PER_PAGE);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                users.add(new Product(
+                list.add(new Product(
                         rs.getInt(1),
                         rs.getInt(2),
                         rs.getString(3),
@@ -388,7 +388,7 @@ public class ProductDaoImpl implements ProductDao {
         } catch (SQLException e) {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
         }
-        return users;
+        return list;
     }
 
     @Override
@@ -415,10 +415,61 @@ public class ProductDaoImpl implements ProductDao {
         return blogs;
     }
 
-    public static void main(String[] args) {
-        List<Blog> list = new ProductDaoImpl().getTop7Blogs(6);
-        for (Blog blog : list) {
-            System.out.println(blog.getTitle());
+
+    @Override
+    public List<Product> getNextTop45ProductsByCategoryId(int productExisted, int categoryId) {
+        DBContext dBContext = new DBContext();
+        final int RECORD_PER_PAGE = 45;
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select *\n"
+                    + "from Product\n"
+                    + "where categoryId = ? \n"
+                    + "order by id\n"
+                    + "offset ? rows fetch next ? rows only";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, categoryId);
+            ps.setInt(2, productExisted);
+            ps.setInt(3, RECORD_PER_PAGE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getTimestamp(10),
+                        rs.getTimestamp(11),
+                        rs.getString(12)));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
+    @Override
+    public void updateProductViewNumber(int viewNumber, int id) {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "UPDATE Product\n"
+                    + "SET viewNumer = ?\n"
+                    + "WHERE id = ?;";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, viewNumber);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -102,16 +102,19 @@
     <div class="leftcolumn">
 
         <div class="card2">
-            <form action="update" method="POST">
-                <input type="hidden" name="id" value="${requestScope.blog.id}">
-                <h2>Title: <input style=" width: 1000px;" value=" ${requestScope.blog.title}" name="title"></h2> 
-                <h5>Description: <textarea maxlength="255" style=" width: 1000px;" name="description">${requestScope.blog.description}</textarea></h5>
-                <h5>Date of create: ${requestScope.blog.create_at}</h5><br>
+            <form action="update" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" maxlength="150" value="${requestScope.blog.id}">
+                <h2>Title: <input style=" width: 1000px;" value=" ${requestScope.blog.title}" name="title" required></h2> 
+                <h5>Description: <textarea maxlength="150" style=" width: 1000px;" name="description">${requestScope.blog.description}</textarea></h5>
+                <input type="hidden"  name="date" value="${requestScope.blog.create_at}">
+                <h5><label>Date of create: ${requestScope.blog.create_at}</label></h5><br>
                 <div class="middle">
-                    <img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid avatar" style="max-height:700px; max-width: 75%;">
-                    <input class="file-upload" type="file" id="img" name="image" accept="image/*" style="margin-top: 20px;">
+                    <img src="${requestScope.blog.image == null?"https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg":requestScope.blog.image}" class="img-fluid avatar" style="max-height:700px; max-width: 75%;"><br>
+
+
+                    <input class="file-upload avatar" type="file" id="img" name="image" accept="image/png,image/jpeg" multiple="multiple" style="margin-top: 20px;" value="${blog.image}">
                 </div>
-                <p>Content: <textarea maxlength="255" style=" width: 1000px;" name="content"> ${requestScope.blog.content}</textarea></p>
+                <p>Content: <textarea maxlength="2000" style=" width: 1000px;" name="content"> ${requestScope.blog.content}</textarea></p>
 
                 <input style="margin-bottom: 50px;"  class="btn btn-primary float-right" type="submit" value="Save">
             </form>

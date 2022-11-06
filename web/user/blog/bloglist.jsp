@@ -144,7 +144,7 @@
                                 <li class="page-item"><p class="page-link">>></p></li>
                                 </c:if>
                                 <c:if test="${pageCurrent !=numberPage}">
-                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?category=page=${numberPage}">Last</a></li>
+                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?page=${numberPage}">Last</a></li>
                                 </c:if>
                         </ul>
                     </nav>

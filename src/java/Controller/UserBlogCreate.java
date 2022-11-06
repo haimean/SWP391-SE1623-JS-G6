@@ -63,8 +63,7 @@ public class UserBlogCreate extends HttpServlet {
         int id = daoB.getIdByTitle(b.getTitle());        
         Blog b1 = new Blog(id, title, description, null, content);
         daoB.insertIntoImageBlog(b1);
-        response.sendRedirect(".");
-        }
+response.sendRedirect(request.getContextPath()  +  "/user/blog");        }
         else{
              String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         filePart.write(request.getRealPath("image") + fileName);
@@ -83,7 +82,7 @@ public class UserBlogCreate extends HttpServlet {
         int id = daoB.getIdByTitle(b.getTitle());        
         Blog b1 = new Blog(id, title, description, geturl, content);
         daoB.insertIntoImageBlog(b1);
-        response.sendRedirect(".");
+        response.sendRedirect(request.getContextPath()  +  "/user/blog");
         }
        
     }

@@ -9,7 +9,9 @@ import java.sql.Timestamp;
 public class Product {
 
     private int id, categoryID;
-    private String name, description, original;
+    private String name;
+    private String description;
+    private String original;
     private int quantity;
     private double price;
     private boolean status;
@@ -21,6 +23,17 @@ public class Product {
     public Product() {
     }
 
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price) {
+        this.id = id;
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+        this.original = original;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    
     public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, Timestamp create_at, Timestamp update_at, String proImg) {
         this.id = id;
         this.categoryID = categoryID;
@@ -154,4 +167,10 @@ public class Product {
         this.proImg = proImg;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", categoryID=" + categoryID + ", name=" + name + ", description=" + description + ", original=" + original + ", quantity=" + quantity + ", price=" + price + ", status=" + status + ", viewNumber=" + viewNumber + ", create_at=" + create_at + ", update_at=" + update_at + ", proImg=" + proImg + '}';
+    }
+
+    
 }

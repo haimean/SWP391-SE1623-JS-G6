@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Dao.Impl.ProductDaoImpl;
+import Dao.Impl.SellerProductDaoimpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -32,10 +32,12 @@ public class SellerProductDelete extends HttpServlet {
             throws ServletException, IOException {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int id = Integer.parseInt(request.getParameter("pid"));
-            ProductDaoImpl dao = new ProductDaoImpl();
-            dao.delete(id);
-            response.sendRedirect(request.getContextPath() + "/seller/product");
+            int pid = Integer.parseInt(request.getParameter("id"));
+            SellerProductDaoimpl dao = new SellerProductDaoimpl();
+            
+            dao.deleteProduct(pid);
+            
+            response.sendRedirect(request.getContextPath()+ "/seller/product");
         }
     }
 

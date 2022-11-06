@@ -1,5 +1,4 @@
 <%@include file="../layout/index.jsp" %>
-
 <div class="header">
     <h3>Order</h3>
 </div>
@@ -45,12 +44,12 @@
                     <td>${o.price}</td>
                     <td>${o.total}</td>
                 </tr>                       
-                <!--                        <tr>                      
-                                            <th scope="row"></th>
-                                            <td colspan="2">Total</td>
-                                            <td>                               
-                                            </td>
-                                        </tr>-->
+                <tr>                      
+                    <th scope="row"></th>
+                    <td colspan="2">Total :${o.total} </td>
+                    <td>                               
+                    </td>
+                </tr>
             </tbody>
         </table>
 
@@ -67,8 +66,8 @@
     .container{
         width: 815px;
         height: 646px;
-        margin-top: 131px;
-        margin-left: 301px;
+        margin-top: 60px;
+        margin-left: 400px;
     }
     .table{
         margin-top: 100px;

@@ -1,5 +1,5 @@
 <%@include file="../layout/index.jsp" %>
-<div class="container"  style="
+<div class="container full"  style="
      border: 1px solid #0000004a;
      background: white;
      margin-top: 3rem;
@@ -8,15 +8,15 @@
      flex-direction: column;
      padding: 4rem;
      ">
-    <div class="container">
+    <div class="container form-ds">
         <!-- form search -->
         <form action="order" class="d-flex" role="search">
             <input name="txtFullName" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="${search}">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <!-- table -->
-        
-        <div class=".container-md"> 
+
+        <div class="container-md"> 
             <table class="table">
                 <thead>
                     <tr>
@@ -48,12 +48,12 @@
         </div>
         <!-- pagination -->
         <div class="paging">
-        <ul class="pagination justify-content-center">
-            <c:forEach begin="1" end="${endpage}" var="p">
-                <li class="page-item"><a class="page-link" href="seller/order?page=${p}">${p}</a></li>
-                </c:forEach>
-        </ul>
-    </div>
+            <ul class="pagination justify-content-center">
+                <c:forEach begin="1" end="${endpage}" var="p">
+                    <li class="page-item"><a class="page-link" href="seller/order?page=${p}">${p}</a></li>
+                    </c:forEach>
+            </ul>
+        </div>
     </div>     
 </div>
 <style>
@@ -65,19 +65,28 @@
         left: 301px;
     }
     .container{
-        width: 815px;
-        height: 646px;
+        width: 1000px;
+        height: 800px;
         margin-top: 131px;
         margin-left: 301px;
+
+    }
+    .full {
+        position: relative;
     }
     .table{
         margin-top: 100px;
+    }
+    .form-ds {
+        position: absolute;
+        left: -30%;
+        top: -15%;
     }
     .d-flex{
         margin-top: 30px;
         width: 574.2px;
         height: 45.21px;
-        margin-left: 6  0px;
+        margin-left: 60px;
     }
     .pagination {
         margin-top: 300px;
@@ -90,5 +99,11 @@
     .header{
         text-align: center;
         /* margin-left: 220px; */
+    }
+    .paging {
+        position: absolute;
+        top: 25%;
+        left: 30%;
+        transform: translateX(-50%);
     }
 </style>

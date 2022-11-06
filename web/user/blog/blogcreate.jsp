@@ -5,6 +5,7 @@
 --%>
 <%@include file="../../store/layout/index.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
@@ -102,16 +103,17 @@
     <div class="leftcolumn">
 
         <div class="card2">
-            <form action="create" method="get">
-                
-                <h2>Title: <input style=" width: 1000px;" value="  name="title"></h2> 
-                <h5>Description: <textarea maxlength="255" style=" width: 1000px;" name="description"></textarea></h5>
-                
+            <form action="create" method="POST" enctype="multipart/form-data">
+                <h2>Title: <input style=" width: 1000px;"  maxlength="150" name="title" required></h2> 
+                <h5>Description: <textarea maxlength="150" style=" width: 1000px;" name="description"></textarea></h5>
+                <input type="hidden"  name="date" >
                 <div class="middle">
-                    <img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid avatar" style="max-height:700px; max-width: 75%;">
-                    <input class="file-upload" type="file" id="img" name="image" accept="image/*" style="margin-top: 20px;">
+                    <img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid avatar" style="max-height:700px; max-width: 75%;"><br>
+
+
+                    <input class="file-upload avatar" type="file" id="img" name="image" accept="image/png,image/jpg" multiple="multiple" style="margin-top: 20px;" >
                 </div>
-                <p>Content: <textarea maxlength="255" style=" width: 1000px;" name="content"> ${requestScope.blog.content}</textarea></p>
+                <p>Content: <textarea maxlength="2000" style=" width: 1000px;" name="content"></textarea></p>
 
                 <input style="margin-bottom: 50px;"  class="btn btn-primary float-right" type="submit" value="Save">
             </form>

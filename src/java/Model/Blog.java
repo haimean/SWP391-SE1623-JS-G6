@@ -11,28 +11,39 @@ import java.sql.Date;
  * @author nguye
  */
 public class Blog {
+    
 
-    private int id;
-    private int viewNumber;
-    private String title;
-    private String description;
-    private String image;
-    private String content;
-    Date create_at;
-    Date update_at;
+
+    private int  id;
+    private int  viewNumber;
+    private String  title;
+    private String  description;
+    private String  image;
+    private String  content;
+    private String create_at;
+    private String update_at;
+
 
     public Blog() {
     }
 
-    public Blog(int id, String title, String description, int viewNumber, Date create_at, Date update_at, String image,
-            String content) {
+    public Blog(int id, String title, String description, int viewNumber,   String image, String  content, String create_at, String update_at) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.viewNumber = viewNumber;
+         this.image = image;
+        this.content = content;
         this.create_at = create_at;
         this.update_at = update_at;
-        this.image = image;
+       
+    }
+
+    public Blog(int id, String title, String description, String image, String content) {
+this.id = id;
+        this.title = title;
+        this.description = description;
+         this.image = image;
         this.content = content;
     }
 
@@ -43,8 +54,8 @@ public class Blog {
     public void setimage(String image) {
         this.image = image;
     }
-
-    public Blog(int id, String title, String description, int viewNumber, String image, String content) {
+    
+    public Blog(int id, String title, String description, int viewNumber, String image, String  content) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -52,20 +63,27 @@ public class Blog {
         this.image = image;
         this.content = content;
     }
-
-    public Blog(int id, String title, String description, String image, String content) {
+    public Blog(int id, String title, String description, String image, String  content, String create_at, String update_at) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.image = image;
         this.content = content;
+        this.create_at = create_at;
+        this.update_at = update_at;
     }
-
-    public Blog(int id, String title, String description, String content) {
+    public Blog(String title, String description, String image, String  content) {
+ 
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.content = content;
+    }
+    public Blog(int id, String title, String description, String  content) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.content = content;
+      this.content = content;
     }
 
     public String getImage() {
@@ -84,6 +102,7 @@ public class Blog {
         this.content = content;
     }
 
+    
     public int getId() {
         return id;
     }
@@ -108,19 +127,19 @@ public class Blog {
         this.description = description;
     }
 
-    public Date getCreate_at() {
+    public String getCreate_at() {
         return create_at;
     }
 
-    public void setCreate_at(Date create_at) {
+    public void setCreate_at(String create_at) {
         this.create_at = create_at;
     }
 
-    public Date getUpdate_at() {
+    public String getUpdate_at() {
         return update_at;
     }
 
-    public void setUpdate_at(Date update_at) {
+    public void setUpdate_at(String update_at) {
         this.update_at = update_at;
     }
 
@@ -131,5 +150,8 @@ public class Blog {
     public void setViewNumber(int viewNumber) {
         this.viewNumber = viewNumber;
     }
+    
+     
+    
 }
 

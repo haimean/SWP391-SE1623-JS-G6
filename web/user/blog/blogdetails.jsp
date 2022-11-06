@@ -4,7 +4,7 @@
     Author     : nguye
 --%>
 <%@include file="/store/layout/index.jsp" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -66,7 +66,7 @@
                 background-color: white;
                 padding: 20px;
                 margin-top: 20px;
-                
+
             }
 
             /* Clear floats after the columns */
@@ -110,18 +110,30 @@
 
                 <div class="card2">
                     <div class="dropdown">
+
                         <img src="https://www.shareicon.net/data/512x512/2016/06/04/775696_interface_512x512.png" class="img" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
-                          
-                        
+
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="update?id=${requestScope.blog.id}">Update</a></li>                           
                         </ul>
                     </div>
-                    <h2>${requestScope.blog.title}</h2>
-                    <h5>${requestScope.blog.description}.</h5>
-                    <h5>${requestScope.blog.create_at}</h5><br>
-                    <div class="" ><img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid" style="height:400px; width: 75%;"></div>
-                    <h5>${requestScope.blog.content}.</h5>
+                    <h2>${blog.title}</h2>
+                    <h5>${blog.description}.</h5>
+                    <c:if test="${blog.create_at != null}">
+                        <h5>${blog.create_at}</h5>
+                    </c:if><br>
+                    <c:if test="${blog.create_at == null}">
+                        <h5>khong nhan date</h5>
+                    </c:if><br>
+                    <div class="" >
+                        <c:if test="${blog.image == null}">
+                            <img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid" style="max-height:700px; max-width: 75%;">
+                        </c:if>
+                        <c:if test="${blog.image != null}">
+                            <img src="${blog.image}" class="img-fluid" style="max-height:700px; max-width: 75%;">
+                        </c:if>
+                    </div>
+                    <h5>${blog.content}.</h5>
                 </div>
             </div>
             <div class="rightcolumn">
@@ -140,7 +152,8 @@
                         <c:forEach  var="i" begin="0" end="${lstzsize}" >
                             <div class="fakeimg">
                                 <a  href="blogDetails?id=${requestScope.listB.get(i).id}">
-                                    <img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid" style="height:200px; width: 100%;">
+                                    <img src="${requestScope.listB.get(i).image == null?"https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg":requestScope.listB.get(i).image}" class="img-fluid avatar" style="max-height:700px; max-width: 75%;"><br>
+
                                     ${requestScope.listB.get(i).title}</a>&nbsp
                                 <img src="https://www.freeiconspng.com/thumbs/eye-icon/eyeball-icon-png-eye-icon-1.png" class="img">&nbsp${requestScope.listB.get(i).viewNumber}<br>
                             </div>

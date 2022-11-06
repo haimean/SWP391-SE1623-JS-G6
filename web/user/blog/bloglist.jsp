@@ -4,12 +4,12 @@
     Author     : nguye
 --%>
 <%@include file="/store/layout/index.jsp" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Blog</title>
+        <title>How To Create Blog Section Design In Bootstrap</title>
         <link rel="stylesheet" href="blogList.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,7 +67,7 @@
                 height: 50px;
                 width: 300px;
             }
-            
+
             .mid {
                 margin-left: 500px;
             }
@@ -79,7 +79,7 @@
         <!-- Blog Section -->
         <section id="blog">
             <a href="./blog/blogcreate.jsp"> <button type="button" class="btn btn-secondary btn-sm" >New Blog...</button></a>
-           
+
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -91,67 +91,67 @@
                 </div>
                 <div class="row">
                     <c:if test="${lstzsize>-1}">
-                    <c:forEach  var="i" begin="0" end="${lstzsize}" >
-                        <div class="col-md-4 col-lg-4 ">
-                            <div class="blog-post">
-                                <div class="post-thumb">
-                                    <a href="blog/detail?id=${requestScope.listB.get(i).id}">
-                                        <c:if test="${listB.get(i).image != null}">
-                                            <img src="https://drive.google.com/file/d/1R1HXAO0sdA5XwNKjvXy3d0q0mSjysGle/view?usp=share_link" class="img-fluid" alt="Image"/>
-                                        </c:if>
-                                        <c:if test="${listB.get(i).image == null}">
-                                        <img src="https://drive.google.com/file/d/1R1HXAO0sdA5XwNKjvXy3d0q0mSjysGle/view?usp=share_link" class="img-fluid" />
-                                        </c:if>
-                                       
-                                    </a>
-                                </div>
-                                <h2 class="titlelength"><a href="blog/detail?id=${requestScope.listB.get(i).id}" >${requestScope.listB.get(i).title}</a></h2>
-                                <p class="deslength">${requestScope.listB.get(i).description}</p>
-                                <a href="blog/detail?id=${requestScope.listB.get(i).id}" class="btn btn-warning float-right">Read More</a>
-                                <img src="https://www.freeiconspng.com/thumbs/eye-icon/eyeball-icon-png-eye-icon-1.png" class="img">&nbsp${requestScope.listB.get(i).viewNumber}
-                            </div>
-                        </div> 
-                    </c:forEach>
-</c:if>
+                        <c:forEach  var="i" begin="0" end="${lstzsize}" >
+                            <div class="col-md-4 col-lg-4 ">
+                                <div class="blog-post">
+                                    <div class="post-thumb">
+                                        <a href="blog/detail?id=${requestScope.listB.get(i).id}">
+                                            <c:if test="${listB.get(i).image != null}">
+                                                <img src="${listB.get(i).image}" class="img-fluid" alt="Image"/>
+                                            </c:if>
+                                            <c:if test="${listB.get(i).image == null}">
+                                                <img src="https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg" class="img-fluid" />
+                                            </c:if>
 
-                   
-
+                                        </a>
                                     </div>
+                                    <h2 class="titlelength"><a href="blog/detail?id=${requestScope.listB.get(i).id}" >${requestScope.listB.get(i).title}</a></h2>
+                                    <p class="deslength">${requestScope.listB.get(i).description}</p>
+                                    <a href="blog/detail?id=${requestScope.listB.get(i).id}" class="btn btn-warning float-right">Read More</a>
+                                    <img src="https://www.freeiconspng.com/thumbs/eye-icon/eyeball-icon-png-eye-icon-1.png" class="img">&nbsp${requestScope.listB.get(i).viewNumber}
+                                </div>
+                            </div> 
+                        </c:forEach>
+                    </c:if>
+
+
+
+                </div>
                 <c:if test="${numberPage>1}">
-                        <nav class="mt-4 " aria-label="Page navigation sample">
+                    <nav class="mt-4 " aria-label="Page navigation sample">
                         <ul class="pagination mid">
 
-                                <!-- fist page-->
-                                <c:if test="${pageCurrent ==1}">
-                                    <li class="page-item"><p class="page-link"><<</p></li>
-                                    </c:if>
-                                    <c:if test="${pageCurrent !=1}">
-                                    <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog">First</a></li>
-                                    </c:if>
+                            <!-- fist page-->
+                            <c:if test="${pageCurrent ==1}">
+                                <li class="page-item"><p class="page-link"><<</p></li>
+                                </c:if>
+                                <c:if test="${pageCurrent !=1}">
+                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog">First</a></li>
+                                </c:if>
 
-                                <!--page-->
-                                <c:forEach var="page" begin="${beginPage}" end="${endPage}">
-                                    <c:if test="${pageCurrent == page}">
-                                        <li class="page-item active"><p class="page-link">${page}</p></li>
-                                        </c:if>
-                                        <c:if test="${pageCurrent != page}">
-                                        <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?page=${page}">${page}</a></li>
-                                        </c:if>
-                                    </c:forEach>
-
-                                <!--last page-->        
-                                <c:if test="${pageCurrent ==numberPage}">
-                                    <li class="page-item"><p class="page-link">>></p></li>
+                            <!--page-->
+                            <c:forEach var="page" begin="${beginPage}" end="${endPage}">
+                                <c:if test="${pageCurrent == page}">
+                                    <li class="page-item active"><p class="page-link">${page}</p></li>
                                     </c:if>
-                                    <c:if test="${pageCurrent !=numberPage}">
-                                    <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?category=page=${numberPage}">Last</a></li>
-                                        </c:if>
-                                        </ul>
-                                        </nav>
+                                    <c:if test="${pageCurrent != page}">
+                                    <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?page=${page}">${page}</a></li>
                                     </c:if>
-                                    </div>
-                                    </section>
-                                    <!-- End Blog Section -->
+                                </c:forEach>
 
-                                    </body>
-                                    </html>
+                            <!--last page-->        
+                            <c:if test="${pageCurrent ==numberPage}">
+                                <li class="page-item"><p class="page-link">>></p></li>
+                                </c:if>
+                                <c:if test="${pageCurrent !=numberPage}">
+                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?page=${numberPage}">Last</a></li>
+                                </c:if>
+                        </ul>
+                    </nav>
+                </c:if>
+            </div>
+        </section>
+        <!-- End Blog Section -->
+
+    </body>
+</html>

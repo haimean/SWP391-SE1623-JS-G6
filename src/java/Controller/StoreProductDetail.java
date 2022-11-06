@@ -42,6 +42,9 @@ public class StoreProductDetail extends HttpServlet {
         Product product = db.get(id);
         List<Product> listProducts = db.getTop7Products(id, categoryId);
         List<Blog> listBlogs = db.getTop7Blogs(id);
+        int newViewNumber = product.getViewNumber() + 1;
+        product.setViewNumber(newViewNumber);
+        db.updateProductViewNumber(newViewNumber, id);
         request.setAttribute("p", product);
         request.setAttribute("list", listProducts);
         request.setAttribute("listBlogs", listBlogs);

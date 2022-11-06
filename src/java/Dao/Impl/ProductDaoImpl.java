@@ -415,12 +415,6 @@ public class ProductDaoImpl implements ProductDao {
         return blogs;
     }
 
-    public static void main(String[] args) {
-        List<Blog> list = new ProductDaoImpl().getTop7Blogs(6);
-        for (Blog blog : list) {
-            System.out.println(blog.getTitle());
-        }
-    }
 
     @Override
     public List<Product> getNextTop45ProductsByCategoryId(int productExisted, int categoryId) {
@@ -459,5 +453,23 @@ public class ProductDaoImpl implements ProductDao {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
         }
         return list;
+    }
+
+    @Override
+    public void updateProductViewNumber(int viewNumber, int id) {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "UPDATE Product\n"
+                    + "SET viewNumer = ?\n"
+                    + "WHERE id = ?;";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, viewNumber);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

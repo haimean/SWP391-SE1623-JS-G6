@@ -45,7 +45,7 @@ public class SellerProductCreate extends HttpServlet {
 
         Product product = new Product(categoryId, name, description, origin, quantity, price, true);
 
-        dao.insertProduct(product);
+        dao.insert(product);
         response.sendRedirect(request.getContextPath()+"/seller/product");
     }
 

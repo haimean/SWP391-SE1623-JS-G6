@@ -271,6 +271,7 @@
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
         <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterVerifyCode</servlet-name>
         <url-pattern>/register/verify</url-pattern>

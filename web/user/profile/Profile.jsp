@@ -24,6 +24,7 @@
         </div>
         <div class="div-title">
             <h1 class="title">${userinf.getFullname()}</h1>
+            <h1 class="title">${userGoogleInfo.getEmail()}</h1>
         </div>
         <div class="div-bio">
             <span>${userinf.getBiography()}</span>

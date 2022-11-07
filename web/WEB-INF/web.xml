@@ -73,7 +73,6 @@
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>StoreProductList</servlet-name>
         <servlet-class>Controller.StoreProductList</servlet-class>
     </servlet>
@@ -113,7 +112,7 @@
         <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
         <servlet-class>Controller.AdminTypeSupportCenterUpdate</servlet-class>
     </servlet>
-    <servlet>        
+    <servlet>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <servlet-class>Controller.ProfileUserChangePassword</servlet-class>
     </servlet>
@@ -124,6 +123,10 @@
     <servlet>
         <servlet-name>VerifyCode</servlet-name>
         <servlet-class>Controller.VerifyCode</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginWithGoogle</servlet-name>
+        <servlet-class>Controller.LoginWithGoogle</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -217,7 +220,7 @@
         <servlet-name>UserBlogCreate</servlet-name>
         <url-pattern>/user/blog/create</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>        
+    <servlet-mapping>
         <servlet-name>AdminSupportCenterCreate</servlet-name>
         <url-pattern>/admin/qna/create</url-pattern>
     </servlet-mapping>
@@ -237,7 +240,7 @@
         <servlet-name>AdminTypeSupportCenterUpdate</servlet-name>
         <url-pattern>/admin/qna-type/update</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>        
+    <servlet-mapping>
         <servlet-name>ProfileUserChangePassword</servlet-name>
         <url-pattern>/profile/changepassword</url-pattern>
     </servlet-mapping>
@@ -248,6 +251,10 @@
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
         <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginWithGoogle</servlet-name>
+        <url-pattern>/logingoogle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -51,6 +51,16 @@
                             </div>
                             <input class="btn btn-primary btn-lg w-100 shadow-lg"  type="submit" value="Login" />
                         </form>
+                        <div class="login-google">
+                            <div class="or-container">
+                                <div class="line-separator"></div>
+                                <div class="or-label">or</div>
+                                <div class="line-separator"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12"> <a class="btn btn-lg btn-google btn-block btn-outline" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:9999/SWP391-SE1623-JS-G6/logingoogle&response_type=code&client_id=1086381055681-0upu0i0nmp2v352u8b46hplsd8hpicc8.apps.googleusercontent.com&approval_prompt=force"><img src="https://img.icons8.com/color/20/000000/google-logo.png"> Sign In With Google</a> </div>
+                            </div> <br>
+                        </div>
                     </div>
                     <div class="text-center pt-4">
                         <p class="m-0 ">Do not have an account? <a href="<%=request.getContextPath()%>/register" class="text-black">Sign Up</a></p>
@@ -79,7 +89,7 @@
             this.classList.toggle('fa-eye');
             this.classList.toggle('fa-eye-slash');
         });
-        setTimeout(closeAlertModal, 2000)
+        setTimeout(closeAlertModal, 2000);
         function closeAlertModal() {
             let modal = document.getElementById("alert");
             modal.classList.add("fadeOutLeft");
@@ -108,5 +118,32 @@
                 transform: translateX(-100%);
             }
         }
+        .login-google{
+            text-align: center;
+        }
+        .btn-google {
+            color: #545454;
+            background-color: #ffffff;
+            box-shadow: 0 1px 2px 1px #ddd
+        }
+        .line-separator {
+            background-color: #ccc;
+            flex-grow: 5;
+            height: 1px;
+            width: auto;
+
+        }
+        .or-label {
+            flex-grow: 1;
+            margin: 0 15px;
+            text-align: center
+        }
+        .or-container {
+            align-items: center;
+            color: #ccc;
+            display: flex;
+            margin: 25px 0;
+        }
+
     </style>
 </html>

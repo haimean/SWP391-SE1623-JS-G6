@@ -79,10 +79,6 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    public static void main(String[] args) {
-        UserDao dao = new UserDaoImpl();
-        System.out.println(dao.login("admin@gmail.com", "Minh@123455"));
-    }
 
     @Override
     public boolean updateUserStatusByID(int id, boolean status) {
@@ -342,7 +338,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean update(User t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -394,11 +390,15 @@ public class UserDaoImpl implements UserDao {
     @Override
     public ArrayList<User> search(String seachValue) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public static void main(String[] args) {
+        UserDaoImpl db= new UserDaoImpl();
+        System.out.println(db.login("user@gmail.com", "User123@abcd"));
     }
 }

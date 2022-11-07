@@ -79,7 +79,8 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <%
                             User user = (User) request.getSession().getAttribute("user");
-                            if(user == null){
+                            UserGoogle usergoogle=(UserGoogle) request.getSession().getAttribute("userGoogle");
+                            if(user == null && usergoogle==null){
                             %>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/login">Login</a></li>    
                                 <%

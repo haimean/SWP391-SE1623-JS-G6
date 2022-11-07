@@ -7,6 +7,7 @@ package Dao.Impl;
 import Dao.UserInformationDao;
 import Model.UserInformation;
 import Dao.DBContext;
+import Model.UserGoogle;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -77,23 +78,45 @@ public class UserInformationDaoImpl implements UserInformationDao {
     @Override
     public List<UserInformation> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean insert(UserInformation t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean update(UserInformation t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
+    }
+
+    public UserGoogle getByEmail(String email) {
+        DBContext dBContext = new DBContext();
+        UserGoogle user = new UserGoogle();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select * from UserGoogle ug where ug.email=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user.setId(rs.getString("id"));
+                user.setEmail(rs.getString("email"));
+                user.setVerified_email(rs.getBoolean("verified_email"));
+                return user;
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(UserGoogle.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
 }

@@ -52,6 +52,7 @@ public class UserBlogUpdate extends HttpServlet {
         //Get parameter
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
+        title.trim();
         String description = request.getParameter("description");
         String content = request.getParameter("content");
         String date = request.getParameter("date");

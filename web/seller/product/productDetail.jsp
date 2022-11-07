@@ -1,74 +1,81 @@
-<%-- 
-    Document   : productDetail
-    Created on : Sep 30, 2022, 4:44:05 PM
-    Author     : ngolu
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-        <title>Document</title>
-    </head>
-    <body>
+<%@include file="../layout/index.jsp" %>
+<div class="container"  style="
+     border: 1px solid #0000004a;
+     background: white;
+     margin-top: 3rem;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     padding: 4rem;
+     ">
         <form action="update" method="post">
             <div class="container">
-                <h3>Product</h3>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Id</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="id" readonly="" value="${detail.id}"placeholder="">
-                </div>
+                <h3>Product</h3>                 
                 <div>
                     <label for="exampleFormControlInput1" class="form-label">Category</label>
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="categoryId">
                         <c:forEach items="${requestScope.listc}" var="o">
-                            <option value="${o.id}"  ${detail.id == o.id ? "selected": "" }   >${o.name}</option>     
+                            <option value="${o.id}"  ${detail.id == o.id ? "selected": "" }>${o.name}</option>     
                         </c:forEach>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Name</label>
+                    <label for="exampleFormControlInput1" class="form-label" style="color:red">Name(*)</label>
                     <input type="text" class="form-control" id="pid" name="name" value="${detail.name}" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Origin</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="origin" value="${detail.original}" placeholder="">
+                    <input type="text" class="form-control" id="pid" name="origin" value="${detail.original}" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" name="quantity" value="${detail.quantity}" placeholder="">
+                    <input type="number" class="form-control" id="pid" name="quantity" value="${detail.quantity}" placeholder="" min="0">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Price</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="price" value="${detail.price}" placeholder="">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">View Number</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" name="viewnumber" value="${detail.viewNumber}" placeholder="">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Time Create</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput1" name="create" value="${detail.create}" placeholder="">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Time Update</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput1" name="update" value="${detail.update}" placeholder="">
+                    <input type="number" class="form-control" id="pid" name="price" value="${detail.price}" placeholder="" min="1">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
+                    <textarea class="form-control" id="pid" name="description" rows="3">${detail.description}</textarea>
                 </div>
                 <div class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-primary" value="Save">
-                    <!--        <button type="button" class="btn btn-primary">Save</button>-->
                 </div>   
             </div>
         </form>
-    </body>
-</html>
+</div>
+                
+<style>
+    .container{
+        width: 1050px;
+        height: 1050px;
+        padding-top: 80px;
+        background-color: rgba(255, 255, 255, 0.884);
+    }
+    .bttCreate{
+        padding-bottom: 19px;
+    }
+    .me-2 {
+        margin-right: .5rem!important;
+        height: 40px;
+        width: 480px;
+    }
+    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+        cursor: pointer;
+        height: 40px;
+    }
+    .d-flex {
+        display: flex!important;
+        padding-bottom: 91px;
+    }
+    h3{
+        text-align: center;
+    }
+    .Page navigation example{
+        position: absolute;
+        top: 25%;
+        left: 30%;
+        transform: translateX(-50%);
+    }
+</style>

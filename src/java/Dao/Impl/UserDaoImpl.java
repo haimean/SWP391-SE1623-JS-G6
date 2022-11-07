@@ -364,6 +364,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public ArrayList<User> search(String seachValue) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public AddressReceiver getUserById(int id) {
         DBContext dBContext = new DBContext();
 
@@ -453,4 +457,3 @@ public class UserDaoImpl implements UserDao {
         }
         return user;
     }
-}

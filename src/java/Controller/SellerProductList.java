@@ -5,14 +5,13 @@
 package Controller;
 
 import Model.Product;
-import Dao.Impl.ProductDaoImpl;
+import Dao.Impl.SellerProductDaoimpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  *
@@ -33,15 +32,52 @@ public class SellerProductList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String txtSearch = request.getParameter("txt");
-        ProductDaoImpl dao = new ProductDaoImpl();
-        List<Product> products = new ArrayList<Product>();
-        if (txtSearch != null) {
-            products = dao.searchByName(txtSearch);
+        SellerProductDaoimpl dao = new SellerProductDaoimpl();
+        List<Product> listp = dao.getProduct();
+
+        String search = request.getParameter("txt");
+        String indexpasge = request.getParameter("page");
+        if (indexpasge == null) {
+            indexpasge = "1";
+            int page = Integer.parseInt(indexpasge);
+            if (search != null) {
+                List<Product> products = dao.searchByName(search.trim());
+                request.setAttribute("search", search);
+                request.setAttribute("products", products);
+                request.getRequestDispatcher("/seller/product/productList.jsp").forward(request, response);
+            } else {
+                List<Product> products = dao.getProduct(page);
+            }
+            int count = dao.getTotalProduct();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            List<Product> products = dao.getProduct(page);
+            request.setAttribute("endpage", endpage);
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("/seller/product/productList.jsp").forward(request, response);
         } else {
-            products = new ProductDaoImpl().getAll();
+            int page = Integer.parseInt(indexpasge);
+            if (search != null) {
+                List<Product> products = dao.searchByName(search.trim());
+                request.setAttribute("search", search);
+                request.setAttribute("products", products);
+                request.getRequestDispatcher("/seller/product/productList.jsp").forward(request, response);
+            } else {
+                List<Product> products = dao.getProduct(page);
+            }
+            int count = dao.getTotalProduct();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            List<Product> products = dao.getProduct(page);
+            request.setAttribute("search", search);
+            request.setAttribute("endpage", endpage);
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("/seller/product/productList.jsp").forward(request, response);
         }
-        request.setAttribute("products", products);
-        request.getRequestDispatcher("product/productList.jsp").forward(request, response);
+
     }
 }

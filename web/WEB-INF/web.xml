@@ -136,6 +136,14 @@
         <servlet-name>ResetPasswordVerifyCode</servlet-name>
         <servlet-class>Controller.ResetPasswordVerifyCode</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerOrderList</servlet-name>
+        <servlet-class>Controller.SellerOrderList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerOrderDetail</servlet-name>
+        <servlet-class>Controller.SellerOrderDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -257,6 +265,13 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ProfileUserChangePassword</servlet-name>
+        <url-pattern>/profile/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyCode</servlet-name>
+        <url-pattern>/verify</url-pattern>
+    <servlet-mapping>
         <servlet-name>RegisterVerifyCode</servlet-name>
         <url-pattern>/register/verify</url-pattern>
     </servlet-mapping>
@@ -272,9 +287,15 @@
         <servlet-name>ResetPasswordVerifyCode</servlet-name>
         <url-pattern>/reset_password/verify</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderList</servlet-name>
+        <url-pattern>/seller/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderDetail</servlet-name>
+        <url-pattern>/seller/order/detail</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

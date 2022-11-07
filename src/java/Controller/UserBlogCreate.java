@@ -54,6 +54,7 @@ public class UserBlogCreate extends HttpServlet {
         cloudinary.config.secure = true;
         //Get parameter
         String title = request.getParameter("title");
+        title.trim();
         String description = request.getParameter("description");
         String content = request.getParameter("content");
         Part filePart = request.getPart("image");

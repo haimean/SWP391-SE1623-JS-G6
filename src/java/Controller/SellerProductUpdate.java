@@ -7,7 +7,7 @@ package Controller;
 import Model.Product;
 import Model.Category;
 import Dao.Impl.CategoryDaoImpl;
-import Dao.Impl.ProductDaoImpl;
+import Dao.Impl.SellerProductDaoimpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -34,9 +34,11 @@ public class SellerProductUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = request.getParameter("pid") != null ? Integer.parseInt(request.getParameter("pid")) : 0;
-        Product p = new ProductDaoImpl().get(id);
+        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+        Product p = new SellerProductDaoimpl().get(id);
         List<Category> listc = new CategoryDaoImpl().getAll();
+        
+        request.setAttribute("id", id);
         request.setAttribute("detail", p);
         request.setAttribute("listc", listc);
         request.getRequestDispatcher("productDetail.jsp").forward(request, response);
@@ -59,11 +61,10 @@ public class SellerProductUpdate extends HttpServlet {
         String origin = request.getParameter("origin");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         double price = Double.parseDouble(request.getParameter("price"));
-        int viewNumber = Integer.parseInt(request.getParameter("viewnumber"));
         String description = request.getParameter("description");
-        ProductDaoImpl dao = new ProductDaoImpl();
-        Product procudt = new Product(id, categoryId, name, description, origin, quantity, price, true, viewNumber);
-        dao.update(procudt);
+        SellerProductDaoimpl dao = new SellerProductDaoimpl();
+        Product product = new Product(id, categoryId, name, description, origin, quantity, price);
+        dao.update(product);
         response.sendRedirect(request.getContextPath() + "/seller/product");
     }
 

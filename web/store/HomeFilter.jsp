@@ -12,11 +12,10 @@
 <div class="swiper mySwiper container mt-4">
     <div class="swiper-wrapper">
         <c:forEach items="${categories}" var="c">
-            <button class="btn btn-outline-primary swiper-slide rounded-pill" onclick="filterCategory(${c.getId()})">${c.getName()}</button>
+            <button class="btn btn-outline-primary swiper-slide rounded-pill ${categoryId == c.id ? "active" : ""}" onclick="filterCategory(${c.getId()})">${c.getName()}</button>
         </c:forEach>
     </div>
 </div>
-
 <div class= "grid-container">
     <c:forEach items="${products}" var="p">
         <img class="grid-item" src="${p.proImg}" onclick="productDetail(${p.id},${p.categoryID})">
@@ -30,6 +29,7 @@
         </svg>
     </button>
 </div>
+<input type="hidden" value="${categoryId}" id="ctId"/>
 <div class="text-center mb-5 btn-load">
     <button type="button" class="btn btn-outline-primary rounded-3" id="loadMore" onclick="loadMore()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
@@ -47,8 +47,8 @@
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
 <script>
-        console.log("Run");
         let elem = document.querySelector('.grid-container');
         let msnry;
         imagesLoaded(elem, () => {
@@ -57,11 +57,15 @@
                 columnWidth: 220
             });
         });
-
+        
         let swiper = new Swiper(".mySwiper", {
-            slidesPerView: 11,
+            slidesPerView: 8,
             spaceBetween: 10,
-            freeMode: true
+            freeMode: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
         });
 
         function filterCategory(categoryId) {
@@ -86,14 +90,17 @@
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
+
         function loadMore() {
             let imgs = document.getElementsByTagName("img").length;
+            let categoryId = document.getElementById("ctId").value;
             $.ajax({
                 url: '<%= request.getContextPath()%>',
                 type: 'get',
                 data: {
                     pageExisted: imgs,
-                    mode: "LOAD"
+                    mode: "FILTER_LOAD",
+                    categoryId
                 },
                 success: function (data) {
                     let arrImgStr = data.split("+");
@@ -110,7 +117,6 @@
                         elem.appendChild(imgEl);
                         console.log(imgEl);
                     });
-                    console.log(arrImgStr);
                     msnry.appended(arrElImg);
                     if (data.length == 0) {
                         let btnLoad = document.querySelector(".btn-load");

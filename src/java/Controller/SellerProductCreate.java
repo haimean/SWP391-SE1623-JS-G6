@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Dao.Impl.ProductDaoImpl;
+import Dao.Impl.SellerProductDaoimpl;
 import Model.Product;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -27,20 +27,26 @@ public class SellerProductCreate extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/seller/product/productAdd.jsp").forward(request, response);
+    }
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String name = request.getParameter("name");
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         String origin = request.getParameter("origin");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         double price = Double.parseDouble(request.getParameter("price"));
         String description = request.getParameter("description");
-        ProductDaoImpl dao = new ProductDaoImpl();
+        SellerProductDaoimpl dao = new SellerProductDaoimpl();
 
-        Product procudt = new Product(categoryId, name, description, origin, quantity, price, true);
+        Product product = new Product(categoryId, name, description, origin, quantity, price, true);
 
-        dao.insert(procudt);
-        response.sendRedirect(request.getContextPath() + "/seller/product");
+        dao.insert(product);
+        response.sendRedirect(request.getContextPath()+"/seller/product");
     }
 
 }

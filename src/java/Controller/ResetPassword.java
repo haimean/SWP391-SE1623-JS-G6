@@ -8,12 +8,12 @@ import Dao.Impl.UserDaoImpl;
 import Dao.UserDao;
 import Model.User;
 import SendEmail.SendEmail;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,10 +21,9 @@ import java.util.regex.Pattern;
  *
  * @author haimi
  */
-public class Register extends HttpServlet {
+public class ResetPassword extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
-    // + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -36,7 +35,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("register/register.jsp").forward(request, response);
+        request.getRequestDispatcher("resetPassword/reset.jsp").forward(request, response);
     }
 
     /**
@@ -55,31 +54,30 @@ public class Register extends HttpServlet {
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
         String rePassword = request.getParameter("rePassword").trim();
-        String fullName = request.getParameter("fullName").trim();
-        if (!userDaoImpl.haveAccount(email) && isValid(password) && password.equals(rePassword)) {
+        if (userDaoImpl.haveAccount(email) && isValid(password) && password.equals(rePassword)) {
             // create instance object of the SendEmail Class
             SendEmail sm = new SendEmail();
             // get the 6-digit code
             String code = sm.getRandom();
             // craete new user using all information
-            User user = new User(fullName, email, password, code);
+            User user = new User(email, password, code);
             // call the send email method
-            boolean test = sm.sendEmail(user);
+            boolean test = sm.sendEmailResetPass(user);
             // check if the email send successfully
             if (test) {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(180);
                 session.setAttribute("authcode", user);
-                response.sendRedirect(request.getContextPath() + "/register/verify");
+                response.sendRedirect(request.getContextPath() + "/reset_password/verify");
                 return;
             } else {
                 response.sendRedirect(request.getContextPath());
             }
         }
 
-        if (userDaoImpl.haveAccount(email)) {
+        if (!userDaoImpl.haveAccount(email)) {
             // trung mail
-            request.setAttribute("emailError", "Email already exists");
+            request.setAttribute("emailError", "Email don't exists");
         }
         if (!isValid(password)) {
             // sai dinh dang pass
@@ -92,8 +90,7 @@ public class Register extends HttpServlet {
         request.setAttribute("email", email);
         request.setAttribute("password", password);
         request.setAttribute("rePassword", rePassword);
-        request.setAttribute("fullName", fullName);
-        request.getRequestDispatcher("/register/register.jsp").forward(request, response);
+        request.getRequestDispatcher("resetPassword/reset.jsp").forward(request, response);
     }
 
     public static boolean isValid(String password) {

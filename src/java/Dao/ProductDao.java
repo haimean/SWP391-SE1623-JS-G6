@@ -23,7 +23,11 @@ public interface ProductDao extends BaseDAO<Product> {
     List<Product> getTop7Products(int id, int categoryId);
 
     List<Product> getNextTop45Products(int productExisted);
-    
+
+    List<Product> getNextTop45ProductsByCategoryId(int productExisted, int categoryId);
+
     List<Blog> getTop7Blogs(int productId);
+
+    void updateProductViewNumber(int viewNumber, int id);
 
 }

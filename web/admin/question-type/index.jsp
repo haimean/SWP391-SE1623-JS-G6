@@ -81,6 +81,7 @@
 </svg>
 
 <div class="container">
+    ${test}
     <div class="table-responsive table-container mx-auto">
         <a type="button" class="btn btn-primary mt-4 ms-4" href="<%= request.getContextPath()%>/admin/qna-type/create">Create</a>
         <div class="shadow-sm p-3 mb-5 bg-white rounded px-5 py-5 d-flex flex-column align-items-center">
@@ -110,10 +111,10 @@
                                     <input type="hidden" value="NORMAL" name="mode"/>
                                     <input type="hidden" value="${qt.id}" name="id"/>
                                 </form>
-                                <button type="button" class="btn btn-danger ms-3" data-bs-toggle="modal" data-bs-target="#modal${q.id}">Delete</button>
+                                <button type="button" class="btn btn-danger ms-3" data-bs-toggle="modal" data-bs-target="#modal${qt.id}">Delete</button>
                             </td>
                         </tr>
-                    <div class="modal fade" id="modal${q.id}" tabindex="-1">   
+                    <div class="modal fade" id="modal${qt.id}" tabindex="-1">   
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
         UserInformation listprofile = new UserInformation();
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select u.id,u.email,uf.fullname,uf.gender,uf.biography,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
+            String sql = "select u.id,u.email,uf.fullname,uf.image,uf.gender,uf.biography,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
                     + "on u.id=uf.id\n"
                     + "where u.id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -36,6 +37,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
             while (rs.next()) {
                 listprofile.setId(rs.getInt("id"));
                 listprofile.setFullname(rs.getString("fullname"));
+                listprofile.setImage(rs.getString("image"));
                 listprofile.setBiography(rs.getString("biography"));
                 listprofile.setGender(rs.getInt("gender"));
                 listprofile.setPhone(rs.getString("phone"));
@@ -49,7 +51,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
         return listprofile;
     }
 
-    public boolean updateProfile(int id, String fullname,String image, String gender, String biography, String address, String city) {
+    public boolean updateProfile(int id, String fullname, String image, String gender, String biography, String address, String city) {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
@@ -74,22 +76,24 @@ public class UserInformationDaoImpl implements UserInformationDao {
 
     @Override
     public List<UserInformation> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean insert(UserInformation t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean update(UserInformation t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
     }
-
 }

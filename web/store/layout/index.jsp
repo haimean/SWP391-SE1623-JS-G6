@@ -44,7 +44,7 @@
                     <a class="nav-link active" href="<%= request.getContextPath()%>/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<%= request.getContextPath()%>/userProductList">Shop</a>
+                    <a class="nav-link active" href="<%= request.getContextPath()%>/product">Shop</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="<%= request.getContextPath()%>/blog">Blog</a>
@@ -86,7 +86,8 @@
                                 }else{
                                 %>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/profile">Profile</a></li>    
-                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/message">Message</a></li>
+                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/messages">Message</a></li>
+                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/user/blog">MyBlog</a></li>    
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout"">Logout</a></li>
                                 <%}%>       
                         </ul>

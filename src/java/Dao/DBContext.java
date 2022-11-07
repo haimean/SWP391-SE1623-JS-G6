@@ -23,6 +23,7 @@ public class DBContext {
     private final String userID = "sa";
     private final String password = "123456";
 
+
     public Connection getConnection() {
 
         Connection connection = null;
@@ -59,6 +60,7 @@ public class DBContext {
             }
         }
     }
+
     public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
         if (preparedStatement != null) {
             try {

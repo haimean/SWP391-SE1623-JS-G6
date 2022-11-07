@@ -5,7 +5,6 @@ package Model;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 import java.sql.Date;
-import sun.security.util.Password;
 
 /**
  *
@@ -41,6 +40,12 @@ public class User {
 
     public User(String name, String email, String password, String code) {
         this.fullName = name;
+        this.email = email;
+        this.password = password;
+        this.code = code;
+    }
+
+    public User(String email, String password, String code) {
         this.email = email;
         this.password = password;
         this.code = code;
@@ -121,7 +126,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", role=" + role + ", fullName=" + fullName + ", email=" + email + ", password="
-                + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status=" + status
+                + password + ", phone=" + phone + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", status="
+                + status
                 + '}';
     }
 

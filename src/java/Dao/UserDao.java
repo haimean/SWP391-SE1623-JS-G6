@@ -4,6 +4,7 @@
  */
 package Dao;
 
+import Model.AddressReceiver;
 import Model.User;
 import java.util.ArrayList;
 
@@ -18,14 +19,24 @@ public interface UserDao extends BaseDAO<User> {
     boolean updateUserStatusByID(int id, boolean status);
 
     boolean updateUserRoleByID(int id, int role);
+
     ArrayList<User> search(String seachValue, int index);
-    
+
     int getTotalUsers();
-    
+
     int getTotalUsersSearch(String seachValue);
-    
+
     ArrayList<User> paginate(int index);
+
     ArrayList<User> search(String seachValue);
-    
-    boolean updatePassword(String email,String password);
+
+    AddressReceiver getUserById(int id);
+
+    boolean updatePassword(String email, String password);
+
+    int getUserId(User user);
+
+    public boolean haveAccount(String email);
+
+    public User get(String email);
 }

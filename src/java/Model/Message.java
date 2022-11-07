@@ -84,5 +84,4 @@ public class Message {
         this.Update_at = Update_at;
     }
 
-
 }

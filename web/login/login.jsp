@@ -14,8 +14,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
                 integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
         crossorigin="anonymous"></script>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     </head>
     <body>
+
         <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-6 col-12 mx-auto">
@@ -23,28 +25,29 @@
                         <h2 class="mb-2 text-center">Sign In</h2>
                         <form action="<%=request.getContextPath()%>/login" method="POST">
                             <h4 class="font-500">Email</h4>
-                            <input name="email" class="form-control form-control-lg mb-3" type="email"  placeholder="Email" >
+                            <input name="email" class="form-control form-control-lg mb-3" type="email"  placeholder="Email" value="${email}" >
                             <h4 class="font-500">Password</h4>
                             <div class="input-group ">
-                                <input class="form-control form-control-lg" id="password" name="password" type="password" placeholder="Password" value="">
+                                <input class="form-control form-control-lg" id="password" name="password" type="password" placeholder="Password" value="${password}">
                                 <span class="input-group-text">
                                     <i class="fa fa-eye-slash" id="togglePassword" 
                                        style="cursor: pointer"></i>
                                 </span>
                             </div>
+                            <span style="color: red" class="mb-3">${errorPassword}</span>
                             <div class="d-flex my-3  justify-content-between">
                                 <div class="form-check">
                                     <input
                                         type="checkbox"
                                         class="form-check-input uf-form-check-input"
-                                        id="exampleCheck1"
+                                        id="remember"
                                         style="margin-top: 0.65rem;"
                                         />
                                     <h4 class="form-check-h4 " for="exampleCheck1"
                                         >Remember Me</h4
                                     >
                                 </div>
-                                <a href="#">Forgot password?</a>
+                                <a href="reset_password">Forgot password?</a>
                             </div>
                             <input class="btn btn-primary btn-lg w-100 shadow-lg"  type="submit" value="Login" />
                         </form>
@@ -54,16 +57,56 @@
                     </div>      
                 </div>        
             </div>
+
         </div>
-        <script>
-            const togglePassword = document.querySelector("#togglePassword");
-            const password = document.querySelector("#password");
-            togglePassword.addEventListener("click", function () {
-                const type = password.getAttribute("type") === "password" ? "text" : "password";
-                password.setAttribute("type", type);
-                this.classList.toggle('fa-eye');
-                this.classList.toggle('fa-eye-slash');
-            });
-        </script>
+        <div class="position-fixed w-100">
+            <c:if test="${login == 'false'}">
+                <button class="alert alert-danger d-flex align-items-center position-absolute ms-3 pe-auto" id="alert" role="alert" onclick="closeAlertModal()">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                        Your email or password is incorrect!
+                    </div>
+                </button>
+            </c:if>
+        </div>
     </body>
+    <script>
+        const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password");
+        togglePassword.addEventListener("click", function () {
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+        setTimeout(closeAlertModal, 2000)
+        function closeAlertModal() {
+            let modal = document.getElementById("alert");
+            modal.classList.add("fadeOutLeft");
+        }
+    </script>
+    <style>
+        .fadeOutLeft{
+            animation: fadeOutLeft 0.3s ease-in;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeOutLeft {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            50%{
+                opacity: 1;
+                transform: skewX(-5deg);
+            }
+            75%{
+                opacity: 1;
+                transform: skewX(5deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </html>

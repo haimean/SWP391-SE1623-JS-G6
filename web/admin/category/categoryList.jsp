@@ -18,7 +18,7 @@
     <div class="side-nav-categories">
         <form id="form" action="category" method="GET">
             <div class="search">
-                <input name="search" class="text-search" type="text" onkeyup="ValidateSearch()" placeholder="Name..." id="search-input">
+                <input name="search" class="text-search" type="text" value="${search}" onkeyup="ValidateSearch()" placeholder="Name..." id="search-input">
                     <button class="button-search">Search</button>
             </div><br>
                 <span id="text-search"></span>

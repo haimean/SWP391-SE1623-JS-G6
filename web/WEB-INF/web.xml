@@ -65,16 +65,32 @@
         <servlet-class>Controller.StoreBuy</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserProductList</servlet-name>
-        <servlet-class>Controller.StoreProductList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProfileUserDisplay</servlet-name>
         <servlet-class>Controller.ProfileUserDisplay</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileUserUpdate</servlet-name>
         <servlet-class>Controller.ProfileUserUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StoreProductList</servlet-name>
+        <servlet-class>Controller.StoreProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogList</servlet-name>
+        <servlet-class>Controller.UserBlogList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogDetails</servlet-name>
+        <servlet-class>Controller.UserBlogDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogUpdate</servlet-name>
+        <servlet-class>Controller.UserBlogUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserBlogCreate</servlet-name>
+        <servlet-class>Controller.UserBlogCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminSupportCenterCreate</servlet-name>
@@ -105,8 +121,20 @@
         <servlet-class>Controller.Register</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>VerifyCode</servlet-name>
-        <servlet-class>Controller.VerifyCode</servlet-class>
+        <servlet-name>RegisterVerifyCode</servlet-name>
+        <servlet-class>Controller.RegisterVerifyCode</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StoreProductDetail</servlet-name>
+        <servlet-class>Controller.StoreProductDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>Controller.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordVerifyCode</servlet-name>
+        <servlet-class>Controller.ResetPasswordVerifyCode</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SellerOrderList</servlet-name>
@@ -181,16 +209,32 @@
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserProductList</servlet-name>
-        <url-pattern>/userProductList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ProfileUserDisplay</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProfileUserUpdate</servlet-name>
         <url-pattern>/profile/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StoreProductList</servlet-name>
+        <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogList</servlet-name>
+        <url-pattern>/user/blog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogDetails</servlet-name>
+        <url-pattern>/user/blog/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogUpdate</servlet-name>
+        <url-pattern>/user/blog/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserBlogCreate</servlet-name>
+        <url-pattern>/user/blog/create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminSupportCenterCreate</servlet-name>
@@ -213,6 +257,10 @@
         <url-pattern>/admin/qna-type/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ProfileUserChangePassword</servlet-name>
+        <url-pattern>/profile/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
@@ -223,6 +271,21 @@
     <servlet-mapping>
         <servlet-name>VerifyCode</servlet-name>
         <url-pattern>/verify</url-pattern>
+    <servlet-mapping>
+        <servlet-name>RegisterVerifyCode</servlet-name>
+        <url-pattern>/register/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StoreProductDetail</servlet-name>
+        <url-pattern>/product/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/reset_password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordVerifyCode</servlet-name>
+        <url-pattern>/reset_password/verify</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SellerOrderList</servlet-name>

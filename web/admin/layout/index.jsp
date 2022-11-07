@@ -1,4 +1,5 @@
 <%@page import="Model.*" import="Dao.*" import="java.util.ArrayList" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

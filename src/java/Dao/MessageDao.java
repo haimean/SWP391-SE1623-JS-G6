@@ -12,7 +12,9 @@ import java.util.ArrayList;
  * @author haimi
  */
 public interface MessageDao extends BaseDAO<Message> {
-ArrayList<Message> getAll(int id);
-ArrayList<Message> get(int userid, int userReceiverId);
-ArrayList<Message> getAll(int id, String search);
+  ArrayList<Message> getAll(int id);
+
+  ArrayList<Message> get(int userid, int userReceiverId);
+
+  ArrayList<Message> getAll(int id, String search);
 }

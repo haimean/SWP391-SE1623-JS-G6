@@ -25,7 +25,6 @@ public class CartDaoImpl implements CartDao {
     @Override
     public Boolean addOrder(User user, Cart cart) {
         DBContext dBContext = new DBContext();
-        Boolean status = false;
         Date date = new Date(System.currentTimeMillis());
         try {
             Connection connection = dBContext.getConnection();
@@ -40,7 +39,6 @@ public class CartDaoImpl implements CartDao {
             String query1 = "select top 1 id from [Order] order by id desc";
             PreparedStatement ps1 = connection.prepareStatement(query1);
             ResultSet rs = ps1.executeQuery();
-            dBContext.closeConnection(connection, ps1, rs);
             if (rs.next()) {
                 int oid = rs.getInt(1);
                 for (ItemCart item : cart.getItems()) {
@@ -50,8 +48,9 @@ public class CartDaoImpl implements CartDao {
                     ps2.setInt(2, item.getProduct().getId());
                     ps2.setInt(3, item.getQuantity());
                     ps2.setDouble(4, item.getPrice());
+                    ps2.setDate(5, date);
+                    ps2.setDate(6, date);
                     ps2.executeUpdate();
-                    dBContext.closeConnection(connection, ps2);
                 }
             }
             String query3 = "update Product set quantity = quantity - ? where id = ?";
@@ -62,41 +61,45 @@ public class CartDaoImpl implements CartDao {
                 ps3.executeUpdate();
             }
             dBContext.closeConnection(connection, ps3);
-            status = true;
+            return true;
         } catch (SQLException e) {
-            status = false;
+            return false;
         }
-        return status;
-
     }
 
     @Override
     public String getStatus() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Cart get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<Cart> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean insert(Cart t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean update(Cart t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -34,7 +34,10 @@ public class Product {
     }
 
     
-    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, Timestamp create_at, Timestamp update_at, String proImg) {
+    
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price,
+            boolean status, int viewNumber, Timestamp create_at, Timestamp update_at, String proImg) {
+
         this.id = id;
         this.categoryID = categoryID;
         this.name = name;
@@ -49,7 +52,8 @@ public class Product {
         this.proImg = proImg;
     }
 
-    public Product(int categoryID, String name, String description, String original, int quantity, double price, boolean status) {
+    public Product(int categoryID, String name, String description, String original, int quantity, double price,
+            boolean status) {
         this.categoryID = categoryID;
         this.name = name;
         this.description = description;
@@ -59,7 +63,8 @@ public class Product {
         this.status = status;
     }
 
-    public Product(int id, int categoryId, String name, String description, String origin, int quantity, double price, boolean b, int viewNumber) {
+    public Product(int id, int categoryId, String name, String description, String origin, int quantity, double price,
+            boolean b, int viewNumber) {
         this.id = id;
         this.categoryID = categoryID;
         this.name = name;

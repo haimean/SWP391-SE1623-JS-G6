@@ -7,6 +7,7 @@ package Dao.Impl;
 import Model.User;
 import Dao.DBContext;
 import Dao.UserDao;
+import Model.AddressReceiver;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +27,8 @@ public class UserDaoImpl implements UserDao {
 
     Timestamp ts = Timestamp.from(Instant.now());
 
-    public static boolean haveAccount(String email) {
+    @Override
+    public boolean haveAccount(String email) {
         DBContext dBContext = new DBContext();
         int numberAccount = 0;
         try {
@@ -39,11 +41,7 @@ public class UserDaoImpl implements UserDao {
                 numberAccount = rs.getInt(1);
             }
             dBContext.closeConnection(connection, ps);
-            if (numberAccount > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return numberAccount > 0;
         } catch (SQLException e) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -56,9 +54,10 @@ public class UserDaoImpl implements UserDao {
         User user = new User();
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select u.id, role, fullname, email, phone, status, u.created_at, updated_at\n"
+            String sql = "select u.id, role, fullname, u.email, phone, status, u.created_at, updated_at\n"
                     + "                from UserInformation as ui, [User] as u\n"
                     + "                where u.id = ui.userId and u.email = ? and u.password = ?";
+
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, Email);
             ps.setString(2, password);
@@ -79,6 +78,11 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return user;
+    }
+
+    public static void main(String[] args) {
+        UserDao dao = new UserDaoImpl();
+        System.out.println(dao.login("admin@gmail.com", "Minh@123455"));
     }
 
     @Override
@@ -234,33 +238,35 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
         }
         return 0;
-     }
+    }
+
+    @Override
     public boolean insert(User item) {
         DBContext dBContext = new DBContext();
-
         try {
             Connection connection = dBContext.getConnection();
             String sql = "INSERT INTO [dbo].[user]\n"
                     + "           ([email]\n"
                     + "           ,[password]\n"
-                    + "           ,[create_at]\n"
-                    + "           ,[update_at]\n"
-                    + "     VALUES(?,?,?,4)";
+                    + "           ,[created_at]\n"
+                    + "           ,[updated_at],role)\n"
+                    + "     VALUES(?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, item.getEmail());
             ps.setString(2, item.getPassword());
             ps.setTimestamp(3, ts);
             ps.setTimestamp(4, ts);
+            ps.setInt(5, 3);
             ps.executeUpdate();
             dBContext.closeConnection(connection, ps);
         } catch (SQLException ex) {
             Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        item = login(item.getEmail(), item.getPassword());
         try {
+            item.setId(getUserId(item));
             Connection connection = dBContext.getConnection();
-            String sql = "INSERT INTO UserInformation (userId,fullName,create_at)  VALUES(?,?,?)";
+            String sql = "INSERT INTO UserInformation (userId,fullName,created_at)  VALUES(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, item.getId());
             ps.setString(2, item.getFullName());
@@ -334,20 +340,14 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    
-
     @Override
     public boolean update(User t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    @Override
-    public boolean updatePassword(String email,String password){
+    public boolean updatePassword(String email, String password) {
         DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
@@ -367,4 +367,93 @@ public class UserDaoImpl implements UserDao {
     public ArrayList<User> search(String seachValue) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-}
+
+    public AddressReceiver getUserById(int id) {
+        DBContext dBContext = new DBContext();
+
+        try {
+            Connection connection = dBContext.getConnection();
+
+            String sql = "SELECT userId, fullname, phone, email, [address] + ', ' + city as [address]\n"
+                    + "FROM AddressReceiver\n"
+                    + "WHERE userId = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new AddressReceiver(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+
+            }
+            dBContext.closeConnection(connection, ps);
+
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<User> search(String seachValue) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getUserId(User user) {
+        DBContext dBContext = new DBContext();
+        int userId = 0;
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select id from [User] where email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                userId = rs.getInt(1);
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return userId;
+    }
+
+    @Override
+    public User get(String email) {
+        DBContext dBContext = new DBContext();
+        User user = new User();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "select u.id, role, fullname, email, phone, status,"
+                    + " u.created_at, updated_at "
+                    + "from [User] u ,[UserInformation] ui"
+                    + " where u.id = ui.userId and u.email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getDate(7),
+                        rs.getDate(8));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return user;
+    }

@@ -21,11 +21,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label" style="color:red">Name(*)</label>
-                    <input type="text" class="form-control" id="pid" name="name" value="${detail.name}" placeholder="">
+                    <input type="text" class="form-control" id="pid" name="name" value="${detail.name}" placeholder="" maxlength="50">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Origin</label>
-                    <input type="text" class="form-control" id="pid" name="origin" value="${detail.original}" placeholder="">
+                    <input type="text" class="form-control" id="pid" name="origin" value="${detail.original}" placeholder="" maxlength="20">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Quantity</label>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea class="form-control" id="pid" name="description" rows="3">${detail.description}</textarea>
+                    <textarea class="form-control" id="pid" name="description" rows="3" maxlength="1000">${detail.description}</textarea>
                 </div>
                 <div class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-primary" value="Save">

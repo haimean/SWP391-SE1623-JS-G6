@@ -128,7 +128,8 @@ public class SellerProductDaoimpl implements SellerProductDao {
                         rs.getBoolean(8),
                         rs.getInt(9),
                         rs.getTimestamp(10),
-                        rs.getTimestamp(11), "image");
+                        rs.getTimestamp(11),
+                        rs.getString(12));
                 list.add(p);               
             }
             db.closeConnection(connection, ps);
@@ -253,7 +254,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
     
     public static void main(String[] args) {
         SellerProductDaoimpl dao = new SellerProductDaoimpl();
-        List<Product> list  = dao.getProduct(1);
+        List<Product> list  = dao.getProduct(3);
         for (Product product : list) {
             System.out.println(product);
         }

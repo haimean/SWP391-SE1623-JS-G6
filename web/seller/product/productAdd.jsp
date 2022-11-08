@@ -13,11 +13,11 @@
             <h3>Add New Product </h3>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label" style="color:red">Name(*)</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="" required="required">
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="" required="required" maxlength="50">
             </div>
             <div>
                 <label for="exampleFormControlInput1" class="form-label">Category</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" name="categoryId" placeholder="" required> 
+                <input type="number" class="form-control" id="exampleFormControlInput1" name="categoryId" placeholder="" required min="0"> 
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Origin</label>
@@ -29,11 +29,11 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Price</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" name="price" placeholder="" required>
+                <input type="number" class="form-control" id="exampleFormControlInput1" name="price" placeholder="" required min="0">
             </div>                     
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3" maxlength="200"></textarea>
             </div>
 
             <div class="d-flex justify-content-center">

@@ -32,47 +32,43 @@ public class SellerProductList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SellerProductDaoimpl dao = new SellerProductDaoimpl();
-        List<Product> listp = dao.getProduct();
-
+         SellerProductDaoimpl dao = new SellerProductDaoimpl();
+        List<Product> products ;
         String search = request.getParameter("txt");
         String indexpasge = request.getParameter("page");
         if (indexpasge == null) {
             indexpasge = "1";
             int page = Integer.parseInt(indexpasge);
             if (search != null) {
-                List<Product> products = dao.searchByName(search.trim());
+                 products = dao.searchByName(search.trim());
                 request.setAttribute("search", search);
                 request.setAttribute("products", products);
                 request.getRequestDispatcher("/seller/product/productList.jsp").forward(request, response);
-            } else {
-                List<Product> products = dao.getProduct(page);
-            }
+            } 
             int count = dao.getTotalProduct();
             int endpage = count / 5;
             if (count % 5 != 0) {
                 endpage++;
             }
-            List<Product> products = dao.getProduct(page);
+             products = dao.getProduct(page);
             request.setAttribute("endpage", endpage);
             request.setAttribute("products", products);
             request.getRequestDispatcher("/seller/product/productList.jsp").forward(request, response);
         } else {
             int page = Integer.parseInt(indexpasge);
             if (search != null) {
-                List<Product> products = dao.searchByName(search.trim());
+                 products = dao.searchByName(search.trim());
                 request.setAttribute("search", search);
                 request.setAttribute("products", products);
                 request.getRequestDispatcher("/seller/product/productList.jsp").forward(request, response);
-            } else {
-                List<Product> products = dao.getProduct(page);
             }
             int count = dao.getTotalProduct();
             int endpage = count / 5;
             if (count % 5 != 0) {
                 endpage++;
             }
-            List<Product> products = dao.getProduct(page);
+             products = dao.getProduct(page);
+            request.setAttribute("page", page);
             request.setAttribute("search", search);
             request.setAttribute("endpage", endpage);
             request.setAttribute("products", products);

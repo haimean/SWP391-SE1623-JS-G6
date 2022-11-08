@@ -36,7 +36,7 @@
                         <th >${o.name}</th>
                         <th >${o.categoryID}</th>
                         <th >${o.quantity}</th>
-                        <th ><img src="https://static.vecteezy.com/system/resources/previews/000/395/417/original/modern-company-logo-design-vector.jpg" width="120" alt="${o.name}"/></th>     
+                        <th ><img src="${o.proImg}" width="120" alt="${o.name}"/></th>     
                         <th >  
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${o.id}">Delete</button>
                             <div class="modal fade" id="exampleModal${o.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,15 +61,16 @@
                 </c:forEach>
             </tbody>
         </table>
-         <div class="paging">
-            <ul class="pagination justify-content-center">
+        <div class="paging">
+            <ul class="pagination justify-content-center">            
                 <c:forEach begin="1" end="${endpage}" var="p">
-                    <li class="page-item"><a class="page-link" href="product?page=${p}">${p}</a></li>
-                    </c:forEach>
+                    <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/seller/product?page=${p}">${p}</a></li>
+                    </c:forEach>                  
             </ul>
         </div>  
     </div>
 </div>
+                    <p> ${page}</p>
 <style>
     .container{
         width: 1050px;

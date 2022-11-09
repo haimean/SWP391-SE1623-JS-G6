@@ -109,14 +109,7 @@
             <div class="leftcolumn">
 
                 <div class="card2">
-                    <div class="dropdown">
-
-                        <img src="https://www.shareicon.net/data/512x512/2016/06/04/775696_interface_512x512.png" class="img" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
-
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="update?id=${requestScope.blog.id}">Update</a></li>                           
-                        </ul>
-                    </div>
+                    
                     <h2>${blog.title}</h2>
                     <h5>${blog.description}.</h5>
                     <c:if test="${blog.create_at != null}">

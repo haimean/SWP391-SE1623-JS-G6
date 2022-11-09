@@ -22,6 +22,7 @@ public class Blog {
     private String  content;
     private String create_at;
     private String update_at;
+    private int  userId;
 
 
     public Blog() {
@@ -45,6 +46,14 @@ this.id = id;
         this.description = description;
          this.image = image;
         this.content = content;
+    }
+
+    public Blog(String title, String description, String url, String content, int userId) {
+        this.title = title;
+        this.description = description;
+         this.image = image;
+        this.content = content;
+        this.userId = userId;
     }
 
     public String getimage() {
@@ -149,6 +158,14 @@ this.id = id;
 
     public void setViewNumber(int viewNumber) {
         this.viewNumber = viewNumber;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     
      

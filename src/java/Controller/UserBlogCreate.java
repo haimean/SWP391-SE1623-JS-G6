@@ -88,7 +88,8 @@ response.sendRedirect(request.getContextPath()  +  "/user/blog");
         int id = daoB.getIdByTitle(b.getTitle());        
         Blog b1 = new Blog(id, title, description, geturl, content);
         daoB.insertIntoImageBlog(b1);
-        request.getRequestDispatcher(request.getContextPath()  +  "/user/blog").forward(request, response);
+//        request.getRequestDispatcher(request.getContextPath()  +  "/user/blog").forward(request, response);
+response.sendRedirect(request.getContextPath()  +  "/user/blog");  
         }
        
     }

@@ -50,7 +50,7 @@
         <div class="paging">
             <ul class="pagination justify-content-center">
                 <c:forEach begin="1" end="${endpage}" var="p">
-                    <li class="page-item"><a class="page-link" href="order?page=${p}">${p}</a></li>
+                    <li class="page-item ${page == p ? "active" : ""}"><a class="page-link" href="order?page=${p}">${p}</a></li>
                     </c:forEach>
             </ul>
         </div>

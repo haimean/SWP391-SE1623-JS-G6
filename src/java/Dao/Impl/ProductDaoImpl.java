@@ -472,4 +472,19 @@ public class ProductDaoImpl implements ProductDao {
             Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void increaseView(int proId) {
+         DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "update Blog\n"
+                + "set viewNumber = viewNumber +1 \n"
+                + "where id = " + proId;
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ps.executeQuery();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 }

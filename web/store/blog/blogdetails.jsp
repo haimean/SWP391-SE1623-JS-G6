@@ -144,7 +144,7 @@
                         <!--<<form action="blogDetails">-->
                         <c:forEach  var="i" begin="0" end="${lstzsize}" >
                             <div class="fakeimg">
-                                <a  href="blogDetails?id=${requestScope.listB.get(i).id}">
+                                <a  href="detail?id=${requestScope.listB.get(i).id}">
                                     <img src="${requestScope.listB.get(i).image == null?"https://agencyentourage.com/wp-content/uploads/2018/02/thinkstockphotos-626669886.jpg":requestScope.listB.get(i).image}" class="img-fluid avatar" style="max-height:700px; max-width: 75%;"><br>
 
                                     ${requestScope.listB.get(i).title}</a>&nbsp

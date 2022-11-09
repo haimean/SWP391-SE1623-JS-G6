@@ -98,6 +98,7 @@ public class SellerOrderList extends HttpServlet {
                 endpage++;
             }
             List<Order> orders = dao.getOrder(page);
+            request.setAttribute("page", page);
             request.setAttribute("endpage", endpage);
             request.setAttribute("listO", orders);
             request.getRequestDispatcher("/seller/order/orderlist.jsp").forward(request, response);

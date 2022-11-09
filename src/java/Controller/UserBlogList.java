@@ -61,6 +61,7 @@ public class UserBlogList extends HttpServlet {
 
 //        List<Blog> blog = bdao.getAllBlog();
         List<Blog> blog = bdao.getAllBlogByConstrain(page - 1, user.getId());
+        request.setAttribute("userStatus", user.isStatus());
         request.setAttribute("beginPage", beginPage);
         request.setAttribute("endPage", endPage);
         request.setAttribute("lstzsize", blog.size() - 1);

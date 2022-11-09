@@ -78,8 +78,8 @@
 
         <!-- Blog Section -->
         <section id="blog">
-            <a href="./blog/blogcreate.jsp"> <button type="button" class="btn btn-secondary btn-sm" >New Blog...</button></a>
-
+            <!--<a href="./blog/blogcreate.jsp"> <button type="button" class="btn btn-secondary btn-sm"  ${userStatus == true ? "disabled" : ""}>New Blog...</button></a>-->
+            <button type="button" class="btn btn-secondary btn-sm"  ${userStatus == true ? "disabled" : ""}><a href="./blog/blogcreate.jsp">New Blog...</a></button>
             <div class="container">
                 <div class="row">
                     <div class="col-12">

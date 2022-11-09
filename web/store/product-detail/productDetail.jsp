@@ -198,7 +198,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <a class="btn btn-outline-primary flex-shrink-0" href="detail?id=${rb.id}">
+                                    <a class="btn btn-outline-primary flex-shrink-0" href="<%= request.getContextPath()%>/store/blog/detail?id=${rb.id}">
                                         View Blog
                                     </a>
                                 </div>

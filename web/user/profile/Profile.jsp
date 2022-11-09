@@ -51,9 +51,6 @@
             <span><ion-icon name="business-outline"></ion-icon> City: <b>${userinf.getCity()}</b></span>
         </div>
     </div>
-    <div class="side-nav-blog">
-        <h1>blog</h1>
-    </div>
 </div>
 <div class="position-fixed w-100">
     <script>

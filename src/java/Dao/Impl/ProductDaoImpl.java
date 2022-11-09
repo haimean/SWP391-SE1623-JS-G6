@@ -397,7 +397,7 @@ public class ProductDaoImpl implements ProductDao {
         ArrayList<Blog> blogs = new ArrayList<>();
         try {
             Connection connection = dBContext.getConnection();
-            String query = "select m.blogId, b.title, b.[description],b.viewNumer, \n"
+            String query = "select m.blogId, b.title, b.[description],b.viewNumber, \n"
                     + "b.image,b.content\n"
                     + "from MapBlogAndProduct m\n"
                     + "inner join Blog b on b.id = m.blogId\n"
@@ -414,7 +414,7 @@ public class ProductDaoImpl implements ProductDao {
         }
         return blogs;
     }
-
+    
 
     @Override
     public List<Product> getNextTop45ProductsByCategoryId(int productExisted, int categoryId) {

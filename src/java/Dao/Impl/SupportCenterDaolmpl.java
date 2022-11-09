@@ -166,7 +166,7 @@ public class SupportCenterDaolmpl implements SupportCenterDao {
         ArrayList<SupportCenter> qnas = new ArrayList<>();
         try {
             Connection connection = dBContext.getConnection();
-            String query = "select sc.id, sc.created_at, sc.updated_at, question, answer, [name]\n"
+            String query = "select sc.id, sc.created_at, sc.updated_at, question, answer, [name], typeId\n"
                     + "from SupportCenter sc, TypeSupportCenter tsc\n"
                     + "where sc.typeId = tsc.id";
             PreparedStatement ps = connection.prepareStatement(query);
@@ -178,7 +178,8 @@ public class SupportCenterDaolmpl implements SupportCenterDao {
                         rs.getDate(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getString(6)));
+                        rs.getString(6),
+                        rs.getInt(7)));
             }
             dBContext.closeConnection(connection, ps);
         } catch (SQLException e) {

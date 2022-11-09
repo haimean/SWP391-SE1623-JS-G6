@@ -149,9 +149,14 @@
         <servlet-class>Controller.StoreBlog</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StoreBlogDetails</servlet-name>
-        <servlet-class>Controller.StoreBlogDetails</servlet-class>
+        
+        <servlet-name>About</servlet-name>
+        <servlet-class>Controller.About</servlet-class>
     </servlet>
+    <servlet>
+    <servlet-name>StoreBlogDetails</servlet-name>
+        <servlet-class>Controller.StoreBlogDetails</servlet-class>
+        </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
         <url-pattern>/admin/category/create</url-pattern>
@@ -301,8 +306,14 @@
         <url-pattern>/store/blog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+      
+        <servlet-name>About</servlet-name>
+        <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>StoreBlogDetails</servlet-name>
         <url-pattern>/store/blog/detail</url-pattern>
+        
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

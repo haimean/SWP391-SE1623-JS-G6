@@ -19,7 +19,7 @@
                             <button class="btn bg-info ml-3" type="submit">Search</button>
                         </form>
                     </div>
-                    <div class="card-body contacts_body">
+                    <div class="card-body contacts_body">       
                         <ui class="contacts">
                             <!-- list -->
                             <%
@@ -27,12 +27,12 @@
                                 ArrayList<Message> messagesUser = (ArrayList<Message>)  request.getAttribute("messagesUser");  
                                 if (messages != null) {
                                     String userName;
-                                    User userReceiver;
+                                    UserInformation userReceiver;
                                     for (Message m : messages) {
                                         if (user.getId() == m.getUserReceiverId()) {
-                                            userReceiver = (User) new DAOUser().getUser(m.getUserSenderId());
+                                            userReceiver = (UserInformation) new UserInformationDaoImpl().get(m.getUserSenderId());
                                         } else {
-                                            userReceiver = (User) new DAOUser().getUser(m.getUserReceiverId());
+                                            userReceiver = (UserInformation) new UserInformationDaoImpl().get(m.getUserReceiverId());
                                         }
                             %>
                             <li>
@@ -40,14 +40,14 @@
                                     <div class="img_cont">
                                         <a href="<%= request.getContextPath()%>/message?id=<%=userReceiver.getId()%>">
                                             <img 
-                                                src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                                src="<%=userReceiver.getImage()%>"
                                                 class="rounded-circle user_img"
                                                 />
                                         </a>
                                     </div>
                                     <div class="user_info">
                                         <a href="<%= request.getContextPath()%>/message?id=<%=userReceiver.getId()%>">
-                                            <span>  <%=userReceiver.getFullName()%></span>
+                                            <span>  <%=userReceiver.getFullname()%></span>
                                         </a>
                                         <p><%=m.getContent()%></p>
                                     </div>
@@ -64,12 +64,12 @@
                         <div class="d-flex bd-highlight">
                             <div class="img_cont">
                                 <img
-                                    src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                    src="${uReceiver.getImage()}"
                                     class="rounded-circle user_img"
                                     />
                             </div>
                             <div class="user_info">
-                                <span> ${userNameReceiver}</span>
+                                <span> ${uReceiver.getFullname()}</span>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,8 @@
                                 <%=m.getContent()%>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg" />
+                                <img src="${avatar}" 
+                                     class="rounded-circle user_img_msg" />
                             </div>
                         </div>
                         <%
@@ -92,7 +93,7 @@
                         <div class="d-flex justify-content-start mb-4">
                             <div class="img_cont_msg">
                                 <img
-                                    src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                    src="${uReceiver.getImage()}" 
                                     class="rounded-circle user_img_msg"
                                     />
                             </div>
@@ -108,7 +109,7 @@
                             method="POST"
                             class="d-flex"
                             >
-                            <input type="hidden" name="id" value="${userIdReceiver}" />
+                            <input type="hidden" name="id" value="${uReceiver.getId()}" />
                             <input
                                 name="mess"
                                 class="form-control me-2"

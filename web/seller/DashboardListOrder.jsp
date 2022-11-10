@@ -1,4 +1,4 @@
-<%@include file="../layout/index.jsp" %>
+<%@include file="../seller/layout/index.jsp" %>
 <div class="container full"  style="
      border: 1px solid #0000004a;
      background: white;
@@ -10,7 +10,7 @@
      ">
     <div class="container form-ds">
         <!-- form search -->
-        <form action="order" class="d-flex" role="search">
+        <form action="orderlist" class="d-flex" role="search">
             <input name="txtFullName" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="${search}" required="" maxlength="30">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
@@ -26,7 +26,6 @@
                         <th scope="col">Number Phone</th>
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,10 +36,7 @@
                             <td>${o.email}</td>
                             <td>${o.phone}</td>
                             <td>${o.price}</td>
-                            <td>${o.status}</td>
-                            <td>
-                                <a href="<%= request.getContextPath()%>/seller/order/detail?oid=${o.id}"><button type="button" class="btn btn-primary">Infor</button></a>
-                            </td>
+                            <td>${o.status}</td>                          
                         </tr>
                     </c:forEach>  
                 </tbody>
@@ -50,7 +46,7 @@
         <div class="paging">
             <ul class="pagination justify-content-center">
                 <c:forEach begin="1" end="${endpage}" var="p">
-                    <li class="page-item ${page == p ? "active" : ""}"><a class="page-link" href="order?page=${p}">${p}</a></li>
+                    <li class="page-item ${page == p ? "active" : ""}"><a class="page-link" href="<%= request.getContextPath()%>/seller/dashboard/orderlist?page=${p}">${p}</a></li>
                     </c:forEach>
             </ul>
         </div>
@@ -107,3 +103,4 @@
         transform: translateX(-50%);
     }
 </style>
+

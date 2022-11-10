@@ -28,6 +28,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
     Connection connection = db.getConnection();
     Timestamp ts = Timestamp.from(Instant.now());
 
+    // get all product
     @Override
     public List<Product> getProduct() {
         String sql = "Select * from Product";
@@ -58,6 +59,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return list;
     }
 
+    // search product by name 
     @Override
     public List<Product> searchByName(String txtSearch) {
         List<Product> products = new ArrayList<>();
@@ -89,6 +91,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return products;
     }
 
+    // get total product 
     @Override
     public int getTotalProduct() {
         String sql = "Select count(*) from Product";
@@ -105,6 +108,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return 0;
     }
 
+    // paging product
     @Override
     public List<Product> getProduct(int page) {
         String sql = "select * from Product\n"
@@ -139,6 +143,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return list ;
     }
 
+    // insert product
     @Override
     public boolean insert(Product item) {
         String sql = "INSERT INTO [dbo].[Product]\n"
@@ -174,6 +179,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return false;
     }
 
+    // update product
     @Override
     public boolean update(Product item) {
         Timestamp ts = Timestamp.from(Instant.now());
@@ -208,6 +214,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return false;
     }
 
+    // delete product
     @Override
     public boolean delete(int id) {
         String sql = "DELETE FROM [dbo].[Product]\n WHERE id = ?";
@@ -223,6 +230,7 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return false;
     }
 
+    // get product by id
     @Override
     public Product get(int id) {
         String sql = "select * from Product where id = ?";
@@ -252,11 +260,5 @@ public class SellerProductDaoimpl implements SellerProductDao {
         return null;
     }
     
-    public static void main(String[] args) {
-        SellerProductDaoimpl dao = new SellerProductDaoimpl();
-        List<Product> list  = dao.getProduct(3);
-        for (Product product : list) {
-            System.out.println(product);
-        }
-    }
+   
 }

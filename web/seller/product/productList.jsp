@@ -13,7 +13,7 @@
     </div>
     <div class="content" style="margin-top: 2rem">
         <form action="product" class="d-flex" role="search">
-            <input name="txt" class="form-control me-2" type="text" placeholder="Enter Name" aria-label="Search" value="${search}">
+            <input name="txt" class="form-control me-2" type="text" placeholder="Enter Name" aria-label="Search" value="${search}" required="" maxlength="100">
             <button class="btn btn-success" type="submit">Search</button>
         </form>
         <table class="table">
@@ -64,7 +64,7 @@
         <div class="paging">
             <ul class="pagination justify-content-center">            
                 <c:forEach begin="1" end="${endpage}" var="p">
-                    <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/seller/product?page=${p}">${p}</a></li>
+                    <li class="page-item ${page == p ? "active" : ""}"><a class="page-link" href="<%= request.getContextPath()%>/seller/product?page=${p}">${p}</a></li>
                     </c:forEach>                  
             </ul>
         </div>  

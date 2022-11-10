@@ -129,7 +129,8 @@ public class OrderDaoimpl implements OrderDao {
         }
         return list;
     }
-
+    
+    // get total order
     @Override
     public int getTotalOrder() {
         String sql = "select count(*)\n"
@@ -149,6 +150,7 @@ public class OrderDaoimpl implements OrderDao {
         return 0;
     }
 
+    // paging order
     @Override
     public List<Order> getOrder(int page) {
         String sql = "select [order].id, [UserInformation].fullname,[UserInformation].phone, [user].email ,\n"

@@ -153,12 +153,27 @@
         <servlet-class>Controller.About</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>SellerDashboard</servlet-name>
+        <servlet-class>Controller.SellerDashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerDashboardProductList</servlet-name>
+        <servlet-class>Controller.SellerDashboardProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SellerDashboardOrderList</servlet-name>
+        <servlet-class>Controller.SellerDashboardOrderList</servlet-class>
+
+ </servlet>
+    <servlet>
         <servlet-name>StoreBlogDetails</servlet-name>
         <servlet-class>Controller.StoreBlogDetails</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StoreFavoriteProduct</servlet-name>
         <servlet-class>Controller.StoreFavoriteProduct</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminCategoryCreate</servlet-name>
@@ -313,12 +328,26 @@
         <url-pattern>/about</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SellerDashboard</servlet-name>
+        <url-pattern>/seller/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerDashboardProductList</servlet-name>
+        <url-pattern>/seller/dashboard/productlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerDashboardOrderList</servlet-name>
+        <url-pattern>/seller/dashboard/orderlist</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
         <servlet-name>StoreBlogDetails</servlet-name>
         <url-pattern>/store/blog/detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StoreFavoriteProduct</servlet-name>
         <url-pattern>/favorite</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

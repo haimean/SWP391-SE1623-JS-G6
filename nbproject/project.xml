@@ -19,39 +19,47 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.cloudinary-core-1.33.0.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.cloudinary-http44-1.33.0.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.cloudinary-taglib-1.33.0.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-codec-1.11.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-logging-1.2.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.fluent-hc-4.5.13.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.httpclient-4.5.13.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.httpcore-4.4.13.jar}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.httpmime-4.5.13.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.jakarta.mail-2.0.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jakarta.activation-2.0.1.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.cloudinary-core-1.33.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.cloudinary-http44-1.33.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.cloudinary-taglib-1.33.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-codec-1.11.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-logging-1.2.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.fluent-hc-4.5.13.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.httpclient-4.5.13.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.httpcore-4.4.13.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.httpmime-4.5.13.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

@@ -4,21 +4,24 @@
  */
 package Controller;
 
-import Dao.Impl.OrderDaoimpl;
-import Model.Order;
+import Dao.Impl.BlogDaoImpl;
+import Dao.Impl.UserDaoImpl;
+import Model.Blog;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author ngolu
+ * @author nguye
  */
-public class SellerOrderList extends HttpServlet {
+public class StoreBlogDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +40,10 @@ public class SellerOrderList extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SellerOrderList</title>");
+            out.println("<title>Servlet StoreBlogDetails</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SellerOrderList at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet StoreBlogDetails at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,52 +61,32 @@ public class SellerOrderList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDaoimpl dao = new OrderDaoimpl();
-        List<Order> listO = dao.getOrder();
-        String search = request.getParameter("txtFullName");
-        String indexpasge = request.getParameter("page");
-        if (indexpasge == null) {
-            indexpasge = "1";
-            int page = Integer.parseInt(indexpasge);
-            if (search != null) {
-                List<Order> orders = dao.searchByFullName(search.trim());
-                request.setAttribute("search", search);
-                request.setAttribute("listO", orders);
-                request.getRequestDispatcher("/seller/order/orderlist.jsp").forward(request, response);
-            } else {
-                List<Order> orders = dao.getOrder(page);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+       //lay ra thong tin user
+        UserDaoImpl daoUser = new UserDaoImpl();
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+      
+        //lay ra list top 3 popular blog va blog detail voi id da lay duoc
+        int id = Integer.parseInt(request.getParameter("id"));
+        BlogDaoImpl daoB = new BlogDaoImpl();
+        Blog b = daoB.getWithDate(id);
+        Blog bRemove = null;
+        ArrayList<Blog> listB = daoB.getTop3Blog();
+        for (Blog blog : listB) {
+            if(b.getId() == blog.getId()){
+                bRemove = blog;
             }
-            int count = dao.getTotalOrder();
-            int endpage = count / 5;
-            if (count % 5 != 0) {
-                endpage++;
-            }
-            List<Order> orders = dao.getOrder(page);
-            request.setAttribute("endpage", endpage);
-            request.setAttribute("listO", orders);
-            request.getRequestDispatcher("/seller/order/orderlist.jsp").forward(request, response);
-        } else {
-            int page = Integer.parseInt(indexpasge);
-            if (search != null) {
-                List<Order> orders = dao.searchByFullName(search.trim());
-                request.setAttribute("search", search);
-                request.setAttribute("listO", orders);
-                request.getRequestDispatcher("/seller/order/orderlist.jsp").forward(request, response);
-            } else {
-                List<Order> orders = dao.getOrder(page);
-            }
-            int count = dao.getTotalOrder();
-            int endpage = count / 5;
-            if (count % 5 != 0) {
-                endpage++;
-            }
-            List<Order> orders = dao.getOrder(page);
-            request.setAttribute("page", page);
-            request.setAttribute("endpage", endpage);
-            request.setAttribute("listO", orders);
-            request.getRequestDispatcher("/seller/order/orderlist.jsp").forward(request, response);
         }
-
+        listB.remove(bRemove);
+        if(listB.size() > 3){
+            listB.remove(3);
+        }
+        request.setAttribute("listB", listB);
+        request.setAttribute("blog", b);
+        request.setAttribute("lstzsize", listB.size() - 1);
+         request.getRequestDispatcher("blogdetails.jsp").forward(request, response);
     }
 
     /**

@@ -78,8 +78,6 @@
 
         <!-- Blog Section -->
         <section id="blog">
-            <!--<a href="./blog/blogcreate.jsp"> <button type="button" class="btn btn-secondary btn-sm"  ${userStatus == true ? "disabled" : ""}>New Blog...</button></a>-->
-            <button type="button" class="btn btn-secondary btn-sm"  ${userStatus == true ? "disabled" : ""}><a href="./blog/blogcreate.jsp">New Blog...</a></button>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -126,7 +124,7 @@
                                 <li class="page-item"><p class="page-link"><<</p></li>
                                 </c:if>
                                 <c:if test="${pageCurrent !=1}">
-                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog">First</a></li>
+                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/store/blog">First</a></li>
                                 </c:if>
 
                             <!--page-->
@@ -135,7 +133,7 @@
                                     <li class="page-item active"><p class="page-link">${page}</p></li>
                                     </c:if>
                                     <c:if test="${pageCurrent != page}">
-                                    <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?page=${page}">${page}</a></li>
+                                    <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/store/blog?page=${page}">${page}</a></li>
                                     </c:if>
                                 </c:forEach>
 
@@ -144,7 +142,7 @@
                                 <li class="page-item"><p class="page-link">>></p></li>
                                 </c:if>
                                 <c:if test="${pageCurrent !=numberPage}">
-                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/user/blog?page=${numberPage}">Last</a></li>
+                                <li class="page-item"><a class="page-link" href="/SWP391-SE1623-JS-G6/store/blog?page=${numberPage}">Last</a></li>
                                 </c:if>
                         </ul>
                     </nav>

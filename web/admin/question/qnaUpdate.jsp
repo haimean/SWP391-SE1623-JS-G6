@@ -39,11 +39,11 @@
         </div>
         <div class="form-group mt-5">
             <label class="mb-2">Question</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Question" name="question">${sc.question}</textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Question" name="question" required>${sc.question}</textarea>
         </div>
         <div class="form-group mt-5">
             <label class="mb-2">Answer</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Answer" name="answer">${sc.answer}</textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Answer" name="answer" required>${sc.answer}</textarea>
         </div>
         <div class="mt-5 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">Update</button>

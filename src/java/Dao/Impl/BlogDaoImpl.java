@@ -42,6 +42,26 @@ public class BlogDaoImpl implements Dao.BlogDao {
 
         return st;
     }
+    
+    public int getPageCount(int id) throws Exception {
+        DBContext dBContext = new DBContext();
+        int st = 0;
+        String sql = "SELECT COUNT(*) FROM Blog WHERE userId = "+id;
+
+        try {
+
+            Connection connection = dBContext.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                st = (int) Math.ceil(rs.getInt(1) / 6.0);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return st;
+    }
 
     @Override
     public List<Blog> getAllBlogByConstrain(int index) {
@@ -51,6 +71,41 @@ public class BlogDaoImpl implements Dao.BlogDao {
                 + "FROM Blog b\n"
                 + "LEFT JOIN ImageBlog ib\n"
                 + "ON b.id = ib.blogID ";
+        StringBuilder sb = new StringBuilder(sql);
+        sb.append(" ORDER BY id ASC OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY");
+        try {
+
+            Connection connection = dBContext.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sb.toString());
+            ps.setInt(1, index * 6);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Blog blog = new Blog(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)
+                );
+                list.add(blog);
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogByConstrain(int index, int id) {
+        DBContext dBContext = new DBContext();
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT b.id, b.title, b.[description], b.viewNumber, ib.[image], b.content, b.created_at, b.updated_at, b.userId\n"
+                + "FROM Blog b\n"
+                + "LEFT JOIN ImageBlog ib\n"
+                + "ON b.id = ib.blogID \n"
+                + "where b.userId = " + id;
         StringBuilder sb = new StringBuilder(sql);
         sb.append(" ORDER BY id ASC OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY");
         try {
@@ -107,6 +162,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
         }
         return blog;
     }
+
     public Blog getWithDate2(int id) {
         DBContext dBContext = new DBContext();
         Blog blog = new Blog();
@@ -261,6 +317,37 @@ public class BlogDaoImpl implements Dao.BlogDao {
                     + "   ,[created_at]\n"
                     + "	  ,[updated_at]\n"
                     + "   ,[content]\n"
+                    + "	  ,[status]\n"
+                    + "	  ,[userId])\n"
+                    + "VALUES( ? , ?, ?, ?, ?, 1, ?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, t.getTitle());
+            ps.setString(2, t.getDescription());
+            ps.setDate(3, new Date(System.currentTimeMillis()));
+            ps.setDate(4, new Date(System.currentTimeMillis()));
+            ps.setString(5, t.getContent());
+            ps.setInt(6, t.getUserId());
+            ps.execute();
+            dBContext.closeConnection(connection, ps);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean insert2(Blog t) {
+        DBContext dBContext = new DBContext();
+
+        try {
+            Connection connection = dBContext.getConnection();
+//            Timestamp ts = Timestamp.from(Instant.now());
+            String sql = "INSERT INTO Blog(\n"
+                    + "   [title]\n"
+                    + "   ,[description]\n"
+                    + "   ,[created_at]\n"
+                    + "	  ,[updated_at]\n"
+                    + "   ,[content]\n"
                     + "	  ,[status])\n"
                     + "VALUES( ? , ?, ?, ?, ?, 1)";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -269,7 +356,6 @@ public class BlogDaoImpl implements Dao.BlogDao {
             ps.setDate(3, new Date(System.currentTimeMillis()));
             ps.setDate(4, new Date(System.currentTimeMillis()));
             ps.setString(5, t.getContent());
-
             ps.execute();
             dBContext.closeConnection(connection, ps);
             return true;
@@ -374,7 +460,7 @@ public class BlogDaoImpl implements Dao.BlogDao {
         try {
             String sql = "select id\n"
                     + "  from Blog \n"
-                    + "  where title like N'" + title +"'";
+                    + "  where title like N'" + title + "'";
             Connection connection = dBContext.getConnection();
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();

@@ -33,6 +33,19 @@ public class Product {
         this.price = price;
     }
 
+    public Product(int id, int categoryID, String name, String description, String original, int quantity, double price, boolean status, int viewNumber, String proImg) {
+        this.id = id;
+        this.categoryID = categoryID;
+        this.name = name;
+        this.description = description;
+        this.original = original;
+        this.quantity = quantity;
+        this.price = price;
+        this.status = status;
+        this.viewNumber = viewNumber;
+        this.proImg = proImg;
+    }
+
     
     
     public Product(int id, int categoryID, String name, String description, String original, int quantity, double price,

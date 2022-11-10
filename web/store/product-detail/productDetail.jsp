@@ -54,6 +54,19 @@
     .blog-wrapper{
         height: 28rem;
     }
+    .icon-favorite{
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+    .icon-favorite:hover{
+        transform: scale(1.2);
+        color: #ff6b6b;
+    }
+    .favorited{
+        color: #ff6b6b;
+    }
 </style>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -93,7 +106,7 @@
                     <span>${p.price}</span>
                 </div>
                 <p class="lead">${p.description}</p>
-                <form class="d-flex" action="<%= request.getContextPath()%>/product/detail" method="post">
+                <form class="d-flex align-items-center" action="<%= request.getContextPath()%>/product/detail" method="post">
                     <input type="hidden" name="mode" value="ADD"/>
                     <input type="hidden" name="id" value="${p.id}"/>
                     <input type="hidden" name="categoryId" value="${p.categoryID}"/>
@@ -114,6 +127,11 @@
                     <button class="btn btn-outline-primary flex-shrink-0" type="submit">
                         Add to cart
                     </button>
+                    <div class="ms-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 icon-favorite ${isExisted ? "" : "favorited"}" onclick="addFavorite(${p.id},${p.categoryID})">
+                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                        </svg>
+                    </div>
                 </form>
             </div>
         </div>
@@ -198,7 +216,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <a class="btn btn-outline-primary flex-shrink-0" href="detail?id=${rb.id}">
+                                    <a class="btn btn-outline-primary flex-shrink-0" href="<%= request.getContextPath()%>/store/blog/detail?id=${rb.id}">
                                         View Blog
                                     </a>
                                 </div>
@@ -245,7 +263,11 @@
                     }
                     console.log(input.value);
                 }
-
+                function addFavorite(productId, categoryId) {
+                    let icon = document.querySelector(".icon-favorite");
+                    window.location = "detail?id="+ productId + "&categoryId=" + categoryId + "&mode=FAVORITE";
+                    console.log(productId,categoryId);
+                }
 
                 setTimeout(closeAlertModal, 2800);
                 function closeAlertModal() {

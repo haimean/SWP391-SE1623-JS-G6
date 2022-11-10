@@ -106,11 +106,11 @@
                                                 <div class="form-group col-md-6">
                                                     <label>Min</label>
 
-                                                    <input name="beginp" class="form-control" placeholder="$0" type="number" min="0" value="${requestScope.beginprice}" />
+                                                    <input name="beginp" class="form-control" placeholder="$0" type="number" min="0" max="1000000000" value="${requestScope.beginprice}" />
                                                 </div>
                                                 <div class="form-group text-right col-md-6">
                                                     <label>Max</label>
-                                                    <input name="endp" class="form-control" placeholder="$1,0000" type="number" min="0" value="${requestScope.endprice}"/>
+                                                    <input name="endp" class="form-control" placeholder="$1,0000" type="number" min="0" max="1000000000" value="${requestScope.endprice}"/>
                                                 </div>
                                             </div> <!-- form-row.// -->
 

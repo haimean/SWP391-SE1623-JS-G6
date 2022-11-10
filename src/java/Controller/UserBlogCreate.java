@@ -6,6 +6,7 @@ package Controller;
 
 import Dao.Impl.BlogDaoImpl;
 import Model.Blog;
+import Model.User;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
@@ -53,18 +54,22 @@ public class UserBlogCreate extends HttpServlet {
                 "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
         cloudinary.config.secure = true;
         //Get parameter
+        
+        User user = (User) request.getSession().getAttribute("user");
+        
         String title = request.getParameter("title");
         title.trim();
         String description = request.getParameter("description");
         String content = request.getParameter("content");
         Part filePart = request.getPart("image");
         if(filePart.getSize() == 0){
-             Blog b = new Blog(title, description, null, content);
+             Blog b = new Blog(title, description, null, content, user.getId());
         daoB.insert(b);        
         int id = daoB.getIdByTitle(b.getTitle());        
         Blog b1 = new Blog(id, title, description, null, content);
         daoB.insertIntoImageBlog(b1);
-response.sendRedirect(request.getContextPath()  +  "/user/blog");        }
+response.sendRedirect(request.getContextPath()  +  "/user/blog");        
+        }
         else{
              String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         filePart.write(request.getRealPath("image") + fileName);
@@ -78,12 +83,13 @@ response.sendRedirect(request.getContextPath()  +  "/user/blog");        }
         String geturl = uploadResult.get("secure_url").toString();
 
         //Update title, content, image and description
-        Blog b = new Blog(title, description, geturl, content);
+        Blog b = new Blog(title, description, geturl, content, user.getId());
         daoB.insert(b);        
         int id = daoB.getIdByTitle(b.getTitle());        
         Blog b1 = new Blog(id, title, description, geturl, content);
         daoB.insertIntoImageBlog(b1);
-        response.sendRedirect(request.getContextPath()  +  "/user/blog");
+//        request.getRequestDispatcher(request.getContextPath()  +  "/user/blog").forward(request, response);
+response.sendRedirect(request.getContextPath()  +  "/user/blog");  
         }
        
     }

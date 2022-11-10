@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="Model.*" import="Dao.*" import="java.util.ArrayList" %>
+<%@page import="Model.*" import="Dao.*"  import="Dao.Impl.*" import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -89,7 +89,7 @@
                                 }else{
                                 %>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/profile">Profile</a></li>    
-                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/messages">Message</a></li>
+                            <li><a class="dropdown-item" href="<%= request.getContextPath()%>/message">Message</a></li>
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/user/blog">MyBlog</a></li>    
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/favorite">Favorite Products</a></li>    
                             <li><a class="dropdown-item" href="<%= request.getContextPath()%>/logout"">Logout</a></li>

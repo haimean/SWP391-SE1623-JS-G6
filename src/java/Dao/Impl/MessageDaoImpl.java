@@ -8,7 +8,6 @@ import Dao.DBContext;
 import Dao.MessageDao;
 import Model.Message;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,8 +53,6 @@ public class MessageDaoImpl implements MessageDao {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println(rs.getInt(1));
-
                 listId.add(rs.getInt(1));
             }
             dBContext.closeConnection(connection, ps);
@@ -95,7 +92,7 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public ArrayList<Message> get(int userId, int userReceiverId) {
         DBContext dBContext = new DBContext();
-        ArrayList<Message> list = new ArrayList<>();
+        ArrayList<Message> messages = new ArrayList<>();
         try {
             Connection connection = dBContext.getConnection();
             String sql = "select * from Message where (userSenderId = ? AND userReceiverId= ?) OR  (userSenderId = ? AND userReceiverId= ?)";
@@ -107,14 +104,14 @@ public class MessageDaoImpl implements MessageDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5),
+                messages.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5),
                         rs.getDate(6)));
             }
             dBContext.closeConnection(connection, ps);
         } catch (SQLException ex) {
             Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        return messages;
     }
 
     @Override
@@ -124,7 +121,7 @@ public class MessageDaoImpl implements MessageDao {
         ArrayList<Integer> listId = new ArrayList<>();
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select DISTINCT   userReceiverId from Message where userSenderId = ? and Message.userReceiverId = UserInformation.userId and UserInformation.fullname LIKE  '%'+?+'%'";
+            String sql = "select DISTINCT   userReceiverId from Message, UserInformation where userSenderId = ? and Message.userReceiverId = UserInformation.userId and UserInformation.fullname LIKE  '%'+?+'%'";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ps.setString(2, search);
@@ -140,7 +137,7 @@ public class MessageDaoImpl implements MessageDao {
         }
         try {
             Connection connection = dBContext.getConnection();
-            String sql = "select DISTINCT   userSenderId from Message where userReceiverId = ? and Message.userSenderId = UserInformation.userId and UserInformation.fullname LIKE  '%'+?+'%'";
+            String sql = "select DISTINCT   userSenderId from Message, UserInformation  where userReceiverId = ? and Message.userSenderId = UserInformation.userId and UserInformation.fullname LIKE  '%'+?+'%'";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ps.setString(2, search);
@@ -186,17 +183,15 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean insert(Message message) {
         DBContext dBContext = new DBContext();
         Timestamp ts = Timestamp.from(Instant.now());
-        long millis = System.currentTimeMillis();
         String sql = "INSERT INTO Message (userSenderId,userReceiverId,content,"
                 + "created_at,updated_at) VALUES(?,?,?,?,?)";
-        Date createAt = new Date(millis);
         try {
             Connection connection = dBContext.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -217,19 +212,19 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public boolean update(Message t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Message get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<Message> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

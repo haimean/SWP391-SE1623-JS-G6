@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +28,7 @@ public class UserInformationDaoImpl implements UserInformationDao {
         try {
             Connection connection = dBContext.getConnection();
             String sql = "select u.id,u.email,uf.fullname,uf.image,uf.gender,uf.biography,uf.phone,uf.[address],uf.city from [User] u inner join UserInformation uf\n"
-                    + "on u.id=uf.id\n"
+                    + "on u.id=uf.userId\n"
                     + "where u.id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);

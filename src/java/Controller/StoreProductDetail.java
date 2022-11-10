@@ -9,6 +9,7 @@ import Model.Blog;
 import Model.Cart;
 import Model.ItemCart;
 import Model.Product;
+import Model.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -36,6 +37,9 @@ public class StoreProductDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        boolean isExisted = true;
+        User user = (User) request.getSession().getAttribute("user");
+        String mode = request.getParameter("mode");
         int id = Integer.parseInt(request.getParameter("id"));
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         ProductDaoImpl db = new ProductDaoImpl();
@@ -45,6 +49,39 @@ public class StoreProductDetail extends HttpServlet {
         int newViewNumber = product.getViewNumber() + 1;
         product.setViewNumber(newViewNumber);
         db.updateProductViewNumber(newViewNumber, id);
+        
+        if(user != null){
+            List<Product> listFavoriteProducts = db.getFavoriteProducts(user.getId());
+                for (Product favoriteProduct : listFavoriteProducts) {
+                    if (favoriteProduct.getId() == product.getId()) {
+                        isExisted = false;
+                        break;
+                    }
+                }
+        }
+        
+        if (mode != null && mode.equals("FAVORITE")) {
+            if (user != null) {
+                isExisted = false;
+                List<Product> listFavoriteProducts = db.getFavoriteProducts(user.getId());
+                for (Product favoriteProduct : listFavoriteProducts) {
+                    if (favoriteProduct.getId() == product.getId()) {
+                        db.removeFavoriteProducts(user.getId(), id);
+                        isExisted = true;
+                        break;
+                    }
+                }
+                if (!isExisted) {
+                    db.addFavorite(user.getId(), id);
+                }
+                request.setAttribute("isExisted", isExisted);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            }
+        }
+        
+        request.setAttribute("isExisted", isExisted);
         request.setAttribute("p", product);
         request.setAttribute("list", listProducts);
         request.setAttribute("listBlogs", listBlogs);

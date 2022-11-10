@@ -29,5 +29,13 @@ public interface ProductDao extends BaseDAO<Product> {
     List<Blog> getTop7Blogs(int productId);
 
     void updateProductViewNumber(int viewNumber, int id);
+    
+    boolean addFavorite(int userId, int productId);
+    
+    List<Product> getFavoriteProducts(int userId);
+    
+    boolean removeFavoriteProducts(int userId, int productId);
+    
+    boolean removeAllFavoriteProducts(int userId);
 
 }

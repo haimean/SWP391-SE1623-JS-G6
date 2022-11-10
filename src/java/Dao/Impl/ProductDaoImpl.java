@@ -414,7 +414,6 @@ public class ProductDaoImpl implements ProductDao {
         }
         return blogs;
     }
-    
 
     @Override
     public List<Product> getNextTop45ProductsByCategoryId(int productExisted, int categoryId) {
@@ -472,19 +471,114 @@ public class ProductDaoImpl implements ProductDao {
             Logger.getLogger(ProductDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void increaseView(int proId) {
-         DBContext dBContext = new DBContext();
+        DBContext dBContext = new DBContext();
         try {
             Connection connection = dBContext.getConnection();
             String sql = "update Blog\n"
-                + "set viewNumber = viewNumber +1 \n"
-                + "where id = " + proId;
-             PreparedStatement ps = connection.prepareStatement(sql);
-             ps.executeQuery();
+                    + "set viewNumber = viewNumber +1 \n"
+                    + "where id = " + proId;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.executeQuery();
 
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+
+    @Override
+    public List<Product> getFavoriteProducts(int userId) {
+        DBContext dBContext = new DBContext();
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "select fp.productId, p.categoryID, p.[name], p.[description],\n"
+                    + "p.origin, p.quantity, p.price, p.[status], p.viewNumer, p.proImg\n"
+                    + "from FavoriteProduct fp\n"
+                    + "inner join Product p on p.id = fp.productId\n"
+                    + "where fp.userId = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                products.add(new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getDouble(7),
+                        rs.getBoolean(8),
+                        rs.getInt(9),
+                        rs.getString(10)));
+            }
+            dBContext.closeConnection(connection, ps);
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return products;
+    }
+
+    public static void main(String[] args) {
+        List<Product> list = new ProductDaoImpl().getFavoriteProducts(5);
+        for (Product product : list) {
+            System.out.println(product.toString());
+        }
+    }
+
+    @Override
+    public boolean addFavorite(int userId, int productId) {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String query = "insert into FavoriteProduct\n"
+                    + "values(?,?)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, userId);
+            ps.setInt(2, productId);
+            ps.executeUpdate();
+            dBContext.closeConnection(connection, ps);
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean removeFavoriteProducts(int userId, int productId) {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "DELETE FROM FavoriteProduct WHERE ((userId = ?) and (productId = ?))";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setInt(2, productId);
+            ps.executeUpdate();
+            dBContext.closeConnection(connection, ps);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeAllFavoriteProducts(int userId) {
+        DBContext dBContext = new DBContext();
+        try {
+            Connection connection = dBContext.getConnection();
+            String sql = "DELETE FROM FavoriteProduct WHERE userId = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+            dBContext.closeConnection(connection, ps);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }
